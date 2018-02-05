@@ -12,7 +12,8 @@ output:
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
   word_document: null
-bibliography: C:/Herring/MSE ABC Control Rule/MSE/Manuscripts/Technical/SarahStuffRmarkdown/HerringMSE.bib
+bibliography: HerringMSE.bib
+csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -31,7 +32,7 @@ In January 2016, the New England Fishery Management Council  (NEFMC), the politi
 
 1.	Evaluate the relative performance of HCRs at meeting herring fishery objectives, including those related to predators of herring, as informed by stakeholder input, and,
 
-2.	Discuss our approach to developing an MSE on a relatively truncated timetable in order to meet management time frames, and identify the lessons learned throughout the process, especially as they relate to using MSE as a tool to advance an ecosystem based approach to management (Plagányi et al., 2014).
+2.	Discuss our approach to developing an MSE on a relatively truncated timetable in order to meet management time frames, and identify the lessons learned throughout the process, especially as they relate to using MSE as a tool to advance an ecosystem based approach to management (Plag?nyi et al., 2014).
 
 
 #Methods
