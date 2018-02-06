@@ -65,14 +65,11 @@ To address concerns about possible stock assessment bias, operating models with 
   \label{Fy_equation}
     \tilde{F}_y=
     \begin{cases}
-       \psi F_{MSY}, & \text{if}\ \widehat{SSB}_y \geq SSB_{up} \\
-      \frac{\widehat{SSB}_y - SSB_{low}}{SSB_{up}-SSB_{low}}, & SSB_{low} < \widehat{SSB}_y < SSB_{up}\\
+      \psi F_{MSY}, & \text{if}\ \widehat{SSB}_y \geq SSB_{up} \\
+      \psi F_{MSY} \frac{\widehat{SSB}_y - SSB_{low}}{SSB_{up}-SSB_{low}}, & SSB_{low} < \widehat{SSB}_y < SSB_{up}\\
       0, & if \widehat{SSB}_y \leq SSB_{low}
     \end{cases}
   \end{equation}
-\iffalse
-  $= \bigg\{ {\substack  {\; \; if \; \\(F_{MSY} \psi)  \; \; if \;  \\0 \; \; if \; \widehat{SSB}_y<=SSB_{low}}}$
-\fi
 
 The $\tilde{F}_y$ was then used to set a quota in year y + 1 (Table XX T8).  $\tilde{F}_{ay}$ equaled $\tilde{F}_y$ times $S_a$, and $S_a$ was time and simulation invariant selectivity at age equal to the values for the mobile gear fishery reported in [@Deroba2015atlantic, Table 1].  $\tilde{F}_y$ was used to set a quota in the following year to approximate the practice of using projections based on an assessment using data through year y - 1 to set quotas in the following year(s).  Furthermore, although $\tilde{F}_y$ was set using $\widehat{SSB}_y$, the quota was based on $\widehat{B}_y$ because the fishery selects some immature ages.  The fully selected fishing mortality rate that would remove the quota from the true population ($\bar{F}_y$) was found using Newton-Raphson iterations.
 Several variations of the biomass based rule were also evaluated.  These variations included applying the control rule annually, using the same quota for three year blocks such that the control rule is applied every fourth year (i.e., $Q_{y+1}=Q_{y+2}=Q_{y+3}$), using the same quota for 5 year blocks, and using the same quota for three year blocks but restricting the change in the quota to 15% in either direction when the control rule was reapplied in the fourth year.  Thus, four variants of the biomass based control rule were evaluated: 1) annual application, 2) three year blocks, 3) five year blocks, and 4) 3 year blocks with a 15% restriction.
@@ -165,7 +162,7 @@ After specifying the population model parameters and herring-predator relationsh
 Bluefin tuna were identified at the stakeholder workshop as the recommended highly migratory herring predator. 
 
 ### Tuna population model
-Western Atlantic bluefin tuna population parameters were drawn from the 2014 stock assessment [@iccat_report_2015], the growth curve from [@restrepo_updated_2010], and recruitment parameters from a detailed examination of alternative stock recruit relationships [@porch_making_2016]. Ultimately, the “low recruitment” scenario was selected to represent bluefin tuna productivity in the Gulf of Maine, which defines Bmsy as 13,226 t and therefore affects measures of status relative to Bmsy. Continuation of the current tuna fishing strategy (F<0.5Fmsy under the low recruitment scenario) is assumed. All predator population model parameters are listed in Table 2. 
+Western Atlantic bluefin tuna population parameters were drawn from the 2014 stock assessment [@iccat_report_2015], the growth curve from [@restrepo_updated_2010], and recruitment parameters from a detailed examination of alternative stock recruit relationships [@porch_making_2016]. Ultimately, the âlow recruitmentâ scenario was selected to represent bluefin tuna productivity in the Gulf of Maine, which defines Bmsy as 13,226 t and therefore affects measures of status relative to Bmsy. Continuation of the current tuna fishing strategy (F<0.5Fmsy under the low recruitment scenario) is assumed. All predator population model parameters are listed in Table 2. 
 
 ### Herring-tuna relationship model
 Tuna diets are variable depending on location and timing of foraging [@chase_differences_2002; @golet_changes_2013; @logan_diet_2015; @golet_paradox_2015], but for the purposes of this analysis, we assumed that herring is an important enough prey of tuna to impact tuna growth in the Northeast US shelf ecosystem. A relationship between bluefin tuna growth and herring average weight was implemented based on information and methods in @golet_paradox_2015. The relationship between tuna condition anomaly (defined as proportional departures from the weight-at-length relationship used in the assessment) and average weight of tuna-prey-sized herring ($Havgwt_{y}$, herring >180 mm collected from commercial herring fisheries) was modeled as a generalized logistic function with lower and upper bounds on tuna growth parameters:
@@ -198,7 +195,7 @@ Common terns were identified at the stakeholder workshop as the recommended seab
 ### Tern population model
 There is no published stock assessment or population model for most seabirds in the Northeast US. Therefore, Gulf of Maine Common and Arctic tern population parameters were drawn from accounts in the Birds of North America [@hatch_arctic_2002; @nisbet_common_2002] and estimated from counts of breeding pairs and estimates of fledgling success summarized by the Gulf of Maine Seabird Working Group (GOMSWG; data at http://gomswg.org/minutes.html), as corrected and updated by seabird experts from throughout Maine. While we analyzed both Arctic and Common tern information, the stakeholder workshop identified Common terns as the example species for modeling, and this species has more extensive data and a generally higher proportion of herring in its diet based on that data. Therefore, the model is based on common terns in the Gulf of Maine. 
 
-Adult breeding pairs by colony were combined with estimated productivity of fledglings per nest to estimate the annual number of fledglings for each year. A survival rate of 10% was applied to fledglings from each year to represent “recruits” to the breeding adult population age 4 and up [@nisbet_common_2002]. This “stock-recruit” information was used to estimate steepness for the delay difference model based on common tern information only. Fitting parameters with R nls [@Rcite] had variable success, with the full dataset unable to estimate a significant beta parameter (cyan line, Fig. \ref{ternSR}) for common terns, and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (bright green line overlaid with black, Fig. \ref{ternSR}). Therefore, steepness was estimated to give a relationship (black line, Fig. \ref{ternSR}) falling between these two lines. The resulting stock recruit relationship set steepness at 0.26, a theoretical maximum breeding adult population of 45,000 pairs (@nisbet_common_2002, 1930’s New England population), and a theoretical maximum recruitment of 4,500 individuals annually (reflecting approximately a productivity of 1.0 at “carrying capacity” resulting in a stable population). Average common tern productivity is 1.02 (all GOM colony data combined). Adult mortality was assumed to be 0.1 for the delay difference model (survival of 90% [@nisbet_common_2002] for adults).
+Adult breeding pairs by colony were combined with estimated productivity of fledglings per nest to estimate the annual number of fledglings for each year. A survival rate of 10% was applied to fledglings from each year to represent ârecruitsâ to the breeding adult population age 4 and up [@nisbet_common_2002]. This âstock-recruitâ information was used to estimate steepness for the delay difference model based on common tern information only. Fitting parameters with R nls [@Rcite] had variable success, with the full dataset unable to estimate a significant beta parameter (cyan line, Fig. \ref{ternSR}) for common terns, and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (bright green line overlaid with black, Fig. \ref{ternSR}). Therefore, steepness was estimated to give a relationship (black line, Fig. \ref{ternSR}) falling between these two lines. The resulting stock recruit relationship set steepness at 0.26, a theoretical maximum breeding adult population of 45,000 pairs (@nisbet_common_2002, 1930âs New England population), and a theoretical maximum recruitment of 4,500 individuals annually (reflecting approximately a productivity of 1.0 at âcarrying capacityâ resulting in a stable population). Average common tern productivity is 1.02 (all GOM colony data combined). Adult mortality was assumed to be 0.1 for the delay difference model (survival of 90% [@nisbet_common_2002] for adults).
 
 
 ```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns \\label{ternSR}", out.width='400pt', message = FALSE, warning = FALSE}
@@ -438,13 +435,13 @@ ternproddiet + facet_wrap(~colony) #+ theme(text=element_text(size=16))
 
 ```
 
-The estimated population size of herring on the Northeast US shelf had some relationship to the amount of herring in tern diet at several colonies (4 of 13 common tern colony diets related to herring Age 1 recruitment, 6 of 13 common tern colony diets related to herring total B, and 4 of 13 common tern colony diets related to herring SSB; detailed statistics and plots available upon request). However, statistically significant direct relationships between herring population size and tern productivity were rare, with only Ship Island productivity increasing with herring total B, and Eastern Egg Rock, Matinicus Rock, Ship, and Monomoy Islands productivity increasing with herring SSB. Given that Monomoy Island tern chicks consistently received the lowest proportion of herring in their diets of any colony (0-11%), we don’t consider this relationship further to build the model.  
+The estimated population size of herring on the Northeast US shelf had some relationship to the amount of herring in tern diet at several colonies (4 of 13 common tern colony diets related to herring Age 1 recruitment, 6 of 13 common tern colony diets related to herring total B, and 4 of 13 common tern colony diets related to herring SSB; detailed statistics and plots available upon request). However, statistically significant direct relationships between herring population size and tern productivity were rare, with only Ship Island productivity increasing with herring total B, and Eastern Egg Rock, Matinicus Rock, Ship, and Monomoy Islands productivity increasing with herring SSB. Given that Monomoy Island tern chicks consistently received the lowest proportion of herring in their diets of any colony (0-11%), we donât consider this relationship further to build the model.  
 
 Based on tern feeding observations, we would expect the number of age 1 herring in the population to be most related to tern productivity since that is the size class terns target, but this relationship was not found in analyzing the data. Herring total biomass was positively related to tern diets at nearly half of the colonies, and reflects all size classes including the smaller sizes most useful as tern forage, but was only directly related to tern productivity at one colony.  Herring SSB was not considered further as an index of tern prey because it represents sizes larger than tern forage. 
 
-<!--Examining all colonies together shows some relationship between herring population size and herring in tern diets, but no consistent relationship between the proportion of herring in tern diets and tern productivity, or between herring population size and tern productivity. Therefore, a reasonable lower bound on the potential for herring to influence tern productivity in the Gulf of Maine is “no relationship,” and any herring control rule (short of one that severely overfishes or eliminates the stock) would not expected to affect tern productivity under this assumption.--> 
+<!--Examining all colonies together shows some relationship between herring population size and herring in tern diets, but no consistent relationship between the proportion of herring in tern diets and tern productivity, or between herring population size and tern productivity. Therefore, a reasonable lower bound on the potential for herring to influence tern productivity in the Gulf of Maine is âno relationship,â and any herring control rule (short of one that severely overfishes or eliminates the stock) would not expected to affect tern productivity under this assumption.--> 
 
-To represent the potential for herring to influence tern productivity, we parameterized a tern “recruitment multiplier” based on herring assessed total biomass and common tern productivity across all colonies (except Monomoy where terns eat sandlance). This relationship includes a threshold herring biomass where common tern productivity would drop below 1.0, and above that threshold productivity exceeds 1.0 (Fig. \ref{herrternmod}). The threshold of ~400,000 tons is set where a linear relationship between herring total biomass and common tern productivity crosses productivity=1 (black dashed line in Fig. \ref{herrternmod}). However, the selected threshold is uncertain because there are few observations of common tern productivity at low herring total biomass (1975-1985). The linear relationship does not have a statistically significant slope; a curve was fit to represent a level contribution of herring total biomass to common tern productivity above the threshold. The curve descends below the threshold, dropping below 0.5 productivity at around 50,000 tons and representing the extreme assumption that herring extinction would result in tern productivity of 0. Although the relationship of tern productivity to herring biomass at extremely low herring populations has not been quantified, control rules that allow herring extinction do not meet stated management objectives for herring, so this extreme assumption for terns will not change any decisions to include or exclude control rules. 
+To represent the potential for herring to influence tern productivity, we parameterized a tern ârecruitment multiplierâ based on herring assessed total biomass and common tern productivity across all colonies (except Monomoy where terns eat sandlance). This relationship includes a threshold herring biomass where common tern productivity would drop below 1.0, and above that threshold productivity exceeds 1.0 (Fig. \ref{herrternmod}). The threshold of ~400,000 tons is set where a linear relationship between herring total biomass and common tern productivity crosses productivity=1 (black dashed line in Fig. \ref{herrternmod}). However, the selected threshold is uncertain because there are few observations of common tern productivity at low herring total biomass (1975-1985). The linear relationship does not have a statistically significant slope; a curve was fit to represent a level contribution of herring total biomass to common tern productivity above the threshold. The curve descends below the threshold, dropping below 0.5 productivity at around 50,000 tons and representing the extreme assumption that herring extinction would result in tern productivity of 0. Although the relationship of tern productivity to herring biomass at extremely low herring populations has not been quantified, control rules that allow herring extinction do not meet stated management objectives for herring, so this extreme assumption for terns will not change any decisions to include or exclude control rules. 
 
 ```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success \\label{herrternmod}", out.width='400pt', message = FALSE, warning = FALSE}
 ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
@@ -880,3 +877,218 @@ tabl <- "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
+**Economic Model** 
+
+*Basics and Intro--*
+There are many economic methods that can inform ecosystem approaches to fisheries management[^1].  @Kirkley2011AConsiderations use a static input-output model to simulate the effects of changes in herring quotas and predator biomass levels on the New England economy. Their analysis suggested that the effects of changes in herring catch on other segments of the economy are quite small; we, therefore therefore confined the analysis to the herring fleet. @Lehuta2013InvestigatingEngland also construct an coupled ecological-economic model of herring under the assumption of competitive output markets for herring and zero economic profit.  We did not make this assumption.  
+
+
+[^1]: @Edwards2004PortfolioStocks and @Jin2016ApplyingEBFM illustrate a portfolio approach. @Jin2003LinkingEcosystem and @Jin2012DevelopmentEngland link regional economic models to ecosystem models. @Tschirhart2000GeneralEcosystem and @Finnoff2003HarvestingEcosystem link structural economic models of constrained optimization to ecosystem models.  
+
+The economic sub-model converts Yield from the biological component into Gross and Net Operating Revenues. An econometric model of prices as a function of previous prices and landings is estimated; the results of this model are used to predict prices as a function of landings in the simulation model.
+
+There are two fleets, purse seine and trawl, that are assumed to have the ability to catch 30 and 70% of the yield respectively. The trawl fleet has a higher marginal cost of fishing. The fishery yield acts as a constraint (upper bound) on the landings of both fleets. If a fleet is unconstrained, then it makes zero net profits (it will fish until it is unprofitable to do so, the point at which price is equal to marginal cost). If a fleet is constrained by regulations, then positive net profits are possible.
+
+Gross Revenues are simply yield multiplied by price. Net operating Revenues subtract out the variable operating costs (not including labor or fixed costs). Because the price of herring decreases when landings are high, there can be a level of landings above which increases actually decrease Gross or Net revenues.  The economic analysis of the herring industry focuses on two revenue metrics and stability of those metrics. We report these metrics over the final terminal 50 years of the simulation.
+
+*Prices--*
+Annual prices were constructed from NMFS dealer data for 1982 through 2016[^2]. Annual landings were constructed from the processed ME DMR landings dataset for the same time period. Because Atlantic Herring was not federally managed prior to the implementation of the Herring FMP in 2000; the NMFS dealer databases may not contain all landings. The ME DMR data do not contain prices. 
+
+[^2]: Prices have been normalized to 2015 real dollars using the Bureau of Labor Statistics (BLS) Producer Price Index (PPI) for Unprocessed and Packaged Fish (WPU0223)
+
+Exploratory data analysis showed that prices, landings,and the natural logarithms of both were likely non-stationary over the time series. First-differencing produced stationary series. Figure [ML_series] suggests there may be two regimes in this market: one from 1982 to about 1993-1995 and another from that time through 2015.
+
+\iffalse
+Min-Yang will need to tighten this up 
+1.  Move the robustness checks into an appendix and put the ARDL test into the EC format.  
+2.  Lots of the arithmetic will need to be omitted for brevity.  
+3.  Figures and Tables
+
+code is here: /home/mlee/Documents/Herring_PDT_work/Amendment8/MSE_ABC/price_things/  herring_realprice_timeseries.do  herring_realprice_timeseries2.do
+
+\fi
+
+A few models were estimated that explained prices as a function of quantities. We estimated a model of first-differences on the full dataset, pre-1995 only, and 1995 and later.
+\begin{align}
+\mbox{ln} p_{y}-\mbox{ln} p_{y-1} &= a + b(\mbox{ln} q_{y}-\mbox{ln} q_{y-1})\notag\\ 
+\Delta \mbox{ln} p_{y} &= a + b \Delta \mbox{ln} q_{y}+ \epsilon_{y}  \label{diffeqn}
+\end{align}
+
+Post-1995 suggests an elasticity of approximately -0.17 (Table [diffeqn]); prices are minimally sensitive to changes in quantities. The simple differenced model has minimal, if any, explanatory power for the pre-1995 time period.
+
+Alternatively, an Autoregressive Distributed Lag (ARDL(p,q)) model can be estimated (in levels or in natural logs).
+
+\begin{equation}
+p_{y} = \alpha + \sum_{i=1}^p \beta_i p_{y-i} +\sum_{j=0}^q \gamma_j  q_{y-j} + \varepsilon_{y} \label{ardl_pq}.
+\end{equation}
+
+Some of the methods of @Pesaran2001BoundsRelationships are used to estimate a relatively simple dynamic model. A model was first estimated on the full 1982-2015 dataset; model selection criteria indicated a ARDL(4,0) was preferred and that prices were not affected by landings quantities. This is likely caused by a combination of overfitting of the model and the two regimes evident in exploratory graphs. An ARDL(1,0) is then estimated on a the 1995-2015 data. Models estimated in natural logarithms and in levels fit well. The bounds test [@Pesaran2001BoundsRelationships] strongly suggested a long-run relationship between prices and quantities. Table [ardl_regression] contains those results. We end up with an ARDL(1,0) specification:
+
+\begin{equation}
+p_{y} = \alpha + \beta_1 p_{y-1} + \gamma_0  q_{y} + \varepsilon_{y} \label{ardl_10}.
+\end{equation}
+
+While inspection of the time-series suggested that a time-trend be included, specification testing indicated that the time-trend did not improve model fit.
+
+Results in table [ardl_regression] suggest a short-run elasticity of approximately -0.40, an adjustment ($1-\beta$) of approximately -0.33 and a long-run elasticity of -1.42. These two models in table [ardl_regression] are quite consistent with each other and fit the data well. The results of the ARDL model are also broadly consistent with the differenced model. We use column (2) of [ardl_regression] to construct prices and therefore net revenues. The dynamic formulation of equation  [ardl_pq] requires an initial price (in year $y$) to predict prices at time $y+1$ and beyond. The average price over 2011-2015 is used as price at the beginning of the reporting period in year 100.
+
+Following @Lehuta2013InvestigatingEngland, we assume that an unlimited quantity of menhaden is available as a perfect substitute at a real price of \$375 per metric ton. Menhaden is likely to be a good substitute in the bait market, but a poor substitute in the human consumption market. \$360 per mt is equal to the average real price over the most recent 5 years (\$242 per metric ton) plus a transportation markup of \$133 per metric ton. This puts an upper bound on the *ex-vessel* price of herring when quantities are low.
+
+*Costs --*
+
+We construct costs separately for the purse seine and trawl fleets. We assume that both fleets have constant marginal product (catch per day) and constant marginal costs.
+
+We assume that the purse seine fleet could continue to land up to 30% of the yield and the trawl fishery could land the remainder. We use observer data from 2010-2015 to construct cost per day fished for each fishery. Fuel prices were much higher in 2011-2014 compared to 2015. We construct a high and a low fuel price scenario by adjusting these costs using the 2011-2014 average (high) or 2015 (low) prices for fuel based on EIA data. Other costs of fishing included water, oil, and damage costs. Crew pay was not included. Fuel expenses are a large portion of total expenses.
+
+We combine these data with catch per day fished from the Vessel Trip Report databases over the same time period. This allows us to construct the average cost of catching a metric ton of herring for the trawl and purse seine fleet ($c^t$ and $c^s$ respectively).
+
+Net Operating revenues are computed by subtracting the variable operating costs from Gross revenues:
+\begin{equation}
+\label{net_operating_revenue}
+NR_{y} =p(q_y)q_y - 0.3q_yCPUE_{p}cost_{p} -0.7q_yCPUE_{t}cost_{t}
+\end{equation}
+
+*Net Operating Revenues--*
+
+The market clearing price is $p(q)= p(q^t+q^s)$ where $\frac{\partial p}{ \partial q}<0$. The trawl fleet can harvest up to 70% of the quota and the purse seine fleet can harvest up to 30% of the quota; these are based on historical averages. We'll use $\bar{q^t}$ and $\bar{q^s}$ to indicate these levels. The purse seine fleet has lower costs than the trawl fishery.
+
+We assume that each fleet is competitive or harvests the limit. For some lowprices, only the purse seine fleet is active. When that
+happens, the net revenue of the seine fleet is: 
+\begin{equation}
+NR^s=p(q^s+0)q^s -c^sq^s=0
+\end{equation}
+
+Since $p(\cdot)$ is known from the econometric model, this can be solved for positive valued $q^s$:
+
+\begin{align}
+(\alpha + \beta_1 p_{y-1} + \gamma_0  q_{s})   q^s -c^sq^s&=0\\
+(\alpha + \beta_1 p_{y-1} + \gamma_0  q_{s}) -c^s&=0\\
+\frac{\alpha + \beta_1 p_{y-1} -c^s}{-\gamma_0}&=q_{s}
+\end{align}
+
+The market price for case in which the purse seine fleet selects $q<\bar{q^s}$ is simply $c^s$. It is possible that the purse seine fleet would be constrained by $\bar{q^s}$, in which case we set $q^s=\bar{q^s}$. When this happens, the market price (assuming the trawl fleet is not active) is:
+
+\begin{equation}
+\alpha + \beta_1 p_{y-1} + \gamma_0  \bar{q_{s}}
+\end{equation}
+
+For some slightly higher prices, the trawl fleet is active. Similarly,
+we assume a competitive industry:
+
+\begin{align}
+NR^t&=p(q^s+q^t)q^t -c^tq^t=0
+\end{align}
+
+Once again, by substitution, we have:
+
+\begin{align}
+(\alpha + \beta_1 p_{y-1} + \gamma_0( q^t+q^s)) q^t -c^tq^t &=0\\
+\alpha + \beta_1 p_{y-1} + \gamma_0( q^t+q^s)  -c^t &=0\\
+\frac{\alpha + \beta_1 p_{y-1} +\gamma_0q^s -c^t}{-\gamma_0} &= q^t
+\end{align}
+
+The market price for case in which the trawl fleet selects $q^t<\bar{q^t}$ is simply $c^t$. It is possible that the trawl fleet would be constrained by $\bar{q^t}$, in which case we set $q^t=\bar{q^t}$. When this happens, the market price (assuming the trawl fleet is not active) is:
+
+\begin{equation}
+\label{all_price}
+p=\alpha + \beta_1 p_{y-1} + \gamma_0(\bar{q_{s}}+\bar{q_{s}}) )
+\end{equation}
+
+Equation [all_price] is the price at which the entire quota is harvested. For prices slightly lower than this, the trawl fleet harvests less than its maximum fraction of yield. For prices lower than \$63.24, the trawl fleet harvests nothing. There is also a range of output prices below which the seine fishery harvests less than its share, and an even lower price (\$14.27 per metric ton) at which the seine fishery is inactive.
+
+These behavioral assumptions have some implications. If the purse seine fleet is unconstrained by its quota ($q^s<\bar{q^s}$), it will make zero profits. Similarly, if the trawl fleet is unconstrained, it will also make zero profit (but the purse seine fleet will make positive profits). The only way for there to be positive profits for both sectors is for both trawl and seine sectors to be constrained by their quotas. This will happen when quotas or costs of fishing are below.These are slighly unrealistic and a result of treating each fleet as being composed of identical (representative) vessels. If vessels in a fleet were heterogenous, some of the most productive vessels could earn positive profits while the marginal vessel earned zero profits at the unconstrained harvest levels.
+
+*Stability --*
+
+Stakeholders were interested in understanding stability of the herring industry. Following the herring dynamics section, we also computed Interannual Variation (IAV) of Net Revenues and report the median (across replicates) of median (across the final 50 years) of IAV. IAV is a summary metric of variability in the time series over a time period, but does not provide insight into stationarity of the time series.
+
+An additional performance metric, stationarity, is used to assess the stability of net revenues over the terminal period. For each simulation, we perform an econometric test of stationarity [@Dickey1979DistributionRoot].
+Letting $\Delta$ be the first difference operator ($\Delta NR_y= NR_{y}-NR_{y-1}$), the general form of the augmented
+dickey fuller regression is:
+
+\begin{equation}
+\Delta NR_{y} = a_0 + \beta  NR_{y-1} + \delta y + \sum_{j=1}^k \xi_j \Delta NR_{y-j} + \varepsilon \label{dfuller_equation}
+\end{equation}
+
+Econometric evidence that $\beta=0$ is evidence of a unit root (nonstationarity) while statistical rejections of $H_0: \beta=0$ in favor of $H_A: \beta<0$ is evidence of stationarity of the time-series. We estimate a version of equation [dfuller_equation] in which $a, \delta,$ and $\xi_{j} \hspace{3mm} \forall j \ge 1$ are restricted to zero[^4] [^5]:
+
+\begin{equation}
+\label{estimated}
+\Delta NR_{y} = \beta  NR_{y-1} \xi_1 \Delta NR_{y-1} + \varepsilon 
+\end{equation}
+
+The results of these tests are summarized in two ways. First, we classify a simulation as stationary if we reject the null $H_0: \beta=0$ in favor of $H_A: \beta<0$ at the 10% significance level. We then compute the number of simulations (out of 100) that are stationary.   This classification may be too knife-edged. Many methods have been used in the fields of meta-analysis and bioinformatic to combine the results of independent experiments [@Folks1984CombinationTests; @Rice1990ATests; @Whitlock2005CombiningApproach]. Therefore, use a weighted Z-score method to combine these trials [@Whitlock2005CombiningApproach]. To be concrete, the null hypothesis being tested is the joint test that a particular control rule implemented on a simulated stock of herring does not produce a stable equilibrium[^6]. Defining $\phi$ as the standard normal cumulative distribution function, we construct:
+
+\begin{align}
+Z_i &= \phi^{-1} (1-p_i)\\
+Z  &= \frac{\sum_{i=1}^k Z_i}{\sqrt(k)}\end{align}
+
+$Z$ has a standard normal distribution under the null hypothesis; finding $Z$ outside the standard normal is evidence to reject the null hypothesis that a particular control rule leads to non-stationary trajectory of revenue.
+
+\iffalse
+I also applied Fisher's method:
+
+\begin{align}
+\chi^2_F =-2\sum_{i=1}^k ln(P_i),
+\end{align}
+
+all of the null hypotheses of the $k$ tests are true, then this will have a $\chi^2$ distribution with $2k$ degrees of freedom. A value would near zero would be evidence *for* the null hypothesis of non-stationarity.
+\fi
+
+*Caveats to the Economic model--*
+We did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal qualitative effects. The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs. A bigger problem is that, in the long run, firms can enter and exit this industry. We assume that average variable costs are the same as the marginal costs. This may be okay. It may be bad.
+
+If firms can enter and exit, then exclusion of fixed costs from the model could result in misleading recommendations. We did not model firm entry and exit; this is a difficult decision to model. Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible.
+
+Catch in the economic model can be different from the Yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the market model suggests that this is not so simple.
+
+
+ 
+
+\iffalse 
+Two economic models were recently developed that focused on herring in the Northeast United States. ,
+through the intermediary of the extractive herring sector. The authors
+take an optimization approach: herring landings are selected to maximize
+output.
+
+There are two drawbacks to this approach. First, because the model is static, the effects of changes in commercial herring removals on predators (through changes in herring biomass) cannot be deduced. The dynamic ecosystem models developed address this particular shortcoming. Second, constant prices for herring are assumed; this assumption is relaxed as well. %THIS IS 
+Neither approaches examine the value of increased herring biomass on other fisheries
+STUFF FROM THE KIRKLEY AND LEHUTA CITATIONS
+
+
+With multiple predators, prey, and variability in the desirability of predators, it is possible that increases in biomass of a particular prey could be bad for society. For example, biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.
+
+Stated another way, the ability to manipulate the ecosystem with an ABC control rule to achieve desirable outcomes would depend on the rates at which these increases in prey are converted into social utility: this depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these technologies are not particularly well understood at this time.
+
+Herring is often (but no exclusively) used for bait; typically for the lobster fishery. In 2014, approximately 75% of landed herring was
+utilized as bait. Other uses include animal food and human consumption. On an annual basis, the quantity supplied in the herring market is
+usually driven by the Annual Catch Limits (ACLs), or sub-ACLs. These are occasionally not constraining; however seems to occur for regulatory
+reasons (such as a closure for catch of haddock in the Georges Bank fishery) instead of for market reasons.
+\fi
+
+*Random thoughts. this probably belongs in the non-tech manuscript --*
+ A key factor in management performance is the process by which  management tools are developed and implemented.
+
+> One approach to the creation of regulatory legitimacy is to structure the management process around user participation in decision-making. User participation addresses the twin problems of integrating human  and ecological systems and bringing individual users into the  definition of the collective good. Participation offers certain  benefits to the management process but it also carries costs. Whether  it is worthwhile for fishery management depends on the relative  magnitudes of those benefits and costs. [@Hanna1995UserCouncil]
+
+> What we ask of fishery governance is that it coordinate institutional  rules and individual actions by performing certain functions: incorporate multiple objectives representing different types of  conservation and use; bring the time horizons of private individuals  into line with those of the public; send signals of resource scarcity  and enable effective adaptive responses; promote legitimacy by  reflecting accepted norms of equity and by controlling harmful  opportunism; contain both the level and distribution of transactions  costs.These functions are expressions of Williamson's organizational  imperative to minimize costs, accommodate limited information, and  safeguard against harmful opportunism.
+ [@Hanna1999StrengtheningResources]
+
+
+Fishery management must, among other things, incorporate multiple
+objectives, promote legitimacy by reflecting accepted norms, and have
+low transactions costs [@Hanna1999StrengtheningResources]. User
+participation in decision-making is a way to increase regulatory
+legitimacy [@Hanna1995UserCouncil]. One drawback to user-participation
+is that meetings tend to attract participants with the most extreme
+views [@Osborne2000MeetingsParticipation; @Turner2005MeetingsAnalysis].
+
+Extensions, and Future Research
+-------------------------------
+
+@Carroll2001PricingManagement describe another mechanism (product quality) through which changes in prey could be evaluated. We did not attempt to value *in-situ* herring or compute the social benefits or costs derived from changes in biomass. @Brown2005AFisheries and @Finnoff2003HarvestingEcosystem describe methods to trace the effects of changes in harvest or biomass of one species on ecosystems or predators. Finally, we note that increases in predator biomass can have negative impacts on prey and harvesters of prey @Flaaten1996ThePredation.
+
+One of the difficulties with doing an economic extension that models the prey species is that it's difficult to know which margin (dimension) to address.  For example, we didn't know that the tuna model would result in changes in quality. If we had try to model how changes in abundance might affect costs of harvesting tuna, this would have not been a fruitful use of time.
+\clearpage
+
+#References
