@@ -16,12 +16,16 @@ bibliography: [HerringMSE.bib]
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, fig.align='center')
 library(ggplot2)
 library(tidyr)
 library(dplyr)
 library(broom)
+
+#The sg_figs option can be set to FALSE to skip making SG's figures on the fly. Or TRUE to make them. 
+sg_figs <- FALSE
 ```
 
 #Introduction
@@ -55,11 +59,20 @@ Differences in $M$, stock-recruit parameters, and weights-at-age led to differen
 
 To address concerns about possible stock assessment bias, operating models with and without a positive bias were included.  In operating models without bias, $\rho$=0 and the only assessment error was that caused by the unbiased measurement errors ($\epsilon_{\phi y}$).  In operating models with bias, $\rho$=0.6, which was based on the degree of retrospective pattern in $SSB$ from the most recent stock assessment [@Deroba2015atlantic].
 
-*Harvest Control Rules.--* Several  basic control rules were evaluated, including a biomass based control rule [@katsukawa2004numerical], a constant catch rule, and a conditional constant catch rule (Figure 3; @clark2004conditional; @Deroba2012Evaluating).  The biomass based control rule was defined by three parameters: the proportion ($\psi$) of $F_{MSY}$ that dictates the maximum desired fishing mortality rate ($\tilde{F}$), an upper SSB threshold ($SSB_{up}$), and a lower SSB threshold ($SSB_{low}$).  The $\tilde{F}$ equaled the maximum when $\widehat{SSB}$ was above the upper threshold, declined linearly between the upper and lower thresholds, and equaled zero below the lower threshold:
+*Harvest Control Rules.--* Several  basic control rules were evaluated, including a biomass based control rule [@katsukawa2004numerical], a constant catch rule, and a conditional constant catch rule (Figure 3; @clark2004conditional, @Deroba2012Evaluating).  The biomass based control rule was defined by three parameters: the proportion ($\psi$) of $F_{MSY}$ that dictates the maximum desired fishing mortality rate ($\tilde{F}$), an upper SSB threshold ($SSB_{up}$), and a lower SSB threshold ($SSB_{low}$).  The $\tilde{F}$ equaled the maximum when $\widehat{SSB}$ was above the upper threshold, declined linearly between the upper and lower thresholds, and equaled zero below the lower threshold:
 
-
-$\tilde{F}_y= \bigg\{ {\substack{F_{MSY} \psi \; \; if \; \widehat{SSB}_y >= SSB_{up}\\(F_{MSY} \psi) \frac{\widehat{SSB}_y - SSB_{low}}{SSB_{up}-SSB_{low}} \; \; if \; SSB_{low}<\widehat{SSB}_y<SSB_{up} \\0 \; \; if \; \widehat{SSB}_y<=SSB_{low}}}$
-
+  \begin{equation}
+  \label{Fy_equation}
+    \tilde{F}_y=
+    \begin{cases}
+       \psi F_{MSY}, & \text{if}\ \widehat{SSB}_y \geq SSB_{up} \\
+      \frac{\widehat{SSB}_y - SSB_{low}}{SSB_{up}-SSB_{low}}, & SSB_{low} < \widehat{SSB}_y < SSB_{up}\\
+      0, & if \widehat{SSB}_y \leq SSB_{low}
+    \end{cases}
+  \end{equation}
+\iffalse
+  $= \bigg\{ {\substack  {\; \; if \; \\(F_{MSY} \psi)  \; \; if \;  \\0 \; \; if \; \widehat{SSB}_y<=SSB_{low}}}$
+\fi
 
 The $\tilde{F}_y$ was then used to set a quota in year y + 1 (Table XX T8).  $\tilde{F}_{ay}$ equaled $\tilde{F}_y$ times $S_a$, and $S_a$ was time and simulation invariant selectivity at age equal to the values for the mobile gear fishery reported in [@Deroba2015atlantic, Table 1].  $\tilde{F}_y$ was used to set a quota in the following year to approximate the practice of using projections based on an assessment using data through year y - 1 to set quotas in the following year(s).  Furthermore, although $\tilde{F}_y$ was set using $\widehat{SSB}_y$, the quota was based on $\widehat{B}_y$ because the fishery selects some immature ages.  The fully selected fishing mortality rate that would remove the quota from the true population ($\bar{F}_y$) was found using Newton-Raphson iterations.
 Several variations of the biomass based rule were also evaluated.  These variations included applying the control rule annually, using the same quota for three year blocks such that the control rule is applied every fourth year (i.e., $Q_{y+1}=Q_{y+2}=Q_{y+3}$), using the same quota for 5 year blocks, and using the same quota for three year blocks but restricting the change in the quota to 15% in either direction when the control rule was reapplied in the fourth year.  Thus, four variants of the biomass based control rule were evaluated: 1) annual application, 2) three year blocks, 3) five year blocks, and 4) 3 year blocks with a 15% restriction.
@@ -70,7 +83,7 @@ The constant catch control rule is defined by one parameter, a desired constant 
 
 The conditional constant catch rule used a constant desired catch amount unless removing that desired catch from the assessed biomass caused the fully selected fishing mortality rate to exceed a pre-determined maximum, in which case the desired catch was set to the value produced by applying the maximum fully selected fishing mortality rate to the assessed biomass (Figure 3).  Thus, the conditional constant catch rule has two policy parameters: a desired constant catch amount, and a maximum fishing mortality rate.  The constant catch amounts were varied from 0.1$MSY$ to 1.0$MSY$ in increments of 0.1, while the maximum fishing mortality rate equaled 0.5$F_{MSY}$.  When the maximum fishing mortality rate portion the conditional constant catch rule was invoked, a quota was set in the same manner as when $\widehat{SSB}_y >= SSB_{up}$ in the biomass based control rule described above.
 
-*Implementation Error.--* Implementation errors were also included in a similar way as in [@punt2008evaluation;@Deroba2012Evaluating], as year-specific lognormal random deviations (Table XX T9).  The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.
+*Implementation Error.--* Implementation errors were also included in a similar way as in @punt2008evaluation and @Deroba2012Evaluating, as year-specific lognormal random deviations (Table XX T9).  The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.
 
 **Predators**
 
@@ -188,7 +201,7 @@ There is no published stock assessment or population model for most seabirds in 
 Adult breeding pairs by colony were combined with estimated productivity of fledglings per nest to estimate the annual number of fledglings for each year. A survival rate of 10% was applied to fledglings from each year to represent “recruits” to the breeding adult population age 4 and up [@nisbet_common_2002]. This “stock-recruit” information was used to estimate steepness for the delay difference model based on common tern information only. Fitting parameters with R nls [@Rcite] had variable success, with the full dataset unable to estimate a significant beta parameter (cyan line, Fig. \ref{ternSR}) for common terns, and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (bright green line overlaid with black, Fig. \ref{ternSR}). Therefore, steepness was estimated to give a relationship (black line, Fig. \ref{ternSR}) falling between these two lines. The resulting stock recruit relationship set steepness at 0.26, a theoretical maximum breeding adult population of 45,000 pairs (@nisbet_common_2002, 1930’s New England population), and a theoretical maximum recruitment of 4,500 individuals annually (reflecting approximately a productivity of 1.0 at “carrying capacity” resulting in a stable population). Average common tern productivity is 1.02 (all GOM colony data combined). Adult mortality was assumed to be 0.1 for the delay difference model (survival of 90% [@nisbet_common_2002] for adults).
 
 
-```{r, eval=FALSE, fig.cap="Stock-recruitment function for Gulf of Maine common terns \\label{ternSR}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns \\label{ternSR}", out.width='400pt', message = FALSE, warning = FALSE}
 ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -230,7 +243,7 @@ ternrec+
 
 The resulting model based on common tern population dynamics in the Gulf of Maine (with no link to herring) predicts that the population will increase to its carrying capacity under steady conditions over a 150 year simulation. The actual population has increased at ~2% per year between 1998 and 2015 (Fig. \ref{terntrend}). Given the lack of detailed demographic information in the delay-difference model, this was considered a good representation of the average observed trend in current common tern population dynamics. 
 
-```{r, eval=FALSE, fig.cap="Population trends for Gulf of Maine terns, no herring link \\label{terntrend}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns, no herring link \\label{terntrend}", out.width='400pt', message = FALSE, warning = FALSE}
 ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -378,7 +391,7 @@ ternpoptrend +   geom_point() +
 ### Herring-tern relationship model
 The relationship between herring abundance and tern reproductive success was built based on information from individual colonies on annual productivity, proportion of herring in the diet, and amount of herring in the population as estimated by the current stock assessment. Since little of this information has appeared in the peer-reviewed literature, we present it in detail here.  First, productivity information was evaluated by major diet item recorded for chicks over all colonies and years. In general, common tern productivity was higher when a streamlined fish species was the major diet item relative to invertebrates, but having herring as the major diet item resulted in about the same distribution of productivities as having hake or sandlance as the major diet item for these colonies (Fig. \ref{chickdiet}). 
 
-```{r, eval=FALSE, fig.cap="Major diet items for Gulf of Maine tern fledgelings \\label{chickdiet}",  out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Major diet items for Gulf of Maine tern fledgelings \\label{chickdiet}",  out.width='400pt', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/TernMajorDietItems.png")
 ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -404,7 +417,7 @@ dietitem + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 Individual colonies showed different trends in number of nesting pairs, productivity, and proportion of herring in the diet (plots available upon request). When both Arctic and Common terns shared a colony, interannual changes in productivity were generally similar between species, suggesting that conditions at and around the colony (weather, predation pressure, and prey fields) strongly influenced productivity rather than species-specific traits. Only two colonies (Machias Seal Island near the Canadian Border and Stratton Island in southern Maine) showed a significant positive correlation between the proportion of herring in the chick diet and productivity. Other islands showed either non-significant (no) relationships, or in one case (Metinic Island) a significant negative relationship (Fig. \ref{proddiet}). 
 
-```{r, eval=FALSE, fig.cap="Herring proporiton in diet and tern productivity by colony \\label{proddiet}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and tern productivity by colony \\label{proddiet}", out.width='400pt', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/ternproddiet.png")
 ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -433,7 +446,7 @@ Based on tern feeding observations, we would expect the number of age 1 herring 
 
 To represent the potential for herring to influence tern productivity, we parameterized a tern “recruitment multiplier” based on herring assessed total biomass and common tern productivity across all colonies (except Monomoy where terns eat sandlance). This relationship includes a threshold herring biomass where common tern productivity would drop below 1.0, and above that threshold productivity exceeds 1.0 (Fig. \ref{herrternmod}). The threshold of ~400,000 tons is set where a linear relationship between herring total biomass and common tern productivity crosses productivity=1 (black dashed line in Fig. \ref{herrternmod}). However, the selected threshold is uncertain because there are few observations of common tern productivity at low herring total biomass (1975-1985). The linear relationship does not have a statistically significant slope; a curve was fit to represent a level contribution of herring total biomass to common tern productivity above the threshold. The curve descends below the threshold, dropping below 0.5 productivity at around 50,000 tons and representing the extreme assumption that herring extinction would result in tern productivity of 0. Although the relationship of tern productivity to herring biomass at extremely low herring populations has not been quantified, control rules that allow herring extinction do not meet stated management objectives for herring, so this extreme assumption for terns will not change any decisions to include or exclude control rules. 
 
-```{r, eval=FALSE, fig.cap="Modeled influence of herring total biomass on tern reproductive success \\label{herrternmod}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success \\label{herrternmod}", out.width='400pt', message = FALSE, warning = FALSE}
 ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -498,7 +511,7 @@ totprodnomonherr +
 
 When included in the model using $\gamma$ = 1.09 in equation \ref{recwithherring_equation}, this relationship adjusts the modeled common tern population increase to match the current average increase in common tern nesting pairs observed in the data (Fig. \ref{terntrendwherring}). There is still considerable uncertainty around this mean population trajectory which cannot be reflected in our simple model. 
 
-```{r, eval=FALSE, fig.cap="Population trends for Gulf of Maine terns with simulated herring-common tern productivity relationship \\label{terntrendwherring}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns with simulated herring-common tern productivity relationship \\label{terntrendwherring}", out.width='400pt', message = FALSE, warning = FALSE}
 ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -646,7 +659,7 @@ ternpoptrend +   geom_point() +
 ## Groundfish
 Because no specific groundfish was identified as a representative herring predator during the stakeholder workshop, the first decision was which groundfish to model. Annual diet estimates (based on sample sizes of ~100+ stomachs) are available for the top three groundfish predators of herring (those with herring occurring in the diets most often in the entire NEFSC food habits database): spiny dogfish, Atlantic cod, and silver hake. Cod and spiny dogfish were considered first because their overall diet proportions of herring are higher, and because silver hake has the least recently updated assessment. Diet compositions by year were estimated for spiny dogfish, Georges Bank cod, and Gulf of Maine cod to match the scale of stock assessments. Full weighted diet compositions were estimated, and suggest considerable interannual variability in the herring proportion in groundfish diets (filled blue proportions of bars in Fig. \ref{gfishdiets}).  
 
-```{r,eval=FALSE, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database \\label{gfishdiets}", message = FALSE, warning = FALSE}
+```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database \\label{gfishdiets}", message = FALSE, warning = FALSE}
 
 dogdiet   <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/dogfishdietcomp.csv")
 GBcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GBcoddietcomp.csv")
@@ -684,7 +697,7 @@ Some interannual variation in diet may be explained by changing herring abundanc
 
 
 
-```{r, eval=FALSE, fig.cap="Relationship of assessed groundfish spawning stock biomass (SSB) with the proportion of herring in diet \\label{gfishBherrdiet}", out.width='400pt',message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Relationship of assessed groundfish spawning stock biomass (SSB) with the proportion of herring in diet \\label{gfishBherrdiet}", out.width='400pt',message = FALSE, warning = FALSE}
 codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
 codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
 dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
@@ -740,7 +753,7 @@ The dogfish model stock recruitment function, initial population, and annual nat
 There was a weak positive relationship between dogfish total biomass and herring total biomass from the respective stock assessments (Fig. \ref{pupherring}), but no clear relationship between dogfish weight or dogfish recruitment and herring population size. During the recent period of relatively low dogfish recruitment (1995-2007), there is a positive relationship between dogfish pup average weight and herring proportion in diet, suggesting a potential growth and or recruitment mechanism; however this relationship does not hold throughout the time series (Fig. \ref{pupherring}). 
 
 
-```{r, eval=FALSE, fig.cap="Dogfish population relationships with herring total biomass (left) and herring proportion in diet (right) \\label{pupherring}", out.width='.49\\linewidth', fig.show='hold', fig.align='center', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Dogfish population relationships with herring total biomass (left) and herring proportion in diet (right) \\label{pupherring}", out.width='.49\\linewidth', fig.show='hold', fig.align='center', message = FALSE, warning = FALSE}
 codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
 codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
 dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
@@ -821,7 +834,7 @@ Therefore, to simulate a potential positive relationship between herring and dog
 
 
 
-```{r, eval=FALSE, fig.cap="Modeled herring relative population size-dogfish natural mortality relationship \\label{herringdogfish}", out.width='300pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Modeled herring relative population size-dogfish natural mortality relationship \\label{herringdogfish}", out.width='300pt', message = FALSE, warning = FALSE}
 # from MSE_GroundfishLink.R
 PredannualA   <-  0.092  #0.6 #predator annual natural mortality rate (0-1); serves as max if time varying
 Predexploit   <-  0.092  #0.3 #predator annual exploitation rate (0-1)
