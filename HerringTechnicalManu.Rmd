@@ -27,6 +27,7 @@ library(broom)
 #The sg_figs option can be set to FALSE to skip making SG's figures on the fly. Or TRUE to make them. 
 sg_figs <- FALSE
 ```
+\doublespacing
 
 #Introduction
 
@@ -876,127 +877,145 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+**An Economic Model of the Predators**
 
-**Economic Model** 
+We didn't do one.
+
+**An Economic Model of the Herring Fishery** 
 
 *Basics and Intro--*
 There are many economic methods that can inform ecosystem approaches to fisheries management[^1].  @Kirkley2011AConsiderations use a static input-output model to simulate the effects of changes in herring quotas and predator biomass levels on the New England economy. Their analysis suggested that the effects of changes in herring catch on other segments of the economy are quite small; we, therefore therefore confined the analysis to the herring fleet. @Lehuta2013InvestigatingEngland also construct an coupled ecological-economic model of herring under the assumption of competitive output markets for herring and zero economic profit.  We did not make this assumption.  
 
-
 [^1]: @Edwards2004PortfolioStocks and @Jin2016ApplyingEBFM illustrate a portfolio approach. @Jin2003LinkingEcosystem and @Jin2012DevelopmentEngland link regional economic models to ecosystem models. @Tschirhart2000GeneralEcosystem and @Finnoff2003HarvestingEcosystem link structural economic models of constrained optimization to ecosystem models.  
 
-The economic sub-model converts Yield from the biological component into Gross and Net Operating Revenues. An econometric model of prices as a function of previous prices and landings is estimated; the results of this model are used to predict prices as a function of landings in the simulation model.
+The economic model of the herring fishery converts Yield from the herring component into Gross Revenues (GR) and Net Operating Revenues (NR).  There are two fleets,trawl and purse seine, that are assumed to have the ability to catch 70 and 30% of the Yield respectively[^2][^3].  Gross Revenue, Net Revenue, and the constraints on harvest can be represented as (for all years, $y$ subscripts omitted here for simplicity):
 
-There are two fleets, purse seine and trawl, that are assumed to have the ability to catch 30 and 70% of the yield respectively. The trawl fleet has a higher marginal cost of fishing. The fishery yield acts as a constraint (upper bound) on the landings of both fleets. If a fleet is unconstrained, then it makes zero net profits (it will fish until it is unprofitable to do so, the point at which price is equal to marginal cost). If a fleet is constrained by regulations, then positive net profits are possible.
+[^2]: The midwater trawl, paired midwater trawl, and bottom trawl are all aggregated into the trawl fleet. 
+[^3]: The fishery is managed with four sub-ACLs and the purse seine fleet can only fish in one of the four areas.  This  70/30 split corresponds to recent history.
 
-Gross Revenues are simply yield multiplied by price. Net operating Revenues subtract out the variable operating costs (not including labor or fixed costs). Because the price of herring decreases when landings are high, there can be a level of landings above which increases actually decrease Gross or Net revenues.  The economic analysis of the herring industry focuses on two revenue metrics and stability of those metrics. We report these metrics over the final terminal 50 years of the simulation.
+\begin{align}
+GR^i&=p(q^t+q^s)q^i\\
+NR^i&=GR-c^i(q^i)\\
+q^s &\leq .3Q, \hspace{1mm} q^t \leq .7Q
+\end{align}
+where $q^i$ and $c^i$ are are the quantity landed and cost function for fleet $i$.  We make two further assumptions: that total catch is less than or equal to Yield $q^t+q^s \leq Q$ and that a fleet has the option of not fishing if positive harvest would lead to negative net revenue ($NR_i \geq 0$). Each fleet selects $q^i$ to maximize Net Revenues under the relevant constraints.   
+\begin{equation}
+\label{optimization_problem}
+\max_{q_i} p(q^t+q^s)q^i - c^i(q^i)
+\end{equation}
+Note that, depending on prices and costs, a fleet may harvest nothing, it's entire ``allocation'', or some level in between.
+
+*Production and Costs--*
+Economic data collected from 2010-2015 by the Northest Fisheries Observer Program (NEFOP) are used to construct average daily costs for the trawl and purse seine fleets.  Fuel prices were much higher in 2011-2014 compared to 2015. We construct a high and a low fuel price scenario by adjusting these costs using the 2011-2014 average (high) or 2015 (low) prices for fuel based on EIA data. Other costs of fishing included water, oil, and damage costs. Crew pay was not included. Fuel expenses are a large portion of total expenses. 
+
+We construct average catch per day fished for each fleet from the Vessel Trip Report databases over the same time period.  The trip lengths in the VTR and observer data were very similar. This allows us to construct the average cost of catching a metric ton of herring for the trawl and purse seine fleet ($c^t$ and $c^s$ respectively).  We assume that the average cost is equal to the marginal cost for each fleet.  These figures are presented in Table \ref{PUR_costs} and \ref{OTM_costs}.
+
+\begin{table}[htpb]
+\begin{centering}
+\begin{tabular}{lrrrrrrr}\hline
+	&	Catch &	Trip length&\multicolumn{3}{c}{Cost per day}	&	Observed	&	VTR	\\
+Year	&	 (mt/day) &days	&	Low	&	High	&	Raw	&	 trips	&	 trips	\\\hline
+2011	&	65.5& 0.9	&	1,454	&	1,927	&	1,667	&	79	&	264	\\
+2012	&	77.5& 1.1	&	1,149	&	1,520	&	1,290	&	40	&	278	\\
+2013	&	91.7& 0.8	&	1,115	&	1,500	&	1,279	&	50	&	312	\\
+2014	&	99.4& 1.1	&	1,156	&	1,556	&	1,330	&	24	&	316	\\
+2015	&	105.4 & 1.1	&	1,068	&	1,437	&	811	&	14	&	243	\\
+ALL	&	87.5& 1.0&	1,249	&	1,664	&	1,396	&	207	&	1,413	\\\hline
+\end{tabular}
+\caption{Average daily catch and trip length (VTR) and costs (NEFOP data) for the purse seine fleet (2011-2015).  \label{PUR_costs}  In the simulation models, the marginal cost for the purse seine fleet is set to \$14.27 per metric ton ( \$1,249 per day divided by 87.5 mt per day).  }
+\end{centering}
+\end{table}
+
+\begin{table}[htpb]
+\begin{centering}
+\begin{tabular}{lrrrrrrr}\hline
+	&	Catch &	Trip length&\multicolumn{3}{c}{Cost per day}	&	Observed	&	VTR	\\
+Year	&	 (mt/day) &days	&	Low	&	High	&	Raw	&	 trips	&	 trips	\\\hline
+2011	&	69.9& 2.6	&	4,011	&	5,232	&	4,520	&	149	&	354	\\
+2012	&	64.8& 3.0	&	4,108	&	5,287	&	4,608	&	179	&	392	\\
+2013	&	53.9& 3.5	&	3,364	&	4,472	&	3,954	&	103	&	470	\\
+2014	&	66.1& 2.4 	&	3,672	&	4,865	&	4,182	&	123	&	409	\\
+2015	&	55.2&2.5  	&	3,904	&	5,124	&	3,001	&	19	&	380	\\
+ALL	&	61.4	&2.9&	3,833	&	5,009	&	4,315	&	573	&	2,005	\\\hline
+\end{tabular}
+\caption{Average daily catch and trip length (VTR) and costs (NEFOP data) for the midwater trawl fleet (2011-2015). \label{OTM_costs}In the simulation models, the marginal cost for the trawl fleet is set to \$62.43 per metric ton (\$3,833 per day divided by 61.4 mt per day)}
+\end{centering}
+\end{table}
 
 *Prices--*
-Annual prices were constructed from NMFS dealer data for 1982 through 2016[^2]. Annual landings were constructed from the processed ME DMR landings dataset for the same time period. Because Atlantic Herring was not federally managed prior to the implementation of the Herring FMP in 2000; the NMFS dealer databases may not contain all landings. The ME DMR data do not contain prices. 
+Annual prices were constructed from NMFS dealer data for 1982 through 2016[^4]. Annual landings were constructed from the processed ME DMR landings dataset for the same time period. Because Atlantic Herring was not federally managed prior to the implementation of the Herring FMP in 2000; the NMFS dealer databases may not contain all landings. The ME DMR data do not contain prices. Exploratory data analysis showed that prices, landings,and the natural logarithms of both were likely non-stationary over the time series.  First-differencing produced stationary series. There also appear to be two regimes in this market: one from 1982 to about 1993-1995 and another from that time through 2016.
 
-[^2]: Prices have been normalized to 2015 real dollars using the Bureau of Labor Statistics (BLS) Producer Price Index (PPI) for Unprocessed and Packaged Fish (WPU0223)
 
-Exploratory data analysis showed that prices, landings,and the natural logarithms of both were likely non-stationary over the time series. First-differencing produced stationary series. Figure [ML_series] suggests there may be two regimes in this market: one from 1982 to about 1993-1995 and another from that time through 2015.
+[^4]: Prices have been normalized to 2015 real dollars using the Bureau of Labor Statistics (BLS) Producer Price Index (PPI) for Unprocessed and Packaged Fish (WPU0223)
+
+We used the Bounds test methodology developed by @Pesaran2001BoundsRelationships test for a long-run relationship between prices and quantities. The advantage of this method is that knowledge of stationarity is not required for a valid test of a long-run relationship. A long-run relationship between prices and landings can be modeled as:
+
+
+\begin{equation}
+\label{ARDL}
+p_{y}= c+\sum_{i=1}^p a_i p_{t-i}+ \sum_{i=0}^n b_i q_{y-i} + e_{t},
+\end{equation}
+and rearranged into an error correction model (ECM):
+
+\begin{equation}
+\label{ECM}
+\Delta p_y= \gamma+ \alpha_1 p_{y-1} + \sum_{i=1}^p \theta_i \Delta p_{y-i}+ \sum_{i=0}^n  \beta_i \Delta q_{y-i} + e_{y},
+\end{equation}
+where $\Delta$ is the first-differences operator [@Pesaran2001BoundsRelationships]. The $\gamma$ parameter must also be restricted ($\gamma=c / \alpha_1$) for these equations \ref{ARDL} and \ref{ECM} to be equivalent.  The @Pesaran2001BoundsRelationships bounds test estimates equation \ref{ECM} by OLS and constructs a joint-F test that the $\alpha_1$ and $\beta_i$ parameters are non-zero. The F-statistic has a non-standard distribution with an inconclusive area.  The model was first estimated on the full 1982-2015 dataset; model selection criteria indicated a ARDL(4,0) was preferred and that prices were not affected by quantities.  This is likely caused by a combination of overfitting of the model and the two regimes evident in exploratory graphs.  An ARDL(1,0) is then estimated on a subset of the data (1995-2015); if there was a regime shift, the current regime is more likely to be similar to the future.  Models estimated in natural logarithms and in levels fit well. The PSS F-statistics of 9.34 and 10.20 are above the upper critical value, strongly suggesting a long-run relationship between prices and quantities[^5] (Table \ref{ardl_regression}).  We present the results of the ARDL(1,0) formulation because it is a bit easier to interpret. 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lcc} \hline
+VARIABLES		&	pricemt	&	lnp	\\\hline
+Price$_{t-1}$		&	0.646***	&	0.666***	\\
+		&	-0.0937	&	-0.0935	\\
+Quantity		&	-1.194***	&	-0.395***	\\
+		&	-0.277	&	-0.0956	\\
+Constant		&	217.8***	&	6.423***	\\
+		&	-48.16	&	-1.484	\\
+Observations		&	21	&	21	\\
+R-squared		&	0.906	&	0.906	\\
+BGp		&	0.34	&	0.547	\\
+BGF		&	1	&	0.4	\\
+PSS	F-statistic	&	10.2	&	9.34	\\\hline
+1\% Critical values &\multicolumn{2}{c}{[6.84, 7.84]} \\\hline
+\multicolumn{3}{c}{ Standard errors in parentheses} \\
+\multicolumn{3}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\\hline
+\end{tabular}
+\caption{Regression results from the ``ARDL'' specification (Equation \ref{ARDL}) and the @Pesaran2001BoundsRelationships Bounds test.  1995-2015 data only. The explanatory variables enter in levels in the first column and natural logarithms in the second column  \label{ardl_regression}}
+\end{center}
+\end{table}
+
+[^5]:As a robustness check, we tried varying the first (1996) and last (2016) year included in the dataset.  This did not change the estimated results substantially. We also estimated a short-run relationship between prices and quantities in which $\Delta p_y$ was regressed on $\Delta q_y$.  The short-run effects were qualitatively similar to the "long-run" model in Table \ref{ardl_regression}.  
+
 
 \iffalse
 Min-Yang will need to tighten this up 
-1.  Move the robustness checks into an appendix and put the ARDL test into the EC format.  
-2.  Lots of the arithmetic will need to be omitted for brevity.  
 3.  Figures and Tables
 
-code is here: /home/mlee/Documents/Herring_PDT_work/Amendment8/MSE_ABC/price_things/  herring_realprice_timeseries.do  herring_realprice_timeseries2.do
-
+code for running regressions is here: /home/mlee/Documents/Herring_PDT_work/Amendment8/MSE_ABC/price_things/  herring_realprice_timeseries.do  herring_realprice_timeseries2.do
 \fi
 
-A few models were estimated that explained prices as a function of quantities. We estimated a model of first-differences on the full dataset, pre-1995 only, and 1995 and later.
-\begin{align}
-\mbox{ln} p_{y}-\mbox{ln} p_{y-1} &= a + b(\mbox{ln} q_{y}-\mbox{ln} q_{y-1})\notag\\ 
-\Delta \mbox{ln} p_{y} &= a + b \Delta \mbox{ln} q_{y}+ \epsilon_{y}  \label{diffeqn}
-\end{align}
-
-Post-1995 suggests an elasticity of approximately -0.17 (Table [diffeqn]); prices are minimally sensitive to changes in quantities. The simple differenced model has minimal, if any, explanatory power for the pre-1995 time period.
-
-Alternatively, an Autoregressive Distributed Lag (ARDL(p,q)) model can be estimated (in levels or in natural logs).
-
-\begin{equation}
-p_{y} = \alpha + \sum_{i=1}^p \beta_i p_{y-i} +\sum_{j=0}^q \gamma_j  q_{y-j} + \varepsilon_{y} \label{ardl_pq}.
-\end{equation}
-
-Some of the methods of @Pesaran2001BoundsRelationships are used to estimate a relatively simple dynamic model. A model was first estimated on the full 1982-2015 dataset; model selection criteria indicated a ARDL(4,0) was preferred and that prices were not affected by landings quantities. This is likely caused by a combination of overfitting of the model and the two regimes evident in exploratory graphs. An ARDL(1,0) is then estimated on a the 1995-2015 data. Models estimated in natural logarithms and in levels fit well. The bounds test [@Pesaran2001BoundsRelationships] strongly suggested a long-run relationship between prices and quantities. Table [ardl_regression] contains those results. We end up with an ARDL(1,0) specification:
-
-\begin{equation}
-p_{y} = \alpha + \beta_1 p_{y-1} + \gamma_0  q_{y} + \varepsilon_{y} \label{ardl_10}.
-\end{equation}
-
-While inspection of the time-series suggested that a time-trend be included, specification testing indicated that the time-trend did not improve model fit.
-
-Results in table [ardl_regression] suggest a short-run elasticity of approximately -0.40, an adjustment ($1-\beta$) of approximately -0.33 and a long-run elasticity of -1.42. These two models in table [ardl_regression] are quite consistent with each other and fit the data well. The results of the ARDL model are also broadly consistent with the differenced model. We use column (2) of [ardl_regression] to construct prices and therefore net revenues. The dynamic formulation of equation  [ardl_pq] requires an initial price (in year $y$) to predict prices at time $y+1$ and beyond. The average price over 2011-2015 is used as price at the beginning of the reporting period in year 100.
-
-Following @Lehuta2013InvestigatingEngland, we assume that an unlimited quantity of menhaden is available as a perfect substitute at a real price of \$375 per metric ton. Menhaden is likely to be a good substitute in the bait market, but a poor substitute in the human consumption market. \$360 per mt is equal to the average real price over the most recent 5 years (\$242 per metric ton) plus a transportation markup of \$133 per metric ton. This puts an upper bound on the *ex-vessel* price of herring when quantities are low.
-
-*Costs --*
-
-We construct costs separately for the purse seine and trawl fleets. We assume that both fleets have constant marginal product (catch per day) and constant marginal costs.
-
-We assume that the purse seine fleet could continue to land up to 30% of the yield and the trawl fishery could land the remainder. We use observer data from 2010-2015 to construct cost per day fished for each fishery. Fuel prices were much higher in 2011-2014 compared to 2015. We construct a high and a low fuel price scenario by adjusting these costs using the 2011-2014 average (high) or 2015 (low) prices for fuel based on EIA data. Other costs of fishing included water, oil, and damage costs. Crew pay was not included. Fuel expenses are a large portion of total expenses.
-
-We combine these data with catch per day fished from the Vessel Trip Report databases over the same time period. This allows us to construct the average cost of catching a metric ton of herring for the trawl and purse seine fleet ($c^t$ and $c^s$ respectively).
-
-Net Operating revenues are computed by subtracting the variable operating costs from Gross revenues:
-\begin{equation}
-\label{net_operating_revenue}
-NR_{y} =p(q_y)q_y - 0.3q_yCPUE_{p}cost_{p} -0.7q_yCPUE_{t}cost_{t}
-\end{equation}
-
 *Net Operating Revenues--*
+Because the marginal costs for the purse seine are always less than the marginal costs of the trawl fisher, there are three possible combinations of activity levels: both fleets active, both inactive, and trawl inactive while purse seine is active.
 
-The market clearing price is $p(q)= p(q^t+q^s)$ where $\frac{\partial p}{ \partial q}<0$. The trawl fleet can harvest up to 70% of the quota and the purse seine fleet can harvest up to 30% of the quota; these are based on historical averages. We'll use $\bar{q^t}$ and $\bar{q^s}$ to indicate these levels. The purse seine fleet has lower costs than the trawl fishery.
 
-We assume that each fleet is competitive or harvests the limit. For some lowprices, only the purse seine fleet is active. When that
-happens, the net revenue of the seine fleet is: 
+Case 1 occurs if the output prices are very low.  For some low level of prices, only the purse seine fleet is active. When that happens, the net revenue of the seine fleet is:
 \begin{equation}
 NR^s=p(q^s+0)q^s -c^sq^s=0
 \end{equation}
 
-Since $p(\cdot)$ is known from the econometric model, this can be solved for positive valued $q^s$:
-
-\begin{align}
-(\alpha + \beta_1 p_{y-1} + \gamma_0  q_{s})   q^s -c^sq^s&=0\\
-(\alpha + \beta_1 p_{y-1} + \gamma_0  q_{s}) -c^s&=0\\
-\frac{\alpha + \beta_1 p_{y-1} -c^s}{-\gamma_0}&=q_{s}
-\end{align}
-
-The market price for case in which the purse seine fleet selects $q<\bar{q^s}$ is simply $c^s$. It is possible that the purse seine fleet would be constrained by $\bar{q^s}$, in which case we set $q^s=\bar{q^s}$. When this happens, the market price (assuming the trawl fleet is not active) is:
-
-\begin{equation}
-\alpha + \beta_1 p_{y-1} + \gamma_0  \bar{q_{s}}
-\end{equation}
-
-For some slightly higher prices, the trawl fleet is active. Similarly,
-we assume a competitive industry:
-
-\begin{align}
-NR^t&=p(q^s+q^t)q^t -c^tq^t=0
-\end{align}
-
-Once again, by substitution, we have:
-
-\begin{align}
-(\alpha + \beta_1 p_{y-1} + \gamma_0( q^t+q^s)) q^t -c^tq^t &=0\\
-\alpha + \beta_1 p_{y-1} + \gamma_0( q^t+q^s)  -c^t &=0\\
-\frac{\alpha + \beta_1 p_{y-1} +\gamma_0q^s -c^t}{-\gamma_0} &= q^t
-\end{align}
-
-The market price for case in which the trawl fleet selects $q^t<\bar{q^t}$ is simply $c^t$. It is possible that the trawl fleet would be constrained by $\bar{q^t}$, in which case we set $q^t=\bar{q^t}$. When this happens, the market price (assuming the trawl fleet is not active) is:
+\iffalse 
+Subsequent equation appears out of nowhere.
+\fi
 
 \begin{equation}
 \label{all_price}
 p=\alpha + \beta_1 p_{y-1} + \gamma_0(\bar{q_{s}}+\bar{q_{s}}) )
 \end{equation}
 
-Equation [all_price] is the price at which the entire quota is harvested. For prices slightly lower than this, the trawl fleet harvests less than its maximum fraction of yield. For prices lower than \$63.24, the trawl fleet harvests nothing. There is also a range of output prices below which the seine fishery harvests less than its share, and an even lower price (\$14.27 per metric ton) at which the seine fishery is inactive.
+Equation \ref{all_price} is the price at which the entire quota is harvested. For prices slightly lower than this, the trawl fleet harvests less than its maximum fraction of yield. For prices lower than \$63.24, the trawl fleet harvests nothing. There is also a range of output prices below which the seine fishery harvests less than its share, and an even lower price (\$14.27 per metric ton) at which the seine fishery is inactive.  These are the marginal costs of landing herring (Table \ref{PUR_costs} and \ref{OTM_costs}).
 
-These behavioral assumptions have some implications. If the purse seine fleet is unconstrained by its quota ($q^s<\bar{q^s}$), it will make zero profits. Similarly, if the trawl fleet is unconstrained, it will also make zero profit (but the purse seine fleet will make positive profits). The only way for there to be positive profits for both sectors is for both trawl and seine sectors to be constrained by their quotas. This will happen when quotas or costs of fishing are below.These are slighly unrealistic and a result of treating each fleet as being composed of identical (representative) vessels. If vessels in a fleet were heterogenous, some of the most productive vessels could earn positive profits while the marginal vessel earned zero profits at the unconstrained harvest levels.
 
 *Stability --*
 
@@ -1010,7 +1029,7 @@ dickey fuller regression is:
 \Delta NR_{y} = a_0 + \beta  NR_{y-1} + \delta y + \sum_{j=1}^k \xi_j \Delta NR_{y-j} + \varepsilon \label{dfuller_equation}
 \end{equation}
 
-Econometric evidence that $\beta=0$ is evidence of a unit root (nonstationarity) while statistical rejections of $H_0: \beta=0$ in favor of $H_A: \beta<0$ is evidence of stationarity of the time-series. We estimate a version of equation [dfuller_equation] in which $a, \delta,$ and $\xi_{j} \hspace{3mm} \forall j \ge 1$ are restricted to zero[^4] [^5]:
+Econometric evidence that $\beta=0$ is evidence of a unit root (nonstationarity) while statistical rejections of $H_0: \beta=0$ in favor of $H_A: \beta<0$ is evidence of stationarity of the time-series. We estimate a version of equation [dfuller_equation] in which $a, \delta,$ and $\xi_{j} \hspace{3mm} \forall j \ge 1$ are restricted to zero:
 
 \begin{equation}
 \label{estimated}
@@ -1035,13 +1054,15 @@ I also applied Fisher's method:
 all of the null hypotheses of the $k$ tests are true, then this will have a $\chi^2$ distribution with $2k$ degrees of freedom. A value would near zero would be evidence *for* the null hypothesis of non-stationarity.
 \fi
 
-*Caveats to the Economic model--*
+*Caveats to the Herring Fishery Economic model--*
 We did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal qualitative effects. The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs. A bigger problem is that, in the long run, firms can enter and exit this industry. We assume that average variable costs are the same as the marginal costs. This may be okay. It may be bad.
 
 If firms can enter and exit, then exclusion of fixed costs from the model could result in misleading recommendations. We did not model firm entry and exit; this is a difficult decision to model. Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible.
 
 Catch in the economic model can be different from the Yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the market model suggests that this is not so simple.
 
+Nothing big with Menhaden. 
+Nothing on Lobster.
 
  
 
@@ -1075,13 +1096,7 @@ reasons (such as a closure for catch of haddock in the Georges Bank fishery) ins
  [@Hanna1999StrengtheningResources]
 
 
-Fishery management must, among other things, incorporate multiple
-objectives, promote legitimacy by reflecting accepted norms, and have
-low transactions costs [@Hanna1999StrengtheningResources]. User
-participation in decision-making is a way to increase regulatory
-legitimacy [@Hanna1995UserCouncil]. One drawback to user-participation
-is that meetings tend to attract participants with the most extreme
-views [@Osborne2000MeetingsParticipation; @Turner2005MeetingsAnalysis].
+Fishery management must, among other things, incorporate multiple objectives, promote legitimacy by reflecting accepted norms, and have low transactions costs [@Hanna1999StrengtheningResources]. User participation in decision-making is a way to increase regulatory legitimacy [@Hanna1995UserCouncil]. One drawback to user-participation is that meetings tend to attract participants with the most extreme views [@Osborne2000MeetingsParticipation; @Turner2005MeetingsAnalysis].
 
 Extensions, and Future Research
 -------------------------------
