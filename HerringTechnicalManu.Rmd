@@ -219,7 +219,7 @@ Adult breeding pairs by colony were combined with estimated productivity of fled
 
 
 ```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns \\label{ternSR}", out.width='400pt', message = FALSE, warning = FALSE}
-ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
+#ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
 names(ternpopproddiet)[5]<-"productivity"
@@ -261,7 +261,7 @@ ternrec+
 The resulting model based on common tern population dynamics in the Gulf of Maine (with no link to herring) predicts that the population will increase to its carrying capacity under steady conditions over a 150 year simulation. The actual population has increased at ~2% per year between 1998 and 2015 (Fig. \ref{terntrend}). Given the lack of detailed demographic information in the delay-difference model, this was considered a good representation of the average observed trend in current common tern population dynamics. 
 
 ```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns, no herring link \\label{terntrend}", out.width='400pt', message = FALSE, warning = FALSE}
-ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
+#ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
 names(ternpopproddiet)[5]<-"productivity"
@@ -356,14 +356,14 @@ Req<-PredEquilib$Req
 Weq<-PredEquilib$Weq
 ##############################################
 #### Read in Herring "data"
-preyB<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111TotBioSimYear.txt", header=T)  
-preysim<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111NAASimYear.txt", header=T)
+#preyB<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111TotBioSimYear.txt", header=T)  
+#preysim<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111NAASimYear.txt", header=T)
 preyNsim<-transmute(preysim, preyN=Age1+Age2+Age3+Age4+Age5+Age6+Age7+Age8, Sim=Sim)
      
 by_simN<-group_by(preyNsim, Sim)
 Nyears<-summarise(by_simN, n=n())
 
-preychar<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111SimCharAA.txt", header=T)
+#preychar<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111SimCharAA.txt", header=T)
 preychar<-cbind(preychar, Age=rep(1:8,max(preychar$Sim)))
 #BASE ON TOTAL B
 Ternforage<-cbind(preyB, Yr=rep(1:Nyears$n, max(preychar$Sim)))
@@ -410,7 +410,7 @@ The relationship between herring abundance and tern reproductive success was bui
 
 ```{r, eval=sg_figs, fig.cap="Major diet items for Gulf of Maine tern fledgelings \\label{chickdiet}",  out.width='400pt', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/TernMajorDietItems.png")
-ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
+#ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
 names(ternpopproddiet)[5]<-"productivity"
@@ -436,7 +436,7 @@ Individual colonies showed different trends in number of nesting pairs, producti
 
 ```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and tern productivity by colony \\label{proddiet}", out.width='400pt', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/ternproddiet.png")
-ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
+#ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
 names(ternpopproddiet)[5]<-"productivity"
@@ -464,7 +464,7 @@ Based on tern feeding observations, we would expect the number of age 1 herring 
 To represent the potential for herring to influence tern productivity, we parameterized a tern ârecruitment multiplierâ based on herring assessed total biomass and common tern productivity across all colonies (except Monomoy where terns eat sandlance). This relationship includes a threshold herring biomass where common tern productivity would drop below 1.0, and above that threshold productivity exceeds 1.0 (Fig. \ref{herrternmod}). The threshold of ~400,000 tons is set where a linear relationship between herring total biomass and common tern productivity crosses productivity=1 (black dashed line in Fig. \ref{herrternmod}). However, the selected threshold is uncertain because there are few observations of common tern productivity at low herring total biomass (1975-1985). The linear relationship does not have a statistically significant slope; a curve was fit to represent a level contribution of herring total biomass to common tern productivity above the threshold. The curve descends below the threshold, dropping below 0.5 productivity at around 50,000 tons and representing the extreme assumption that herring extinction would result in tern productivity of 0. Although the relationship of tern productivity to herring biomass at extremely low herring populations has not been quantified, control rules that allow herring extinction do not meet stated management objectives for herring, so this extreme assumption for terns will not change any decisions to include or exclude control rules. 
 
 ```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success \\label{herrternmod}", out.width='400pt', message = FALSE, warning = FALSE}
-ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
+#ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
 names(ternpopproddiet)[5]<-"productivity"
@@ -472,7 +472,7 @@ names(ternpopproddiet)[5]<-"productivity"
 #get rid of trailing white spaces
 ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
 
-herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
+#herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
 herring <- herring[,1:6]
 
 ternpopproddiet_herring <- left_join(ternpopproddiet, herring)
@@ -529,7 +529,7 @@ totprodnomonherr +
 When included in the model using $\gamma$ = 1.09 in equation \ref{recwithherring_equation}, this relationship adjusts the modeled common tern population increase to match the current average increase in common tern nesting pairs observed in the data (Fig. \ref{terntrendwherring}). There is still considerable uncertainty around this mean population trajectory which cannot be reflected in our simple model. 
 
 ```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns with simulated herring-common tern productivity relationship \\label{terntrendwherring}", out.width='400pt', message = FALSE, warning = FALSE}
-ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
+#ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
 names(ternpopproddiet)[5]<-"productivity"
@@ -624,14 +624,14 @@ Req<-PredEquilib$Req
 Weq<-PredEquilib$Weq
 ##############################################
 #### Read in Herring "data"
-preyB<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111TotBioSimYear.txt", header=T)  
-preysim<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111NAASimYear.txt", header=T)
+#preyB<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111TotBioSimYear.txt", header=T)  
+#preysim<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111NAASimYear.txt", header=T)
 preyNsim<-transmute(preysim, preyN=Age1+Age2+Age3+Age4+Age5+Age6+Age7+Age8, Sim=Sim)
      
 by_simN<-group_by(preyNsim, Sim)
 Nyears<-summarise(by_simN, n=n())
 
-preychar<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111SimCharAA.txt", header=T)
+#preychar<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111SimCharAA.txt", header=T)
 preychar<-cbind(preychar, Age=rep(1:8,max(preychar$Sim)))
 #BASE ON TOTAL B
 Ternforage<-cbind(preyB, Yr=rep(1:Nyears$n, max(preychar$Sim)))
@@ -678,9 +678,9 @@ Because no specific groundfish was identified as a representative herring predat
 
 ```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database \\label{gfishdiets}", message = FALSE, warning = FALSE}
 
-dogdiet   <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/dogfishdietcomp.csv")
-GBcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GBcoddietcomp.csv")
-GOMcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GOMcoddietcomp.csv")
+#dogdiet   <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/dogfishdietcomp.csv")
+#GBcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GBcoddietcomp.csv")
+#GOMcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GOMcoddietcomp.csv")
 
 names(dogdiet)[1]<-"Year"
 names(GBcoddiet)[1]<-"Year" 
@@ -715,13 +715,13 @@ Some interannual variation in diet may be explained by changing herring abundanc
 
 
 ```{r, eval=sg_figs, fig.cap="Relationship of assessed groundfish spawning stock biomass (SSB) with the proportion of herring in diet \\label{gfishBherrdiet}", out.width='400pt',message = FALSE, warning = FALSE}
-codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
-codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
-dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
-gfishdiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Gfishdiets.csv")
-herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
+#codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
+#codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
+#dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
+#gfishdiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Gfishdiets.csv")
+#herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
 herring <- herring[,1:6]
-dogfishrec <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishrec.csv")
+#dogfishrec <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishrec.csv")
 
 # add species column, tidy and combine datasets
 codGB <- cbind(codGB, species=rep("GBcod", dim(codGB)[1]))
@@ -771,40 +771,40 @@ There was a weak positive relationship between dogfish total biomass and herring
 
 
 ```{r, eval=sg_figs, fig.cap="Dogfish population relationships with herring total biomass (left) and herring proportion in diet (right) \\label{pupherring}", out.width='.49\\linewidth', fig.show='hold', fig.align='center', message = FALSE, warning = FALSE}
-codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
-codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
-dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
-gfishdiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Gfishdiets.csv")
-herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
+#codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
+#codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
+#dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
+#gfishdiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Gfishdiets.csv")
+#herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
 herring <- herring[,1:6]
-dogfishrec <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishrec.csv")
+#dogfishrec <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishrec.csv")
 
 # add species column, tidy and combine datasets
-codGB <- cbind(codGB, species=rep("GBcod", dim(codGB)[1]))
-codGOM <- cbind(codGOM, species=rep("GOMcod", dim(codGOM)[1]))
-dogfish <- cbind(dogfish, species=rep("dogfish", dim(dogfish)[1]))
-dogfish <- full_join(dogfish, dogfishrec)
+#codGB <- cbind(codGB, species=rep("GBcod", dim(codGB)[1]))
+#codGOM <- cbind(codGOM, species=rep("GOMcod", dim(codGOM)[1]))
+#dogfish <- cbind(dogfish, species=rep("dogfish", dim(dogfish)[1]))
+#dogfish <- full_join(dogfish, dogfishrec)
 
-gfishdiet <- gfishdiet %>%
-  gather(preypred, dietprop, 2:9) %>%
-  separate(preypred, c("prey", "species"), sep="_")
+#gfishdiet <- gfishdiet %>%
+#  gather(preypred, dietprop, 2:9) %>%
+#  separate(preypred, c("prey", "species"), sep="_")
 
-codpops <- full_join(codGB, codGOM)
-names(codpops)[1]<-"Yr"
-names(dogfish)[2:12] <- c("LargeB", "MedB", "RecAge1t",
-                          "TotJan1B","survSSB", "survSSB_MA","stocExpB",
-                          "stocTotB", "stocSSB", "SSBkgtow", "SSB")
+#codpops <- full_join(codGB, codGOM)
+#names(codpops)[1]<-"Yr"
+#names(dogfish)[2:12] <- c("LargeB", "MedB", "RecAge1t",
+#                          "TotJan1B","survSSB", "survSSB_MA","stocExpB",
+#                          "stocTotB", "stocSSB", "SSBkgtow", "SSB")
 #put all in t not 1000t
-dogfish <- dogfish %>%
-  mutate_at(vars(LargeB, MedB, RecAge1t,TotJan1B, survSSB, survSSB_MA,
-                 stocExpB, stocTotB, stocSSB, SSB),
-            funs(.*1000))
+#dogfish <- dogfish %>%
+#  mutate_at(vars(LargeB, MedB, RecAge1t,TotJan1B, survSSB, survSSB_MA,
+#                 stocExpB, stocTotB, stocSSB, SSB),
+#            funs(.*1000))
 
-dogfish <- dogfish %>%
-  mutate(RecAge1 = RecAge1t/PupAvgWtkg) %>% #rec in 1000 fish matches cod units
-  mutate(TotJan1B = replace(TotJan1B, TotJan1B==0, NA)) #2014 missed survey
+#dogfish <- dogfish %>%
+#  mutate(RecAge1 = RecAge1t/PupAvgWtkg) %>% #rec in 1000 fish matches cod units
+#  mutate(TotJan1B = replace(TotJan1B, TotJan1B==0, NA)) #2014 missed survey
 
-gfishpops <- full_join(codpops, dogfish)
+#gfishpops <- full_join(codpops, dogfish)
 
 #merge fishpops and fish diets
 gfishpopfood <- left_join(gfishpops, gfishdiet, by=c("Yr"="Year", "species"="species"))
