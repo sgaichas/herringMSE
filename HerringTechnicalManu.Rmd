@@ -264,17 +264,17 @@ The resulting model based on common tern population dynamics in the Gulf of Main
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
-names(ternpopproddiet)[5]<-"productivity"
+#names(ternpopproddiet)[5]<-"productivity"
 
 #get rid of trailing white spaces
-ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
+#ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
 
-terntotalpop <- ternpopproddiet %>%
-  group_by(yr, species) %>%
-  filter(yr<2016) %>%
-  select(breedpairs, nfledged) %>%
-  filter(!is.na(nfledged)) %>%
-  summarise(totpairs = sum(breedpairs, na.rm=T), totfledge = sum(nfledged, na.rm=T))
+#terntotalpop <- ternpopproddiet %>%
+#  group_by(yr, species) %>%
+#  filter(yr<2016) %>%
+#  select(breedpairs, nfledged) %>%
+#  filter(!is.na(nfledged)) %>%
+#  summarise(totpairs = sum(breedpairs, na.rm=T), totfledge = sum(nfledged, na.rm=T))
 
 terntotalpop19982015 <- terntotalpop %>%
   filter(yr>1997)
@@ -413,10 +413,10 @@ The relationship between herring abundance and tern reproductive success was bui
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
-names(ternpopproddiet)[5]<-"productivity"
+#names(ternpopproddiet)[5]<-"productivity"
 
 #get rid of trailing white spaces
-ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
+#ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
 
 majorterndiet <- ternpopproddiet %>% 
   filter(!majority.diet %in% c("", "hake and sandlance",
@@ -439,10 +439,10 @@ Individual colonies showed different trends in number of nesting pairs, producti
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
-names(ternpopproddiet)[5]<-"productivity"
+#names(ternpopproddiet)[5]<-"productivity"
 
 #get rid of trailing white spaces
-ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
+#ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
 
 ternproddiet <- ggplot(ternpopproddiet, aes(x=prop.herring, y=productivity, colour=species)) +
   geom_point() +
@@ -467,22 +467,22 @@ To represent the potential for herring to influence tern productivity, we parame
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
-names(ternpopproddiet)[5]<-"productivity"
+#names(ternpopproddiet)[5]<-"productivity"
 
 #get rid of trailing white spaces
-ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
+#ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
 
 #herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
 herring <- herring[,1:6]
 
 ternpopproddiet_herring <- left_join(ternpopproddiet, herring)
 
-terntotalpop <- ternpopproddiet %>%
-  group_by(yr, species) %>%
-  filter(yr<2016) %>%
-  select(breedpairs, nfledged) %>%
-  filter(!is.na(nfledged)) %>%
-  summarise(totpairs = sum(breedpairs, na.rm=T), totfledge = sum(nfledged, na.rm=T))
+#terntotalpop <- ternpopproddiet %>%
+#  group_by(yr, species) %>%
+#  filter(yr<2016) %>%
+#  select(breedpairs, nfledged) %>%
+#  filter(!is.na(nfledged)) %>%
+#  summarise(totpairs = sum(breedpairs, na.rm=T), totfledge = sum(nfledged, na.rm=T))
 
 # Monomoy Island is a third of the population but eats mainly sandlance and is south of GOM proper--leave out?
 
@@ -532,20 +532,20 @@ When included in the model using $\gamma$ = 1.09 in equation \ref{recwithherring
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
-names(ternpopproddiet)[5]<-"productivity"
+#names(ternpopproddiet)[5]<-"productivity"
 
 #get rid of trailing white spaces
-ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
+#ternpopproddiet$majority.diet <- sub(" +$", "", ternpopproddiet$majority.diet)
 
-terntotalpop <- ternpopproddiet %>%
-  group_by(yr, species) %>%
-  filter(yr<2016) %>%
-  select(breedpairs, nfledged) %>%
-  filter(!is.na(nfledged)) %>%
-  summarise(totpairs = sum(breedpairs, na.rm=T), totfledge = sum(nfledged, na.rm=T))
+#terntotalpop <- ternpopproddiet %>%
+#  group_by(yr, species) %>%
+#  filter(yr<2016) %>%
+#  select(breedpairs, nfledged) %>%
+#  filter(!is.na(nfledged)) %>%
+#  summarise(totpairs = sum(breedpairs, na.rm=T), totfledge = sum(nfledged, na.rm=T))
 
-terntotalpop19982015 <- terntotalpop %>%
-  filter(yr>1997)
+#terntotalpop19982015 <- terntotalpop %>%
+#  filter(yr>1997)
 
 ternpoptrend <- ggplot(terntotalpop19982015, aes(x=yr, y=totpairs, colour=species))
 
@@ -554,62 +554,62 @@ ternpoptrend <- ggplot(terntotalpop19982015, aes(x=yr, y=totpairs, colour=specie
 #######Some Functions#########
 ###Function to calculate unfished "SSBR", and abundance or biomass, or equilibrium characteristics given exploitation rate for delay-difference dynamics with Beverton-Holt SR.
 #function(unfishedspr,desired unfished N or B, steepness,units of numbs or bio?, annual natural mortality, annual fishery exploitation rate, ford walford parameter intercept, ford walford slope param, do unfished or exploited equilib?)
-unfishspr<-function(predunfishspr=NULL,targzero=NULL,steep=NULL,numbs_weightb=NULL,annualnatmort=NULL,annualexploit=NULL,FWalpha=NULL,FWrho=NULL,unfishflag=NULL) {
-  #see delay-diff chapter of hilborn and walters and common pubs on steepness (Mangel et al 2010)
-  predrzero<-1/predunfishspr*targzero  #unfished recruitment=f(unfishedSSBR,unfished N or B specified by user
-  predalpha<-(4*steep*predrzero)/(5*steep-1) #alpha of BH SR #1/beta? alpha in Mangel et al 2010 is (targzero/predrzero)*((1-steep)/(4*steep)) #
-  predbeta<-((targzero/predrzero)*((1-steep)/(4*steep)))/((5*steep-1)/(4*steep*predrzero)) #beta of BH SR #alpha/beta? beta ibid (5*steep-1)/(4*steep*predrzero)
-  #predalpha<- (targzero/predrzero)*((1-steep)/(4*steep)) #direct from Mangel et al 2010
-  #predbeta<-(5*steep-1)/(4*steep*predrzero) #direct from Mangel et al 2010
-  if(numbs_weightb==1){ #solving in units of numbers or biomass
-    kappa<-1-(1-annualnatmort)*(1-annualexploit) #growth-survival constant (pg 339 Hilborn and Walters)
-    eqvalue<-(predalpha/kappa)-(predbeta/(1-annualexploit)) #equilibrium N
-    Ceq<-eqvalue*annualexploit #equilibrium catch
-    Req<-kappa*eqvalue #equilibrium recruitment
-    SSeq<-eqvalue-Ceq  #equilibrium spawning stock
-  } else {
-    kappa<-((1-(1+FWrho)*(1-annualnatmort)*(1-annualexploit))+(FWrho*(1-annualnatmort)^2*(1-annualexploit)^2))/FWalpha  #growth-survival constant (pg 339 Hilborn and Walters)
-    #kappa<-((1-(1+FWrho)*(1-annualnatmort)*(1-annualexploit))+(FWrho*(1-annualnatmort)^2*(1-annualexploit)^2))/(Recwt-((Prerecwt*FWrho)*(1-annualnatmort)*(1-annualexploit)))
-    eqvalue<-(predalpha/kappa)-(predbeta/(1-annualexploit)) #equilibrium Biomass
-    Yeq<-eqvalue*annualexploit #equilibrium yield
-    Req<-kappa*eqvalue #equilibrium recruitment
-    SSeq<-eqvalue-Yeq #equilibrium spawning stock
-    Neq<-Req/(1-(1-annualnatmort)*(1-annualexploit)) #equilibrium N
-    Weq<-eqvalue/Neq #equilibrium average weight
-  }  
-  if(unfishflag==0){ #if doing unfished then just return unfished spr to optimize function; required for equlibrium calcs
-  return((targzero-eqvalue)^2)
-  } else { #if not doing unfished (exploit>0) then return various equilibrium values
-   if(numbs_weightb==1) { #units of numbers or biomass?
-     return(data.frame("Neq"=eqvalue,"Ceq"=Ceq,"Req"=Req,"SSeq"=SSeq,"predrzero"=predrzero,"predalpha"=predalpha,"predbeta"=predbeta))
-   }else {
-     return(data.frame("Beq"=eqvalue,"Yeq"=Yeq,"Req"=Req,"SSeq"=SSeq,"Neq"=Neq,"Weq"=Weq,"predrzero"=predrzero,"predalpha"=predalpha,"predbeta"=predbeta))
-   }
-  }
-}
+#unfishspr<-function(predunfishspr=NULL,targzero=NULL,steep=NULL,numbs_weightb=NULL,annualnatmort=NULL,annualexploit=NULL,FWalpha=NULL,FWrho=NULL,unfishflag=NULL) {
+#  #see delay-diff chapter of hilborn and walters and common pubs on steepness (Mangel et al 2010)
+#  predrzero<-1/predunfishspr*targzero  #unfished recruitment=f(unfishedSSBR,unfished N or B specified by user
+#  predalpha<-(4*steep*predrzero)/(5*steep-1) #alpha of BH SR #1/beta? alpha in Mangel et al 2010 is (targzero/predrzero)*((1-steep)/(4*steep)) #
+#  predbeta<-((targzero/predrzero)*((1-steep)/(4*steep)))/((5*steep-1)/(4*steep*predrzero)) #beta of BH SR #alpha/beta? beta ibid (5*steep-1)/(4*steep*predrzero)
+#  #predalpha<- (targzero/predrzero)*((1-steep)/(4*steep)) #direct from Mangel et al 2010
+#  #predbeta<-(5*steep-1)/(4*steep*predrzero) #direct from Mangel et al 2010
+#  if(numbs_weightb==1){ #solving in units of numbers or biomass
+#    kappa<-1-(1-annualnatmort)*(1-annualexploit) #growth-survival constant (pg 339 Hilborn and Walters)
+#    eqvalue<-(predalpha/kappa)-(predbeta/(1-annualexploit)) #equilibrium N
+#    Ceq<-eqvalue*annualexploit #equilibrium catch
+#    Req<-kappa*eqvalue #equilibrium recruitment
+#    SSeq<-eqvalue-Ceq  #equilibrium spawning stock
+#  } else {
+#    kappa<-((1-(1+FWrho)*(1-annualnatmort)*(1-annualexploit))+(FWrho*(1-annualnatmort)^2*(1-annualexploit)^2))/FWalpha  #growth-survival constant (pg 339 Hilborn and Walters)
+#    #kappa<-((1-(1+FWrho)*(1-annualnatmort)*(1-annualexploit))+(FWrho*(1-annualnatmort)^2*(1-annualexploit)^2))/(Recwt-((Prerecwt*FWrho)*(1-annualnatmort)*(1-annualexploit)))
+#    eqvalue<-(predalpha/kappa)-(predbeta/(1-annualexploit)) #equilibrium Biomass
+#    Yeq<-eqvalue*annualexploit #equilibrium yield
+#    Req<-kappa*eqvalue #equilibrium recruitment
+#    SSeq<-eqvalue-Yeq #equilibrium spawning stock
+#    Neq<-Req/(1-(1-annualnatmort)*(1-annualexploit)) #equilibrium N
+#    Weq<-eqvalue/Neq #equilibrium average weight
+#  }  
+#  if(unfishflag==0){ #if doing unfished then just return unfished spr to optimize function; required for equlibrium calcs
+#  return((targzero-eqvalue)^2)
+#  } else { #if not doing unfished (exploit>0) then return various equilibrium values
+#   if(numbs_weightb==1) { #units of numbers or biomass?
+#     return(data.frame("Neq"=eqvalue,"Ceq"=Ceq,"Req"=Req,"SSeq"=SSeq,"predrzero"=predrzero,"predalpha"=predalpha,"predbeta"=predbeta))
+#   }else {
+#     return(data.frame("Beq"=eqvalue,"Yeq"=Yeq,"Req"=Req,"SSeq"=SSeq,"Neq"=Neq,"Weq"=Weq,"predrzero"=predrzero,"predalpha"=predalpha,"predbeta"=predbeta))
+#   }
+#  }
+#}
 #####end function unfishspr#####
 
 #### Common Tern Gulf of Maine pars (see HerringMSEpredspars.xlsx for derivation
 
-numbs_weight  <-  1  #2 #1=numbers, else weight.  Will predator be tracked just in numbers or numbers and weight?  Weight allows for growth effects.
-Predzero      <-  45000 #5.90E+05 # #5.60E+09  #50000 #predator unfished total N or biomass
-Predsteep     <-  0.26 #0.25  #0.8 #predator steepness
-PredannualA   <-  0.1  #0.6 #predator annual natural mortality rate (0-1); serves as max if time varying
-Predexploit   <-  0.00  #0.3 #predator annual exploitation rate (0-1)
-FWalpha       <-  0.00015#1.5 #  #0.243 #ford-walford plot intercept parameter if doing biomass units tons
-FWrho         <-  0.0  #1.45 #ford-walford plot slope parameter if doing biomass units; serves as max if time varying
+#numbs_weight  <-  1  #2 #1=numbers, else weight.  Will predator be tracked just in numbers or numbers and weight?  Weight allows for growth effects.
+#Predzero      <-  45000 #5.90E+05 # #5.60E+09  #50000 #predator unfished total N or biomass
+#Predsteep     <-  0.26 #0.25  #0.8 #predator steepness
+#PredannualA   <-  0.1  #0.6 #predator annual natural mortality rate (0-1); serves as max if time varying
+#Predexploit   <-  0.00  #0.3 #predator annual exploitation rate (0-1)
+#FWalpha       <-  0.00015#1.5 #  #0.243 #ford-walford plot intercept parameter if doing biomass units tons
+#FWrho         <-  0.0  #1.45 #ford-walford plot slope parameter if doing biomass units; serves as max if time varying
 
-PredN         <-  c() #for predator abundance vector
-PredN[1]      <-  3000  #7000 #initial abundance in year 1
-PredB         <-  c() #for predator biomass vector if doing in those units
-PredB[1]      <-  1.5  #6000 #initial biomass in year 1 
-PredRecdelay  <-  4  #1 #delay in years for when recruits in year y are added to population
+#PredN         <-  c() #for predator abundance vector
+#PredN[1]      <-  3000  #7000 #initial abundance in year 1
+#PredB         <-  c() #for predator biomass vector if doing in those units
+#PredB[1]      <-  1.5  #6000 #initial biomass in year 1 
+#PredRecdelay  <-  4  #1 #delay in years for when recruits in year y are added to population
 
 preypredrec<-1.09 #strength of effect of prey N on predator recruitment (like Plaganyi and Butterworth) >=1; 1=no effect
-preyprednatm<-0 #strength of effect of prey N on predator annual natural mort (0-1) 0=no effect
-preypredgrow<-1 #strengh of effect of prey N on predator growth, >=1, 1=no effect
+#preyprednatm<-0 #strength of effect of prey N on predator annual natural mort (0-1) 0=no effect
+#preypredgrow<-1 #strengh of effect of prey N on predator growth, >=1, 1=no effect
   
-COTEprodThresh<-400000
+#COTEprodThresh<-400000
 
 #####End user inputs########
 
@@ -632,7 +632,7 @@ by_simN<-group_by(preyNsim, Sim)
 Nyears<-summarise(by_simN, n=n())
 
 #preychar<-read.table("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Unadj1111SimCharAA.txt", header=T)
-preychar<-cbind(preychar, Age=rep(1:8,max(preychar$Sim)))
+#preychar<-cbind(preychar, Age=rep(1:8,max(preychar$Sim)))
 #BASE ON TOTAL B
 Ternforage<-cbind(preyB, Yr=rep(1:Nyears$n, max(preychar$Sim)))
 h<-1
@@ -720,7 +720,7 @@ Some interannual variation in diet may be explained by changing herring abundanc
 #dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
 #gfishdiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Gfishdiets.csv")
 #herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
-herring <- herring[,1:6]
+#herring <- herring[,1:6]
 #dogfishrec <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishrec.csv")
 
 # add species column, tidy and combine datasets
@@ -776,7 +776,7 @@ There was a weak positive relationship between dogfish total biomass and herring
 #dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
 #gfishdiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/Gfishdiets.csv")
 #herring <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/herringassessout2015.csv")
-herring <- herring[,1:6]
+#herring <- herring[,1:6]
 #dogfishrec <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishrec.csv")
 
 # add species column, tidy and combine datasets
