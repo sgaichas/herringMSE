@@ -1,0 +1,1680 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={The dream and the reality: meeting decision-making time frames while incorporating ecosystem and economic models into management strategy evaluation},
+            pdfauthor={Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre Boelke, Brian J. Irwin},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{The dream and the reality: meeting decision-making time frames while
+incorporating ecosystem and economic models into management strategy
+evaluation}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre
+Boelke, Brian J. Irwin}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \date{}
+  \predate{}\postdate{}
+
+\usepackage{setspace}
+
+\usepackage{float}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+\begin{document}
+\maketitle
+
+\doublespacing
+
+\section{Introduction}\label{introduction}
+
+Management strategy evaluation (MSE) uses simulation to evaluate the
+trade-offs resulting from alternative management options in the face of
+uncertainty (Punt et al. 2016). MSEs require time, however, for
+stakeholder input, data collection, and model development (Butterworth
+2007) (Punt et al., 2014). As such, the process can take much longer
+than ``traditional'' management time frames (Butterworth 2007) . The
+development time is also likely to lengthen when explicit ecosystem,
+multi-species, or socioeconomic considerations are desired because the
+data and modeling needs, and subsequent uncertainties, are all greater
+than in a single species approach. This manuscript chronicles the
+development of an MSE done on a truncated timetable (\textasciitilde{}12
+months) required to meet management time frames.
+
+In January 2016, the New England Fishery Management Council (NEFMC), the
+political body responsible for federally managed species in the
+northeast US, approved the conduct of an MSE to evaluate harvest control
+rules (HCRs) for Atlantic herring (hereafter herring) \emph{Clupea
+harengus}. The primary goal of this MSE was to evaluate the effects of
+alternative HCRs on the herring fishery, predators of herring, and the
+human environment. The MSE was also to include a public stakeholder
+process. The NEFMC desired to have results from the MSE ready to inform
+fisheries management decisions within one year, which left little time
+to develop the technical aspects of the MSE, especially in the context
+of multiple public stakeholder workshops. A particularly challenging
+aspect of the time frame was deciding what technical aspects of the MSE
+(e.g., operating models) could be compromised (i.e., perhaps not ideal
+from a scientific or best-practices standpoint) while ensuring the
+results would still accurately portray the trade-offs among objectives
+and remain relevant for decision-making. The objectives of this
+manuscript were to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Evaluate the relative performance of HCRs at meeting herring fishery
+  objectives, including those related to predators of herring, as
+  informed by stakeholder input, and,
+\item
+  Discuss our approach to developing an MSE on a relatively truncated
+  timetable in order to meet management time frames, and identify the
+  lessons learned throughout the process, especially as they relate to
+  using MSE as a tool to advance an ecosystem based approach to
+  management (Plagányi et al. 2014).
+\end{enumerate}
+
+\section{Methods}\label{methods}
+
+\textbf{Herring}
+
+\emph{Basics.--} An MSE was developed specific to Gulf of Maine -
+Georges Bank Atlantic herring. The MSE was a modified version of that
+used in Deroba et al. (2015), and symbols were largely consistent with
+Deroba et al. (2015) (Table 1). The MSE was based on an age-structured
+simulation that considered fish from age-1 through age-8+ (age-8 and
+older), which is consistent with the age ranges used in the 2012 and
+2015 Atlantic herring stock assessments (NOAA National Marine Fisheries
+Service 2012, Deroba et al. 2015). The abundances at age in year one of
+all simulations equaled the equilibrium abundances produced by the
+fishing mortality rate that would reduce the population to 40\% of
+\(SSB_{F=0}\). Abundance in each subsequent age and year was calculated
+assuming that fish died exponentially according to an age and year
+specific total instantaneous mortality rate (Table XX T1-T2).
+
+Recruitment followed Beverton-Holt dynamics (Francis 1992) (Table XX
+T3-T5). The variance of recruitment process errors (\(\sigma_R^2\))
+equaled 0.36 and the degree of autocorrelation (\(\omega\)) equaled 0.1,
+which are values consistent with recruitment estimates from a recent
+Atlantic herring stock assessment (Deroba et al. 2015).
+
+\emph{Assessment Error.--} A stock assessment was approximated (i.e.,
+assessment errors) similar to Punt et al. (2008) and Deroba et al.
+(2015). Assessment error was modeled as a year-specific lognormal random
+deviation common to all ages, with first-order autocorrelation and a
+term that created the option to include bias (Table XX T6-T7). The
+variance of assessment errors (\(\sigma_\phi^2\) ) equaled 0.05 and
+autocorrelation (\(\vartheta\)) equaled 0.7. Rho (\(\rho\)) allowed for
+the inclusion of bias in the assessed value of abundance (see below;
+Deroba 2014). Assessed spawning stock biomass (\(\widehat{SSB}_y\)) was
+calculated similarly to \(SSB_y\) except with \(N_{a,y}\) replaced with
+\(\widehat{N}_{a,y}\) (Table XX T5), and assessed total biomass
+(\(\widehat{B}_y\)) was calculated as the sum across ages of the product
+of \(\widehat{N}_{a,y}\) and \(W_a\).
+
+\emph{Operating Models.--} The stakeholder workshops identified
+uncertainties about herring life history traits and stock assessment,
+and the effect of some of these uncertainties on harvest control rule
+performance was evaluated by simulating the control rules for each of
+eight operating models (Table 2; Figures 1-2). The uncertainties
+addressed by the eight operating models included: Atlantic herring
+natural mortality and recruitment , Atlantic herring weight-at-age, and
+possible bias in the stock assessment beyond the unbiased measurement
+error (\(\epsilon_{\phi y}\)).
+
+The specific values used in the operating models for each of the
+uncertainties were premised on data used in recent stock assessments or
+estimates from fits of stock assessment models (NOAA National Marine
+Fisheries Service 2015). Natural mortality in recent stock assessments
+has varied among ages and years, with \(M\) being higher during
+1996-2014 than in previous years (NOAA National Marine Fisheries Service
+2012, 2015). Natural mortality, however, has also been identified as an
+uncertainty in the stock assessments and sensitivity runs have been
+conducted without higher \(M\) during 1996-2014, such that \(M\) was
+constant among years (NOAA National Marine Fisheries Service 2012,
+2015). To capture uncertainty in \(M\) in the MSE, operating models were
+run with either relatively high or low \(M_a\) (Table 2; Figure 1).
+Relatively high \(M_a\) values equaled the age-specific natural
+mortality rates used for the years 1996-2014 in the stock assessment.
+Relatively low \(M_a\) values in the MSE equaled the age-specific
+natural mortality rates used for the years 1965-1995 in the stock
+assessment. In the MSE, \(M_a\) was always time invariant.
+
+Uncertainty in estimates of stock-recruit parameters were represented in
+the MSE by using the parameters estimated by stock assessments fit with
+and without the higher \(M\) during 1996-2014. Stock assessment fits
+with higher \(M\) during 1996-2014 produced estimates of steepness and
+\(SSB_{F=0}\) that were lower than in stock assessment fits without
+higher \(M\) during 1996-2014 (Table 3; Figure 1). Thus, operating
+models with relatively high \(M_a\) always had relatively low steepness
+and \(SSB_{F=0}\), and the opposite held with relatively low \(M_a\)
+(Table 2).
+
+Uncertainty in Atlantic herring size-at-age was accounted for by having
+operating models with either fast or slow growth (i.e., weights-at-age;
+Table 2; Figure 3). Atlantic herring weight-at-age generally declined
+from the mid-1980s through the mid-1990s, and has been relatively stable
+since. Reasons for the decline are speculative and no causal
+relationships have been established. Thus, fast growth operating models
+had weights-at-age that equaled the January 1 weights-at-age from the
+most recent stock assessment averaged over the years 1976-1985, while
+the slow growth operating models averaged over the years 2005-2014
+(Deroba 2015). In the MSE, weight-at-age was always time invariant.
+Differences in \(M\), stock-recruit parameters, and weights-at-age led
+to differences in unfished and \(MSY\) reference points among operating
+models (Table 3). The effect of \(M\) and stock-recruit parameters was
+larger than the effect of differences in weight-at-age (Table 3).
+
+To address concerns about possible stock assessment bias, operating
+models with and without a positive bias were included. In operating
+models without bias, \(\rho\)=0 and the only assessment error was that
+caused by the unbiased measurement errors (\(\epsilon_{\phi y}\)). In
+operating models with bias, \(\rho\)=0.6, which was based on the degree
+of retrospective pattern in \(SSB\) from the most recent stock
+assessment (NOAA National Marine Fisheries Service 2015).
+
+\emph{Harvest Control Rules.--} Several basic control rules were
+evaluated, including a biomass based control rule (Katsukawa 2004), a
+constant catch rule, and a conditional constant catch rule (Figure 3;
+Clark and Hare (2004), Deroba and Bence (2012)). The biomass based
+control rule was defined by three parameters: the proportion (\(\psi\))
+of \(F_{MSY}\) that dictates the maximum desired fishing mortality rate
+(\(\tilde{F}\)), an upper SSB threshold (\(SSB_{up}\)), and a lower SSB
+threshold (\(SSB_{low}\)). The \(\tilde{F}\) equaled the maximum when
+\(\widehat{SSB}\) was above the upper threshold, declined linearly
+between the upper and lower thresholds, and equaled zero below the lower
+threshold:
+
+\begin{equation}
+  \label{Fy_equation}
+    \tilde{F}_y=
+    \begin{cases}
+      \psi F_{MSY}, & \text{if}\ \widehat{SSB}_y \geq SSB_{up} \\
+      \psi F_{MSY} \frac{\widehat{SSB}_y - SSB_{low}}{SSB_{up}-SSB_{low}}, & SSB_{low} < \widehat{SSB}_y < SSB_{up}\\
+      0, & if \widehat{SSB}_y \leq SSB_{low}
+    \end{cases}
+  \end{equation}
+
+The \(\tilde{F}_y\) was then used to set a quota in year y + 1 (Table XX
+T8). \(\tilde{F}_{ay}\) equaled \(\tilde{F}_y\) times \(S_a\), and
+\(S_a\) was time and simulation invariant selectivity at age equal to
+the values for the mobile gear fishery reported in (NOAA National Marine
+Fisheries Service 2015, Table 1). \(\tilde{F}_y\) was used to set a
+quota in the following year to approximate the practice of using
+projections based on an assessment using data through year y - 1 to set
+quotas in the following year(s). Furthermore, although \(\tilde{F}_y\)
+was set using \(\widehat{SSB}_y\), the quota was based on
+\(\widehat{B}_y\) because the fishery selects some immature ages. The
+fully selected fishing mortality rate that would remove the quota from
+the true population (\(\bar{F}_y\)) was found using Newton-Raphson
+iterations. Several variations of the biomass based rule were also
+evaluated. These variations included applying the control rule annually,
+using the same quota for three year blocks such that the control rule is
+applied every fourth year (i.e., \(Q_{y+1}=Q_{y+2}=Q_{y+3}\)), using the
+same quota for 5 year blocks, and using the same quota for three year
+blocks but restricting the change in the quota to 15\% in either
+direction when the control rule was reapplied in the fourth year. Thus,
+four variants of the biomass based control rule were evaluated: 1)
+annual application, 2) three year blocks, 3) five year blocks, and 4) 3
+year blocks with a 15\% restriction.
+
+For each biomass based control rule variant, a range of values for the
+three parameters defining the control rule were evaluated. The
+proportion (\(\psi\)) of \(F_{MSY}\) that dictates the maximum desired
+fishing mortality rate was varied from 0.1\(F_{MSY}\) to 1.0\(F_{MSY}\)
+in increments of 0.1, while the upper and lower SSB threshold parameters
+(\(SSB_{up} \; SSB_{low}\)) were varied from 0.0\(SSB_{MSY}\) to
+4\(SSB_{MSY}\) but with inconsistent increments (i.e., 0.0, 0.1, 0.3,
+0.5, 0.7, 0.9, 1.0, 1.1, 1.3, 1.5, 1.7, 2.0, 2.5, 3, 3.5, 4). The full
+factorial of combinations for the three biomass based control rule
+parameters produced 1,360 shapes (note \(SSB_{low}\) must be
+\textless{}= \(SSB_{up}\)) and each of these shapes was evaluated for
+each of the four biomass based control rule variants described above.
+
+The constant catch control rule is defined by one parameter, a desired
+constant catch (i.e., quota) amount (Figure 3). The constant catch
+amounts were varied from 0.1\(MSY\) to 1.0\(MSY\) in increments of 0.1.
+
+The conditional constant catch rule used a constant desired catch amount
+unless removing that desired catch from the assessed biomass caused the
+fully selected fishing mortality rate to exceed a pre-determined
+maximum, in which case the desired catch was set to the value produced
+by applying the maximum fully selected fishing mortality rate to the
+assessed biomass (Figure 3). Thus, the conditional constant catch rule
+has two policy parameters: a desired constant catch amount, and a
+maximum fishing mortality rate. The constant catch amounts were varied
+from 0.1\(MSY\) to 1.0\(MSY\) in increments of 0.1, while the maximum
+fishing mortality rate equaled 0.5\(F_{MSY}\). When the maximum fishing
+mortality rate portion the conditional constant catch rule was invoked,
+a quota was set in the same manner as when
+\(\widehat{SSB}_y >= SSB_{up}\) in the biomass based control rule
+described above.
+
+\emph{Implementation Error.--} Implementation errors were also included
+in a similar way as in Punt et al. (2008) and Deroba and Bence (2012),
+as year-specific lognormal random deviations (Table XX T9). The variance
+of implementation errors (\(\sigma_\theta^2\)) equaled 0.001.
+
+\textbf{Predators}
+
+There are two components of predator modeling for the herring MSE: a
+predator population model, and a herring-predator relationship model to
+link herring with predator populations. Here, we give an overview of the
+modeling process, and we describe the decisions made in parameterizing
+individual predator models and herring-predator relationships in the
+following sections. The overall population in numbers for each predator
+each year \(N_{y}\) is modeled with a delay-difference function:
+
+\begin{equation}
+N_{y+1} = N_{y}S_{y} +  R_{y+1} \label{delaydiffN_equation},
+\end{equation}
+
+where annual predator survival \(S_{y}\) is based on annual natural
+mortality \(v\) and exploitation \(u\)
+
+\begin{equation}
+S_{y} =  (1-v_{y})(1-u) \label{survival_equation},
+\end{equation}
+
+and annual recruitment \(R_{y}\) (delayed until recruitment age a) is a
+Beverton-Holt function:
+
+\begin{equation}
+R_{y+a} = \frac{\alpha B_{y}}{\beta + B_{y}} \label{delaydiffrec_equation}.
+\end{equation}
+
+Predator recruitment parameters are defined with steepness = \(h\),
+unfished recruitment \(R_{F=0}\), and unfished spawning biomass
+\(B_{F=0}\) as
+
+\begin{equation}
+\alpha = \frac{4hR_{F=0}}{5h-1} \label{predalpha_equation}, and
+\end{equation}
+
+\begin{equation}
+\beta = \frac{(B_{F=0}/R_{F=0})((1-h)/(4h))}{(5h-1)/(4hR_{F=0})} \label{predbeta_equation}
+\end{equation}
+
+.
+
+Predator population biomass is defined with Ford-Walford plot intercept
+(\(FWint\)) and slope (\(FWslope\)) growth parameters
+
+\begin{equation}
+B_{y+1} = S_{y} (FWint N_{y} + FWslope B_{y}) + FWint R_{y+1} \label{delaydiffB_equation}
+\end{equation}
+
+Parameterizing this model requires specification of the
+stock-recruitment relationship (steepness h and unfished spawning stock
+size in numbers or biomass), the natural mortality rate, the fishing
+mortality (exploitation) rate, the initial population size, and the
+weight at age of the predator (Ford-Walford plot intercept and slope
+parameters). For each predator, population parameters were derived from
+different sources (Tab. 1).
+
+Table 1. Predator population model specification and parameter sources
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule
+\begin{minipage}[b]{0.17\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.17\columnwidth}\raggedright\strut
+Highly migratory\strut
+\end{minipage} & \begin{minipage}[b]{0.17\columnwidth}\raggedright\strut
+Seabird\strut
+\end{minipage} & \begin{minipage}[b]{0.17\columnwidth}\raggedright\strut
+Groundfish\strut
+\end{minipage} & \begin{minipage}[b]{0.17\columnwidth}\raggedright\strut
+Marine mammal\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Stakeholder preferred species\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Bluefin tuna\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Common tern\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+not specified\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+not specified\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Species modeled\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Bluefin tuna (western Atlantic stock)\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Common tern (Gulf of Maine colonies as defined by the GOM Seabird
+Working Group)\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Spiny dogfish (GOM and GB cod stocks also examined)\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+none, data limited (Minke \& humpback whales, harbor porpoise, harbor
+seal examined)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Stock-recruitment\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Current assessment and literature\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Derived from observations\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Current assessment and literature\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+No time series data for our region\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Natural mortality\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Current assessment\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Literature\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Current assessment\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Derivable from assessment?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Fishing mortality\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Current assessment\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+n/a\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Current assessment\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Derivable from assessment?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Initial population\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Current assessment\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Derived from observations\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Current assessment\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Derivable from assessment?\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Weight at age\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Literature\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Literature\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Literature\strut
+\end{minipage} & \begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+Literature\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Predator population models were based on either the most recent stock
+assessment for the predator or from observational data from the
+Northeast US shelf. Herring-predator relationships were based on either
+peer-reviewed literature or observational data specific to the Northeast
+US shelf. We did not include process or observation error in any of
+these modeled relationships. This is obviously unrealistic, but the
+primary obective of the herring MSE is to evaluate the effect of herring
+management on predators. Leaving out variability driven by anything
+other than herring is intended to clarify the effect of herring
+managment.
+
+To develop the herring-predator relationship model, specific herring
+population characteristics (e.g.~total abundance or biomass, or
+abundance/biomass of certain ages or sizes) were related to either
+predator growth, predator reproduction, or predator survival. Our aim
+was to use information specific to the Northeast US shelf ecosystem,
+either from peer-reviewed literature, from observations, or a
+combination.
+
+In general, if support for a relationship between herring and predator
+recruitment was evident, it was modeled as a predator recruitment
+multiplier based on the herring population (\(Hpop_{y}\)) relative to a
+specified threshold \(Hthresh\):
+
+\begin{equation}
+R_{y+a} = \frac{\alpha B_{y}}{\beta + B_{y}} * \frac{\gamma(Hpop_{y}/Hthresh)}{(\gamma-1)+(Hpop_{y}/Hthresh)} \label{recwithherring_equation}, 
+\end{equation}
+
+where \(\gamma\) \textgreater{} 1 links herring population size relative
+to the threshold level to predator recruitment.
+
+If a relationship between predator growth and herring population size
+was evident, annual changes in growth were modeled by modifying either
+the Ford-Walford intercept (\(AnnAlpha\)) or slope (\(AnnRho\)):
+
+\begin{equation}
+B_{y+1} = S_{y} (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1} \label{delaydiffB_equation}, or
+\end{equation}\begin{equation}
+B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1} \label{delaydiffB_equation}.
+\end{equation}
+
+Finally, herring population size \(Hpop_{y}\) could be related to
+predator survival using a multiplier on constant predator annual natural
+mortality \(v\):
+
+\begin{equation}
+v_{y} =  v e ^ {-(\frac{Hpop_{y}}{Hpop_{F=0}})\delta} \label{varmort_equation},
+\end{equation}
+
+where 0 \textless{} \(\delta\) \textless{}1 links herring population
+size to predator survival.
+
+After specifying the population model parameters and herring-predator
+relationship, we applied the (Hilborn and Walters 2003) equilibruim
+calculation for the delay difference model with F=0 to get the unfished
+spawners per recruit ratio. This ratio was then used in a new
+equilibruim calculation with the current predator exploitation rate to
+estimate Beverton-Holt stock recruitment parameters, equilibrium
+recruitment and equilibrium individual weight under exploitation. Then,
+each model was run forward for 150 years with output from the herring
+operating model specifying the herring population characteristics.
+
+\subsection{Highly migratory species}\label{highly-migratory-species}
+
+Bluefin tuna were identified at the stakeholder workshop as the
+recommended highly migratory herring predator.
+
+\subsubsection{Tuna population model}\label{tuna-population-model}
+
+Western Atlantic bluefin tuna population parameters were drawn from the
+2014 stock assessment (ICCAT 2015), the growth curve from (Restrepo et
+al. 2010), and recruitment parameters from a detailed examination of
+alternative stock recruit relationships (Porch and Lauretta 2016).
+Ultimately, the Ã¢ÂÂlow recruitmentÃ¢ÂÂ scenario was selected to
+represent bluefin tuna productivity in the Gulf of Maine, which defines
+Bmsy as 13,226 t and therefore affects measures of status relative to
+Bmsy. Continuation of the current tuna fishing strategy
+(F\textless{}0.5Fmsy under the low recruitment scenario) is assumed. All
+predator population model parameters are listed in Table 2.
+
+\subsubsection{Herring-tuna relationship
+model}\label{herring-tuna-relationship-model}
+
+Tuna diets are variable depending on location and timing of foraging
+(Chase 2002, Golet et al. 2013, 2015, Logan et al. 2015), but for the
+purposes of this analysis, we assumed that herring is an important
+enough prey of tuna to impact tuna growth in the Northeast US shelf
+ecosystem. A relationship between bluefin tuna growth and herring
+average weight was implemented based on information and methods in Golet
+et al. (2015). The relationship between tuna condition anomaly (defined
+as proportional departures from the weight-at-length relationship used
+in the assessment) and average weight of tuna-prey-sized herring
+(\(Havgwt_{y}\), herring \textgreater{}180 mm collected from commercial
+herring fisheries) was modeled as a generalized logistic function with
+lower and upper bounds on tuna growth parameters:
+
+\begin{equation}
+AnnAlpha_{y} = (0.9 FWint) + \frac{(1.1 FWint) - (0.9 FWint)}{1+e^{(1-\lambda)*(100(Havgwt_{y}-T)/T)}} \label{tunagrow_equation},
+\end{equation}
+
+where \(\lambda\) \textgreater{} 1 links herring average weight
+anomalies to tuna growth.
+
+The inflection point of \(T\) = 0.15 kg average weight matches the 0
+tuna weight anomaly in Golet et al. (2015) (p.~186, Fig 2C), and upper
+and lower bounds were determined by estimating the growth intercept with
+weight at age 10\% higher or lower, respectively from the average weight
+at age obtained by applying the length to weight conversion reported in
+the 2014 stock assessment (ICCAT 2015) to the length at age estimated
+from the Restrepo et al. (2010) growth curve (Fig \ref{herringtuna}).
+When included in the model with \(\lambda\) = 1.1 in equation
+\ref{tunagrow_equation}, the simulated variation in tuna weight at age
+covered the observed range reported in Golet et al. (2015).
+
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-1-1} 
+
+}
+
+\caption{Modeled herring average weight-tuna growth relationship \label{herringtuna}}\label{fig:unnamed-chunk-1}
+\end{figure}
+
+\subsection{Seabirds}\label{seabirds}
+
+Common terns were identified at the stakeholder workshop as the
+recommended seabird herring predator.
+
+\subsubsection{Tern population model}\label{tern-population-model}
+
+There is no published stock assessment or population model for most
+seabirds in the Northeast US. Therefore, Gulf of Maine Common and Arctic
+tern population parameters were drawn from accounts in the Birds of
+North America (Hatch 2002, Nisbet 2002) and estimated from counts of
+breeding pairs and estimates of fledgling success summarized by the Gulf
+of Maine Seabird Working Group (GOMSWG; data at
+\url{http://gomswg.org/minutes.html}), as corrected and updated by
+seabird experts from throughout Maine. While we analyzed both Arctic and
+Common tern information, the stakeholder workshop identified Common
+terns as the example species for modeling, and this species has more
+extensive data and a generally higher proportion of herring in its diet
+based on that data. Therefore, the model is based on common terns in the
+Gulf of Maine.
+
+Adult breeding pairs by colony were combined with estimated productivity
+of fledglings per nest to estimate the annual number of fledglings for
+each year. A survival rate of 10\% was applied to fledglings from each
+year to represent Ã¢ÂÂrecruitsÃ¢ÂÂ to the breeding adult population
+age 4 and up (Nisbet 2002). This Ã¢ÂÂstock-recruitÃ¢ÂÂ information
+was used to estimate steepness for the delay difference model based on
+common tern information only. Fitting parameters with R nls (R Core Team
+2016) had variable success, with the full dataset unable to estimate a
+significant beta parameter (cyan line, Fig. \ref{ternSR}) for common
+terns, and a truncated dataset resulting in low population production
+rates inconsistent with currently observed common tern trends (bright
+green line overlaid with black, Fig. \ref{ternSR}). Therefore, steepness
+was estimated to give a relationship (black line, Fig. \ref{ternSR})
+falling between these two lines. The resulting stock recruit
+relationship set steepness at 0.26, a theoretical maximum breeding adult
+population of 45,000 pairs (Nisbet (2002), 1930Ã¢ÂÂs New England
+population), and a theoretical maximum recruitment of 4,500 individuals
+annually (reflecting approximately a productivity of 1.0 at
+Ã¢ÂÂcarrying capacityÃ¢ÂÂ resulting in a stable population). Average
+common tern productivity is 1.02 (all GOM colony data combined). Adult
+mortality was assumed to be 0.1 for the delay difference model (survival
+of 90\% (Nisbet 2002) for adults).
+
+\begin{figure}
+
+{\centering \includegraphics[width=400pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-2-1} 
+
+}
+
+\caption{Stock-recruitment function for Gulf of Maine common terns \label{ternSR}}\label{fig:unnamed-chunk-2}
+\end{figure}
+
+The resulting model based on common tern population dynamics in the Gulf
+of Maine (with no link to herring) predicts that the population will
+increase to its carrying capacity under steady conditions over a 150
+year simulation. The actual population has increased at
+\textasciitilde{}2\% per year between 1998 and 2015 (Fig.
+\ref{terntrend}). Given the lack of detailed demographic information in
+the delay-difference model, this was considered a good representation of
+the average observed trend in current common tern population dynamics.
+
+\begin{figure}
+
+{\centering \includegraphics[width=400pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-3-1} 
+
+}
+
+\caption{Population trends for Gulf of Maine terns, no herring link \label{terntrend}}\label{fig:unnamed-chunk-3}
+\end{figure}
+
+\subsubsection{Herring-tern relationship
+model}\label{herring-tern-relationship-model}
+
+The relationship between herring abundance and tern reproductive success
+was built based on information from individual colonies on annual
+productivity, proportion of herring in the diet, and amount of herring
+in the population as estimated by the current stock assessment. Since
+little of this information has appeared in the peer-reviewed literature,
+we present it in detail here. First, productivity information was
+evaluated by major diet item recorded for chicks over all colonies and
+years. In general, common tern productivity was higher when a
+streamlined fish species was the major diet item relative to
+invertebrates, but having herring as the major diet item resulted in
+about the same distribution of productivities as having hake or
+sandlance as the major diet item for these colonies (Fig.
+\ref{chickdiet}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=400pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-4-1} 
+
+}
+
+\caption{Major diet items for Gulf of Maine tern fledgelings \label{chickdiet}}\label{fig:unnamed-chunk-4}
+\end{figure}
+
+Individual colonies showed different trends in number of nesting pairs,
+productivity, and proportion of herring in the diet (plots available
+upon request). When both Arctic and Common terns shared a colony,
+interannual changes in productivity were generally similar between
+species, suggesting that conditions at and around the colony (weather,
+predation pressure, and prey fields) strongly influenced productivity
+rather than species-specific traits. Only two colonies (Machias Seal
+Island near the Canadian Border and Stratton Island in southern Maine)
+showed a significant positive correlation between the proportion of
+herring in the chick diet and productivity. Other islands showed either
+non-significant (no) relationships, or in one case (Metinic Island) a
+significant negative relationship (Fig. \ref{proddiet}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=400pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-5-1} 
+
+}
+
+\caption{Herring proporiton in diet and tern productivity by colony \label{proddiet}}\label{fig:unnamed-chunk-5}
+\end{figure}
+
+The estimated population size of herring on the Northeast US shelf had
+some relationship to the amount of herring in tern diet at several
+colonies (4 of 13 common tern colony diets related to herring Age 1
+recruitment, 6 of 13 common tern colony diets related to herring total
+B, and 4 of 13 common tern colony diets related to herring SSB; detailed
+statistics and plots available upon request). However, statistically
+significant direct relationships between herring population size and
+tern productivity were rare, with only Ship Island productivity
+increasing with herring total B, and Eastern Egg Rock, Matinicus Rock,
+Ship, and Monomoy Islands productivity increasing with herring SSB.
+Given that Monomoy Island tern chicks consistently received the lowest
+proportion of herring in their diets of any colony (0-11\%), we
+donÃ¢ÂÂt consider this relationship further to build the model.
+
+Based on tern feeding observations, we would expect the number of age 1
+herring in the population to be most related to tern productivity since
+that is the size class terns target, but this relationship was not found
+in analyzing the data. Herring total biomass was positively related to
+tern diets at nearly half of the colonies, and reflects all size classes
+including the smaller sizes most useful as tern forage, but was only
+directly related to tern productivity at one colony. Herring SSB was not
+considered further as an index of tern prey because it represents sizes
+larger than tern forage.
+
+To represent the potential for herring to influence tern productivity,
+we parameterized a tern Ã¢ÂÂrecruitment multiplierÃ¢ÂÂ based on
+herring assessed total biomass and common tern productivity across all
+colonies (except Monomoy where terns eat sandlance). This relationship
+includes a threshold herring biomass where common tern productivity
+would drop below 1.0, and above that threshold productivity exceeds 1.0
+(Fig. \ref{herrternmod}). The threshold of \textasciitilde{}400,000 tons
+is set where a linear relationship between herring total biomass and
+common tern productivity crosses productivity=1 (black dashed line in
+Fig. \ref{herrternmod}). However, the selected threshold is uncertain
+because there are few observations of common tern productivity at low
+herring total biomass (1975-1985). The linear relationship does not have
+a statistically significant slope; a curve was fit to represent a level
+contribution of herring total biomass to common tern productivity above
+the threshold. The curve descends below the threshold, dropping below
+0.5 productivity at around 50,000 tons and representing the extreme
+assumption that herring extinction would result in tern productivity of
+0. Although the relationship of tern productivity to herring biomass at
+extremely low herring populations has not been quantified, control rules
+that allow herring extinction do not meet stated management objectives
+for herring, so this extreme assumption for terns will not change any
+decisions to include or exclude control rules.
+
+\begin{figure}
+
+{\centering \includegraphics[width=400pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-6-1} 
+
+}
+
+\caption{Modeled influence of herring total biomass on tern reproductive success \label{herrternmod}}\label{fig:unnamed-chunk-6}
+\end{figure}
+
+When included in the model using \(\gamma\) = 1.09 in equation
+\ref{recwithherring_equation}, this relationship adjusts the modeled
+common tern population increase to match the current average increase in
+common tern nesting pairs observed in the data (Fig.
+\ref{terntrendwherring}). There is still considerable uncertainty around
+this mean population trajectory which cannot be reflected in our simple
+model.
+
+\begin{figure}
+
+{\centering \includegraphics[width=400pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-7-1} 
+
+}
+
+\caption{Population trends for Gulf of Maine terns with simulated herring-common tern productivity relationship \label{terntrendwherring}}\label{fig:unnamed-chunk-7}
+\end{figure}
+
+\subsection{Groundfish}\label{groundfish}
+
+Because no specific groundfish was identified as a representative
+herring predator during the stakeholder workshop, the first decision was
+which groundfish to model. Annual diet estimates (based on sample sizes
+of \textasciitilde{}100+ stomachs) are available for the top three
+groundfish predators of herring (those with herring occurring in the
+diets most often in the entire NEFSC food habits database): spiny
+dogfish, Atlantic cod, and silver hake. Cod and spiny dogfish were
+considered first because their overall diet proportions of herring are
+higher, and because silver hake has the least recently updated
+assessment. Diet compositions by year were estimated for spiny dogfish,
+Georges Bank cod, and Gulf of Maine cod to match the scale of stock
+assessments. Full weighted diet compositions were estimated, and suggest
+considerable interannual variability in the herring proportion in
+groundfish diets (filled blue proportions of bars in Fig.
+\ref{gfishdiets}).
+
+\begin{figure}
+
+{\centering \includegraphics{HerringTechnicalManu_files/figure-latex/unnamed-chunk-8-1} 
+
+}
+
+\caption{Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database \label{gfishdiets}}\label{fig:unnamed-chunk-8}
+\end{figure}
+
+Some interannual variation in diet may be explained by changing herring
+abundance. Dogfish and both cod stocks had positive relationships
+between the amount of herring observed in annual diets and the size of
+the herring population according to the most recent assessment
+(statistics and plots available upon request). This suggests that these
+groundfish predators are opportunistic, eating herring in proportion to
+their availability in the ecosystem. However, monotonically declining
+cod populations for both GOM and GB cod stocks resulted in either no
+herring-cod relationship, or a negative relationship between herring
+populations and cod populations (Fig. \ref{gfishBherrdiet}). Only
+dogfish spawning stock biomass had a positive relationship with the
+proporiton of herring in dogfish diet. Therefore, we selected dogfish as
+the groundfish predator for modeling.
+
+\begin{figure}
+
+{\centering \includegraphics[width=400pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-9-1} 
+
+}
+
+\caption{Relationship of assessed groundfish spawning stock biomass (SSB) with the proportion of herring in diet \label{gfishBherrdiet}}\label{fig:unnamed-chunk-9}
+\end{figure}
+
+\subsubsection{Dogfish population model}\label{dogfish-population-model}
+
+The dogfish model stock recruitment function, initial population, and
+annual natural mortality were adapted from information in (Rago et al.
+1998, Rago and Sosebee 2010, 2013, Bubley et al. 2012). Due to
+differential growth and fishing mortality by sex, our model best
+represents female dogfish (a split-sex delay difference model was not
+feasible within the time constraints of this MSE). Further, dogfish
+stock-recruit modeling to date based on Ricker functions (Rago and
+Sosebee 2010) captures more nuances in productivity than the
+Beverton-Holt model we used. Our recruitment parameterization reflects a
+stock with generally low productivity and relatively high resilience,
+which we recognize is a rough approximation for a species such as
+dogfish. The annual fishing exploitation rate applied is average of the
+catch/adult female biomass from the most recent years of the 2016 data
+update provided to the Mid-Atlantic Fishery Management Council (Rago
+pers comm).
+
+\subsubsection{Herring-dogfish relationship
+model}\label{herring-dogfish-relationship-model}
+
+There was a weak positive relationship between dogfish total biomass and
+herring total biomass from the respective stock assessments (Fig.
+\ref{pupherring}), but no clear relationship between dogfish weight or
+dogfish recruitment and herring population size. During the recent
+period of relatively low dogfish recruitment (1995-2007), there is a
+positive relationship between dogfish pup average weight and herring
+proportion in diet, suggesting a potential growth and or recruitment
+mechanism; however this relationship does not hold throughout the time
+series (Fig. \ref{pupherring}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=.49\linewidth]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-10-1} \includegraphics[width=.49\linewidth]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-10-2} 
+
+}
+
+\caption{Dogfish population relationships with herring total biomass (left) and herring proportion in diet (right) \label{pupherring}}\label{fig:unnamed-chunk-10}
+\end{figure}
+
+Therefore, to simulate a potential positive relationship between herring
+and dogfish, we assumed that dogfish survival increased (natural
+mortality was reduced) by an unspecified mechanism as herring abundance
+increased (Fig. \ref{herringdogfish}). Because dogfish are fully
+exploited by fisheries in this model, the impact of this change in
+natural mortality on total survival has small to moderate benefits to
+dogfish population numbers and biomass. Using a \(\delta\) = 0.2 in
+equation \ref{varmort_equation} results in weak increases in dogfish
+biomass with herring abundance consistent with observations.
+
+\begin{figure}
+
+{\centering \includegraphics[width=300pt]{HerringTechnicalManu_files/figure-latex/unnamed-chunk-11-1} 
+
+}
+
+\caption{Modeled herring relative population size-dogfish natural mortality relationship \label{herringdogfish}}\label{fig:unnamed-chunk-11}
+\end{figure}
+
+\subsection{Marine mammals}\label{marine-mammals}
+
+Because no specific marine mammal was identified as a representative
+herring predator in the stakeholder workshop, as with groundfish, the
+first decision was which marine mammal to model. Diet information for a
+wide range of marine mammals on the Northeast US shelf suggests that
+minke whales, humpback whales, harbor seals, and harbor porpoises have
+the highest proportions of herring in their diets (Smith et al. 2015),
+and therefore may show some reaction to changes in the herring ABC
+control rule.
+
+While some food habits data existed for marine mammals, consultation
+with marine mammal stock assessment scientists at the Northeast
+Fisheries Science Center confirmed that no data were available to
+parameterize a stock-recruitment relationship for any of these marine
+mammal species in the Northeast US region, and no such information was
+available in the literature for stocks in this region. Althouth it may
+be possible to develop stock-recruitment models for one or more of these
+species in the future, it was not possible within the time frame of the
+herring MSE. Therefore, we were unable to model marine mammals within
+the same framework as other predators.
+
+Potential effects of changes in herring production and/or biomass on
+marine mammals were instead evaluated using an updated version of an
+existing food web model for the Gulf of Maine (Link et al. 2006, 2008,
+2009) and incorporating food web model parameter uncertainty. Overall,
+food web modeling showed that a simulated increase in herring production
+in the Gulf of Maine may produce modest but uncertain benefits to marine
+mammal predators, primarily because increased herring was associated
+with decreases in other forage groups also preyed on by marine mammals.
+Please see Appendix 1 of this document for full analyses and results.
+
+\subsection{Summary of predator model input
+parameters}\label{summary-of-predator-model-input-parameters}
+
+Table 2. Predator model input parameters
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Parameter & Tuna & Tern & Dogfish\tabularnewline
+\midrule
+\endhead
+Numbers or Weight? & Weight & Numbers & Weight\tabularnewline
+Unfished spawning pop & 6.69E+04 & 45000 & 300000\tabularnewline
+Steepness \emph{h} & 1.0 & 0.26 & 0.97\tabularnewline
+Annual nat. mortality \emph{v} & 0.14 & 0.1 & 0.092\tabularnewline
+Annual exploitation \emph{u} & 0.079 & 0.00 & 0.092\tabularnewline
+Growth intercept \emph{FWint} & 0.020605 & 0.00015 &
+0.000278\tabularnewline
+Growth slope \emph{FWslope } & 0.9675 & 0.0 & 0.9577\tabularnewline
+Initial abundance & 111864 & 3000 & 49629630\tabularnewline
+Initial biomass & 27966 & 1.5 & 134000\tabularnewline
+Recruit delay (age) \emph{a} & 1 & 4 & 10\tabularnewline
+Prey-recruitment link & 1 (off) & 1.09 & 1 (off)\tabularnewline
+Prey-mortality link & 0 (off) & 0 (off) & 0.2\tabularnewline
+Prey-growth link & 1.1 & 1 (off) & 1 (off)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{An Economic Model of the Predators}
+
+We didn't do one.
+
+\textbf{An Economic Model of the Herring Fishery}
+
+\emph{Basics and Intro--} There are many economic methods that can
+inform ecosystem approaches to fisheries management\footnote{Edwards et
+  al. (2004) and Jin et al. (2016) illustrate a portfolio approach. Jin
+  et al. (2003) and Jin et al. (2012) link regional economic models to
+  ecosystem models. Tschirhart (2000) and Finnoff and Tschirhart (2003)
+  link structural economic models of constrained optimization to
+  ecosystem models.}. Kirkley et al. (2011) use a static input-output
+model to simulate the effects of changes in herring quotas and predator
+biomass levels on the New England economy. Their analysis suggested that
+the effects of changes in herring catch on other segments of the economy
+are quite small; we, therefore therefore confined the analysis to the
+herring fleet. Lehuta et al. (2013) also construct an coupled
+ecological-economic model of herring under the assumption of competitive
+output markets for herring and zero economic profit. We did not make
+this assumption.
+
+The economic model of the herring fishery converts Yield from the
+herring component into Gross Revenues (GR) and Net Operating Revenues
+(NR). There are two fleets,trawl and purse seine, that are assumed to
+have the ability to catch 70 and 30\% of the Yield
+respectively\footnote{The midwater trawl, paired midwater trawl, and
+  bottom trawl are all aggregated into the trawl fleet.}\footnote{The
+  fishery is managed with four sub-ACLs and the purse seine fleet can
+  only fish in one of the four areas. This 70/30 split corresponds to
+  recent history.}. Gross Revenue, Net Revenue, and the constraints on
+harvest can be represented as (for all years, \(y\) subscripts omitted
+here for simplicity):
+
+\begin{align}
+GR^i&=p(q^t+q^s)q^i\\
+NR^i&=GR-c^i(q^i)\\
+q^s &\leq .3Q, \hspace{1mm} q^t \leq .7Q
+\end{align}
+
+where \(q^i\) and \(c^i\) are are the quantity landed and cost function
+for fleet \(i\). We make two further assumptions: that total catch is
+less than or equal to Yield \(q^t+q^s \leq Q\) and that a fleet has the
+option of not fishing if positive harvest would lead to negative net
+revenue (\(NR_i \geq 0\)). Each fleet selects \(q^i\) to maximize Net
+Revenues under the relevant constraints.\\
+
+\begin{equation}
+\label{optimization_problem}
+\max_{q_i} p(q^t+q^s)q^i - c^i(q^i)
+\end{equation}
+
+Note that, depending on prices and costs, a fleet may harvest nothing,
+it's entire ``allocation'', or some level in between.
+
+\emph{Production and Costs--} Economic data collected from 2010-2015 by
+the Northest Fisheries Observer Program (NEFOP) are used to construct
+average daily costs for the trawl and purse seine fleets. Fuel prices
+were much higher in 2011-2014 compared to 2015. We construct a high and
+a low fuel price scenario by adjusting these costs using the 2011-2014
+average (high) or 2015 (low) prices for fuel based on EIA data. Other
+costs of fishing included water, oil, and damage costs. Crew pay was not
+included. Fuel expenses are a large portion of total expenses.
+
+We construct average catch per day fished for each fleet from the Vessel
+Trip Report databases over the same time period. The trip lengths in the
+VTR and observer data were very similar. This allows us to construct the
+average cost of catching a metric ton of herring for the trawl and purse
+seine fleet (\(c^t\) and \(c^s\) respectively). We assume that the
+average cost is equal to the marginal cost for each fleet. These figures
+are presented in Table \ref{PUR_costs} and \ref{OTM_costs}.
+
+\begin{table}[htpb]
+\begin{centering}
+\begin{tabular}{lrrrrrrr}\hline
+    &   Catch & Trip length&\multicolumn{3}{c}{Cost per day}    &   Observed    &   VTR \\
+Year    &    (mt/day) &days &   Low &   High    &   Raw &    trips  &    trips  \\\hline
+2011    &   65.5& 0.9   &   1,454   &   1,927   &   1,667   &   79  &   264 \\
+2012    &   77.5& 1.1   &   1,149   &   1,520   &   1,290   &   40  &   278 \\
+2013    &   91.7& 0.8   &   1,115   &   1,500   &   1,279   &   50  &   312 \\
+2014    &   99.4& 1.1   &   1,156   &   1,556   &   1,330   &   24  &   316 \\
+2015    &   105.4 & 1.1 &   1,068   &   1,437   &   811 &   14  &   243 \\
+ALL &   87.5& 1.0&  1,249   &   1,664   &   1,396   &   207 &   1,413   \\\hline
+\end{tabular}
+\caption{Average daily catch and trip length (VTR) and costs (NEFOP data) for the purse seine fleet (2011-2015).  \label{PUR_costs}  In the simulation models, the marginal cost for the purse seine fleet is set to \$14.27 per metric ton ( \$1,249 per day divided by 87.5 mt per day).  }
+\end{centering}
+\end{table}
+
+\begin{table}[htpb]
+\begin{centering}
+\begin{tabular}{lrrrrrrr}\hline
+    &   Catch & Trip length&\multicolumn{3}{c}{Cost per day}    &   Observed    &   VTR \\
+Year    &    (mt/day) &days &   Low &   High    &   Raw &    trips  &    trips  \\\hline
+2011    &   69.9& 2.6   &   4,011   &   5,232   &   4,520   &   149 &   354 \\
+2012    &   64.8& 3.0   &   4,108   &   5,287   &   4,608   &   179 &   392 \\
+2013    &   53.9& 3.5   &   3,364   &   4,472   &   3,954   &   103 &   470 \\
+2014    &   66.1& 2.4   &   3,672   &   4,865   &   4,182   &   123 &   409 \\
+2015    &   55.2&2.5    &   3,904   &   5,124   &   3,001   &   19  &   380 \\
+ALL &   61.4    &2.9&   3,833   &   5,009   &   4,315   &   573 &   2,005   \\\hline
+\end{tabular}
+\caption{Average daily catch and trip length (VTR) and costs (NEFOP data) for the midwater trawl fleet (2011-2015). \label{OTM_costs}In the simulation models, the marginal cost for the trawl fleet is set to \$62.43 per metric ton (\$3,833 per day divided by 61.4 mt per day)}
+\end{centering}
+\end{table}
+
+\emph{Prices--} Annual prices were constructed from NMFS dealer data for
+1982 through 2016\footnote{Prices have been normalized to 2015 real
+  dollars using the Bureau of Labor Statistics (BLS) Producer Price
+  Index (PPI) for Unprocessed and Packaged Fish (WPU0223)}. Annual
+landings were constructed from the processed ME DMR landings dataset for
+the same time period. Because Atlantic Herring was not federally managed
+prior to the implementation of the Herring FMP in 2000; the NMFS dealer
+databases may not contain all landings. The ME DMR data do not contain
+prices. Exploratory data analysis showed that prices, landings,and the
+natural logarithms of both were likely non-stationary over the time
+series. First-differencing produced stationary series. There also appear
+to be two regimes in this market: one from 1982 to about 1993-1995 and
+another from that time through 2016.
+
+We used the Bounds test methodology developed by Pesaran et al. (2001)
+test for a long-run relationship between prices and quantities. The
+advantage of this method is that knowledge of stationarity is not
+required for a valid test of a long-run relationship. A long-run
+relationship between prices and landings can be modeled as:
+
+\begin{equation}
+\label{ARDL}
+p_{y}= c+\sum_{i=1}^p a_i p_{t-i}+ \sum_{i=0}^n b_i q_{y-i} + e_{t},
+\end{equation}
+
+and rearranged into an error correction model (ECM):
+
+\begin{equation}
+\label{ECM}
+\Delta p_y= \gamma+ \alpha_1 p_{y-1} + \sum_{i=1}^p \theta_i \Delta p_{y-i}+ \sum_{i=0}^n  \beta_i \Delta q_{y-i} + e_{y},
+\end{equation}
+
+where \(\Delta\) is the first-differences operator (Pesaran et al.
+2001). The \(\gamma\) parameter must also be restricted
+(\(\gamma=c / \alpha_1\)) for these equations \ref{ARDL} and \ref{ECM}
+to be equivalent. The Pesaran et al. (2001) bounds test estimates
+equation \ref{ECM} by OLS and constructs a joint-F test that the
+\(\alpha_1\) and \(\beta_i\) parameters are non-zero. The F-statistic
+has a non-standard distribution with an inconclusive area. The model was
+first estimated on the full 1982-2015 dataset; model selection criteria
+indicated a ARDL(4,0) was preferred and that prices were not affected by
+quantities. This is likely caused by a combination of overfitting of the
+model and the two regimes evident in exploratory graphs. An ARDL(1,0) is
+then estimated on a subset of the data (1995-2015); if there was a
+regime shift, the current regime is more likely to be similar to the
+future. Models estimated in natural logarithms and in levels fit well.
+The PSS F-statistics of 9.34 and 10.20 are above the upper critical
+value, strongly suggesting a long-run relationship between prices and
+quantities\footnote{As a robustness check, we tried varying the first
+  (1996) and last (2016) year included in the dataset. This did not
+  change the estimated results substantially. We also estimated a
+  short-run relationship between prices and quantities in which
+  \(\Delta p_y\) was regressed on \(\Delta q_y\). The short-run effects
+  were qualitatively similar to the ``long-run'' model in Table
+  \ref{ardl_regression}.} (Table \ref{ardl_regression}). We present the
+results of the ARDL(1,0) formulation because it is a bit easier to
+interpret.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{lcc} \hline
+VARIABLES       &   pricemt &   lnp \\\hline
+Price$_{t-1}$       &   0.646***    &   0.666***    \\
+        &   -0.0937 &   -0.0935 \\
+Quantity        &   -1.194***   &   -0.395***   \\
+        &   -0.277  &   -0.0956 \\
+Constant        &   217.8***    &   6.423***    \\
+        &   -48.16  &   -1.484  \\
+Observations        &   21  &   21  \\
+R-squared       &   0.906   &   0.906   \\
+BGp     &   0.34    &   0.547   \\
+BGF     &   1   &   0.4 \\
+PSS F-statistic &   10.2    &   9.34    \\\hline
+1\% Critical values &\multicolumn{2}{c}{[6.84, 7.84]} \\\hline
+\multicolumn{3}{c}{ Standard errors in parentheses} \\
+\multicolumn{3}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\\hline
+\end{tabular}
+\caption{Regression results from the ``ARDL'' specification (Equation \ref{ARDL}) and the @Pesaran2001BoundsRelationships Bounds test.  1995-2015 data only. The explanatory variables enter in levels in the first column and natural logarithms in the second column  \label{ardl_regression}}
+\end{center}
+\end{table}
+
+\iffalse
+Min-Yang will need to tighten this up 3. Figures and Tables
+
+code for running regressions is here:
+/home/mlee/Documents/Herring\_PDT\_work/Amendment8/MSE\_ABC/price\_things/
+herring\_realprice\_timeseries.do herring\_realprice\_timeseries2.do \fi
+
+\emph{Net Operating Revenues--} Because the marginal costs for the purse
+seine are always less than the marginal costs of the trawl fisher, there
+are three possible combinations of activity levels: both fleets active,
+both inactive, and trawl inactive while purse seine is active.
+
+Case 1 occurs if the output prices are very low. For some low level of
+prices, only the purse seine fleet is active. When that happens, the net
+revenue of the seine fleet is:
+
+\begin{equation}
+NR^s=p(q^s+0)q^s -c^sq^s=0
+\end{equation}
+
+\iffalse  Subsequent equation appears out of nowhere. \fi
+
+\begin{equation}
+\label{all_price}
+p=\alpha + \beta_1 p_{y-1} + \gamma_0(\bar{q_{s}}+\bar{q_{s}}) )
+\end{equation}
+
+Equation \ref{all_price} is the price at which the entire quota is
+harvested. For prices slightly lower than this, the trawl fleet harvests
+less than its maximum fraction of yield. For prices lower than \$63.24,
+the trawl fleet harvests nothing. There is also a range of output prices
+below which the seine fishery harvests less than its share, and an even
+lower price (\$14.27 per metric ton) at which the seine fishery is
+inactive. These are the marginal costs of landing herring (Table
+\ref{PUR_costs} and \ref{OTM_costs}).
+
+\emph{Stability --}
+
+Stakeholders were interested in understanding stability of the herring
+industry. Following the herring dynamics section, we also computed
+Interannual Variation (IAV) of Net Revenues and report the median
+(across replicates) of median (across the final 50 years) of IAV. IAV is
+a summary metric of variability in the time series over a time period,
+but does not provide insight into stationarity of the time series.
+
+An additional performance metric, stationarity, is used to assess the
+stability of net revenues over the terminal period. For each simulation,
+we perform an econometric test of stationarity (Dickey and Fuller 1979).
+Letting \(\Delta\) be the first difference operator
+(\(\Delta NR_y= NR_{y}-NR_{y-1}\)), the general form of the augmented
+dickey fuller regression is:
+
+\begin{equation}
+\Delta NR_{y} = a_0 + \beta  NR_{y-1} + \delta y + \sum_{j=1}^k \xi_j \Delta NR_{y-j} + \varepsilon \label{dfuller_equation}
+\end{equation}
+
+Econometric evidence that \(\beta=0\) is evidence of a unit root
+(nonstationarity) while statistical rejections of \(H_0: \beta=0\) in
+favor of \(H_A: \beta<0\) is evidence of stationarity of the
+time-series. We estimate a version of equation {[}dfuller\_equation{]}
+in which \(a, \delta,\) and \(\xi_{j} \hspace{3mm} \forall j \ge 1\) are
+restricted to zero:
+
+\begin{equation}
+\label{estimated}
+\Delta NR_{y} = \beta  NR_{y-1} \xi_1 \Delta NR_{y-1} + \varepsilon 
+\end{equation}
+
+The results of these tests are summarized in two ways. First, we
+classify a simulation as stationary if we reject the null
+\(H_0: \beta=0\) in favor of \(H_A: \beta<0\) at the 10\% significance
+level. We then compute the number of simulations (out of 100) that are
+stationary. This classification may be too knife-edged. Many methods
+have been used in the fields of meta-analysis and bioinformatic to
+combine the results of independent experiments (Folks 1984, Rice 1990,
+Whitlock 2005). Therefore, use a weighted Z-score method to combine
+these trials (Whitlock 2005). To be concrete, the null hypothesis being
+tested is the joint test that a particular control rule implemented on a
+simulated stock of herring does not produce a stable
+equilibrium{[}\^{}6{]}. Defining \(\phi\) as the standard normal
+cumulative distribution function, we construct:
+
+\begin{align}
+Z_i &= \phi^{-1} (1-p_i)\\
+Z  &= \frac{\sum_{i=1}^k Z_i}{\sqrt(k)}\end{align}
+
+\(Z\) has a standard normal distribution under the null hypothesis;
+finding \(Z\) outside the standard normal is evidence to reject the null
+hypothesis that a particular control rule leads to non-stationary
+trajectory of revenue.
+
+\iffalse
+I also applied Fisher's method:
+
+\begin{align}
+\chi^2_F =-2\sum_{i=1}^k ln(P_i),
+\end{align}
+
+all of the null hypotheses of the \(k\) tests are true, then this will
+have a \(\chi^2\) distribution with \(2k\) degrees of freedom. A value
+would near zero would be evidence \emph{for} the null hypothesis of
+non-stationarity. \fi
+
+\emph{Caveats to the Herring Fishery Economic model--} We did not
+include fixed costs. If firms do not enter or exit, then the exclusion
+of fixed costs from the model has minimal qualitative effects. The
+stationarity metric would be unaffected; however, IAV constructed
+without fixed costs will be smaller than the true IAV that contains
+fixed costs. A bigger problem is that, in the long run, firms can enter
+and exit this industry. We assume that average variable costs are the
+same as the marginal costs. This may be okay. It may be bad.
+
+If firms can enter and exit, then exclusion of fixed costs from the
+model could result in misleading recommendations. We did not model firm
+entry and exit; this is a difficult decision to model. Economic theory
+suggests that firms will enter (exit) if they anticipate large positive
+(negative) profits over a particular planning horizon; however,
+understanding exactly how these decisions are made was not possible.
+
+Catch in the economic model can be different from the Yield (from the
+herring model). This is frequently handled as symmetric implimentation
+error in the fisheries literature (as it is in this model). However, the
+market model suggests that this is not so simple.
+
+Nothing big with Menhaden. Nothing on Lobster.
+
+\iffalse  Two economic models were recently developed that focused on
+herring in the Northeast United States. , through the intermediary of
+the extractive herring sector. The authors take an optimization
+approach: herring landings are selected to maximize output.
+
+There are two drawbacks to this approach. First, because the model is
+static, the effects of changes in commercial herring removals on
+predators (through changes in herring biomass) cannot be deduced. The
+dynamic ecosystem models developed address this particular shortcoming.
+Second, constant prices for herring are assumed; this assumption is
+relaxed as well. \%THIS IS Neither approaches examine the value of
+increased herring biomass on other fisheries STUFF FROM THE KIRKLEY AND
+LEHUTA CITATIONS
+
+With multiple predators, prey, and variability in the desirability of
+predators, it is possible that increases in biomass of a particular prey
+could be bad for society. For example, biomass of a predator that is
+low-valued but skilled at consuming herring could result in
+disproportionate increases in that low-valued predator. If that
+low-valued predator is not a complete specialist (in consuming herring),
+it may also drive down the biomass of high-valued predators.
+
+Stated another way, the ability to manipulate the ecosystem with an ABC
+control rule to achieve desirable outcomes would depend on the rates at
+which these increases in prey are converted into social utility: this
+depends on the ecosystem technology (conversion of prey into additional
+biomass of high- and low-valued predators), human technology (conversion
+of prey and predator biomass into catch or tourism), and human
+preferences (converting catch or tourism into utility). Despite our
+current efforts, many of these technologies are not particularly well
+understood at this time.
+
+Herring is often (but no exclusively) used for bait; typically for the
+lobster fishery. In 2014, approximately 75\% of landed herring was
+utilized as bait. Other uses include animal food and human consumption.
+On an annual basis, the quantity supplied in the herring market is
+usually driven by the Annual Catch Limits (ACLs), or sub-ACLs. These are
+occasionally not constraining; however seems to occur for regulatory
+reasons (such as a closure for catch of haddock in the Georges Bank
+fishery) instead of for market reasons. \fi
+
+\emph{Random thoughts. this probably belongs in the non-tech manuscript
+--} A key factor in management performance is the process by which
+management tools are developed and implemented.
+
+\begin{quote}
+One approach to the creation of regulatory legitimacy is to structure
+the management process around user participation in decision-making.
+User participation addresses the twin problems of integrating human and
+ecological systems and bringing individual users into the definition of
+the collective good. Participation offers certain benefits to the
+management process but it also carries costs. Whether it is worthwhile
+for fishery management depends on the relative magnitudes of those
+benefits and costs. (Hanna 1995)
+\end{quote}
+
+\begin{quote}
+What we ask of fishery governance is that it coordinate institutional
+rules and individual actions by performing certain functions:
+incorporate multiple objectives representing different types of
+conservation and use; bring the time horizons of private individuals
+into line with those of the public; send signals of resource scarcity
+and enable effective adaptive responses; promote legitimacy by
+reflecting accepted norms of equity and by controlling harmful
+opportunism; contain both the level and distribution of transactions
+costs.These functions are expressions of Williamson's organizational
+imperative to minimize costs, accommodate limited information, and
+safeguard against harmful opportunism. (Hanna 1999)
+\end{quote}
+
+Fishery management must, among other things, incorporate multiple
+objectives, promote legitimacy by reflecting accepted norms, and have
+low transactions costs (Hanna 1999). User participation in
+decision-making is a way to increase regulatory legitimacy (Hanna 1995).
+One drawback to user-participation is that meetings tend to attract
+participants with the most extreme views (Osborne et al. 2000, Turner
+and Weninger 2005).
+
+\subsection{Extensions, and Future
+Research}\label{extensions-and-future-research}
+
+Carroll et al. (2001) describe another mechanism (product quality)
+through which changes in prey could be evaluated. We did not attempt to
+value \emph{in-situ} herring or compute the social benefits or costs
+derived from changes in biomass. Brown et al. (2005) and Finnoff and
+Tschirhart (2003) describe methods to trace the effects of changes in
+harvest or biomass of one species on ecosystems or predators. Finally,
+we note that increases in predator biomass can have negative impacts on
+prey and harvesters of prey Flaaten and Stollery (1996).
+
+One of the difficulties with doing an economic extension that models the
+prey species is that it's difficult to know which margin (dimension) to
+address. For example, we didn't know that the tuna model would result in
+changes in quality. If we had try to model how changes in abundance
+might affect costs of harvesting tuna, this would have not been a
+fruitful use of time. \clearpage
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-Brown2005AFisheries}{}
+Brown, G., Berger, B., and Ikiara, M. 2005. A predator-prey model with
+an application to Lake Victoria fisheries. Marine Resource Economics
+\textbf{20}(3): 221--247.
+
+\hypertarget{ref-bubley_reassessment_2012}{}
+Bubley, W.J., Kneebone, J., Sulikowski, J.A., and Tsang, P.C.W. 2012.
+Reassessment of spiny dogfish Squalus acanthias age and growth using
+vertebrae and dorsal-fin spines. Journal of Fish Biology \textbf{80}(5):
+1300--1319.
+doi:\href{https://doi.org/10.1111/j.1095-8649.2011.03171.x}{10.1111/j.1095-8649.2011.03171.x}.
+
+\hypertarget{ref-butterworth2007management}{}
+Butterworth, D.S. 2007. Why a management procedure approach? Some
+positives and negatives. ICES Journal of Marine Science \textbf{64}(4):
+613--617. Oxford University Press.
+
+\hypertarget{ref-Carroll2001PricingManagement}{}
+Carroll, M.T., Anderson, J.L., and
+Mart\textbackslash{}'\textbackslash{}inez-Garmendia, J. 2001. Pricing US
+North Atlantic bluefin tuna and implications for management.
+Agribusiness \textbf{17}(2): 243--254.
+
+\hypertarget{ref-chase_differences_2002}{}
+Chase, B.C. 2002. Differences in diet of Atlantic bluefin tuna (Thunnus
+thynnus) at five seasonal feeding grounds on the New England continental
+shelf. Fishery Bulletin \textbf{100}(2): 168--180. Available from
+\url{http://aquaticcommons.org/15201/} {[}accessed 26 April 2016{]}.
+
+\hypertarget{ref-clark2004conditional}{}
+Clark, W.G., and Hare, S.R. 2004. A conditional constant catch policy
+for managing the pacific halibut fishery. North American Journal of
+Fisheries Management \textbf{24}(1): 106--113. Wiley Online Library.
+
+\hypertarget{ref-deroba2015simulation}{}
+Deroba, J., Butterworth, D.S., Methot Jr, R., De Oliveira, J.,
+Fernandez, C., Nielsen, A., Cadrin, S., Dickey-Collas, M., Legault, C.,
+Ianelli, J., and others. 2015. Simulation testing the robustness of
+stock assessment models to error: Some results from the ices strategic
+initiative on stock assessment methods. ICES Journal of Marine Science
+\textbf{72}(1): 19--30. Oxford University Press.
+
+\hypertarget{ref-Deroba2012Evaluating}{}
+Deroba, J.J., and Bence, J.R. 2012. Evaluating harvest control rules for
+lake whitefish in the great lakes: Accounting for variable life-history
+traits. Fisheries Research \textbf{121}: 88--103. Elsevier.
+
+\hypertarget{ref-Dickey1979DistributionRoot}{}
+Dickey, D.A., and Fuller, W.A. 1979. Distribution of the estimators for
+autoregressive time series with a unit root. Journal of the American
+statistical association \textbf{74}(366a): 427--431. Taylor \& Francis.
+
+\hypertarget{ref-Edwards2004PortfolioStocks}{}
+Edwards, S.F., Link, J.S., and Rountree, B.P. 2004. Portfolio Management
+of Wild Fish Stocks. Ecological Economics \textbf{49}: 317--329.
+
+\hypertarget{ref-Finnoff2003HarvestingEcosystem}{}
+Finnoff, D., and Tschirhart, J. 2003. Harvesting in an eight-species
+ecosystem. Journal of Environmental Economics and Management
+\textbf{45}(3): 589--611. Academic Press Orlando, USA.
+
+\hypertarget{ref-Flaaten1996ThePredation}{}
+Flaaten, O., and Stollery, K. 1996. The economic costs of biological
+predation. Environmental and Resource Economics \textbf{8}(1): 75--95.
+Springer.
+
+\hypertarget{ref-Folks1984CombinationTests}{}
+Folks, J.L. 1984. Combination of independent tests. \emph{In} Handbook
+of statistics 4. nonparametric statistics. \emph{Edited by} P.
+Krishnaiah and P.K. Sen. North Holland, New York. pp. 113--121.
+
+\hypertarget{ref-francis1992use}{}
+Francis, R.I.C. 1992. Use of risk analysis to assess fishery management
+strategies: A case study using orange roughy (hoplostethus atlanticus)
+on the chatham rise, new zealand. Canadian Journal of Fisheries and
+Aquatic Sciences \textbf{49}(5): 922--930. NRC Research Press.
+
+\hypertarget{ref-golet_paradox_2015}{}
+Golet, W., Record, N., Lehuta, S., Lutcavage, M., Galuardi, B., Cooper,
+A., and Pershing, A. 2015. The paradox of the pelagics: Why bluefin tuna
+can go hungry in a sea of plenty. Marine Ecology Progress Series
+\textbf{527}: 181--192.
+doi:\href{https://doi.org/10.3354/meps11260}{10.3354/meps11260}.
+
+\hypertarget{ref-golet_changes_2013}{}
+Golet, W.J., Galuardi, B., Cooper, A.B., and Lutcavage, M.E. 2013.
+Changes in the Distribution of Atlantic Bluefin Tuna ( Thunnus thynnus )
+in the Gulf of Maine 1979-2005. PLOS ONE \textbf{8}(9): e75480.
+doi:\href{https://doi.org/10.1371/journal.pone.0075480}{10.1371/journal.pone.0075480}.
+
+\hypertarget{ref-Hanna1995UserCouncil}{}
+Hanna, S.S. 1995. User participation and fishery management performance
+within the pacific fishery management council. Ocean and Coastal
+Management \textbf{28}(1-3): 23--44.
+doi:\href{https://doi.org/10.1016/0964-5691(95)00046-1}{10.1016/0964-5691(95)00046-1}.
+
+\hypertarget{ref-Hanna1999StrengtheningResources}{}
+Hanna, S.S. 1999. Strengthening governance of ocean fishery resources.
+Ecological Economics \textbf{31}(2): 275--286.
+doi:\href{https://doi.org/10.1016/S0921-8009(99)00084-1}{10.1016/S0921-8009(99)00084-1}.
+
+\hypertarget{ref-hatch_arctic_2002}{}
+Hatch, J.J. 2002. Arctic Tern (Sterna paradisaea). The Birds of North
+America Online.
+doi:\href{https://doi.org/10.2173/bna.707}{10.2173/bna.707}.
+
+\hypertarget{ref-hilborn_quantitative_2003}{}
+Hilborn, R., and Walters, C.J. 2003. Quantitative Fisheries Stock
+Assessment: Choice, Dynamics and Uncertainty. Springer Science \&
+Business Media.
+
+\hypertarget{ref-iccat_report_2015}{}
+ICCAT. 2015. Report of the 2014 Atlantic bluefin tuna stock assessment
+session (Madrid, Spain, 22--27 September 2014). Collected Volume
+Scientific Papers \textbf{71}(2): 692--945. Available from
+\url{https://www.iccat.int/Documents/Meetings/Docs/2014_BFT_ASSESS-ENG.pdf}.
+
+\hypertarget{ref-Jin2016ApplyingEBFM}{}
+Jin, D., DePiper, G., and Hoagland, P. 2016. Applying Portfolio
+Management to Implement Ecosystem-Based Fishery Management (EBFM). North
+American Journal of Fisheries Management \textbf{36}: 652--669.
+doi:\href{https://doi.org/10.1080/02755947.2016.1146180}{10.1080/02755947.2016.1146180}.
+
+\hypertarget{ref-Jin2003LinkingEcosystem}{}
+Jin, D., Hoagland, P., and Dalton, T.M. 2003. Linking economic and
+ecological models for a marine ecosystem. Ecological Economics.
+doi:\href{https://doi.org/10.1016/j.ecolecon.2003.06.001}{10.1016/j.ecolecon.2003.06.001}.
+
+\hypertarget{ref-Jin2012DevelopmentEngland}{}
+Jin, D., Hoagland, P., Dalton, T.M., and Thunberg, E.M. 2012.
+Development of an integrated economic and ecological framework for
+ecosystem-based fisheries management in New England. Progress in
+Oceanography \textbf{102}: 93--101. Elsevier.
+doi:\href{https://doi.org/10.1016/j.pocean.2012.03.007}{10.1016/j.pocean.2012.03.007}.
+
+\hypertarget{ref-katsukawa2004numerical}{}
+Katsukawa, T. 2004. Numerical investigation of the optimal control rule
+for decision-making in fisheries management. Fisheries science
+\textbf{70}(1): 123--131. Wiley Online Library.
+
+\hypertarget{ref-Kirkley2011AConsiderations}{}
+Kirkley, J.E., Walden, J., and Färe, R. 2011. A general equilibrium
+model for Atlantic herring (Clupea harengus) with ecosystem
+considerations. ICES Journal of Marine Science: Journal du Conseil
+\textbf{68}(5): 860--866. Oxford University Press.
+
+\hypertarget{ref-Lehuta2013InvestigatingEngland}{}
+Lehuta, S., Holland, D.S., and Pershing, A.J. 2013. Investigating
+interconnected fisheries: a coupled model of the lobster and herring
+fisheries in New England. Canadian Journal of Fisheries and Aquatic
+Sciences \textbf{71}(2): 272--289. NRC Research Press.
+
+\hypertarget{ref-link_response_2009}{}
+Link, J., Col, L., Guida, V., Dow, D., O'Reilly, J., Green, J.,
+Overholtz, W., Palka, D., Legault, C., Vitaliano, J., Griswold, C.,
+Fogarty, M., and Friedland, K. 2009. Response of balanced network models
+to large-scale perturbation: Implications for evaluating the role of
+small pelagics in the Gulf of Maine. Ecological Modelling
+\textbf{220}(3): 351--369.
+doi:\href{https://doi.org/10.1016/j.ecolmodel.2008.10.009}{10.1016/j.ecolmodel.2008.10.009}.
+
+\hypertarget{ref-link_documentation_2006}{}
+Link, J., Griswold, C., Methratta, E., and Gunnard, J. (\emph{Editors}).
+2006. Documentation for the Energy Modeling and Analysis eXercise
+(EMAX). Northeast Fish. Sci. Cent. Ref. Doc. 06-15. US Dep. Commer.,
+National Marine Fisheries Service, Woods Hole, MA.
+
+\hypertarget{ref-link_northeast_2008}{}
+Link, J., Overholtz, W., O'Reilly, J., Green, J., Dow, D., Palka, D.,
+Legault, C., Vitaliano, J., Guida, V., Fogarty, M., Brodziak, J.,
+Methratta, L., Stockhausen, W., Col, L., and Griswold, C. 2008. The
+Northeast U.S. continental shelf Energy Modeling and Analysis exercise
+(EMAX): Ecological network model development and basic ecosystem
+metrics. Journal of Marine Systems \textbf{74}(1--2): 453--474.
+doi:\href{https://doi.org/10.1016/j.jmarsys.2008.03.007}{10.1016/j.jmarsys.2008.03.007}.
+
+\hypertarget{ref-logan_diet_2015}{}
+Logan, J.M., Golet, W.J., and Lutcavage, M.E. 2015. Diet and condition
+of Atlantic bluefin tuna (Thunnus thynnus) in the Gulf of Maine,
+2004--2008. Environmental Biology of Fishes \textbf{98}(5): 1411--1430.
+doi:\href{https://doi.org/10.1007/s10641-014-0368-y}{10.1007/s10641-014-0368-y}.
+
+\hypertarget{ref-nisbet_common_2002}{}
+Nisbet, I.C.T. 2002. Common Tern (Sterna hirundo). The Birds of North
+America Online.
+doi:\href{https://doi.org/10.2173/bna.618}{10.2173/bna.618}.
+
+\hypertarget{ref-NEFSC2012Assessment}{}
+NOAA National Marine Fisheries Service, 1.W.S., Northeast Fisheries
+Science Center. 2012. 54\(^{th}\) Northeast Regional Stock Assessment
+Workshop (54th SAW) Assessment Report. US Dept of Commerce, Northeast
+Fisheries Science Center.
+
+\hypertarget{ref-Deroba2015atlantic}{}
+NOAA National Marine Fisheries Service, 1.W.S., Northeast Fisheries
+Science Center. 2015. Atlantic herring operational assessment report
+2015. US Dept of Commerce, Northeast Fisheries Science Center.
+
+\hypertarget{ref-Osborne2000MeetingsParticipation}{}
+Osborne, M.J., Rosenthal, J.S., and Turner, M.A. 2000. Meetings with
+Costly Participation Meetings with Costly Participation. American
+Economic Review \textbf{90}(4): 927--943. Available from
+\href{http://www.jstor.org/stable/117315\%20http://www.jstor.org/stable/117315}{http://www.jstor.org/stable/117315 http://www.jstor.org/stable/117315}.
+
+\hypertarget{ref-Pesaran2001BoundsRelationships}{}
+Pesaran, M.H., Shin, Y., and Smith, R.J. 2001. Bounds testing approaches
+to the analysis of level relationships. Journal of Applied Econometrics
+\textbf{16}(3): 289--326.
+doi:\href{https://doi.org/10.1002/jae.616}{10.1002/jae.616}.
+
+\hypertarget{ref-plaganyi2014multispecies}{}
+Plagányi, É.E., Punt, A.E., Hillary, R., Morello, E.B., Thébaud, O.,
+Hutton, T., Pillans, R.D., Thorson, J.T., Fulton, E.A., Smith, A.D., and
+others. 2014. Multispecies fisheries management and conservation:
+Tactical applications using models of intermediate complexity. Fish and
+Fisheries \textbf{15}(1): 1--22. Wiley Online Library.
+
+\hypertarget{ref-porch_making_2016}{}
+Porch, C.E., and Lauretta, M.V. 2016. On Making Statistical Inferences
+Regarding the Relationship between Spawners and Recruits and the
+Irresolute Case of Western Atlantic Bluefin Tuna ( Thunnus thynnus ).
+PLOS ONE \textbf{11}(6): e0156767.
+doi:\href{https://doi.org/10.1371/journal.pone.0156767}{10.1371/journal.pone.0156767}.
+
+\hypertarget{ref-punt2016management}{}
+Punt, A.E., Butterworth, D.S., Moor, C.L., De Oliveira, J.A., and
+Haddon, M. 2016. Management strategy evaluation: Best practices. Fish
+and Fisheries \textbf{17}(2): 303--334. Wiley Online Library.
+
+\hypertarget{ref-punt2008evaluation}{}
+Punt, A.E., Dorn, M.W., and Haltuch, M.A. 2008. Evaluation of threshold
+management strategies for groundfish off the us west coast. Fisheries
+Research \textbf{94}(3): 251--266. Elsevier.
+
+\hypertarget{ref-Rcite}{}
+R Core Team. 2016. R: A language and environment for statistical
+computing. R Foundation for Statistical Computing, Vienna, Austria.
+Available from \url{https://www.R-project.org/}.
+
+\hypertarget{ref-rago_update_2013}{}
+Rago, P., and Sosebee, K. 2013. Update on the status of spiny dogfish in
+2013 and projected harvests at the Fmsy proxy and Pstar of 40\%. Mid
+Atlantic Fishery Management Council Scientific and Statistical
+Committee. Available from
+\url{https://www.mafmc.org/s/2015-Status-Report-and-Projections_final.pdf}
+{[}accessed 15 November 2016{]}.
+
+\hypertarget{ref-rago_biological_2010}{}
+Rago, P.J., and Sosebee, K.A. 2010. Biological Reference Points for
+Spiny Dogfish. Northeast Fish Sci Cent Ref Doc. 10-06: 52. Available
+from
+\url{http://docs.lib.noaa.gov/noaa_documents/NMFS/NEFSC/NEFSC_reference_documnet/NEFSC_RD_10_12.pdf}
+{[}accessed 19 November 2016{]}.
+
+\hypertarget{ref-rago_implications_1998}{}
+Rago, P.J., Sosebee, K.A., Brodziak, J.K.T., Murawski, S.A., and
+Anderson, E.D. 1998. Implications of recent increases in catches on the
+dynamics of Northwest Atlantic spiny dogfish (Squalus acanthias).
+Fisheries Research \textbf{39}(2): 165--181. Available from
+\url{http://www.sciencedirect.com/science/article/pii/S0165783698001817}
+{[}accessed 15 November 2016{]}.
+
+\hypertarget{ref-restrepo_updated_2010}{}
+Restrepo, V.R., Diaz, G.A., Walter, J.F., Neilson, J.D., Campana, S.E.,
+Secor, D., and Wingate, R.L. 2010. Updated estimate of the growth curve
+of Western Atlantic bluefin tuna. Aquatic Living Resources
+\textbf{23}(4): 335--342.
+doi:\href{https://doi.org/10.1051/alr/2011004}{10.1051/alr/2011004}.
+
+\hypertarget{ref-Rice1990ATests}{}
+Rice, W.R. 1990. A Consensus Combined P-Value Test and the Family-Wide
+Significance of Component Tests. Biometrics \textbf{46}: 303--308.
+
+\hypertarget{ref-smith_consumption_2015}{}
+Smith, L.A., Link, J.S., Cadrin, S.X., and Palka, D.L. 2015. Consumption
+by marine mammals on the Northeast U.S. continental shelf. Ecological
+Applications \textbf{25}(2): 373--389.
+doi:\href{https://doi.org/10.1890/13-1656.1}{10.1890/13-1656.1}.
+
+\hypertarget{ref-Tschirhart2000GeneralEcosystem}{}
+Tschirhart, J. 2000. General Equilibrium of an Ecosystem. Journal of
+Theoretical Biology \textbf{203}(1): 13--32.
+
+\hypertarget{ref-Turner2005MeetingsAnalysis}{}
+Turner, M., and Weninger, Q. 2005. Meetings with costly participation:
+An empirical analysis. Review of Economic Studies \textbf{72}(1):
+247--268.
+doi:\href{https://doi.org/10.1111/0034-6527.00331}{10.1111/0034-6527.00331}.
+
+\hypertarget{ref-Whitlock2005CombiningApproach}{}
+Whitlock, M.C. 2005. Combining probability from independent tests: The
+weighted Z-method is superior to Fisher's approach. Journal of
+Evolutionary Biology.
+doi:\href{https://doi.org/10.1111/j.1420-9101.2005.00917.x}{10.1111/j.1420-9101.2005.00917.x}.
+
+
+\end{document}

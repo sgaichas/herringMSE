@@ -3,17 +3,16 @@ title: 'The dream and the reality: meeting decision-making time frames while inc
   ecosystem and economic models into management strategy evaluation'
 author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre Boelke,
   Brian J. Irwin
-#date: '`r format(Sys.Date(), "%B %d, %Y")`'
+csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-  html_document: null
   word_document: null
-bibliography: [HerringMSE.bib]
-csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
+bibliography: HerringMSE.bib
 ---
 
 
@@ -86,8 +85,8 @@ To address concerns about possible stock assessment bias, operating models with 
     \tilde{F}_y=
     \begin{cases}
       \psi F_{MSY}, & \text{if}\ \widehat{SSB}_y \geq SSB_{up} \\
-      \psi F_{MSY} \frac{\widehat{SSB}_y - SSB_{low}}{SSB_{up}-SSB_{low}}, & SSB_{low} < \widehat{SSB}_y < SSB_{up}\\
-      0, & if \widehat{SSB}_y \leq SSB_{low}
+      \psi F_{MSY} \frac{\widehat{SSB}_y - SSB_{low}}{SSB_{up}-SSB_{low}}, & \text{if}\ SSB_{low} < \widehat{SSB}_y < SSB_{up}\\
+      0, & \text{if}\ \widehat{SSB}_y \leq SSB_{low}
     \end{cases}
   \end{equation}
 
