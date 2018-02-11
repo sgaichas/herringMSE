@@ -895,6 +895,11 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+## Performance Metrics
+**Herring**
+
+For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes.  Median SSB,  $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics.  Additional performance metrics included the proportion of the last 50 years of each simulation with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion of the last 50 years that are overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of the last 50 years that overfishing occurred), and *Q*=0 (i.e., proportion of the last 50 years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded over the last 50 years of each simulation (Table XX T10).  These performance metrics were highlighted to be of interest at the stakeholder workshops.
+
 **An Economic Model of the Predators**
 
 We didn't do one.
