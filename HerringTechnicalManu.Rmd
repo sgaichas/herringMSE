@@ -909,6 +909,26 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 
 For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes.  Median SSB,  $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics.  Additional performance metrics included the proportion of the last 50 years of each simulation with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion of the last 50 years that are overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of the last 50 years that overfishing occurred), and *Q*=0 (i.e., proportion of the last 50 years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded over the last 50 years of each simulation (Table XX T10).  These performance metrics were highlighted to be of interest at the stakeholder workshops.
 
+**Predators**
+Predator performance metrics included those described at the stakeholder workshop, as well as several others drawn from MSE best practices [@punt_management_2016]. Each of the simulated herring time series for every operating model, control rule, and simulation was passed to each predator model, resulting in outputs as described below using the equations above.
+
+All predator performance metrics were calculated based on the final 50 years of each replicate simulation. For all metrics other than "frequency of good status" metrics, we took the median value over the final 50 years of each replicate simulation. Then, the 25th percentile, the median, and the 75th percentile of these 100 medians were calcualted to represent the performance metric for a particular control rule. Results reported here focus on the median.
+
+### Biomass, Abundance, Recruitment
+Population abundance and recruitment in numbers were output for all modeled predators. Population biomass was output for tuna and dogfish. These quantities were directly output by the models.
+
+### Predator condition
+Stakeholders expressed interest in predator condition for fish and marine mammal predators at the first workshop. While delay difference models do not track individuals or age cohorts, a measure of population average weight (population biomass/population numbers) was output for tuna and dogfish. 
+
+### Predator productivity
+Productivity, the number of fledglings per breeding pair, was output for the tern model. Productivity was calculated as recruitment times 10 (to account for the 10% survival rate of fledglings to adults) divided by tern abundance 4 years earlier in the simulation. 
+
+### Status relative to thresholds
+Stakeholders were interested in different measures of population status depending on the predator. For commercially fished species, status relative to current management reference points was preferred. Tuna and dogfish biomass was divided by a biomass reference point specified in current stock assessments: tuna $SSB_{MSY}$ was 13226 [@iccat_report_2015], and dogfish $SSB_{MSY}$ was 159288 [@rago_biological_2010]. Because dogfish were fully exploited in our model, they did not reach $SSB_{MSY}$, so we also evaluated status relative to 0.5 $SSB_{MSY}$ ("overfished"). Tuna condition status was assessed by dividing the output population average weight with the equilibrium average weight. Common tern colonies are managed to improve productivity, so stakeholders suggested that a common tern productivity level of 0.8 would be a minimum threshold, while a productivity of 1.0 would be a target. In addition, total population status was measured relative to current population numbers using the rationale that maintaining at least the current population was desirable. The average common tern population of nesting pairs (including Monomoy) from 1998-2015 was 16000. 
+
+### Frequency of good status
+Evaluating the frequency of desirable or undesirable states over the course of a simulation is suggested by @punt_management_2016. We calculated two metrics for each of the status determinations. First, we calculated the minimum number of years in any individual simulation that a metric was above a given threshold. This is a "worst case scenario" metric. Second, we calculated the median proportion of years across all simulations for a control rule that were above the threshold. This is an "average performance" metric addressing how often good status is maintained.
+
 **An Economic Model of the Predators**
 
 We didn't do one.
