@@ -935,26 +935,26 @@ We didn't do one.
 **An Economic Model of the Herring Fishery** 
 
 *Basics and Intro--*
-There are many economic methods that can inform ecosystem approaches to fisheries management[^1].  @Kirkley2011AConsiderations use a static input-output model to simulate the effects of changes in herring quotas and predator biomass levels on the New England economy. Their analysis suggested that the effects of changes in herring catch on other segments of the economy are quite small; we, therefore therefore confined the analysis to the herring fleet. @Lehuta2013InvestigatingEngland also construct an coupled ecological-economic model of herring under the assumption of competitive output markets for herring and zero economic profit.  We did not make this assumption.  
+There are many economic methods that can inform ecosystem approaches to fisheries management[^a].  @Kirkley2011AConsiderations use a static input-output model to simulate the effects of changes in herring quotas and predator biomass levels on the New England economy. Their analysis suggested that the effects of changes in herring catch on other segments of the economy are quite small; we, therefore confined the analysis to the herring fleet. @Lehuta2013InvestigatingEngland also construct an coupled ecological-economic model of herring under the assumption of competitive output markets for herring and zero economic profit.  We did not make this assumption.  
 
-[^1]: @Edwards2004PortfolioStocks and @Jin2016ApplyingEBFM illustrate a portfolio approach. @Jin2003LinkingEcosystem and @Jin2012DevelopmentEngland link regional economic models to ecosystem models. @Tschirhart2000GeneralEcosystem and @Finnoff2003HarvestingEcosystem link structural economic models of constrained optimization to ecosystem models.  
+[^a]: @Edwards2004PortfolioStocks and @Jin2016ApplyingEBFM illustrate a portfolio approach. @Jin2003LinkingEcosystem and @Jin2012DevelopmentEngland link regional economic models to ecosystem models. @Tschirhart2000GeneralEcosystem and @Finnoff2003HarvestingEcosystem link structural economic models of constrained optimization to ecosystem models.  
 
-The economic model of the herring fishery converts Yield from the herring component into Gross Revenues (GR) and Net Operating Revenues (NR).  There are two fleets,trawl and purse seine, that are assumed to have the ability to catch 70 and 30% of the Yield respectively[^2][^3].  Gross Revenue, Net Revenue, and the constraints on harvest can be represented as (for all years, $y$ subscripts omitted here for simplicity):
+The economic model of the herring fishery converts \textit{yield} from the herring component into Gross Revenues (GR) and Net Operating Revenues (NR).  There are two fleets,trawl and purse seine, that are assumed to have the ability to catch 70 and 30% of the \textit{yield} respectively[^b][^c].  Gross Revenue, Net Revenue, and the constraints on harvest can be represented as (for all years, $y$ subscripts omitted here for simplicity):
 
-[^2]: The midwater trawl, paired midwater trawl, and bottom trawl are all aggregated into the trawl fleet. 
-[^3]: The fishery is managed with four sub-ACLs and the purse seine fleet can only fish in one of the four areas.  This  70/30 split corresponds to recent history.
+[^b]: The midwater trawl, paired midwater trawl, and bottom trawl are all aggregated into the trawl fleet. 
+[^c]: The fishery is managed with four sub-ACLs and the purse seine fleet can only fish in one of the four areas.  This  70/30 split corresponds to recent history.
 
 \begin{align}
-GR^i&=p(q^t+q^s)q^i\\
-NR^i&=GR-c^i(q^i)\\
-q^s &\leq .3Q, \hspace{1mm} q^t \leq .7Q
+GR&=p(q^t+q^s)q^t+p(q^t+q^s)q^s\\
+NR&=GR-c^t(q^t)-c^s(q^s)\\
+q^s &\leq .3yield, \hspace{1mm} q^t \leq .7yield
 \end{align}
-where $q^i$ and $c^i$ are are the quantity landed and cost function for fleet $i$.  We make two further assumptions: that total catch is less than or equal to Yield $q^t+q^s \leq Q$ and that a fleet has the option of not fishing if positive harvest would lead to negative net revenue ($NR_i \geq 0$). Each fleet selects $q^i$ to maximize Net Revenues under the relevant constraints.   
+where $q^i$ and $c^i$ are the quantity landed and cost function for fleet $i$ respectively.  We make two further assumptions: that total catch is less than or equal to Yield: $q^t+q^s \leq yield$ and that a fleet has the option of not fishing if positive harvest would lead to negative net revenue ($NR_i \geq 0$). Each fleet selects $q^i$ to maximize Net Revenues under the relevant constraints.   
 \begin{equation}
 \label{optimization_problem}
-\max_{q_i} p(q^t+q^s)q^i - c^i(q^i)
+\max_{q_i} NR^i=p(q^t+q^s)q^i - c^i(q^i)
 \end{equation}
-Note that, depending on prices and costs, a fleet may harvest nothing, it's entire ``allocation'', or some level in between.
+Note that, depending on prices and costs, a fleet may harvest nothing, it's entire ``allocationed'' fraction of yield, or some level in between.
 
 *Production and Costs--*
 Economic data collected from 2011-2015 by the Northest Fisheries Observer Program (NEFOP) are used to construct average daily costs for the trawl and purse seine fleets.  Fuel prices were much lower in 2011-2014 compared to 2015. We adjusted fuel prices to the 2011-2014 average; sensitivity analysis was performed by settting fuel prices to the 2015 levels but results not reported here.  Other costs of fishing included water, oil, and damage costs. Crew pay and fixed costs were not included.  
@@ -975,9 +975,9 @@ Trawl	&	62.43 & 61.4	&2.9&	3,833	&	5,009	&	4,315	&	573	&	2,005	\\\hline
 
 
 *Prices--*
-Annual prices were constructed from NMFS dealer data for 1982 through 2016[^4]. Annual landings were constructed from the processed ME DMR landings dataset for the same time period.  Exploratory analysis suggested both a regime change in the mid-1990s and likely non-stationarity of both landings and prices.  We used the Bounds testing methodology developed by @Pesaran2001BoundsRelationships test for a long-run relationship between prices and quantities. This method does not require pretesting for stationarity; however, the test statistic does have an inconclusive zone in which knowledge of stationarity would required. A long-run relationship between prices and landings can be modeled as:
+Annual prices were constructed from NMFS dealer data for 1982 through 2016[^d]. Annual landings were constructed from the processed ME DMR landings dataset for the same time period.  Exploratory analysis suggested both a regime change in the mid-1990s and likely non-stationarity of both landings and prices.  We used the Bounds testing methodology developed by @Pesaran2001BoundsRelationships test for a long-run relationship between prices and quantities. This method does not require pretesting for stationarity; however, the test statistic does have an inconclusive zone in which knowledge of stationarity would required. A long-run relationship between prices and landings can be modeled as:
 
-[^4]: Prices have been normalized to 2015 real dollars using the Bureau of Labor Statistics (BLS) Producer Price Index (PPI) for Unprocessed and Packaged Fish (WPU0223). Because Atlantic Herring was not federally managed prior to the implementation of the Herring FMP in 2000; the NMFS dealer databases may not contain all landings prior to this time. The ME DMR data do not contain prices but is a census of landings.
+[^d]: Prices have been normalized to 2015 real dollars using the Bureau of Labor Statistics (BLS) Producer Price Index (PPI) for Unprocessed and Packaged Fish (WPU0223). Because Atlantic Herring was not federally managed prior to the implementation of the Herring FMP in 2000; the NMFS dealer databases may not contain all landings prior to this time. The ME DMR data do not contain prices but is a census of landings.
 
 \begin{equation}
 \label{ARDL}
@@ -991,7 +991,7 @@ or equivalently as an error correction model (ECM):
 \end{equation}
 where $\Delta$ is the first-differences operator [@Pesaran2001BoundsRelationships]. The $\gamma$ parameter must also be restricted ($\gamma=c / \alpha_1$) for these equations \ref{ARDL} and \ref{ECM} to be equivalent.  @Pesaran2001BoundsRelationships tests the null of no long-run relationship using a joint F-test that the $\alpha_1$ and $\beta_i$ parameters in equation \ref{ECM} are non-zero; however, the F-statistic has a non-standard distribution with an inconclusive area.
 
-Equation \ref{ECM} was first estimated on the full 1982-2015 dataset; model selection criteria indicated (p=4,n=0) was preferred and that prices were not affected by quantities.  We suspect this is likely caused by a combination of overfitting of the model and a regimes shift evident in the exploratory graphs. Rather than explore a regime switching model, we simply estimated equation \ref{ECM} with $p=1, n=0$ on a subset of the data (1995-2015).  If there was a regime shift, the current regime is more likely to be similar to the future.  Models estimated in natural logarithms and in levels fit well. The PSS F-statistics of 9.34 and 10.20 are above the upper critical value, strongly suggesting a long-run relationship between prices and quantities[^5] (Table \ref{ardl_regression}).  We also present the results of the ARDL(1,0) formulation because it is a bit easier to interpret. Coefficients from the ``level'' equation are used in the simulation. 
+Equation \ref{ECM} was first estimated on the full 1982-2015 dataset; model selection criteria indicated (p=4,n=0) was preferred and that prices were not affected by quantities.  We suspect this is likely caused by a combination of overfitting of the model and a regimes shift evident in the exploratory graphs. Rather than explore a regime switching model, we simply estimated equation \ref{ECM} with $p=1, n=0$ on a subset of the data (1995-2015).  If there was a regime shift, the current regime is more likely to be similar to the future.  Models estimated in natural logarithms and in levels fit well. The PSS F-statistics of 9.34 and 10.20 are above the upper critical value, strongly suggesting a long-run relationship between prices and quantities[^e] (Table \ref{ardl_regression}).  We also present the results of the ARDL(1,0) formulation because it is a bit easier to interpret. Coefficients from the ``level'' equation are used in the simulation. 
 
 \begin{table}[htbp]
 \begin{center}
@@ -1017,7 +1017,7 @@ PSS	F-statistic	&	10.2	&	9.34	\\\hline
 \end{center}
 \end{table}
 
-[^5]:As a robustness check, we also tried varying the first (1996) and last (2016) year included in the dataset.  This did not change the estimated results substantially. We also estimated a short-run relationship between prices and quantities in which $\Delta p_y$ was regressed on $\Delta q_y$.  The short-run effects were qualitatively similar to the "long-run" model in Table \ref{ardl_regression}.  
+[^e]:As a robustness check, we also tried varying the first (1996) and last (2016) year included in the dataset.  This did not change the estimated results substantially. We also estimated a short-run relationship between prices and quantities in which $\Delta p_y$ was regressed on $\Delta q_y$.  The short-run effects were qualitatively similar to the "long-run" model in Table \ref{ardl_regression}.  
 
 
 <!-- 
@@ -1025,9 +1025,9 @@ MY's code for running regressions is here: /home/mlee/Documents/Herring_PDT_work
 -->
 
 *Net Operating Revenues--*
-The simulation of Gross operating revenues occurs in a few steps.  Herring prices in a year are simulated using equations \ref{optimization_problem} and \ref{ARDL}, parameters from Table \ref{ardl_regression} previous year prices (initialized to the 2011-2015 average for the first year) under the assumption that both fleets combine to land the entire Yield.  If simulated prices are higher than the marginal cost of the trawl fleet($63.24/mt), both fleets are assumed to catch the entire Yield.  Otherwise, we use equations \ref{optimization_problem} and \ref{ARDL} to solve for quantity landed by the trawl fleet when the purse seine fleet lands 30% of yield. If it optimal for the trawl fishery to land nothing, we use equations \ref{optimization_problem} and \ref{ARDL} to find the purse seine's optimal amount of landings[^6]. Net revenues to the fishery can then be calculated directly from equation \ref{optimization_problem}.
+The simulation of Gross operating revenues occurs in a few steps.  Herring prices in a year are simulated using equations \ref{optimization_problem} and \ref{ARDL}, parameters from Table \ref{ardl_regression} previous year prices (initialized to the 2011-2015 average for the first year) under the assumption that both fleets combine to land the entire Yield.  If simulated prices are higher than the marginal cost of the trawl fleet($63.24/mt), both fleets are assumed to catch the entire Yield.  Otherwise, we use equations \ref{optimization_problem} and \ref{ARDL} to solve for quantity landed by the trawl fleet when the purse seine fleet lands 30% of yield. If it optimal for the trawl fishery to land nothing, we use equations \ref{optimization_problem} and \ref{ARDL} to find the purse seine's optimal amount of landings[^f]. Net revenues to the fishery can then be calculated directly from equation \ref{optimization_problem}.
 
-[^6]: Because the marginal costs for the purse seine are always less than the marginal costs of the trawl fishery, any landings by the trawl fleet imply the purse seine fleet is landing 30% of the yield.  
+[^f]: Because the marginal costs for the purse seine are always less than the marginal costs of the trawl fishery, any landings by the trawl fleet imply the purse seine fleet is landing 30% of the yield.  
 
 *Stability --*
 Stakeholders were interested in understanding stability of the herring industry. We computed Interannual Variation (IAV) of Net Revenues. While IAV can summarize variability, it does not provide insight into the equilibrium properties of the time series.  An additional performance metric, stationarity, is used to assess the stability of net revenues over the terminal period. For each simulation, we perform an econometric test of stationarity [@Dickey1979DistributionRoot], by estimating 
@@ -1044,16 +1044,29 @@ Z  &= \frac{\sum_{i=1}^k \phi^{-1} (1-p_i)}{\sqrt(k)}
 $Z$ has a standard normal distribution under the null hypothesis of no stable equilibrium.  We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue.
 
 *Caveats to the Herring Fishery Economic model--*
-We did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal qualitative effects. The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs. A bigger problem is that, in the long run, firms can enter and exit this industry. We assume that average variable costs are the same as the marginal costs. This may be okay. It may be bad.
+We did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal qualitative effects. The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs. A bigger problem is that, in the long run, firms can enter and exit this industry.  If firms can enter and exit, then exclusion of fixed costs from the model could result in misleading recommendations. We did not model firm entry and exit; this is a difficult decision to model. Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible.
 
-If firms can enter and exit, then exclusion of fixed costs from the model could result in misleading recommendations. We did not model firm entry and exit; this is a difficult decision to model. Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible.
+We also assume that marginal costs are equal to average variable costs, constant for each fleet, and do not depend on the level of biomass. A more rigorous approach might include estimating a (economic) production function for the herring fishery; this was not done in the interest of time.  It is difficult to predict how estimating a true cost function and integrating those results would change the results of the study.
 
-Catch in the economic model can be different from the Yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the market model suggests that this is not so simple.
+Catch in the economic model can be different from the yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the market model suggests that this is not so simple.
 
-Nothing big with Menhaden. 
-Nothing on Lobster.
+*Caveats to the Economic model--*
+The largest limitation and caveat to the economic model is that only the herring fishery is quantitatively modeled. We discuss how other economic groups could be modeled here.
 
- 
+*Direct Consumers of landed herring--*
+We note that we have estimated a price-quantity relationship and not necessarily a demand curve for herring.  If we believe that the lobster bait market is well functioning, then consumer welfare measures could be determined from a demand curve for herring.  Rigorous estimation of a demand curve for herring likely requires modeling goods are substitutes for herring, possibly including  mackerel, menhaden, squid,  and substitute bait. This was not done due to time pressures.
+
+*Humans and Herring in the Ecosystem--*
+@Brown2005AFisheries and @Finnoff2003HarvestingEcosystem describe methods to trace the effects of changes in harvest or biomass of one species on ecosystems or predators. The predator section models a few representative consumers of live herring: terns, tuna, whales, and predatory fish. Ecosystem Valuation methods could be used to measure changes in outcomes for those species in dollar value.  See  \cite{lew2015willingness} for a recent review. People may derive value from changes in the status of these predators through either use or non-use values.  For example, people may directly value higher abundances of an animal or protection of an endangered species, even if they have no plans to watch or view them \cite{lew2010valuing,lew2017temporal}.  Quantifying these values typically is done using stated preference methods with data collected using surveys; these studies are costly and time consuming to develop and conduct rigorously.
+
+Consumers may also derive use value from changes in the modeled species. For example, increased tern or whale populations may improve outcomes for bird- or whale-watching customers or reduce costs for tour operators \cite{Larson2004RevealingData}.  This type of value can be quantified using both stated and revealed preference data, both of which typically require collection of survey data; these studies are also costly and time consuming to develp and conduct rigorously.  Perhaps more discouragingly, the precise good being valued (say, a doubling of the tern population) needs to be known quite early in the research process.  In this application, development of a valuation survey for terns would not have been able to start until after the predator modeling was nearly complete.
+
+Another avenue for use value to arise is though changes in costs, catches, or prices in the commercial.  For example, increases in biomass of spiny dogfish could lead to both higher quotas and lower costs to catch more abundant fish.  Examining changes in costs would require a model of the economic production function for the spiny dogfish fishery (similar to the model not used for the herring fleet).  Changes in  product quality could result in higher prices.  For example, because larger tuna receives higher prices, the effects of changes in average weight could be deduced from existing hedonic models \cite{McConnell2000HedonicHawaii, Carroll2001PricingManagement}.
+
+Note that increases in the biomass of a particular predator could be a net ``bad''  for society.  For example, biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.  The ability to manipulate the ecosystem with a prey-level ABC control rule to achieve desirable outcomes depends on the rates at which these increases in prey are converted into social utility. This conversion depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these technologies are not particularly well understood at this time.
+
+One of the difficulties with doing an economic extension that models the prey species is that it's difficult to know which margin (dimension) to address.  For example, we didn't know that the tuna model would result in changes in average weight and not abundances.  If we had try to model how changes in abundance might affect costs of harvesting tuna, this would have not been a fruitful use of time.
+
 
 <!--
 Two economic models were recently developed that focused on herring in the Northeast United States. ,
@@ -1064,16 +1077,6 @@ output.
 There are two drawbacks to this approach. First, because the model is static, the effects of changes in commercial herring removals on predators (through changes in herring biomass) cannot be deduced. The dynamic ecosystem models developed address this particular shortcoming. Second, constant prices for herring are assumed; this assumption is relaxed as well. %THIS IS 
 Neither approaches examine the value of increased herring biomass on other fisheries
 STUFF FROM THE KIRKLEY AND LEHUTA CITATIONS
-
-
-With multiple predators, prey, and variability in the desirability of predators, it is possible that increases in biomass of a particular prey could be bad for society. For example, biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.
-
-Stated another way, the ability to manipulate the ecosystem with an ABC control rule to achieve desirable outcomes would depend on the rates at which these increases in prey are converted into social utility: this depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these technologies are not particularly well understood at this time.
-
-Herring is often (but no exclusively) used for bait; typically for the lobster fishery. In 2014, approximately 75% of landed herring was
-utilized as bait. Other uses include animal food and human consumption. On an annual basis, the quantity supplied in the herring market is
-usually driven by the Annual Catch Limits (ACLs), or sub-ACLs. These are occasionally not constraining; however seems to occur for regulatory
-reasons (such as a closure for catch of haddock in the Georges Bank fishery) instead of for market reasons.
 -->
 
 *Random thoughts. this probably belongs in the non-tech manuscript --*
@@ -1087,13 +1090,7 @@ reasons (such as a closure for catch of haddock in the Georges Bank fishery) ins
 
 Fishery management must, among other things, incorporate multiple objectives, promote legitimacy by reflecting accepted norms, and have low transactions costs [@Hanna1999StrengtheningResources]. User participation in decision-making is a way to increase regulatory legitimacy [@Hanna1995UserCouncil]. One drawback to user-participation is that meetings tend to attract participants with the most extreme views [@Osborne2000MeetingsParticipation; @Turner2005MeetingsAnalysis].
 
-Extensions, and Future Research
 -------------------------------
-
-@Carroll2001PricingManagement describe another mechanism (product quality) through which changes in prey could be evaluated. We did not attempt to value *in-situ* herring or compute the social benefits or costs derived from changes in biomass. @Brown2005AFisheries and @Finnoff2003HarvestingEcosystem describe methods to trace the effects of changes in harvest or biomass of one species on ecosystems or predators. Finally, we note that increases in predator biomass can have negative impacts on prey and harvesters of prey @Flaaten1996ThePredation.
-
-One of the difficulties with doing an economic extension that models the prey species is that it's difficult to know which margin (dimension) to address.  For example, we didn't know that the tuna model would result in changes in quality. If we had try to model how changes in abundance might affect costs of harvesting tuna, this would have not been a fruitful use of time.
-\clearpage
 
 #Results
 
