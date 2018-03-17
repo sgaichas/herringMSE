@@ -1098,16 +1098,15 @@ Fishery management must, among other things, incorporate multiple objectives, pr
 
 **Effects of Operating Models**
 
-The effect of growth on the relative performance of control rules was relatively minor for all metrics than the effect of *M* and steepness (INSERT A PLOT - maybe boxplot among all CRs?).  Furthermore, performance of control rules was similar between the operating models with different *M* and steepness values when reported relative to biological reference points (e.g., $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$), but the scale of results in absolute values was generally different (INSERT PLOT).  Consequently, results for output metrics were only reported in relative units for the low *M*/high steepness, and slow growth operating model, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.
+The effect of growth on the relative performance of control rules was relatively minor for all metrics than the effect of *M* and steepness (INSERT A PLOT - maybe boxplot among all CRs?).  Furthermore, performance of control rules was similar between the operating models with different *M* and steepness values when reported relative to biological reference points (e.g., $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$), but the scale of results in absolute values was generally different (INSERT PLOT).  Consequently, results were only reported in relative units for the low *M*/high steepness, and slow growth operating model, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.
 
-Positive bias in assessment errors resulted in 
+Positive bias in assessment errors resulted in more control rules that led to lower amounts of biomass, more frequent biomass levels below $SSB_{MSY}$, higher *IAV*, but a generally similar range of yield (BOXPLOT).  ##Perhaps also add summary effect and boxplot for predator and econ metrics##.  For the sake of brevity, additional results and tradeoffs (see below) were only reported using an unbiased assessment error operating model.
 
 **Tradeoffs**
 
 *Herring*
 
-Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, and the frequncy that $SSB < \frac{SSB_{MSY}}{2}$ vs. the frequncy that *Q*=0.  These tradeoffs were also only reported 
-
+Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, and the frequncy that $SSB < \frac{SSB_{MSY}}{2}$ vs. the frequncy that *Q*=0.
 
 
 
