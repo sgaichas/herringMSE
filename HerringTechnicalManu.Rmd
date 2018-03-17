@@ -1106,7 +1106,7 @@ Positive bias in assessment errors resulted in more control rules that led to lo
 
 *Herring*
 
-Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, and the frequncy that $SSB < \frac{SSB_{MSY}}{2}$ vs. the frequncy that *Q*=0.
+Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, $\frac{yield}{MSY}$ vs. the frequncy that *Q*=0, and $\frac{yield}{MSY}$ vs. the frequncy that $SSB < \frac{SSB_{MSY}}{2}$.
 
 
 
