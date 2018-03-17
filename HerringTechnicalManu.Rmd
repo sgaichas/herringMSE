@@ -905,7 +905,7 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 ##**Performance Metrics**
 
-*Herring*
+**Herring**
 
 For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes.  Median SSB,  $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics.  Additional performance metrics included the proportion of the last 50 years of each simulation with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion of the last 50 years that are overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of the last 50 years that overfishing occurred), and *Q*=0 (i.e., proportion of the last 50 years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded over the last 50 years of each simulation (Table XX T10).  These performance metrics were highlighted to be of interest at the stakeholder workshops.  
 
@@ -1098,8 +1098,20 @@ Fishery management must, among other things, incorporate multiple objectives, pr
 
 **Effects of Operating Models**
 
-The effect of growth on the relative performance of control rules was relatively minor for all metrics than the effect of *M* and steepness (INSERT A PLOT - maybe boxplot among all CRs?).  Furthermore, performance of control rules was similar between the operating models with different *M* and steepness values when reported relative to biological reference points (e.g., $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$), but the scale of results in absolute values was generally different (INSERT PLOT).  Consequently, results for output metrics were only reported in relative units for the low *M*/high steepness, and slow growth operating model (with and without assessment bias), with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.
+The effect of growth on the relative performance of control rules was relatively minor for all metrics than the effect of *M* and steepness (INSERT A PLOT - maybe boxplot among all CRs?).  Furthermore, performance of control rules was similar between the operating models with different *M* and steepness values when reported relative to biological reference points (e.g., $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$), but the scale of results in absolute values was generally different (INSERT PLOT).  Consequently, results for output metrics were only reported in relative units for the low *M*/high steepness, and slow growth operating model, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.
+
+Positive bias in assessment errors resulted in 
 
 **Tradeoffs**
+
+*Herring*
+
+Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, and the frequncy that $SSB < \frac{SSB_{MSY}}{2}$ vs. the frequncy that *Q*=0.  These tradeoffs were also only reported 
+
+
+
+
+
+
 -------------------------------
 #References
