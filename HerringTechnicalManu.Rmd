@@ -1112,9 +1112,11 @@ Biomass based control rule variants without a restriction on interannual change 
 
 Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of $yield$ and *IAV* than other control rules (). Restricting the interannual change in the quota for the biomass based control rule or using one of the constant catch variants produced options with lower *IAV* than the biomass based alternatives, but biomass based options were available that could attain higher yields that the other control rules could not.  Thus, restricting the interannual change in the quota or using constant catch variants can produce more stable yields than alternatives, but at the cost of yield.
 
+Tradeoffs for $\frac{yield}{MSY}$ vs. the frequncy that *Q*=0 were similar to that of $\frac{yield}{MSY}$ vs. *IAV*.  Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of results than other control rule alternatives.  Restricting the interannual change in the quota for the biomass based control rule or using one of the constant catch variants produced less, and often no fishery closures, that could not be achieved by the biomass based control rules, but at the cost of not offering options that could achieve yields as high as biomass based control rules.
 
+All of the control rule alternatives offered options that had near zero frequency of $SSB < \frac{SSB_{MSY}}{2}$.  At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with higher frequency of $SSB < \frac{SSB_{MSY}}{2}$, such that the short-term stability of such quota blocks comes at the potential cost of more frequently dropping to relatively low levels of biomass.  While restricting the interannual change in the quota or using one of the constant catch variants offered options that had near zero frequency of $SSB <\frac{SSB_{MSY}}{2}$, these options could not achieve as high of yield as biomass based options that also had near zero frequency of $SSB <\frac{SSB_{MSY}}{2}$.  Some constant catch options also had near 100% frequency of $SSB <\frac{SSB_{MSY}}{2}$.
 
-
+#Discussion
 
 -------------------------------
 #References
