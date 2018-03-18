@@ -1118,5 +1118,26 @@ All of the control rule alternatives offered options that had near zero frequenc
 
 #Discussion
 
+Relative results insensitive to OM, which has been found before.
+
+CC options not flexible and can usually be outperformed by other CRs, unless stability is a heavily preferred objective.
+
+We only evaluated a 15% restriction on interannual change in the quote for a BB control rule because this was a value preferred by stakeholders.  Exploring a broader range of percentages, however, may result in a broader range of performance that may sacrfice less yield (than our 15%) but still gain some stability.  See Laurie Kell's stuff; Deroba and Bence.
+
+If short-term stability is an objective, then using quota blocks may be effective.  Some BB CR options with quota blocks could produce similar performance as annual changes in the quota.  Although, at similar level of yields, the quota blocks produced more options with lower biomass.  Thus, a closed-loop simulation should be used to evaluate the changes in relative performance between applying a CR annually or using a quota blocks.
+
+We assumed reference points were known without error, and so our results may not generalize to cases where such values are poorly estimated.  Incorporating error in the estimation of reference points within simulations is an area of active research, but is not straightforward.  For example, the reference points (e.g., MSY) depend on life history traits that may change through time, and so how to accommodate time varying life history in the calculation of the reference values would need to be considered as part of a management strategy.  See Deroba and Bence.
+
+We did not incorporate a full stock assessment due to time contraints.  Discuss pros and cons; this is part of the reality and dream, as is the above paragraph.
+
+MICE can be a reasonable approach to conducting science to meet relatively short managment time frames.  Scientists may have to sacrifice some dreams in order to meet realities of doing research in support of managment.  Review other MICE literature.  Discuss MICE in the context of multi-species/ecosystemy based management, and whether this even qualifies as ecosystem based.
+
+Dive into the "forage" fish debate!?  While herring may constitute "large" fractions of diet, our population level analyses suggest only relatively weak relationships.  Likely due to alternative prey.  Herring abundance may also not be the most important aspect for predators, as their condition seems to be more directly linked to tuna condition, and tuna condition has been good at low herring N and visa versa.
+
+An open stakeholder driven process produced dividends for this analysis in the form of improved relationships and data.  Greater attention should be paid to what stakeholders are involved and how they are involved in MSE processes.  Probably leave a short paragraph assuming Feeney et al. accepted.
+
+Econ something.  Sorry M-Y, but that's the best I can do getting started on Econ discussion topics.
+
+
 -------------------------------
 #References
