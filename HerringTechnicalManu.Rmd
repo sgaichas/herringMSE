@@ -1045,34 +1045,8 @@ Z  &= \frac{\sum_{i=1}^k \phi^{-1} (1-p_i)}{\sqrt(k)}
 \end{align}
 $Z$ has a standard normal distribution under the null hypothesis of no stable equilibrium.  We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue.
 
-<!--- Hi all, I think these two things (stationarity and a collapsed p-value style test) are unique to MSE and fisheries.  Up to you guys if you want to play that up.-->
-
-*Caveats to the Herring Fishery Economic model--*
-We did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal qualitative effects. The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs. A bigger problem is that, in the long run, firms can enter and exit this industry.  If firms can enter and exit, then exclusion of fixed costs from the model could result in misleading recommendations. We did not model firm entry and exit; this is a difficult decision to model. Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible.  Less than three-quarters of the permitted herring vessels were active in the fishery, suggesting that firms could enter if future profitability is expected to be high.
-
-We also assume that marginal costs are equal to average variable costs, constant for each fleet, and do not depend on the level of biomass. A more rigorous approach might include estimating a (economic) production function for the herring fishery; this was not done in the interest of time.  It is difficult to predict how estimating a true cost function and integrating those results would change the results of the study.
-
-Catch in the economic model can be different from the yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the market model suggests that this is not so simple.
-
-*Caveats to the Economic model--*
-The largest limitation and caveat to the economic model is that only the herring fishery is quantitatively modeled. We discuss how other economic groups could be modeled here.
-
-*Direct Consumers of landed herring--*
-We note that we have estimated a price-quantity relationship and not necessarily a demand curve for herring.  If we believe that the lobster bait market is well functioning, then consumer welfare measures could be determined from a demand curve for herring.  Rigorous estimation of a demand curve for herring likely requires modeling goods are substitutes for herring, possibly including  mackerel, menhaden, squid,  and substitute bait. This was not done due to time pressures.
-
-*Humans and Herring in the Ecosystem--*
-@Finnoff2003HarvestingEcosystem and @Brown2005AFisheries describe methods to trace the effects of changes in harvest or biomass of one species through an ecosystem.  The predator section models a few representative consumers of live herring: terns, tuna, whales, and predatory fish. Ecosystem Valuation methods could be used to measure changes in outcomes for those species in dollar value [@loomis1996economic; @richardson2009total; @lew2015willingness].  People may derive value from changes in the status of these predators through either use or non-use values.  For example, people may directly value higher abundances of an animal or protection of an endangered species, even if they have no plans to watch or view them [@lew2010valuing; @lew2017temporal].  Quantifying these values typically is done using stated preference methods with data collected using surveys; these studies are costly and time consuming to develop and conduct rigorously.  Benefit transfer, a method in which valuation from previous studies is applied to a new study area,may be the only way to overcome these barriers [@navrud2007environmental; @johnston2010methods].
-
-Consumers may also derive use value from changes in the modeled species. For example, changes in whale populations may change outcomes for whale-watching customers [@Larson2004RevealingData].  This type of value can be quantified using both stated and revealed preference data, both of which typically require collection of survey data; these studies are also costly and time consuming to develp and conduct rigorously.  Perhaps more discouragingly, the precise good being valued (say, a doubling of the tern population) needs to be known quite early in the research process.  In this application, development of a valuation survey for terns would not have been able to start until after the predator modeling was nearly complete. Benefit transfer may be the only way to value some of the use values on the timeframe required by NEFMC.
-
-Another avenue for use value to arise is though changes in costs, catches, or prices in the associated commercial fishery.  For example, increases in biomass of spiny dogfish could lead to both higher quotas and lower costs to catch more abundant fish.  Examining changes in costs would require an economic model of production for the spiny dogfish fishery (similar to the model not used for the herring fleet) [@holland1999empirical; @hutniczak2014increasing; @reimer2017fisheries]. Changes in product quality could result in higher prices [@Larkin1999IntrinsicFishery; @Asche2015EconomicFisheries].  For example, because larger tuna receives higher prices, the effects of changes in average weight could be deduced from existing hedonic models [@McConnell2000HedonicHawaii; @Carroll2001PricingManagement].
-
-Note that increases in the biomass of a particular predator could be a net ``bad''  for society.  For example, an increase in the biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.  The ability to manipulate the ecosystem with a prey-level ABC control rule to achieve desirable outcomes depends on the rates at which these increases in prey are converted into social utility. This conversion depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these technologies are not particularly well understood at this time.
-
-One of the difficulties with doing an economic extension that models the prey species is that it's difficult to know which margin (dimension) to address.  For example, we didn't know that the tuna model would result in changes in average weight and not abundances.  If we had tried to model how changes in abundance affect affect costs of harvesting tuna, this would have not been a fruitful use of time.
-
-
-<!--
+<!---
+Comment out economic crap.
 Two economic models were recently developed that focused on herring in the Northeast United States. ,
 through the intermediary of the extractive herring sector. The authors
 take an optimization approach: herring landings are selected to maximize
@@ -1081,23 +1055,23 @@ output.
 There are two drawbacks to this approach. First, because the model is static, the effects of changes in commercial herring removals on predators (through changes in herring biomass) cannot be deduced. The dynamic ecosystem models developed address this particular shortcoming. Second, constant prices for herring are assumed; this assumption is relaxed as well. %THIS IS 
 Neither approaches examine the value of increased herring biomass on other fisheries
 STUFF FROM THE KIRKLEY AND LEHUTA CITATIONS
--->
 
-*Random thoughts. this probably belongs in the non-tech manuscript --*
- A key factor in management performance is the process by which  management tools are developed and implemented.
+A key factor in management performance is the process by which  management tools are developed and implemented.
 
-> One approach to the creation of regulatory legitimacy is to structure the management process around user participation in decision-making. User participation addresses the twin problems of integrating human  and ecological systems and bringing individual users into the  definition of the collective good. Participation offers certain  benefits to the management process but it also carries costs. Whether  it is worthwhile for fishery management depends on the relative  magnitudes of those benefits and costs. [@Hanna1995UserCouncil]
+One approach to the creation of regulatory legitimacy is to structure the management process around user participation in decision-making. User participation addresses the twin problems of integrating human  and ecological systems and bringing individual users into the  definition of the collective good. Participation offers certain  benefits to the management process but it also carries costs. Whether  it is worthwhile for fishery management depends on the relative  magnitudes of those benefits and costs. [@Hanna1995UserCouncil]
 
-> What we ask of fishery governance is that it coordinate institutional  rules and individual actions by performing certain functions: incorporate multiple objectives representing different types of  conservation and use; bring the time horizons of private individuals  into line with those of the public; send signals of resource scarcity  and enable effective adaptive responses; promote legitimacy by  reflecting accepted norms of equity and by controlling harmful  opportunism; contain both the level and distribution of transactions  costs.These functions are expressions of Williamson's organizational  imperative to minimize costs, accommodate limited information, and  safeguard against harmful opportunism.
+What we ask of fishery governance is that it coordinate institutional  rules and individual actions by performing certain functions: incorporate multiple objectives representing different types of  conservation and use; bring the time horizons of private individuals  into line with those of the public; send signals of resource scarcity  and enable effective adaptive responses; promote legitimacy by  reflecting accepted norms of equity and by controlling harmful  opportunism; contain both the level and distribution of transactions  costs.These functions are expressions of Williamson's organizational  imperative to minimize costs, accommodate limited information, and  safeguard against harmful opportunism.
  [@Hanna1999StrengtheningResources]
 
 
 Fishery management must, among other things, incorporate multiple objectives, promote legitimacy by reflecting accepted norms, and have low transactions costs [@Hanna1999StrengtheningResources]. User participation in decision-making is a way to increase regulatory legitimacy [@Hanna1995UserCouncil]. One drawback to user-participation is that meetings tend to attract participants with the most extreme views [@Osborne2000MeetingsParticipation; @Turner2005MeetingsAnalysis].
-
+-->
 -------------------------------
 
 #Results
+Stakeholders had wide-ranging, diverse, and often conflicting preferences. One of our first findings is that there often weaker tradeoffs than anticipated.  For example, the XXX for Dogfish, tuna, and XXX were relatively insensitive to both Operating Model and HCR type (Figure YAY). Other performance metrics were highly related to each other, like Net Revenue and Yield/MSY (Figure XY-scatter).  
 
+As second finding was that two classes of control rules (Constant Catch and the 3-year biomass based with a limit on adjustment) performed poorly relative to the other control rules.  Here’s a few results that illustrate that finding (Figure ZZZ). Perhaps stationarity goes here?
 **Effects of Operating Models**
 
 The effect of growth on the relative performance of control rules was relatively minor for all metrics than the effect of *M* and steepness (INSERT A PLOT - maybe boxplot among all CRs?).  Furthermore, performance of control rules was similar between the operating models with different *M* and steepness values when reported relative to biological reference points (e.g., $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$), but the scale of results in absolute values was generally different (INSERT PLOT).  Consequently, results were only reported in relative units for the low *M*/high steepness, and slow growth operating model, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.
@@ -1139,6 +1113,37 @@ Dive into the "forage" fish debate!?  While herring may constitute "large" fract
 An open stakeholder driven process produced dividends for this analysis in the form of improved relationships and data.  Greater attention should be paid to what stakeholders are involved and how they are involved in MSE processes.  Probably leave a short paragraph assuming Feeney et al. accepted.
 
 Econ something.  Sorry M-Y, but that's the best I can do getting started on Econ discussion topics.
+
+If we care about herring as forage, then including herring biomass is effectively double counting.  Alternatively, it suggests that something was left out of the ecosystem model.  <!---ML will tighten up -->
+
+
+## The Dream
+In this section, we discuss the limitations of the quantiative models and simplifications necessary to meet decision-making time frames while incorporating ecosystem and economic models into management strategy evaluation.
+
+
+### Economics
+<!---ML will tighten these up a bit. -->
+We did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal qualitative effects. The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs. A bigger problem is that, in the long run, firms can enter and exit this industry.  If firms can enter and exit, then exclusion of fixed costs from the model could result in misleading recommendations. We did not model firm entry and exit; this is a difficult decision to model. Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible.  Less than three-quarters of the permitted herring vessels were active in the fishery, suggesting that firms could enter if future profitability is expected to be high.
+
+We also assume that marginal costs are equal to average variable costs, constant for each fleet, and do not depend on the level of biomass. A more rigorous approach might include estimating a (economic) production function for the herring fishery; this was not done in the interest of time.  It is difficult to predict how estimating a true cost function and integrating those results would change the results of the study.
+
+Catch in the economic model can be different from the yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the market model suggests that this is not so simple.
+
+The largest limitation of the economic component of the model is that only the herring fishery is quantitatively modeled. Consumers of landed herring and economic valuation of \textit{in-situ} herring are not considered.    
+
+Equation \ref{ARDL} estimates a price-quantity relationship, not necessarily a demand curve for herring.  If we believe that the lobster bait market is well functioning, then consumer welfare measures could be determined from a demand curve for herring.  Rigorous estimation of a demand curve for herring likely requires modeling goods are substitutes for herring, possibly including  mackerel, menhaden, squid,  and substitute bait. This was not done due to limited time available. 
+
+@Finnoff2003HarvestingEcosystem and @Brown2005AFisheries describe methods to trace the effects of changes in harvest or biomass of one species through an ecosystem.  The predator section models a few representative consumers of live herring: terns, tuna, whales, and predatory fish. Ecosystem Valuation methods could be used to measure changes in outcomes for those species in dollar value [@loomis1996economic; @richardson2009total; @lew2015willingness].  People may derive value from changes in the status of these predators through either use or non-use values.  For example, people may directly value higher abundances of an animal or protection of an endangered species, even if they have no plans to watch or view them [@lew2010valuing; @lew2017temporal].  Quantifying these values typically is done using stated preference methods with data collected using surveys; these studies are costly and time consuming to develop and conduct rigorously.  Benefit transfer, a method in which valuation from previous studies is applied to a new study area,may be the only way to overcome these barriers [@navrud2007environmental; @johnston2010methods].
+
+Consumers may also derive use value from changes in the modeled species. For example, changes in whale populations may change outcomes for whale-watching customers [@Larson2004RevealingData].  This type of value can be quantified using both stated and revealed preference data, both of which typically require collection of survey data; these studies are also costly and time consuming to develp and conduct rigorously.  Perhaps more discouragingly, the precise good being valued (say, a doubling of the tern population) needs to be known quite early in the research process.  In this application, development of a valuation survey for terns would not have been able to start until after the predator modeling was nearly complete. Benefit transfer may be the only way to value some of the use values on the timeframe required by NEFMC.
+
+Another avenue for use value to arise is though changes in costs, catches, or prices in the associated commercial fishery.  For example, increases in biomass of spiny dogfish could lead to both higher quotas and lower costs to catch more abundant fish.  Examining changes in costs would require an economic model of production for the spiny dogfish fishery (similar to the model not used for the herring fleet) [@holland1999empirical; @hutniczak2014increasing; @reimer2017fisheries]. Changes in product quality could result in higher prices [@Larkin1999IntrinsicFishery; @Asche2015EconomicFisheries].  For example, because larger tuna receives higher prices, the effects of changes in average weight could be deduced from existing hedonic models [@McConnell2000HedonicHawaii; @Carroll2001PricingManagement].
+
+One of the difficulties with including a quantitative economic model is that it's difficult to know which predator and performance metric to formally model.  For example, prior to completing the predator models, we did not know that tuna weight but not abundances would be sensitive to various harvest control rules.  If we had tried to model how changes in abundance affect affect costs of harvesting tuna, this would have not been a fruitful use of time.
+
+Note that increases in the biomass of a particular predator could be a net ``bad''  for society.  For example, an increase in the biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.  The ability to manipulate the ecosystem with a prey-level ABC control rule to achieve desirable outcomes depends on the rates at which these increases in prey are converted into social utility. This conversion depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these technologies are not particularly well understood at this time.
+
+
 
 
 -------------------------------
