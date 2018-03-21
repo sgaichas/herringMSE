@@ -52,7 +52,8 @@ tn = local({
   i = 0
   function(x) {
     i <<- i + 1
-    paste('\n\n:Table ', i, ': ', x, sep = '')
+    #paste('\n\n:Table ', i, ': ', x, sep = '')
+    paste('\n\n:', x, sep = '')
     # The : before Table tells pandoc to wrap your caption in <caption></caption>
   }
 })
