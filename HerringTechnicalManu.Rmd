@@ -22,6 +22,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 library(broom)
+library(knitr)
 
 data.dir <- './data'
 
@@ -45,6 +46,27 @@ if(sg_figs){
 }
 
 allres <- readRDS(file.path(data.dir,"allres.rds"))
+
+#to get table captions and numbering
+tn = local({
+  i = 0
+  function(x) {
+    i <<- i + 1
+    paste('\n\n:Table ', i, ': ', x, sep = '')
+    # The : before Table tells pandoc to wrap your caption in <caption></caption>
+  }
+})
+knit_hooks$set(tab.cap = function(before, options, envir) {
+  if(!before)
+    tn(options$tab.cap)
+})
+default_output_hook = knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  if (is.null(options$tab.cap) == F)  
+    x
+  else
+    default_output_hook(x,options)
+})
 
 ```
 \doublespacing
@@ -76,20 +98,20 @@ Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5). 
 
 *Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @deroba2015simulation.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias (Table XX T6-T7).  The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; Deroba 2014).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 
-*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table \ref{OMtab}; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and recruitment , Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\epsilon_{\phi y}$). 
+*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table \ref{OMs}; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and recruitment , Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\epsilon_{\phi y}$). 
 
-```{r OMs, fig.cap="Operating model uncertainties addressed \\label{OMtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r OMs, tab.cap="Operating model uncertainties addressed\\label{OMs}", echo=FALSE, message=FALSE, warnings=FALSE,  results='asis'}
 tabl <- "
 | Operating Model Name | Herring productivity | Herring growth   | Assessment bias  |
 |:---------------------|:---------------------|:-----------------|:-----------------|
-| Truth                | Low: high M, low h   | 1970s: larger    | 60% overestimate |
-| Consequences         | Low: high M, low h   | Current: smaller | 60% overestimate |
-| Fake news            | Low: high M, low h   | 1970s: larger    | None             |
-| Bob                  | Low: high M, low h   | Current: smaller | None             |
-| Bart Simpson         | High: low M, high h  | 1970s: larger    | 60% overestimate |
-| Beavis               | High: low M, high h  | Current: smaller | 60% overestimate |
-| Something            | High: low M, high h  | 1970s: larger    | None             |
-| Something else       | High: low M, high h  | Current: smaller | None             |
+| LowBigBiased         | Low: high M, low h   | 1970s: larger    | 60% overestimate |
+| LowSmallBiased       | Low: high M, low h   | Current: smaller | 60% overestimate |
+| LowBigCorrect        | Low: high M, low h   | 1970s: larger    | None             |
+| LowSmallCorrect      | Low: high M, low h   | Current: smaller | None             |
+| HighBigBiased        | High: low M, high h  | 1970s: larger    | 60% overestimate |
+| HighSmallBiased      | High: low M, high h  | Current: smaller | 60% overestimate |
+| HighBigCorrect       | High: low M, high h  | 1970s: larger    | None             |
+| HighSmallCorrect     | High: low M, high h  | Current: smaller | None             |
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
