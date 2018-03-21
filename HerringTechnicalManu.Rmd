@@ -223,8 +223,10 @@ B_{y+1}^P = S_{y}^P (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, 
 \end{equation}
 
 \begin{equation}
-B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}.
+B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}, 
 \end{equation}
+
+where either AnnAlpha or AnnRho are defined for a predator using herring population parameters (see Eqn. \ref{tunagrow_equation} below).
 
 Finally, herring population size $N_{y}$ could be related to predator survival using a multiplier on constant predator annual natural mortality $v$: 
 
