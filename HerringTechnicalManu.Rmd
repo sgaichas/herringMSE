@@ -232,11 +232,11 @@ where $\gamma$ > 1 links herring population size relative to the threshold level
 If a relationship between predator growth and herring population size was evident, annual changes in growth were modeled by modifying either the Ford-Walford intercept ($AnnAlpha$) or slope ($AnnRho$):
 
 \begin{equation}
-B_{y+1} = S_{y} (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1} \label{delaydiffB_equation}, or
+B_{y+1} = S_{y} (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, or
 \end{equation}
 
 \begin{equation}
-B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1} \label{delaydiffB_equation}.
+B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}.
 \end{equation}
 
 Finally, herring population size $Hpop_{y}$ could be related to predator survival using a multiplier on constant predator annual natural mortality $v$: 

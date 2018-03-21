@@ -218,21 +218,6 @@ Recruitment followed Beverton-Holt dynamics <span class="citation">(Francis 1992
 </tr>
 </tbody>
 </table>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>origin/master</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <p>The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models <span class="citation">(Deroba 2015)</span>. Natural mortality in recent stock assessments has varied among ages and years, with <span class="math inline">\(M\)</span> being higher during 1996-2014 than in previous years <span class="citation">(Northeast Fisheries Science Center 2012, Deroba 2015)</span>. Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher <span class="math inline">\(M\)</span> during 1996-2014, such that <span class="math inline">\(M\)</span> was constant among years <span class="citation">(Northeast Fisheries Science Center 2012, Deroba 2015)</span>. To capture uncertainty in <span class="math inline">\(M\)</span> in the MSE, operating models were run with either relatively high or low <span class="math inline">\(M_a\)</span> (Table 2; Figure 1). Relatively high <span class="math inline">\(M_a\)</span> values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment. Relatively low <span class="math inline">\(M_a\)</span> values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment. In the MSE, <span class="math inline">\(M_a\)</span> was always time invariant.</p>
 <p>Uncertainty in estimates of stock-recruit parameters were represented in the MSE by using the parameters estimated by stock assessments fit with and without the higher <span class="math inline">\(M\)</span> during 1996-2014. Stock assessment fits with higher <span class="math inline">\(M\)</span> during 1996-2014 produced estimates of steepness and <span class="math inline">\(SSB_{F=0}\)</span> that were lower than in stock assessment fits without higher <span class="math inline">\(M\)</span> during 1996-2014 (Table 3; Figure 1). Thus, operating models with relatively high <span class="math inline">\(M_a\)</span> always had relatively low steepness and <span class="math inline">\(SSB_{F=0}\)</span>, and the opposite held with relatively low <span class="math inline">\(M_a\)</span> (Table 2).</p>
 <p>Uncertainty in Atlantic herring size-at-age was accounted for by having operating models with either fast or slow growth (i.e., weights-at-age; Table 2; Figure 3). Atlantic herring weight-at-age generally declined from the mid-1980s through the mid-1990s, and has been relatively stable since. Reasons for the decline are speculative and no causal relationships have been established. Thus, fast growth operating models had weights-at-age that equaled the January 1 weights-at-age from the most recent stock assessment averaged over the years 1976-1985, while the slow growth operating models averaged over the years 2005-2014 (<span class="citation">Deroba (2015)</span>). In the MSE, weight-at-age was always time invariant.</p>
@@ -363,10 +348,10 @@ R_{y+a} = \frac{\alpha B_{y}}{\beta + B_{y}} * \frac{\gamma(Hpop_{y}/Hthresh)}{(
 <p>where <span class="math inline">\(\gamma\)</span> &gt; 1 links herring population size relative to the threshold level to predator recruitment.</p>
 <p>If a relationship between predator growth and herring population size was evident, annual changes in growth were modeled by modifying either the Ford-Walford intercept (<span class="math inline">\(AnnAlpha\)</span>) or slope (<span class="math inline">\(AnnRho\)</span>):</p>
 <span class="math display">\[\begin{equation}
-B_{y+1} = S_{y} (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1} \label{delaydiffB_equation}, or
+B_{y+1} = S_{y} (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, or
 \end{equation}\]</span>
 <span class="math display">\[\begin{equation}
-B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1} \label{delaydiffB_equation}.
+B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}.
 \end{equation}\]</span>
 <p>Finally, herring population size <span class="math inline">\(Hpop_{y}\)</span> could be related to predator survival using a multiplier on constant predator annual natural mortality <span class="math inline">\(v\)</span>:</p>
 <span class="math display">\[\begin{equation}
