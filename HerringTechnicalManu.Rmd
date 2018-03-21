@@ -95,10 +95,9 @@ Mostly used as lobster bait. Caught with purse seines (night, inshore), single a
 #Methods
 **Herring** 
  
-*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table \ref{symbol_table}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
-
+*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table \ref{symtab}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
 <!---markdown style table. fucking escape characters-->
-```{r symboltable, fig.cap="Table of Symbols \\label{symtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r symboltable, tab.cap="Table of Symbols \\label{symtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |	Symbol	|	Definition
 |:--------	|:--------------------------------------------------------
