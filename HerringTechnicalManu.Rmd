@@ -46,6 +46,31 @@ if(sg_figs){
 
 allres <- readRDS(file.path(data.dir,"allres.rds"))
 
+<<<<<<< HEAD
+=======
+#to get table captions and numbering
+tn = local({
+  i = 0
+  function(x) {
+    i <<- i + 1
+    #paste('\n\n:Table ', i, ': ', x, sep = '')
+    paste('\n\n:', x, sep = '')
+    # The : before Table tells pandoc to wrap your caption in <caption></caption>
+  }
+})
+knit_hooks$set(tab.cap = function(before, options, envir) {
+  if(!before)
+    tn(options$tab.cap)
+})
+default_output_hook = knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  if (is.null(options$tab.cap) == F)  
+    x
+  else
+    default_output_hook(x,options)
+})
+
+>>>>>>> origin/master
 ```
 \doublespacing
 
@@ -204,8 +229,10 @@ B_{y+1}^P = S_{y}^P (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, 
 \end{equation}
 
 \begin{equation}
-B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}.
+B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}, 
 \end{equation}
+
+where either $AnnAlpha$ or $AnnRho$ are defined for a predator using herring population parameters (see Eqn. \ref{tunagrow_equation} below).
 
 Finally, herring population size $N_{y}$ could be related to predator survival using a multiplier on constant predator annual natural mortality $v$: 
 
