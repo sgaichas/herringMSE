@@ -5,12 +5,12 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -70,19 +70,37 @@ Mostly used as lobster bait. Caught with purse seines (night, inshore), single a
 #Methods
 **Herring** 
  
-*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @deroba2015simulation, and symbols were largely consistent with @deroba2015simulation (Table 1). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @deroba2015simulation].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
+*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table 1). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
 
-Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5).  The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@deroba2015simulation].
+Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
+\begin{equation}
+ R_{1,y+1}=\frac{(\frac{SSB_{F=0}}{R_{F=0}} \frac{1-h}{4h})SSB_y}{1+(\frac{5h-1}{4hR_{F=0}})SSB_y}e^{\varepsilon_{R,y}-\frac{\sigma_R^2}{2}} \\
+ \varepsilon_{R,y}=\omega \varepsilon_{R,y-1}+\sqrt{1-\omega^2}\varrho_y \\
+ \varrho \sim N(0,\sigma_R^2) \\
+ SSB_y=\sum\limits_{a=1}^{8+}N_{a,y}m_aW_a. \\
+\end{equation}
 
-*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @deroba2015simulation.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias (Table XX T6-T7).  The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; Deroba 2014).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 
-*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table 2; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and recruitment , Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\epsilon_{\phi y}$). 
+The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
+
+*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias\varepsilon_{} (Table XX T6-T7):
+
+\begin{equation}
+\widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
+\varepsilon_{\phi,y}=\vartheta\varepsilon_{\phi,y-1}+\sqrt{1-\vartheta^2}\tau_y \\
+\tau \sim N(0,\sigma_\phi^2). \\
+\end{equation}
+
+The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
+
+*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table 2; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
 
 The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models [@Deroba2015atlantic].  Natural mortality in recent stock assessments has varied among ages and years, with $M$ being higher during 1996-2014 than in previous years  [@NEFSC2012Assessment;@Deroba2015atlantic].  Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher $M$ during 1996-2014, such that $M$ was constant among years [@NEFSC2012Assessment;@Deroba2015atlantic].  To capture uncertainty in $M$ in the MSE, operating models were run with either relatively high or low $M_a$ (Table 2; Figure 1).  Relatively high $M_a$ values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment.  Relatively low $M_a$ values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment.  In the MSE, $M_a$ was always time invariant.
 
 Uncertainty in estimates of stock-recruit parameters were represented in the MSE by using the parameters estimated by stock assessments fit with and without the higher $M$ during 1996-2014.  Stock assessment fits with higher $M$ during 1996-2014 produced estimates of steepness and $SSB_{F=0}$ that were lower than in stock assessment fits without higher $M$ during 1996-2014 (Table 3; Figure 1).  Thus, operating models with relatively high $M_a$ always had relatively low steepness and $SSB_{F=0}$, and the opposite held with relatively low $M_a$ (Table 2).
 
-Uncertainty in Atlantic herring size-at-age was accounted for by having operating models with either fast or slow growth (i.e., weights-at-age; Table 2; Figure 3).  Atlantic herring weight-at-age generally declined from the mid-1980s through the mid-1990s, and has been relatively stable since.  Reasons for the decline are speculative and no causal relationships have been established.  Thus, fast growth operating models had weights-at-age that equaled the January 1 weights-at-age from the most recent stock assessment averaged over the years 1976-1985, while the slow growth operating models averaged over the years 2005-2014 (Deroba 2015).  In the MSE, weight-at-age was always time invariant.
+Uncertainty in Atlantic herring size-at-age was accounted for by having operating models with either fast or slow growth (i.e., weights-at-age; Table 2; Figure 3).  Atlantic herring weight-at-age generally declined from the mid-1980s through the mid-1990s, and has been relatively stable since.  Reasons for the decline are speculative and no causal relationships have been established.  Thus, fast growth operating models had weights-at-age that equaled the January 1 weights-at-age from the most recent stock assessment averaged over the years 1976-1985, while the slow growth operating models averaged over the years 2005-2014 (@Deroba2015atlantic).  In the MSE, weight-at-age was always time invariant.
+
 Differences in $M$, stock-recruit parameters, and weights-at-age led to differences in unfished and $MSY$ reference points among operating models (Table 3).  The effect of $M$ and stock-recruit parameters was larger than the effect of differences in weight-at-age (Table 3).
 
 To address concerns about possible stock assessment bias, operating models with and without a positive bias were included.  In operating models without bias, $\rho$=0 and the only assessment error was that caused by the unbiased measurement errors ($\epsilon_{\phi y}$).  In operating models with bias, $\rho$=0.6, which was based on the degree of retrospective pattern in $SSB$ from the most recent stock assessment [@Deroba2015atlantic].
@@ -106,9 +124,14 @@ For each biomass based control rule variant, a range of values for the three par
 
 The constant catch control rule is defined by one parameter, a desired constant catch (i.e., quota) amount (Figure 3).  The constant catch amounts were varied from 0.1$MSY$ to 1.0$MSY$ in increments of 0.1.  
 
-The conditional constant catch rule used a constant desired catch amount unless removing that desired catch from the assessed biomass caused the fully selected fishing mortality rate to exceed a pre-determined maximum, in which case the desired catch was set to the value produced by applying the maximum fully selected fishing mortality rate to the assessed biomass (Figure 3).  Thus, the conditional constant catch rule has two policy parameters: a desired constant catch amount, and a maximum fishing mortality rate.  The constant catch amounts were varied from 0.1$MSY$ to 1.0$MSY$ in increments of 0.1, while the maximum fishing mortality rate equaled 0.5$F_{MSY}$.  When the maximum fishing mortality rate portion the conditional constant catch rule was invoked, a quota was set in the same manner as when $\widehat{SSB}_y >= SSB_{up}$ in the biomass based control rule described above.
+The conditional constant catch rule used a constant desired catch amount unless removing that desired catch from the assessed biomass caused the fully selected fishing mortality rate to exceed a pre-determined maximum, in which case the desired catch was set to the value produced by applying the maximum fully selected fishing mortality rate to the assessed biomass (Figure 3).  Thus, the conditional constant catch rule has two policy parameters: a desired constant catch amount, and a maximum fishing mortality rate.  The constant catch amounts were varied from 0.1$MSY$ to 1.0$MSY$ in increments of 0.1, while the maximum fishing mortality rate equaled 0.5$F_{MSY}$.  When the maximum fishing mortality rate portion of the conditional constant catch rule was invoked, a quota was set in the same manner as when $\widehat{SSB}_y >= SSB_{up}$ in the biomass based control rule described above.
 
-*Implementation Error.--* Implementation errors were also included in a similar way as in @punt2008evaluation and @Deroba2012Evaluating, as year-specific lognormal random deviations (Table XX T9).  The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.
+*Implementation Error.--* Implementation errors were also included in a similar way as in @punt2008evaluation and @Deroba2012Evaluating, as year-specific lognormal random deviations (Table XX T9):
+\begin{equation}
+F_{a,y}=\bar{F}_yS_ae^{\varepsilon_{\theta,y}-\frac{\sigma_\theta^2}{2}} \\
+\varepsilon_{\theta}\sim N(0,\sigma_\theta^2).
+\end{equation}
+The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.
 
 **Predators**
 
