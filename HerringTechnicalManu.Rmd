@@ -206,10 +206,9 @@ Predator population biomass is defined with Ford-Walford plot intercept ($FWint$
 B_{y+1}^P = S_{y}^P (FWint N_{y}^P + FWslope B_{y}^P) + FWint R_{y+1}^P \label{delaydiffB_equation}
 \end{equation}
 
-Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. 1).
+Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. \ref{predsource}).
 
-Table 1. Predator population model specification and parameter sources
-```{r popsources, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r popsources, tab.cap="Predator population model specification and parameter sources\\label{predsource}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |                      | Highly migratory     | Seabird              | Groundfish           | Marine mammal        |
 |:---------------------|:---------------------|:---------------------|:---------------------|:---------------------|
