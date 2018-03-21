@@ -22,6 +22,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 library(broom)
+library(knitr)
 
 data.dir <- './data'
 
@@ -46,8 +47,7 @@ if(sg_figs){
 
 allres <- readRDS(file.path(data.dir,"allres.rds"))
 
-<<<<<<< HEAD
-=======
+
 #to get table captions and numbering
 tn = local({
   i = 0
@@ -70,7 +70,7 @@ knit_hooks$set(output = function(x, options) {
     default_output_hook(x,options)
 })
 
->>>>>>> origin/master
+
 ```
 \doublespacing
 
@@ -105,8 +105,6 @@ Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
  SSB_y=\sum\limits_{a=1}^{8+}N_{a,y}m_aW_a. \\
 \end{equation}
 
-
-<<<<<<< HEAD
 The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
 
 *Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias\varepsilon_{} (Table XX T6-T7):

@@ -149,7 +149,7 @@ Recruitment followed Beverton-Holt dynamics <span class="citation">(Francis 1992
  \varrho \sim N(0,\sigma_R^2) \\
  SSB_y=\sum\limits_{a=1}^{8+}N_{a,y}m_aW_a. \\
 \end{equation}\]</span>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD The variance of recruitment process errors (<span class="math inline">\(\sigma_R^2\)</span>) equaled 0.36 and the degree of autocorrelation (<span class="math inline">\(\omega\)</span>) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment <span class="citation">(Deroba 2015)</span>.</p>
+<p>The variance of recruitment process errors (<span class="math inline">\(\sigma_R^2\)</span>) equaled 0.36 and the degree of autocorrelation (<span class="math inline">\(\omega\)</span>) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment <span class="citation">(Deroba 2015)</span>.</p>
 <p><em>Assessment Error.–</em> A stock assessment was approximated (i.e., assessment errors) similar to <span class="citation">Punt et al. (2008)</span> and <span class="citation">Deroba (2014)</span>. Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias_{} (Table XX T6-T7):</p>
 <span class="math display">\[\begin{equation}
 \widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
@@ -340,8 +340,9 @@ In general, if support for a relationship between herring and predator recruitme
 B_{y+1}^P = S_{y}^P (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, or
 \end{equation}\]</span>
 <span class="math display">\[\begin{equation}
-B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}.
+B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}, 
 \end{equation}\]</span>
+<p>where either <span class="math inline">\(AnnAlpha\)</span> or <span class="math inline">\(AnnRho\)</span> are defined for a predator using herring population parameters (see Eqn.  below).</p>
 <p>Finally, herring population size <span class="math inline">\(N_{y}\)</span> could be related to predator survival using a multiplier on constant predator annual natural mortality <span class="math inline">\(v\)</span>:</p>
 <span class="math display">\[\begin{equation}
 v_{y} =  v e ^ {-(\frac{N_{y}}{N_{F=0}})\delta} \label{varmort_equation},
