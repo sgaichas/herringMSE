@@ -5,12 +5,12 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -104,7 +104,7 @@ Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
 
 The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
 
-*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias\varepsilon_{} (Table XX T6-T7):
+*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\varepsilon_{}$ (Table XX T6-T7):
 
 \begin{equation}
 \widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
@@ -200,10 +200,9 @@ Predator population biomass is defined with Ford-Walford plot intercept ($FWint$
 B_{y+1} = S_{y} (FWint N_{y} + FWslope B_{y}) + FWint R_{y+1} \label{delaydiffB_equation}
 \end{equation}
 
-Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. 1).
+Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. \ref{predsource}).
 
-Table 1. Predator population model specification and parameter sources
-```{r popsources, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r popsources, tab.cap="Predator population model specification and parameter sources\\label{predsource}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |                      | Highly migratory     | Seabird              | Groundfish           | Marine mammal        |
 |:---------------------|:---------------------|:---------------------|:---------------------|:---------------------|
