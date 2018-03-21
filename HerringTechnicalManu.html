@@ -149,7 +149,7 @@ Recruitment followed Beverton-Holt dynamics <span class="citation">(Francis 1992
  \varrho \sim N(0,\sigma_R^2) \\
  SSB_y=\sum\limits_{a=1}^{8+}N_{a,y}m_aW_a. \\
 \end{equation}\]</span>
-<p>The variance of recruitment process errors (<span class="math inline">\(\sigma_R^2\)</span>) equaled 0.36 and the degree of autocorrelation (<span class="math inline">\(\omega\)</span>) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment <span class="citation">(Deroba 2015)</span>.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD The variance of recruitment process errors (<span class="math inline">\(\sigma_R^2\)</span>) equaled 0.36 and the degree of autocorrelation (<span class="math inline">\(\omega\)</span>) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment <span class="citation">(Deroba 2015)</span>.</p>
 <p><em>Assessment Error.–</em> A stock assessment was approximated (i.e., assessment errors) similar to <span class="citation">Punt et al. (2008)</span> and <span class="citation">Deroba (2014)</span>. Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias_{} (Table XX T6-T7):</p>
 <span class="math display">\[\begin{equation}
 \widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
@@ -158,6 +158,81 @@ Recruitment followed Beverton-Holt dynamics <span class="citation">(Francis 1992
 \end{equation}\]</span>
 <p>The variance of assessment errors (<span class="math inline">\(\sigma_\phi^2\)</span> ) equaled 0.05 and autocorrelation (<span class="math inline">\(\vartheta\)</span>) equaled 0.7. Rho (<span class="math inline">\(\rho\)</span>) allowed for the inclusion of bias in the assessed value of abundance (see below; <span class="citation">Deroba (2014)</span>). Assessed spawning stock biomass (<span class="math inline">\(\widehat{SSB}_y\)</span>) was calculated similarly to <span class="math inline">\(SSB_y\)</span> except with <span class="math inline">\(N_{a,y}\)</span> replaced with <span class="math inline">\(\widehat{N}_{a,y}\)</span> (Table XX T5), and assessed total biomass (<span class="math inline">\(\widehat{B}_y\)</span>) was calculated as the sum across ages of the product of <span class="math inline">\(\widehat{N}_{a,y}\)</span> and <span class="math inline">\(W_a\)</span>.</p>
 <p><em>Operating Models.–</em> The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table 2; Figures 1-2). The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error (<span class="math inline">\(\varepsilon_{\phi y}\)</span>).</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Operating Model Name</th>
+<th align="left">Herring productivity</th>
+<th align="left">Herring growth</th>
+<th align="left">Assessment bias</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Truth</td>
+<td align="left">Low: high M, low h</td>
+<td align="left">1970s: larger</td>
+<td align="left">60% overestimate</td>
+</tr>
+<tr class="even">
+<td align="left">Consequences</td>
+<td align="left">Low: high M, low h</td>
+<td align="left">Current: smaller</td>
+<td align="left">60% overestimate</td>
+</tr>
+<tr class="odd">
+<td align="left">Fake news</td>
+<td align="left">Low: high M, low h</td>
+<td align="left">1970s: larger</td>
+<td align="left">None</td>
+</tr>
+<tr class="even">
+<td align="left">Bob</td>
+<td align="left">Low: high M, low h</td>
+<td align="left">Current: smaller</td>
+<td align="left">None</td>
+</tr>
+<tr class="odd">
+<td align="left">Bart Simpson</td>
+<td align="left">High: low M, high h</td>
+<td align="left">1970s: larger</td>
+<td align="left">60% overestimate</td>
+</tr>
+<tr class="even">
+<td align="left">Beavis</td>
+<td align="left">High: low M, high h</td>
+<td align="left">Current: smaller</td>
+<td align="left">60% overestimate</td>
+</tr>
+<tr class="odd">
+<td align="left">Something</td>
+<td align="left">High: low M, high h</td>
+<td align="left">1970s: larger</td>
+<td align="left">None</td>
+</tr>
+<tr class="even">
+<td align="left">Something else</td>
+<td align="left">High: low M, high h</td>
+<td align="left">Current: smaller</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>origin/master</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <p>The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models <span class="citation">(Deroba 2015)</span>. Natural mortality in recent stock assessments has varied among ages and years, with <span class="math inline">\(M\)</span> being higher during 1996-2014 than in previous years <span class="citation">(Northeast Fisheries Science Center 2012, Deroba 2015)</span>. Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher <span class="math inline">\(M\)</span> during 1996-2014, such that <span class="math inline">\(M\)</span> was constant among years <span class="citation">(Northeast Fisheries Science Center 2012, Deroba 2015)</span>. To capture uncertainty in <span class="math inline">\(M\)</span> in the MSE, operating models were run with either relatively high or low <span class="math inline">\(M_a\)</span> (Table 2; Figure 1). Relatively high <span class="math inline">\(M_a\)</span> values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment. Relatively low <span class="math inline">\(M_a\)</span> values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment. In the MSE, <span class="math inline">\(M_a\)</span> was always time invariant.</p>
 <p>Uncertainty in estimates of stock-recruit parameters were represented in the MSE by using the parameters estimated by stock assessments fit with and without the higher <span class="math inline">\(M\)</span> during 1996-2014. Stock assessment fits with higher <span class="math inline">\(M\)</span> during 1996-2014 produced estimates of steepness and <span class="math inline">\(SSB_{F=0}\)</span> that were lower than in stock assessment fits without higher <span class="math inline">\(M\)</span> during 1996-2014 (Table 3; Figure 1). Thus, operating models with relatively high <span class="math inline">\(M_a\)</span> always had relatively low steepness and <span class="math inline">\(SSB_{F=0}\)</span>, and the opposite held with relatively low <span class="math inline">\(M_a\)</span> (Table 2).</p>
 <p>Uncertainty in Atlantic herring size-at-age was accounted for by having operating models with either fast or slow growth (i.e., weights-at-age; Table 2; Figure 3). Atlantic herring weight-at-age generally declined from the mid-1980s through the mid-1990s, and has been relatively stable since. Reasons for the decline are speculative and no causal relationships have been established. Thus, fast growth operating models had weights-at-age that equaled the January 1 weights-at-age from the most recent stock assessment averaged over the years 1976-1985, while the slow growth operating models averaged over the years 2005-2014 (<span class="citation">Deroba (2015)</span>). In the MSE, weight-at-age was always time invariant.</p>
@@ -583,11 +658,11 @@ MY's code for running regressions is here: /home/mlee/Documents/Herring_PDT_work
 \label{DF_estimated}
 \Delta NR_{y} = \beta  NR_{y-1} + \xi_1 \Delta NR_{y-1} + \varepsilon 
 \end{equation}\]</span>
-Econometric evidence that <span class="math inline">\(\beta=0\)</span> is evidence of a unit root (nonstationarity) while statistical rejections of <span class="math inline">\(H_0: \beta=0\)</span> in favor of <span class="math inline">\(H_A: \beta&lt;0\)</span> is evidence of stationarity of the time-series. The results of these tests are summarized in two ways. First, we classify a simulation as stationary if we reject the null <span class="math inline">\(H_0: \beta=0\)</span> in favor of <span class="math inline">\(H_A: \beta&lt;0\)</span> at the 10% significance level, then report the percentage of simulations that are stationary. We also use a weighted Z-score method to combine these trials <span class="citation">(Whitlock 2005)</span> to test the null hypothesis that a particular control rule implemented on a simulated stock of herring does not produce a stable equilibrium. Defining <span class="math inline">\(\phi\)</span> as the standard normal cumulative distribution function, we construct:
+for each simulation. Econometric evidence that <span class="math inline">\(\beta=0\)</span> is evidence of a unit root (nonstationarity) while statistical rejections of <span class="math inline">\(H_0: \beta=0\)</span> in favor of <span class="math inline">\(H_A: \beta&lt;0\)</span> is evidence of stationarity of the time-series. The results of these tests are summarized in two ways. First, we use techniques from the unweighted Z-transform method from the meta-analysis literature to combine the results of these simulations <span class="citation">(Stouffer et al. 1949, Whitlock 2005)</span>. This allows for a test of the null hypothesis that a particular control rule implemented on a particular operating model does not produce a stable equilibrium. Defining <span class="math inline">\(\phi\)</span> as the standard normal cumulative distribution function, we construct:
 <span class="math display">\[\begin{align}
 Z  &amp;= \frac{\sum_{i=1}^k \phi^{-1} (1-p_i)}{\sqrt(k)}
 \end{align}\]</span>
-<p><span class="math inline">\(Z\)</span> has a standard normal distribution under the null hypothesis of no stable equilibrium. We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue.</p>
+<p><span class="math inline">\(Z\)</span> has a standard normal distribution under the null hypothesis of no stable equilibrium. We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue; small values are evidence of a stable equilbrium. Second, we classify a particular simulation as stationary if we reject the null <span class="math inline">\(H_0: \beta=0\)</span> in favor of <span class="math inline">\(H_A: \beta&lt;0\)</span> at the 10% significance level and report the percentage of simulations that are stationary; large values are evidence of a stable equilibrium.</p>
 <!---
 Comment out economic crap.
 Two economic models were recently developed that focused on herring in the Northeast United States. ,
@@ -830,6 +905,9 @@ Fishery management must, among other things, incorporate multiple objectives, pr
 </div>
 <div id="ref-smith_consumption_2015">
 <p>Smith, L.A., Link, J.S., Cadrin, S.X., and Palka, D.L. 2015. Consumption by marine mammals on the Northeast U.S. continental shelf. Ecological Applications <strong>25</strong>(2): 373–389. doi:<a href="https://doi.org/10.1890/13-1656.1">10.1890/13-1656.1</a>.</p>
+</div>
+<div id="ref-stouffer1949american">
+<p>Stouffer, S.A., Suchman, E.A., DeVinney, L.C., Star, S.A., and Williams Jr, R.M. 1949. The american soldier: Adjustment during army life.(Studies in social psychology in world war ii), vol. 1. Princeton Univ. Press.</p>
 </div>
 <div id="ref-Tschirhart2000GeneralEcosystem">
 <p>Tschirhart, J. 2000. General Equilibrium of an Ecosystem. Journal of Theoretical Biology <strong>203</strong>(1): 13–32.</p>

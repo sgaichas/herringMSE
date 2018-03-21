@@ -81,6 +81,7 @@ Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
 \end{equation}
 
 
+<<<<<<< HEAD
 The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
 
 *Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias\varepsilon_{} (Table XX T6-T7):
@@ -94,6 +95,23 @@ The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the d
 The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 
 *Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table 2; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
+
+```{r OMs, fig.cap="Operating model uncertainties addressed \\label{OMtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Operating Model Name | Herring productivity | Herring growth   | Assessment bias  |
+|:---------------------|:---------------------|:-----------------|:-----------------|
+| Truth                | Low: high M, low h   | 1970s: larger    | 60% overestimate |
+| Consequences         | Low: high M, low h   | Current: smaller | 60% overestimate |
+| Fake news            | Low: high M, low h   | 1970s: larger    | None             |
+| Bob                  | Low: high M, low h   | Current: smaller | None             |
+| Bart Simpson         | High: low M, high h  | 1970s: larger    | 60% overestimate |
+| Beavis               | High: low M, high h  | Current: smaller | 60% overestimate |
+| Something            | High: low M, high h  | 1970s: larger    | None             |
+| Something else       | High: low M, high h  | Current: smaller | None             |
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
 
 The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models [@Deroba2015atlantic].  Natural mortality in recent stock assessments has varied among ages and years, with $M$ being higher during 1996-2014 than in previous years  [@NEFSC2012Assessment;@Deroba2015atlantic].  Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher $M$ during 1996-2014, such that $M$ was constant among years [@NEFSC2012Assessment;@Deroba2015atlantic].  To capture uncertainty in $M$ in the MSE, operating models were run with either relatively high or low $M_a$ (Table 2; Figure 1).  Relatively high $M_a$ values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment.  Relatively low $M_a$ values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment.  In the MSE, $M_a$ was always time invariant.
 
@@ -1061,12 +1079,11 @@ Stakeholders were interested in understanding stability of the herring industry.
 \label{DF_estimated}
 \Delta NR_{y} = \beta  NR_{y-1} + \xi_1 \Delta NR_{y-1} + \varepsilon 
 \end{equation}
-
-Econometric evidence that $\beta=0$ is evidence of a unit root (nonstationarity) while statistical rejections of $H_0: \beta=0$ in favor of $H_A: \beta<0$ is evidence of stationarity of the time-series.  The results of these tests are summarized in two ways. First, we classify a simulation as stationary if we reject the null $H_0: \beta=0$ in favor of $H_A: \beta<0$ at the 10% significance level, then report the percentage of simulations that are stationary.  We also use a weighted Z-score method to combine these trials [@Whitlock2005CombiningApproach] to test the null hypothesis that a particular control rule implemented on a simulated stock of herring does not produce a stable equilibrium. Defining $\phi$ as the standard normal cumulative distribution function, we construct:
+for each simulation. Econometric evidence that $\beta=0$ is evidence of a unit root (nonstationarity) while statistical rejections of $H_0: \beta=0$ in favor of $H_A: \beta<0$ is evidence of stationarity of the time-series.  The results of these tests are summarized in two ways. First, we use techniques from the unweighted Z-transform method from the meta-analysis literature to combine the results of these simulations [@stouffer1949american; @Whitlock2005CombiningApproach]. This allows for a test of the  null hypothesis that a particular control rule implemented on a particular operating model does not produce a stable equilibrium. Defining $\phi$ as the standard normal cumulative distribution function, we construct:
 \begin{align}
 Z  &= \frac{\sum_{i=1}^k \phi^{-1} (1-p_i)}{\sqrt(k)}
 \end{align}
-$Z$ has a standard normal distribution under the null hypothesis of no stable equilibrium.  We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue.
+$Z$ has a standard normal distribution under the null hypothesis of no stable equilibrium.  We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue; small values are evidence of a stable equilbrium.  Second, we classify a particular simulation as stationary if we reject the null $H_0: \beta=0$ in favor of $H_A: \beta<0$ at the 10% significance level and  report the percentage of simulations that are stationary; large values are evidence of a stable equilibrium.
 
 <!---
 Comment out economic crap.
