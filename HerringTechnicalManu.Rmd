@@ -5,12 +5,12 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -22,7 +22,6 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 library(broom)
-library(knitr)
 
 data.dir <- './data'
 
@@ -46,27 +45,6 @@ if(sg_figs){
 }
 
 allres <- readRDS(file.path(data.dir,"allres.rds"))
-
-#to get table captions and numbering
-tn = local({
-  i = 0
-  function(x) {
-    i <<- i + 1
-    paste('\n\n:Table ', i, ': ', x, sep = '')
-    # The : before Table tells pandoc to wrap your caption in <caption></caption>
-  }
-})
-knit_hooks$set(tab.cap = function(before, options, envir) {
-  if(!before)
-    tn(options$tab.cap)
-})
-default_output_hook = knit_hooks$get("output")
-knit_hooks$set(output = function(x, options) {
-  if (is.null(options$tab.cap) == F)  
-    x
-  else
-    default_output_hook(x,options)
-})
 
 ```
 \doublespacing
@@ -102,9 +80,11 @@ Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
  SSB_y=\sum\limits_{a=1}^{8+}N_{a,y}m_aW_a. \\
 \end{equation}
 
+
+<<<<<<< HEAD
 The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
 
-*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\varepsilon_{}$ (Table XX T6-T7):
+*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias\varepsilon_{} (Table XX T6-T7):
 
 \begin{equation}
 \widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
@@ -114,20 +94,20 @@ The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the d
 
 The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 
-*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table \ref{OMs}; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
+*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table 2; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
 
-```{r OMs, tab.cap="Operating model uncertainties addressed\\label{OMs}", echo=FALSE, message=FALSE, warnings=FALSE,  results='asis'}
+```{r OMs, fig.cap="Operating model uncertainties addressed \\label{OMtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 | Operating Model Name | Herring productivity | Herring growth   | Assessment bias  |
 |:---------------------|:---------------------|:-----------------|:-----------------|
-| LowBigBiased         | Low: high M, low h   | 1970s: larger    | 60% overestimate |
-| LowSmallBiased       | Low: high M, low h   | Current: smaller | 60% overestimate |
-| LowBigCorrect        | Low: high M, low h   | 1970s: larger    | None             |
-| LowSmallCorrect      | Low: high M, low h   | Current: smaller | None             |
-| HighBigBiased        | High: low M, high h  | 1970s: larger    | 60% overestimate |
-| HighSmallBiased      | High: low M, high h  | Current: smaller | 60% overestimate |
-| HighBigCorrect       | High: low M, high h  | 1970s: larger    | None             |
-| HighSmallCorrect     | High: low M, high h  | Current: smaller | None             |
+| Truth                | Low: high M, low h   | 1970s: larger    | 60% overestimate |
+| Consequences         | Low: high M, low h   | Current: smaller | 60% overestimate |
+| Fake news            | Low: high M, low h   | 1970s: larger    | None             |
+| Bob                  | Low: high M, low h   | Current: smaller | None             |
+| Bart Simpson         | High: low M, high h  | 1970s: larger    | 60% overestimate |
+| Beavis               | High: low M, high h  | Current: smaller | 60% overestimate |
+| Something            | High: low M, high h  | 1970s: larger    | None             |
+| Something else       | High: low M, high h  | Current: smaller | None             |
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
@@ -188,9 +168,10 @@ Predator population biomass is defined with Ford-Walford plot intercept ($FWint$
 B_{y+1}^P = S_{y}^P (FWint N_{y}^P + FWslope B_{y}^P) + FWint R_{y+1}^P \label{delaydiffB_equation}
 \end{equation}
 
-Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. \ref{predsource}).
+Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. 1).
 
-```{r popsources, tab.cap="Predator population model specification and parameter sources\\label{predsource}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+Table 1. Predator population model specification and parameter sources
+```{r popsources, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |                      | Highly migratory     | Seabird              | Groundfish           | Marine mammal        |
 |:---------------------|:---------------------|:---------------------|:---------------------|:---------------------|
@@ -957,7 +938,12 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 
 **Herring**
 
-For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes.  Median SSB,  $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics.  Additional performance metrics included the proportion of the last 50 years of each simulation with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion of the last 50 years that are overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of the last 50 years that overfishing occurred), and *Q*=0 (i.e., proportion of the last 50 years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded over the last 50 years of each simulation (Table XX T10).  These performance metrics were highlighted to be of interest at the stakeholder workshops.  
+For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes.  Median SSB,  $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics.  Additional performance metrics included the proportion of the last 50 years of each simulation with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion of the last 50 years that are overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of the last 50 years that overfishing occurred), and *Q*=0 (i.e., proportion of the last 50 years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded over the last 50 years of each simulation (Table XX T10):
+\begin{equation}
+IAV=\frac{\sqrt{\frac{1}{50}\sum\limits_{y=1}^{50}(Y_{y+1}-Y_{y})^2}}{(\frac{1}{50}\sum\limits_{y=1}^{50}Y_y)}.
+\end{equation}
+
+These performance metrics were highlighted to be of interest at the stakeholder workshops.  
 
 **Predators**
 Predator performance metrics included those described at the stakeholder workshop, as well as several others drawn from MSE best practices [@punt_management_2016]. Each of the simulated herring time series for every operating model, control rule, and simulation was passed to each predator model, resulting in outputs as described below using the equations above.
