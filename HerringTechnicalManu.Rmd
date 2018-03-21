@@ -1038,12 +1038,11 @@ Stakeholders were interested in understanding stability of the herring industry.
 \label{DF_estimated}
 \Delta NR_{y} = \beta  NR_{y-1} + \xi_1 \Delta NR_{y-1} + \varepsilon 
 \end{equation}
-
-Econometric evidence that $\beta=0$ is evidence of a unit root (nonstationarity) while statistical rejections of $H_0: \beta=0$ in favor of $H_A: \beta<0$ is evidence of stationarity of the time-series.  The results of these tests are summarized in two ways. First, we classify a simulation as stationary if we reject the null $H_0: \beta=0$ in favor of $H_A: \beta<0$ at the 10% significance level, then report the percentage of simulations that are stationary.  We also use a weighted Z-score method to combine these trials [@Whitlock2005CombiningApproach] to test the null hypothesis that a particular control rule implemented on a simulated stock of herring does not produce a stable equilibrium. Defining $\phi$ as the standard normal cumulative distribution function, we construct:
+for each simulation. Econometric evidence that $\beta=0$ is evidence of a unit root (nonstationarity) while statistical rejections of $H_0: \beta=0$ in favor of $H_A: \beta<0$ is evidence of stationarity of the time-series.  The results of these tests are summarized in two ways. First, we use techniques from the unweighted Z-transform method from the meta-analysis literature to combine the results of these simulations [@stouffer1949american; @Whitlock2005CombiningApproach]. This allows for a test of the  null hypothesis that a particular control rule implemented on a particular operating model does not produce a stable equilibrium. Defining $\phi$ as the standard normal cumulative distribution function, we construct:
 \begin{align}
 Z  &= \frac{\sum_{i=1}^k \phi^{-1} (1-p_i)}{\sqrt(k)}
 \end{align}
-$Z$ has a standard normal distribution under the null hypothesis of no stable equilibrium.  We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue.
+$Z$ has a standard normal distribution under the null hypothesis of no stable equilibrium.  We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue; small values are evidence of a stable equilbrium.  Second, we classify a particular simulation as stationary if we reject the null $H_0: \beta=0$ in favor of $H_A: \beta<0$ at the 10% significance level and  report the percentage of simulations that are stationary; large values are evidence of a stable equilibrium.
 
 <!---
 Comment out economic crap.
