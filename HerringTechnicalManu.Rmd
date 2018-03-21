@@ -173,31 +173,19 @@ The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.
 
 **Predators**
 
-There are two components of predator modeling for the herring MSE: a predator population model, and a herring-predator relationship model to link herring with predator populations. Here, we give an overview of the modeling process, and we describe the decisions made in parameterizing individual predator models and herring-predator relationships in the following sections. The overall population in numbers for each predator each year $N_{y}$ is modeled with a delay-difference function: 
+There are two components of predator modeling for the herring MSE: a predator population model, and a herring-predator relationship model to link herring with predator populations. Here, we give an overview of the modeling process, and we describe the decisions made in parameterizing individual predator models and herring-predator relationships in the following sections. The overall population in numbers for each predator $P$ each year $N_{y}^P$ is modeled with a delay-difference function: 
 \begin{equation}
-N_{y+1} = N_{y}S_{y} +  R_{y+1} \label{delaydiffN_equation},
+N_{y+1}^P = N_{y}^PS_{y}^P +  R_{y+1}^P \label{delaydiffN_equation},
 \end{equation}
-where annual predator survival $S_{y}$ is based on annual natural mortality $v$ and exploitation $u$ 
+where annual predator survival $S_{y}^P$ is based on annual natural mortality $v$ and exploitation $u$ 
 \begin{equation}
-S_{y} =  (1-v_{y})(1-u) \label{survival_equation},
+S_{y}^P =  (1-v_{y})(1-u) \label{survival_equation},
 \end{equation}
-and annual recruitment $R_{y}$ (delayed until recruitment age a) is a Beverton-Holt function:
-\begin{equation}
-R_{y+a} = \frac{\alpha B_{y}}{\beta + B_{y}} \label{delaydiffrec_equation}.
-\end{equation}
-
-Predator recruitment parameters are defined with steepness = $h$, unfished recruitment $R_{F=0}$, and unfished spawning biomass $B_{F=0}$ as
-\begin{equation}
-\alpha = \frac{4hR_{F=0}}{5h-1} \label{predalpha_equation}, and
-\end{equation}
-
-\begin{equation}
-\beta = \frac{(B_{F=0}/R_{F=0})((1-h)/(4h))}{(5h-1)/(4hR_{F=0})} \label{predbeta_equation}
-\end{equation}. 
+and annual recruitment $R_{y}^P$ (delayed until recruitment age a) is a Beverton-Holt function defined as above for herring.
 
 Predator population biomass is defined with Ford-Walford plot intercept ($FWint$) and slope ($FWslope$) growth parameters
 \begin{equation}
-B_{y+1} = S_{y} (FWint N_{y} + FWslope B_{y}) + FWint R_{y+1} \label{delaydiffB_equation}
+B_{y+1}^P = S_{y}^P (FWint N_{y}^P + FWslope B_{y}^P) + FWint R_{y+1}^P \label{delaydiffB_equation}
 \end{equation}
 
 Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. \ref{predsource}).
@@ -223,7 +211,7 @@ To develop the herring-predator relationship model, specific herring population 
 
 In general, if support for a relationship between herring and predator recruitment was evident, it was modeled as a predator recruitment multiplier based on the herring population ($Hpop_{y}$) relative to a specified threshold $Hthresh$:
 \begin{equation}
-R_{y+a} = \frac{\alpha B_{y}}{\beta + B_{y}} * \frac{\gamma(Hpop_{y}/Hthresh)}{(\gamma-1)+(Hpop_{y}/Hthresh)} \label{recwithherring_equation}, 
+\bar{R}_{y+a}^P = R_{y+a}^P  * \frac{\gamma(N_{y}/N_{thresh})}{(\gamma-1)+(N_{y}/N_{thresh})} \label{recwithherring_equation}, 
 \end{equation}
 
 where $\gamma$ > 1 links herring population size relative to the threshold level to predator recruitment.
@@ -231,17 +219,17 @@ where $\gamma$ > 1 links herring population size relative to the threshold level
 If a relationship between predator growth and herring population size was evident, annual changes in growth were modeled by modifying either the Ford-Walford intercept ($AnnAlpha$) or slope ($AnnRho$):
 
 \begin{equation}
-B_{y+1} = S_{y} (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, or
+B_{y+1}^P = S_{y}^P (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, or
 \end{equation}
 
 \begin{equation}
 B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}.
 \end{equation}
 
-Finally, herring population size $Hpop_{y}$ could be related to predator survival using a multiplier on constant predator annual natural mortality $v$: 
+Finally, herring population size $N_{y}$ could be related to predator survival using a multiplier on constant predator annual natural mortality $v$: 
 
 \begin{equation}
-v_{y} =  v e ^ {-(\frac{Hpop_{y}}{Hpop_{F=0}})\delta} \label{varmort_equation},
+v_{y} =  v e ^ {-(\frac{N_{y}}{N_{F=0}})\delta} \label{varmort_equation},
 \end{equation}
 where 0 < $\delta$ <1 links herring population size to predator survival.
 
