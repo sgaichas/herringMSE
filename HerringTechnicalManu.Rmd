@@ -197,21 +197,21 @@ The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrel
 tabl <- "
 | Operating Model Name | Herring productivity | Herring growth   | Assessment bias  |
 |:---------------------|:---------------------|:-----------------|:-----------------|
-| LowFastBiased        | Low: high M, low h (0.44)  | 1976-1985: fast | 60% overestimate |
-| LowSlowBiased        | Low: high M, low h (0.44)  | 2005-2014: slow | 60% overestimate |
-| LowFastCorrect       | Low: high M, low h (0.44)  | 1976-1985: fast | None             |
-| LowSlowCorrect       | Low: high M, low h (0.44)  | 2005-2014: slow | None             |
-| HighFastBiased       | High: low M, high h (0.79) | 1976-1985: fast | 60% overestimate |
-| HighSlowBiased       | High: low M, high h (0.79) | 2005-2014: slow | 60% overestimate |
-| HighFastCorrect      | High: low M, high h (0.79) | 1976-1985: fast | None             |
-| HighSlowCorrect      | High: low M, high h (0.79) | 2005-2014: slow | None             |
+| LowFastBiased        | Low: high $M$, low $h$ (0.44)  | 1976-1985: fast | 60% overestimate |
+| LowSlowBiased        | Low: high $M$, low $h$ (0.44)  | 2005-2014: slow | 60% overestimate |
+| LowFastCorrect       | Low: high $M$, low $h$ (0.44)  | 1976-1985: fast | None             |
+| LowSlowCorrect       | Low: high $M$, low $h$ (0.44)  | 2005-2014: slow | None             |
+| HighFastBiased       | High: low $M$, high $h$ (0.79) | 1976-1985: fast | 60% overestimate |
+| HighSlowBiased       | High: low $M$, high $h$ (0.79) | 2005-2014: slow | 60% overestimate |
+| HighFastCorrect      | High: low $M$, high $h$ (0.79) | 1976-1985: fast | None             |
+| HighSlowCorrect      | High: low $M$, high $h$ (0.79) | 2005-2014: slow | None             |
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
-```{r MortsWts, tab.cap="Herring Natural Mortality and Weights-at-age \\label{MWttab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r MortsWts, tab.cap="Herring natural mortality and mean weights-at-age (kg) \\label{MWttab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
-|Age	|High M	|Low M	|Fast Growth	|Slow Growth |
+|Age	|High $M$	|Low $M$	|Fast Growth	|Slow Growth |
 |:----|:----|:----|:----|:----|
 |1	|0.81	|0.54	|0.01	|0.02|
 |2	|0.65	|0.43	|0.03	|0.04|
@@ -227,11 +227,24 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 
 The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models [@Deroba2015atlantic].  Natural mortality in recent stock assessments has varied among ages and years, with $M$ being higher during 1996-2014 than in previous years  [@NEFSC2012Assessment;@Deroba2015atlantic].  Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher $M$ during 1996-2014, such that $M$ was constant among years [@NEFSC2012Assessment;@Deroba2015atlantic].  To capture uncertainty in $M$ in the MSE, operating models were run with either relatively high or low $M_a$ (Table \ref{MWttab}; Figure 1).  Relatively high $M_a$ values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment.  Relatively low $M_a$ values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment.  In the MSE, $M_a$ was always time invariant.
 
-Uncertainty in estimates of stock-recruit parameters were represented in the MSE by using the parameters estimated by stock assessments fit with and without the higher $M$ during 1996-2014.  Stock assessment fits with higher $M$ during 1996-2014 produced estimates of steepness and $SSB_{F=0}$ that were lower than in stock assessment fits without higher $M$ during 1996-2014 (Table 3; Figure 1).  Thus, operating models with relatively high $M_a$ always had relatively low steepness and $SSB_{F=0}$, and the opposite held with relatively low $M_a$ (Table 2).
+Uncertainty in estimates of stock-recruit parameters were represented in the MSE by using the parameters estimated by stock assessments fit with and without the higher $M$ during 1996-2014.  Stock assessment fits with higher $M$ during 1996-2014 produced estimates of steepness and $SSB_{F=0}$ that were lower than in stock assessment fits without higher $M$ during 1996-2014 (Table 3; Figure 1).  Thus, operating models with relatively high $M_a$ always had relatively low steepness and $SSB_{F=0}$, and the opposite held with relatively low $M_a$ (Table \ref{OMs}).
 
-Uncertainty in Atlantic herring size-at-age was accounted for by having operating models with either fast or slow growth (i.e., weights-at-age; Table 2; Figure 3).  Atlantic herring weight-at-age generally declined from the mid-1980s through the mid-1990s, and has been relatively stable since.  Reasons for the decline are speculative and no causal relationships have been established.  Thus, fast growth operating models had weights-at-age that equaled the January 1 weights-at-age from the most recent stock assessment averaged over the years 1976-1985, while the slow growth operating models averaged over the years 2005-2014 (@Deroba2015atlantic).  In the MSE, weight-at-age was always time invariant.
+Uncertainty in Atlantic herring size-at-age was accounted for by having operating models with either fast or slow growth (i.e., weights-at-age; Table \ref{MWttab}; Figure 3).  Atlantic herring weight-at-age generally declined from the mid-1980s through the mid-1990s, and has been relatively stable since.  Reasons for the decline are speculative and no causal relationships have been established.  Thus, fast growth operating models had weights-at-age that equaled the January 1 weights-at-age from the most recent stock assessment averaged over the years 1976-1985, while the slow growth operating models averaged over the years 2005-2014 (@Deroba2015atlantic).  In the MSE, weight-at-age was always time invariant.
 
-Differences in $M$, stock-recruit parameters, and weights-at-age led to differences in unfished and $MSY$ reference points among operating models (Table 3).  The effect of $M$ and stock-recruit parameters was larger than the effect of differences in weight-at-age (Table 3).
+Differences in $M$, stock-recruit parameters, and weights-at-age led to differences in unfished and $MSY$ reference points among operating models (Table \ref{RefPts}).  The effect of $M$ and stock-recruit parameters was larger than the effect of differences in weight-at-age (Table \ref{RefPts}).
+
+```{r refpt,tab.cap="Unfished and MSY reference points for the Atlantic herring operating models \\label{RefPts}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis' }
+tabl <- "
+| Steepness | Natural Mortality | Growth | Unfished SSB | SSB MSY | MSY | F MSY |
+|:----|:----|:----|:----|:----|:----|:----|
+| 0.44 | High | Slow | 845176 | 324977 | 66061 | 0.31 |
+| 0.44 | High | Fast | 845176 | 335849 | 60969 | 0.28 |
+| 0.79 | Low | Slow | 1347080 | 369089 | 129171 | 0.54 |
+| 0.79 | Low | Fast | 1347080 | 405485 | 120360 | 0.45 |
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
 
 To address concerns about possible stock assessment bias, operating models with and without a positive bias were included.  In operating models without bias, $\rho$=0 and the only assessment error was that caused by the unbiased measurement errors ($\epsilon_{\phi y}$).  In operating models with bias, $\rho$=0.6, which was based on the degree of retrospective pattern in $SSB$ from the most recent stock assessment [@Deroba2015atlantic].
 
