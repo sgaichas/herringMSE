@@ -5,12 +5,12 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -76,7 +76,9 @@ knit_hooks$set(output = function(x, options) {
 
 #Introduction
 
-Management strategy evaluation (MSE) uses simulation to evaluate the trade-offs resulting from alternative management options in the face of uncertainty [@punt2016management].  MSEs require time, however, for stakeholder input, data collection, and model development [@butterworth2007management] (Punt et al., 2014).  As such, the process can take much longer than "traditional" management time frames [@butterworth2007management].  The development time is also likely to lengthen when explicit ecosystem, multi-species, or socioeconomic considerations are desired because the data and modeling needs, and subsequent uncertainties, are all greater than in a single species approach.  This manuscript chronicles the development of an MSE done on a truncated timetable (~12 months) required to meet management time frames.  The objectives of this manuscript are to:
+Atlantic herring (hereafter herring) *Clupea harengus* in the Northwest Atlantic are preyed upon by fish, seabirds, and marine mammals, and can account for 20-50% of the diet of these predators (Overholtz and Link 2007; Smith and Link 2010; Curti et al., 2013).  Herring are also subject to a directed fishery, mostly using midwater trawls, purse seines, and bottom trawls, that averaged 85,000mt of landings during 2008-2017.  Much of the landings are also used as bait in the relatively high value American lobster *Homarus americanus* fishery.  Herring life-history traits (e.g., weight-at-age) have also varied through time and have a complex stock strucutre that creates uncertainty in their assessment and management.  Thus, herring are of broad interest in the region, but anticipating the relative performance of mangement strategies (e.g., harvest control rules) in the face of uncertainties is challenging, which makes a management strategy evaluation (MSE) for herring in the region a potentially informative tool.
+
+Management strategy evaluation uses simulation to evaluate the trade-offs resulting from alternative management options in the face of uncertainty [@punt2016management].  MSEs require time, however, for stakeholder input, data collection, and model development [@butterworth2007management] (Punt et al., 2014).  As such, the process can take much longer than "traditional" management time frames [@butterworth2007management].  The development time is also likely to lengthen when explicit ecosystem, multi-species, or socioeconomic considerations are desired because the data and modeling needs, and subsequent uncertainties, are all greater than in a single species approach.  This manuscript chronicles the development of an MSE done on a truncated timetable (~12 months) required to meet management time frames.  The objectives of this manuscript were to:
 
 1.	Evaluate the relative performance of HCRs at meeting herring fishery objectives, including those related to predators of herring, as informed by stakeholder input, and,
 
@@ -84,95 +86,14 @@ Management strategy evaluation (MSE) uses simulation to evaluate the trade-offs 
 
 The fisheries management process in New England usually starts when managers percieve a problem causing a management goal or objective to be unmet.  Managers will propose solutions and a technical group, typically composed of scientists and policy analysts from state agencies and the National Marine Fisheries Service (NMFS), will analyze these possible solutions.  Both managers and the technical group can be aided and advised by an Advisory Panel, a closed group appointed by managers that is typically drawn from members of the fishing industry, processing sector, and Environmental Non-Governmental Organizations (ENGOs).  In addition to the public comment process, the Advisory Panel is one of the mechanisms for stakeholders to raise awareness of management problems to managers.  The Council will eventually select a solution through a vote and NMFS will, after verifying that it is consistent with applicable laws, translate those solutions into regulations and enforce those regulations.  Management actions, particularly contentious ones, can take years to develop and implement.
 
-In January 2016, the New England Fishery Management Council  (NEFMC), the political body responsible for federally managed species in the northeast US, requested an MSE to evaluate harvest control rules (HCRs) for Atlantic herring  (hereafter herring) *Clupea harengus* \footnote{The process is described in detail in Feeney \textit{et al}, YYYY}.  Fishery managers wanted to develop an HCR that, among other things, accounted for the role of Atlantic herring as forage in the ecosystem.  However, the exact ''accounting'' system was left to stakeholders. Perhaps because recent herring management actions have been quite contentious, managers decided that any member of the public was a stakeholder.   Stakeholder input was solicited on objectives, performance metrics, and control rules themselves during a workshop in May 2016.  Members of the herring, lobster, groundfish, tuna, recreational fishermen, and whale-watching industries participated as well as ENGOs, federal and state agencies, and academics. Input from these diverse stakeholders were then distilled into a set of desired outcomes and metrics that could be included in a scientific model.  Notably, while the techincal group knew the general scope of the modeling exercise (HCRs that account for herring as forage), detailed modeling of many components of the ecosystem could not begin in earnest until this step was finished.
+In January 2016, the New England Fishery Management Council  (NEFMC), the political body responsible for federally managed species in the northeast US, requested an MSE to evaluate harvest control rules (HCRs) for herring  \footnote{The process is described in detail in Feeney \textit{et al}, YYYY}.  Fishery managers wanted to develop an HCR that, among other things, accounted for the role of Atlantic herring as forage in the ecosystem.  However, the exact ''accounting'' system was left to be defined by stakeholder-driven workshops that were open to the public. Two stakeholder workshops were conducted, one in May 2016 and another in December 2016.  Members of the herring, lobster, groundfish, tuna, recreational, and whale-watching industries participated, as well as ENGOs, federal and state agencies, and academics. Input from these diverse stakeholders were then utilized to construct the closed-loop simulation portion of the MSE.  Notably, while the techincal group knew the general scope of the modeling exercise (HCRs that account for herring as forage), detailed modeling of many components of interest could not begin in earnest until this step was finished.
 
-The NEFMC desired to have results from the MSE ready to inform fisheries management decisions within one year, which left little time to develop the technical aspects of the MSE.  A particularly challenging aspect of the time frame was deciding what technical aspects of the MSE (e.g., operating models) could be compromised (i.e., perhaps not ideal from a scientific or best-practices standpoint) while ensuring the results would still accurately portray the trade-offs among objectives and remain relevant for decision-making. 
-
-**Background on herring**
-Mostly used as lobster bait. Caught with purse seines (night, inshore), single and paired midwater trawl (anytime, anywhere) and bottomtrawl (mostly southern new england).  High volume, low prices. large boats.  Single species stock assessments indicated biomass was historically high. Small retrospective pattern?  Changes over time in some life-history parameters (weight-at-age=growth). Higher uncertainty about other parameters (M and steepness).  Show up in diets of many predators that are sampled in NEFSC's bottom-trawl survey.  It's forage, so it's also eaten by birds, whales, and other things.   
-<!-- not sure where these parapgraphs belong -->
+The NEFMC desired to have results from the MSE ready to inform fisheries management decisions within one year, which left little time to develop the technical aspects of the MSE.  A particularly challenging aspect of the time frame was deciding what technical aspects of the MSE (e.g., operating models) could be compromised or short-cut (i.e., perhaps not ideal from a scientific or best-practices standpoint) while ensuring the results would still accurately portray the trade-offs among objectives and remain relevant for decision-making. Thus, the methods described represent the reality of what was achieved in order to enable managers to make informed decisions within their preferred time frames, and this reality is then contrasted with more ideal scientific approaches that should be the ultimate goal for use in future decision making (i.e., the "dream").
 
 #Methods
 **Herring** 
  
-*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table \ref{symtab}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
-
-<!---markdown style table. fucking escape characters-->
-```{r symboltable, tab.cap="Table of Symbols \\label{symtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-tabl <- "
-|	Symbol	|	Definition
-|:--------	|:--------------------------------------------------------
-|	$y$	|	year
-|	$a$	|	age
-|	$R$	|	herring recruitment
-|	$SSB$	|	herring spawning stock biomass
-|	$F$	|	fishing mortality
-|	$h$	|	steepness
-|	$\\varepsilon_R$	|	recrutment process error
-|	$\\sigma_R^2$	|	variance of recruitment process error
-|	$\\omega$	|	autocorrelation of recruitment error
-|	$N$	|	herring abundance
-|	$m$	|	herring maturity
-|	$W$	|	herring weight
-|	$\\widehat{N}$	|	assessed herring abundance
-|	$\\rho$	|	bias in assessed herring abundance
-|	$\\varepsilon_{\\phi}$	|	assessment error
-|	$\\tau$	|	autocorrelation of assessment error
-|	$\\sigma_{\\phi}^2$	|	variance of assessment error
-|	$B$	|	herring total biomass
-|	$\\widehat{SSB}$	|	assessed herring spawning stock biomass
-|	$\\widehat{B}$	|	assessed herring total biomass
-|	$M$	|	herring natural mortality
-|	$MSY$	|	herring maximum sustainable yield
-|	$SSB_{up}$	|	upper biomass parameter for biomass based control rule
-|	$SSB_{low}$	|	lower biomass parameter for biomass based control rule
-|	$\\psi$	|	proportion of $F_{MSY}$ for biomass based control rule
-|	$F_{MSY}$	|	fishing mortality at herring maximum sustainable yield
-|	$\\tilde{F}$	|	target herring fishing mortality
-|	$S$	|	herring fishery selectivity
-|	$\\bar{F}$	|	fishing mortality that would remove quota from herring population
-|	$Q$	|	quota for herring fishery
-|	$F$	|	realized herring fishery mortality
-|	$\\varepsilon_{\\theta}$	|	implementation error
-|	$\\sigma_{\\theta}^2$	|	variance of implementation error
-|	$P$	|	denotes a quantity that applies to a predator of herring
-|	$N^P$	|	predator abundance
-|	$S^P$	|	annual predator survival
-|	$R^P$	|	predator recruitment from Beverton-Holt relationship
-|	$\\bar{B}^P$	|	predator recruitment as modified by a relationship with herring
-|	$v$	|	annual predator natural mortality
-|	$u$	|	annual predator exploitation mortality
-|	$Fwint$	|	intercept of Ford-Walford relationship
-|	$Fwslope$	|	slope of Ford-Walford relationship
-|	$B^P$	|	predator biomass
-|	$N_{thresh}$	|	threshold in herring abundance that induces a reaction from a predator
-|	$AnnAlpha$	|	intercept of Ford-Walford relationship as modified by a relationship with herring
-|	$AnnRho$	|	slope of Ford-Walford relationship as modified by a relationship with herring
-|	$\\delta$	|	exponent relating herring abundance to predator survival
-|	$Havgwt$	|	average weight of herring
-|	$\\lambda$	|	exponent relating herring average weight to tuna growth
-|	$T$	|	inflection point of the relationship between herring average weight and tuna growth
-|	$SSB_{MSY}$	|	herring spawning stock biomass at maximum sustainable yield
-|	$IAV$	|	interannual variation in herring yield
-|	$SSB_{MSY}^P$	|	predator spawning stock biomass at maximum sustainable yield
-|	GR	|	gross revenue
-|	NR	|	net operating revenues
-|	i	|	fleet (trawl, t, or purse seine, s)
-|	q	|	quantity landed
-|	c()	|	cost function
-|	p	|	function relating landings to prices
-|	t	|	denotes trawl fishery in economic model
-|	s	|	denotes purse seine fishery in economic model
-|	$a_i$	|	parameter of price and landing model
-|	b	|	parameter of price and landing model
-|	$\\gamma$	|	parameter of price and landing model
-|	$\\alpha$	|	parameter of price and landing model
-|	$\\theta_i$	|	parameter of price and landing model
-|	$\\beta$	|	parameter of price and landing model
-|	$\\xi$	|	parameter of economic stationarity metric
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
+*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table 1). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
 
 Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
 \begin{equation}
@@ -184,7 +105,7 @@ Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
 
 The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
 
-*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\varepsilon_{}$ (Table XX T6-T7):
+*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias\varepsilon_{} (Table XX T6-T7):
 
 \begin{equation}
 \widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
@@ -194,25 +115,25 @@ The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the d
 
 The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 
-*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table \ref{OMs}; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
+*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table 2; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
 
-```{r OMs, tab.cap="Operating model uncertainties addressed\\label{OMs}", echo=FALSE, message=FALSE, warnings=FALSE,  results='asis'}
+```{r OMs, fig.cap="Operating model uncertainties addressed \\label{OMtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 | Operating Model Name | Herring productivity | Herring growth   | Assessment bias  |
 |:---------------------|:---------------------|:-----------------|:-----------------|
-| LowFastBiased        | Low: high M, low h (0.44)  | 1976-1985: fast | 60% overestimate |
-| LowSlowBiased        | Low: high M, low h (0.44)  | 2005-2014: slow | 60% overestimate |
-| LowFastCorrect       | Low: high M, low h (0.44)  | 1976-1985: fast | None             |
-| LowSlowCorrect       | Low: high M, low h (0.44)  | 2005-2014: slow | None             |
-| HighFastBiased       | High: low M, high h (0.79) | 1976-1985: fast | 60% overestimate |
-| HighSlowBiased       | High: low M, high h (0.79) | 2005-2014: slow | 60% overestimate |
-| HighFastCorrect      | High: low M, high h (0.79) | 1976-1985: fast | None             |
-| HighSlowCorrect      | High: low M, high h (0.79) | 2005-2014: slow | None             |
+| Truth                | Low: high M, low h (0.44)   | 1976-1985: fast    | 60% overestimate |
+| Consequences         | Low: high M, low h (0.44)   | 2005-2014: slow | 60% overestimate |
+| Fake news            | Low: high M, low h (0.44)   | 1976-1985: fast    | None             |
+| Bob                  | Low: high M, low h (0.44)   | 2005-2014: slow | None             |
+| Bart Simpson         | High: low M, high h (0.79)  | 1976-1985: fast    | 60% overestimate |
+| Beavis               | High: low M, high h (0.79)  | 2005-2014: slow | 60% overestimate |
+| Something            | High: low M, high h (0.79)  | 1976-1985: fast    | None             |
+| Something else       | High: low M, high h (0.79)  | 2005-2014: slow | None             |
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
-```{r MortsWts, tab.cap="Herring Natural Mortality and Weights-at-age \\label{MWttab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r MortsWts, fig.cap="Herring Natural Mortality and Weights-at-age \\label{MWttab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |Age	|High M	|Low M	|Fast Growth	|Slow Growth |
 |:----|:----|:----|:----|:----|
@@ -228,7 +149,7 @@ tabl <- "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
-The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models [@Deroba2015atlantic].  Natural mortality in recent stock assessments has varied among ages and years, with $M$ being higher during 1996-2014 than in previous years  [@NEFSC2012Assessment;@Deroba2015atlantic].  Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher $M$ during 1996-2014, such that $M$ was constant among years [@NEFSC2012Assessment;@Deroba2015atlantic].  To capture uncertainty in $M$ in the MSE, operating models were run with either relatively high or low $M_a$ (Table \ref{MWttab}; Figure 1).  Relatively high $M_a$ values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment.  Relatively low $M_a$ values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment.  In the MSE, $M_a$ was always time invariant.
+The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models [@Deroba2015atlantic].  Natural mortality in recent stock assessments has varied among ages and years, with $M$ being higher during 1996-2014 than in previous years  [@NEFSC2012Assessment;@Deroba2015atlantic].  Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher $M$ during 1996-2014, such that $M$ was constant among years [@NEFSC2012Assessment;@Deroba2015atlantic].  To capture uncertainty in $M$ in the MSE, operating models were run with either relatively high or low $M_a$ (Table 2; Figure 1).  Relatively high $M_a$ values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment.  Relatively low $M_a$ values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment.  In the MSE, $M_a$ was always time invariant.
 
 Uncertainty in estimates of stock-recruit parameters were represented in the MSE by using the parameters estimated by stock assessments fit with and without the higher $M$ during 1996-2014.  Stock assessment fits with higher $M$ during 1996-2014 produced estimates of steepness and $SSB_{F=0}$ that were lower than in stock assessment fits without higher $M$ during 1996-2014 (Table 3; Figure 1).  Thus, operating models with relatively high $M_a$ always had relatively low steepness and $SSB_{F=0}$, and the opposite held with relatively low $M_a$ (Table 2).
 
@@ -283,9 +204,10 @@ Predator population biomass is defined with Ford-Walford plot intercept ($FWint$
 B_{y+1}^P = S_{y}^P (FWint N_{y}^P + FWslope B_{y}^P) + FWint R_{y+1}^P \label{delaydiffB_equation}
 \end{equation}
 
-Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. \ref{predsource}).
+Parameterizing this model requires specification of the stock-recruitment relationship (steepness h and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Tab. 1).
 
-```{r popsources, tab.cap="Predator population model specification and parameter sources\\label{predsource}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+Table 1. Predator population model specification and parameter sources
+```{r popsources, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |                      | Highly migratory     | Seabird              | Groundfish           | Marine mammal        |
 |:---------------------|:---------------------|:---------------------|:---------------------|:---------------------|
