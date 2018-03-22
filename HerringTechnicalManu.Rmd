@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: 'The dream and the reality: meeting decision-making time frames while incorporating
   ecosystem and economic models into management strategy evaluation'
@@ -2650,6 +2649,3 @@ hi!
 
 # Figures
 hi. A figure!
-
-
->>>>>>> origin/master
