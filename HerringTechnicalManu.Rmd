@@ -12,7 +12,9 @@ output:
     toc: true
     toc_depth: 4
     pandoc_args: --latex-engine=xelatex
-  html_document: null
+  html_document:
+    toc: true
+    toc_depth: 4
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -283,7 +285,7 @@ F_{a,y}=\bar{F}_yS_ae^{\varepsilon_{\theta,y}-\frac{\sigma_\theta^2}{2}} \\
 \end{equation}
 The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.
 
-**Predators**
+## Predators
 
 There are two components of predator modeling for the herring MSE: a predator population model, and a herring-predator relationship model to link herring with predator populations. Here, we give an overview of the modeling process, and we describe the decisions made in parameterizing individual predator models and herring-predator relationships in the following sections. The overall population in numbers for each predator $P$ each year $N_{y}^P$ is modeled with a delay-difference function: 
 \begin{equation}
@@ -841,7 +843,7 @@ ternpoptrend +   geom_point() +
 
 ```
 
-## Groundfish
+### Groundfish
 Because no specific groundfish was identified as a representative herring predator during the stakeholder workshop, the first decision was which groundfish to model. Annual diet estimates (based on sample sizes of ~100+ stomachs) are available for the top three groundfish predators of herring (those with herring occurring in the diets most often in the entire NEFSC food habits database): spiny dogfish, Atlantic cod, and silver hake. Cod and spiny dogfish were considered first because their overall diet proportions of herring are higher, and because silver hake has the least recently updated assessment. Diet compositions by year were estimated for spiny dogfish, Georges Bank cod, and Gulf of Maine cod to match the scale of stock assessments. Full weighted diet compositions were estimated, and suggest considerable interannual variability in the herring proportion in groundfish diets (filled blue proportions of bars in Fig. \ref{gfishdiets}).  
 
 ```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database \\label{gfishdiets}", message = FALSE, warning = FALSE}
@@ -1035,7 +1037,7 @@ qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "current herring abundan
 #TotalSurv<-(1-PredAnnualNatM)*(1-Predexploit) #total annual predator survival
 
 ```
-## Marine mammals
+### Marine mammals
 Because no specific marine mammal was identified as a representative herring predator in the stakeholder workshop, as with groundfish, the first decision was which marine mammal to model. Diet information for a wide range of marine mammals on the Northeast US shelf suggests that minke whales, humpback whales, harbor seals, and harbor porpoises have the highest proportions of herring in their diets [@smith_consumption_2015], and therefore may show some reaction to changes in the herring ABC control rule. 
 
 While some food habits data existed for marine mammals, consultation with marine mammal stock assessment scientists at the Northeast Fisheries Science Center confirmed that no data were available to parameterize a stock-recruitment relationship for any of these marine mammal species in the Northeast US region, and no such information was available in the literature for stocks in this region. Althouth it may be possible to develop stock-recruitment models for one or more of these species in the future, it was not possible within the time frame of the herring MSE. Therefore, we were unable to model marine mammals within the same framework as other predators. 
@@ -1064,6 +1066,9 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+
+### Economic model
+Econ model goes here.
 
 ## Performance Metrics
 
