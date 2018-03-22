@@ -5,12 +5,12 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -1256,11 +1256,7 @@ All of the control rule alternatives offered options that had near zero frequenc
 
 Results were generally robust among operating models when presented relative to biological reference points (e.g., $\frac{yield}{MSY}$), but absolute scale differed among operating models.  This result has been previously reported (@Deroba2012Evaluating) and is likely why the results of most MSEs are presented in relative units (e.g., @Amar2009TheFishery; @Deroba2012Evaluating; @Wiedenmann2017).  While convenient scientifically, the differences in absolute scale can create challenges when communicating with stakeholders because most people are more comfortable with absolute units (e.g., fishing industry representatives think in tons and not fractions of $MSY$; Feeney et al., this issue). Thus, reporting results in absolute units will still have value in public settings, and scientists should attempt to convey the reasons for differences in scale among operating models (Feeney et al., this issue).
 
-The constant catch, conditional constant catch, and restricting annual changes in the quota by 15% produced less variable yield than the other biomass based alternatives, but at the expense of yield, more frequent low levels of herring biomass, and more outcomes relatively detrimental to predators. This result is consistent with previous simulations of similar harvest control rules for lake whitefish *Coregonus clupeaformis* in the Laurential Great Lakes (@Deroba2012Evaluation) and   
-
-CC options not flexible and can usually be outperformed by other CRs, unless stability is a heavily preferred objective.
-
-We only evaluated a 15% restriction on interannual change in the quote for a BB control rule because this was a value preferred by stakeholders.  Exploring a broader range of percentages, however, may result in a broader range of performance that may sacrfice less yield (than our 15%) but still gain some stability.  See Laurie Kell's stuff; Deroba and Bence.
+The constant catch, conditional constant catch, and restricting annual changes in the quota by 15% produced less variable yield than the other biomass based alternatives, but at the expense of yield, more frequent low levels of herring biomass, and more outcomes relatively detrimental to predators. This result is consistent with previous simulations of similar harvest control rules for lake whitefish *Coregonus clupeaformis* in the Laurential Great Lakes (@Deroba2012Evaluating) and roundfish stock managed by the International Council for the Exploration of the Sea (@Kell2006). For lake whitefish, @Deroba2012Evaluating found that a conditional constant catch rule could achieve similar stability in yield as a 15% restriction on the interannual change to a quota applied to a biomass based control rule, but with higher yields.  A broader range of percent restrictions on the interannual variation in the quota should be evaluated, however, before assuming that these conclusions are general.  A 15% restriction was used in this analysis because they amount was specifed as desirable by stakeholders.  Conceivably, a different percentage may strike a more agreeable tradeoff between stability and other metrics of interest.  The performance of restraints on the interannual variation in quotas also depends on stock status and variation in life history traits, such as growth (Punt et al., 2002; @Kell2006), and so should likely be evaluated on a case by case basis.
 
 If short-term stability is an objective, then using quota blocks may be effective.  Some BB CR options with quota blocks could produce similar performance as annual changes in the quota.  Although, at similar level of yields, the quota blocks produced more options with lower biomass.  Thus, a closed-loop simulation should be used to evaluate the changes in relative performance between applying a CR annually or using a quota blocks.
 
