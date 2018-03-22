@@ -5,12 +5,12 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -1253,7 +1253,7 @@ All of the control rule alternatives offered options that had near zero frequenc
 
 #Discussion
 
-Relative results insensitive to OM, which has been found before.
+Results were generally robust among operating models when presented relative to biological reference points (e.g., $\frac{yield}{MSY}$), but absolute scale differed among operating models.  This result has been previously reported (@Deroba2012Evaluating) and is likely why the results of most MSEs are presented in relative units (e.g., @Amar2009TheFishery; @Deroba2012Evaluating; @Wiedenmann2017).  While convenient scientifically, the differences in absolute scale can create challenges when communicating with stakeholders because most people are more comfortable with absolute units (e.g., fishing industry representatives think in tons and not fractions of $MSY$; Feeney et al., this issue). Thus, reporting results in absolute units will still have value in public settings, and scientists should attempt to convey the reasons for differences in scale among operating models (Feeney et al., this issue).
 
 CC options not flexible and can usually be outperformed by other CRs, unless stability is a heavily preferred objective.
 
