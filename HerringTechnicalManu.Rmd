@@ -1267,7 +1267,7 @@ If we care about herring as forage, then including herring biomass is effectivel
 In this section, we discuss the limitations of the quantiative models and simplifications necessary to meet decision-making time frames while incorporating ecosystem and economic models into management strategy evaluation.
 
 ### Herring Dreams
-
+play
 We assumed reference points were known without error, and so our results may not generalize to cases where such values are poorly estimated.  Incorporating error in the estimation of reference points within simulations is an area of active research, but is not straightforward.  For example, the reference points (e.g., MSY) depend on life history traits that may change through time, and so how to accommodate time varying life history in the calculation of the reference values would need to be considered as part of a management strategy.  See Deroba and Bence.
 
 We did not incorporate a full stock assessment due to time contraints.  Discuss pros and cons; this is part of the reality and dream, as is the above paragraph.
