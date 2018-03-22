@@ -10,7 +10,10 @@ output:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
+    toc: true
+    toc_depth: 4
     pandoc_args: --latex-engine=xelatex
+  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -91,9 +94,10 @@ In January 2016, the New England Fishery Management Council (NEFMC), the politic
 The NEFMC desired to have results from the MSE ready to inform fisheries management decisions within one year, which left little time to develop the technical aspects of the MSE. A particularly challenging aspect of the time frame was deciding what technical aspects of the MSE (e.g., operating models) could be compromised or short-cut (i.e., perhaps not ideal from a scientific or best-practices standpoint) while ensuring the results would still accurately portray the trade-offs among objectives and remain relevant for decision-making. Thus, the methods described represent the reality of what was achieved in order to enable managers to make informed decisions within their preferred time frames, and this reality is then contrasted with more ideal scientific approaches that should be the ultimate goal for use in future decision making (i.e., the "dream").
 
 #Methods
-**Herring** 
+## Herring 
  
-*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table \ref{symtab}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
+### Basics
+An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table \ref{symtab}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
 <!---markdown style table. fucking escape characters-->
 ```{r symboltable, tab.cap="Table of Symbols \\label{symtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
@@ -172,16 +176,17 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
 Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
-\begin{equation}
- R_{1,y+1}=\frac{(\frac{SSB_{F=0}}{R_{F=0}} \frac{1-h}{4h})SSB_y}{1+(\frac{5h-1}{4hR_{F=0}})SSB_y}e^{\varepsilon_{R,y}-\frac{\sigma_R^2}{2}} \\
- \varepsilon_{R,y}=\omega \varepsilon_{R,y-1}+\sqrt{1-\omega^2}\varrho_y \\
- \varrho \sim N(0,\sigma_R^2) \\
- SSB_y=\sum\limits_{a=1}^{8+}N_{a,y}m_aW_a. \\
-\end{equation}
+\begin{align}
+ R_{1,y+1}&=\frac{(\frac{SSB_{F=0}}{R_{F=0}} \frac{1-h}{4h})SSB_y}{1+(\frac{5h-1}{4hR_{F=0}})SSB_y}e^{\varepsilon_{R,y}-\frac{\sigma_R^2}{2}} \\
+ \varepsilon_{R,y}&=\omega \varepsilon_{R,y-1}+\sqrt{1-\omega^2}\rho_y \\
+ \rho &\sim N(0,\sigma_R^2) \\
+ SSB_y&=\sum\limits_{a=1}^{8+}N_{a,y}m_aW_a.
+\end{align}
 
 The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
 
-*Assessment Error.--* A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\varepsilon_{}$ (Table XX T6-T7):
+### Assessment Error
+A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\varepsilon_{}$ (Table XX T6-T7):
 
 \begin{equation}
 \widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
@@ -191,7 +196,8 @@ The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the d
 
 The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 
-*Operating Models.--* The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table \ref{OMs}; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
+### Operating Models
+The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table \ref{OMs}; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
 
 ```{r OMs, tab.cap="Operating model uncertainties addressed\\label{OMs}", echo=FALSE, message=FALSE, warnings=FALSE,  results='asis'}
 tabl <- "
@@ -248,7 +254,8 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 
 To address concerns about possible stock assessment bias, operating models with and without a positive bias were included.  In operating models without bias, $\rho$=0 and the only assessment error was that caused by the unbiased measurement errors ($\epsilon_{\phi y}$).  In operating models with bias, $\rho$=0.6, which was based on the degree of retrospective pattern in $SSB$ from the most recent stock assessment [@Deroba2015atlantic].
 
-*Harvest Control Rules.--* Several  basic control rules were evaluated, including a biomass based control rule [@katsukawa2004numerical], a constant catch rule, and a conditional constant catch rule (Figure 3; @clark2004conditional, @Deroba2012Evaluating).  The biomass based control rule was defined by three parameters: the proportion ($\psi$) of $F_{MSY}$ that dictates the maximum desired fishing mortality rate ($\tilde{F}$), an upper SSB threshold ($SSB_{up}$), and a lower SSB threshold ($SSB_{low}$).  The $\tilde{F}$ equaled the maximum when $\widehat{SSB}$ was above the upper threshold, declined linearly between the upper and lower thresholds, and equaled zero below the lower threshold:
+### Harvest Control Rules
+Several  basic control rules were evaluated, including a biomass based control rule [@katsukawa2004numerical], a constant catch rule, and a conditional constant catch rule (Figure 3; @clark2004conditional, @Deroba2012Evaluating).  The biomass based control rule was defined by three parameters: the proportion ($\psi$) of $F_{MSY}$ that dictates the maximum desired fishing mortality rate ($\tilde{F}$), an upper SSB threshold ($SSB_{up}$), and a lower SSB threshold ($SSB_{low}$).  The $\tilde{F}$ equaled the maximum when $\widehat{SSB}$ was above the upper threshold, declined linearly between the upper and lower thresholds, and equaled zero below the lower threshold:
 
   \begin{equation}
   \label{Fy_equation}
@@ -269,7 +276,8 @@ The constant catch control rule is defined by one parameter, a desired constant 
 
 The conditional constant catch rule used a constant desired catch amount unless removing that desired catch from the assessed biomass caused the fully selected fishing mortality rate to exceed a pre-determined maximum, in which case the desired catch was set to the value produced by applying the maximum fully selected fishing mortality rate to the assessed biomass (Figure 3).  Thus, the conditional constant catch rule has two policy parameters: a desired constant catch amount, and a maximum fishing mortality rate.  The constant catch amounts were varied from 0.1$MSY$ to 1.0$MSY$ in increments of 0.1, while the maximum fishing mortality rate equaled 0.5$F_{MSY}$.  When the maximum fishing mortality rate portion of the conditional constant catch rule was invoked, a quota was set in the same manner as when $\widehat{SSB}_y >= SSB_{up}$ in the biomass based control rule described above.
 
-*Implementation Error.--* Implementation errors were also included in a similar way as in @punt2008evaluation and @Deroba2012Evaluating, as year-specific lognormal random deviations (Table XX T9):
+### Implementation Error
+Implementation errors were also included in a similar way as in @punt2008evaluation and @Deroba2012Evaluating, as year-specific lognormal random deviations (Table XX T9):
 \begin{equation}
 F_{a,y}=\bar{F}_yS_ae^{\varepsilon_{\theta,y}-\frac{\sigma_\theta^2}{2}} \\
 \varepsilon_{\theta}\sim N(0,\sigma_\theta^2).
@@ -342,8 +350,7 @@ where 0 < $\delta$ <1 links herring population size to predator survival.
 
 After specifying the population model parameters and herring-predator relationship, we applied the [@hilborn_quantitative_2003] equilibruim calculation for the delay difference model with F=0 to get the unfished spawners per recruit ratio. This ratio was then used in a new equilibruim calculation with the current predator exploitation rate to estimate Beverton-Holt stock recruitment parameters, equilibrium recruitment and equilibrium individual weight under exploitation. Then, each model was run forward for 150 years with output from the herring operating model specifying the herring population characteristics. 
 
-## Highly migratory species
-Bluefin tuna were identified at the stakeholder workshop as the recommended highly migratory herring predator. 
+Bluefin tuna were identified at the stakeholder workshop as the recommended highly migratory herring predator. Common terns were identified at the stakeholder workshop as the recommended seabird herring predator. No specific groundfish or marine mammal was identified as a representative herring predator during the stakeholder workshop.
 
 ### Tuna population model
 Western Atlantic bluefin tuna population parameters were drawn from the 2014 stock assessment [@iccat_report_2015], the growth curve from [@restrepo_updated_2010], and recruitment parameters from a detailed examination of alternative stock recruit relationships [@porch_making_2016]. Ultimately, the âlow recruitmentâ scenario was selected to represent bluefin tuna productivity in the Gulf of Maine, which defines Bmsy as 13,226 t and therefore affects measures of status relative to Bmsy. Continuation of the current tuna fishing strategy (F<0.5Fmsy under the low recruitment scenario) is assumed. All predator population model parameters are listed in Table 2. 
@@ -373,8 +380,6 @@ qplot(preyAvgWt, AnnualAlpha, geom="line")
 
 ```
 
-## Seabirds
-Common terns were identified at the stakeholder workshop as the recommended seabird herring predator. 
 
 ### Tern population model
 There is no published stock assessment or population model for most seabirds in the Northeast US. Therefore, Gulf of Maine Common and Arctic tern population parameters were drawn from accounts in the Birds of North America [@hatch_arctic_2002; @nisbet_common_2002] and estimated from counts of breeding pairs and estimates of fledgling success summarized by the Gulf of Maine Seabird Working Group (GOMSWG; data at http://gomswg.org/minutes.html), as corrected and updated by seabird experts from throughout Maine. While we analyzed both Arctic and Common tern information, the stakeholder workshop identified Common terns as the example species for modeling, and this species has more extensive data and a generally higher proportion of herring in its diet based on that data. Therefore, the model is based on common terns in the Gulf of Maine. 
@@ -1061,22 +1066,26 @@ tabl <- "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
-##**Performance Metrics**
+## Performance Metrics
 
-**Herring**
+For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes. We report performance metrics over the final fifty years as a way to describe the long-run performance of a particular control rule. 
 
-For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes.  Median SSB,  $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics.  Additional performance metrics included the proportion of the last 50 years of each simulation with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion of the last 50 years that are overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of the last 50 years that overfishing occurred), and *Q*=0 (i.e., proportion of the last 50 years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded over the last 50 years of each simulation (Table XX T10):
+### Herring performance metrics
+
+Median SSB, $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish  were recorded as herring performance metrics.  Additional performance metrics included the proportion of years with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion years the the stock is overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of years that overfishing occurred), and *Q*=0 (i.e., proportion of years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded (Table XX T10):
 \begin{equation}
 IAV=\frac{\sqrt{\frac{1}{50}\sum\limits_{y=1}^{50}(Y_{y+1}-Y_{y})^2}}{(\frac{1}{50}\sum\limits_{y=1}^{50}Y_y)}.
 \end{equation}
 
 These performance metrics were highlighted to be of interest at the stakeholder workshops.  
 
-**Predators**
+### Predators
 Predator performance metrics included those described at the stakeholder workshop, as well as several others drawn from MSE best practices [@punt_management_2016]. Each of the simulated herring time series for every operating model, control rule, and simulation was passed to each predator model, resulting in outputs as described below using the equations above.
 
-All predator performance metrics were calculated based on the final 50 years of each replicate simulation. For all metrics other than "frequency of good status" metrics, we took the median value over the final 50 years of each replicate simulation. Then, the 25th percentile, the median, and the 75th percentile of these 100 medians were calcualted to represent the performance metric for a particular control rule. Results reported here focus on the median.
-
+For all metrics other than "frequency of good status" metrics, we report the median value for each simulation. Then, the 25th percentile, the median, and the 75th percentile of these 100 medians were calcualted to represent the performance metric for a particular control rule. Results reported here focus on the median.
+<!-- 
+We don't need all these mini sections, do we?
+-->
 ### Biomass, Abundance, Recruitment
 Population abundance and recruitment in numbers were output for all modeled predators. Population biomass was output for tuna and dogfish. These quantities were directly output by the models.
 
@@ -1091,10 +1100,6 @@ Stakeholders were interested in different measures of population status dependin
 
 ### Frequency of good status
 Evaluating the frequency of desirable or undesirable states over the course of a simulation is suggested by @punt_management_2016. We calculated two metrics for each of the status determinations. First, we calculated the minimum number of years in any individual simulation that a metric was above a given threshold. This is a "worst case scenario" metric. Second, we calculated the median proportion of years across all simulations for a control rule that were above the threshold. This is an "average performance" metric addressing how often good status is maintained.
-
-**An Economic Model of the Predators**
-
-We didn't do one.
 
 **An Economic Model of the Herring Fishery** 
 
@@ -1257,6 +1262,10 @@ All of the control rule alternatives offered options that had near zero frequenc
 Results were generally robust among operating models when presented relative to biological reference points (e.g., $\frac{yield}{MSY}$), but absolute scale differed among operating models.  This result has been previously reported (@Deroba2012Evaluating) and is likely why the results of most MSEs are presented in relative units (e.g., @Amar2009TheFishery; @Deroba2012Evaluating; @Wiedenmann2017).  While convenient scientifically, the differences in absolute scale can create challenges when communicating with stakeholders because most people are more comfortable with absolute units (e.g., fishing industry representatives think in tons and not fractions of $MSY$; Feeney et al., this issue). Thus, reporting results in absolute units will still have value in public settings, and scientists should attempt to convey the reasons for differences in scale among operating models (Feeney et al., this issue).
 
 The constant catch, conditional constant catch, and restricting annual changes in the quota by 15% produced less variable yield than the other biomass based alternatives, but at the expense of yield, more frequent low levels of herring biomass, and more outcomes relatively detrimental to predators. This result is consistent with previous simulations of similar harvest control rules for lake whitefish *Coregonus clupeaformis* in the Laurential Great Lakes (@Deroba2012Evaluating) and roundfish stock managed by the International Council for the Exploration of the Sea (@Kell2006). For lake whitefish, @Deroba2012Evaluating found that a conditional constant catch rule could achieve similar stability in yield as a 15% restriction on the interannual change to a quota applied to a biomass based control rule, but with higher yields.  A broader range of percent restrictions on the interannual variation in the quota should be evaluated, however, before assuming that these conclusions are general.  A 15% restriction was used in this analysis because they amount was specifed as desirable by stakeholders.  Conceivably, a different percentage may strike a more agreeable tradeoff between stability and other metrics of interest.  The performance of restraints on the interannual variation in quotas also depends on stock status and variation in life history traits, such as growth (Punt et al., 2002; @Kell2006), and so should likely be evaluated on a case by case basis.
+
+CC options not flexible and can usually be outperformed by other CRs, unless stability is a heavily preferred objective.
+
+We only evaluated a 15% restriction on interannual change in the quote for a BB control rule because this was a value preferred by stakeholders.  Exploring a broader range of percentages, however, may result in a broader range of performance that may sacrfice less yield (than our 15%) but still gain some stability.  See Laurie Kell's stuff; Deroba and Bence.
 
 If short-term stability is an objective, then using quota blocks may be effective.  Some BB CR options with quota blocks could produce similar performance as annual changes in the quota.  Although, at similar level of yields, the quota blocks produced more options with lower biomass.  Thus, a closed-loop simulation should be used to evaluate the changes in relative performance between applying a CR annually or using a quota blocks.
 
