@@ -5,15 +5,15 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document:
+    toc: yes
+    toc_depth: 4
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
-    toc: true
-    toc_depth: 4
     pandoc_args: --latex-engine=xelatex
-  html_document:
-    toc: true
+    toc: yes
     toc_depth: 4
   word_document: null
 bibliography: HerringMSE.bib
@@ -94,7 +94,7 @@ In January 2016, the New England Fishery Management Council (NEFMC), the politic
 
 The NEFMC desired to have results from the MSE ready to inform fisheries management decisions within one year, which left little time to develop the technical aspects of the MSE. A particularly challenging aspect of the time frame was deciding what technical aspects of the MSE (e.g., operating models) could be compromised or short-cut (i.e., perhaps not ideal from a scientific or best-practices standpoint) while ensuring the results would still accurately portray the trade-offs among objectives and remain relevant for decision-making. Thus, the methods described represent the reality of what was achieved in order to enable managers to make informed decisions within their preferred time frames, and this reality is then contrasted with more ideal scientific approaches that should be the ultimate goal for use in future decision making (i.e., the "dream").
 
-#Methods
+#Methods - The Reality
 ## Herring 
  
 ### Basics
@@ -195,7 +195,7 @@ A stock assessment was approximated (i.e., assessment errors) similar to @punt20
 \tau \sim N(0,\sigma_\phi^2). \\
 \end{equation}
 
-The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
+The variance of assessment errors ($\sigma_\phi^2$) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  A range of values for $\sigma_\phi^2$ and $\vartheta$ were not evaluated because previous research using a similar approach to applying assessment errors has found relative control rule performance to be robust to these quantities (Punt et al., 2008; Irwin et al., 2008; @Deroba2012Evaluating).  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$ (Table XX T5), and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 
 ### Operating Models
 The stakeholder workshops identified uncertainties about herring life history traits and stock assessment, and the effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table \ref{OMs}; Figures 1-2).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
@@ -1276,9 +1276,9 @@ In this section, we discuss the limitations of the quantiative models and simpli
 
 ### Herring Dreams
 
-We assumed reference points were known without error, and so our results may not generalize to cases where such values are poorly estimated.  Incorporating error in the estimation of reference points within simulations is an area of active research, but is not straightforward.  For example, the reference points (e.g., MSY) depend on life history traits that may change through time, and so how to accommodate time varying life history in the calculation of the reference values would need to be considered as part of a management strategy.  See Deroba and Bence.
+The application of the biomass based and conditional constant catch control rules assumed $MSY$ reference points were known without error, which has been assumed in several other studies (Irwin et al., 2008; Punt et al., 2008).  Such reference points are likely to be uncertain in most cases, however, and the bias and precision of reference point estimates depends on life hisory traits and autocorrelation in recruitment (Haltuch et al., 2008; Haltuch et al., 2009).  How the relative performance of control rules would change in the presence of error in reference points is unclear and should be a topic for future research.  Given that assessment error affects relative control rule performance (@Deroba2008), errors in reference point estimation may compound those issues and affect results in meaningful ways.  Incorporating realistic errors in reference point estimation, however, will be challenging because the effects will depend on exploitation history and the degree to which life hisotry traits vary among years (Brodziak et al., 2008; Legault and Palmer 2016).  This MSE evaluated uncertianty in life history traits, but not time variation in those traits.  Methods for estimating reference points and the proper response of managment in the presence of time varying life history traits is an active area of research and has been a focal point of MSEs (@Amar2009TheFishery; Legault and Palmer 2016).  For example, increases in natural mortality through time have different implications on reference points depending on whether a per recruit approach is used or if managment is concerned with limiting total mortality, where a per recruit approach would increase target $F$ but limiting total mortality would require decreasing target $F$ (Legault and Palmer 2016).  An MSE for Gulf of Alaska walleye pollock *Theragra chalcogramma* demonstrated that management strategies (i.e., the combination of harvest control rule and estimation model) performed differently depending on how reference points were estimated in the presence of regime shifts in recruitment, with estimates of unfished biomass depending on the range of years used to estimate average recruitment (@Amar2009TheFishery).  Atlantic herring have experienced time varying growth, and the possibility of time varying natural mortality has been considered an uncertainty in recent stock assessments (@NEFSC_2012; @Deroba2015atlantic).  Thus, evaluating the effect of errors in reference point estimation would be a prudent advancement of the MSE.  The stakeholder driven process, however, was already overwhelming for many participants given the time frame, and so adding this additional realism would likely be best completed as a separate exercise that would rely moreso on technical experts than stakeholder input.
 
-We did not incorporate a full stock assessment due to time contraints.  Discuss pros and cons; this is part of the reality and dream, as is the above paragraph.
+This herring MSE did not incorporate a true stock assessment as part of the managment strategy.  The approach taken offered the advanatage of simplicity, brevity, and the ability to control bias in the assessment without having to specify a source of the bias (e.g., misspecified $M$, incorrect selectivity), as would be required with the incorporation of a true stock assessment. Conceivably, relative control rule performance could vary depending on the mispecification that induces a bias in a true stock assessment model, and so several alternative sources of bias would likely have to be evaluated as part of an MSE, significantly increasing computing time in an already demanding time frame.  Given the technical nature of stock assessments, constructing an evaluation of the effect of different sources of bias in a stock assessment also could likely be conducted outside of a stakeholder process.  None the less, incorporating a true stock assessment is considered best practice and may induce realism, such as levels of autocorrelation among assessment fits, that cannot be reproduced otherwise (Cox and Kronlund 2008; @punt_management_2016).  Consequently, this MSE and subsequent managment decisions should be revisited as such additional realism is implemented.
 
 ### Predator Dreams
 
