@@ -47,6 +47,7 @@ if(sg_figs){
 
 allres <- readRDS(file.path(data.dir,"allres.rds"))
 
+
 #to get table captions and numbering
 tn = local({
   i = 0
@@ -69,31 +70,106 @@ knit_hooks$set(output = function(x, options) {
     default_output_hook(x,options)
 })
 
+
 ```
 \doublespacing
 
 #Introduction
 
-Management strategy evaluation (MSE) uses simulation to evaluate the trade-offs resulting from alternative management options in the face of uncertainty [@punt2016management].  MSEs require time, however, for stakeholder input, data collection, and model development [@butterworth2007management] (Punt et al., 2014).  As such, the process can take much longer than "traditional" management time frames [@butterworth2007management].  The development time is also likely to lengthen when explicit ecosystem, multi-species, or socioeconomic considerations are desired because the data and modeling needs, and subsequent uncertainties, are all greater than in a single species approach.  This manuscript chronicles the development of an MSE done on a truncated timetable (~12 months) required to meet management time frames.  The objectives of this manuscript are to:
+Atlantic herring (hereafter herring) *Clupea harengus* in the Northwest Atlantic are preyed upon by fish, seabirds, and marine mammals, and can account for 20-50% of the diet of these predators (Overholtz and Link 2007; Smith and Link 2010; Curti et al., 2013). Herring are also subject to a directed fishery, mostly using midwater trawls, purse seines, and bottom trawls, that averaged 85,000mt of landings during 2008-2017. Much of the landings are also used as bait in the relatively high value American lobster *Homarus americanus* fishery. Herring life-history traits (e.g., weight-at-age) have also varied through time and have a complex stock strucutre that creates uncertainty in their assessment and management. Thus, herring are of broad interest in the region, but anticipating the relative performance of mangement strategies (e.g., harvest control rules) in the face of uncertainties is challenging, which makes a management strategy evaluation (MSE) for herring in the region a potentially informative tool.
 
-1.	Evaluate the relative performance of HCRs at meeting herring fishery objectives, including those related to predators of herring, as informed by stakeholder input, and,
+Management strategy evaluation uses simulation to evaluate the trade-offs resulting from alternative management options in the face of uncertainty [@punt2016management]. MSEs require time, however, for stakeholder input, data collection, and model development [@butterworth2007management] (Punt et al., 2014). As such, the process can take much longer than "traditional" management time frames [@butterworth2007management]. The development time is also likely to lengthen when explicit ecosystem, multi-species, or socioeconomic considerations are desired because the data and modeling needs, and subsequent uncertainties, are all greater than in a single species approach. This manuscript chronicles the development of an MSE done on a truncated timetable (~12 months) required to meet management time frames. The objectives of this manuscript were to:
 
-2.	Discuss our approach to developing an MSE on a relatively truncated timetable in order to meet management time frames, and identify the lessons learned throughout the process, especially as they relate to using MSE as a tool to advance an ecosystem based approach to management [@plaganyi2014multispecies].
+1. Evaluate the relative performance of HCRs at meeting herring fishery objectives, including those related to predators of herring, as informed by stakeholder input, and,
 
-The fisheries management process in New England usually starts when managers percieve a problem causing a management goal or objective to be unmet.  Managers will propose solutions and a technical group, typically composed of scientists and policy analysts from state agencies and the National Marine Fisheries Service (NMFS), will analyze these possible solutions.  Both managers and the technical group can be aided and advised by an Advisory Panel, a closed group appointed by managers that is typically drawn from members of the fishing industry, processing sector, and Environmental Non-Governmental Organizations (ENGOs).  In addition to the public comment process, the Advisory Panel is one of the mechanisms for stakeholders to raise awareness of management problems to managers.  The Council will eventually select a solution through a vote and NMFS will, after verifying that it is consistent with applicable laws, translate those solutions into regulations and enforce those regulations.  Management actions, particularly contentious ones, can take years to develop and implement.
+2. Discuss our approach to developing an MSE on a relatively truncated timetable in order to meet management time frames, and identify the lessons learned throughout the process, especially as they relate to using MSE as a tool to advance an ecosystem based approach to management [@plaganyi2014multispecies].
 
-In January 2016, the New England Fishery Management Council  (NEFMC), the political body responsible for federally managed species in the northeast US, requested an MSE to evaluate harvest control rules (HCRs) for Atlantic herring  (hereafter herring) *Clupea harengus* \footnote{The process is described in detail in Feeney \textit{et al}, YYYY}.  Fishery managers wanted to develop an HCR that, among other things, accounted for the role of Atlantic herring as forage in the ecosystem; however, the exact ``accounting'' system was left to stakeholders. Perhaps because recent herring management actions have been quite contentious, managers decided that any member of the public was a stakeholder.   Stakeholder input was solicited on objectives, performance metrics, and control rules themselves during a workshop in May 2016.  Members of the herring, lobster, groundfish, tuna, recreational fishermen, and whale-watching industries participated as well as ENGOs, federal and state agencies, and academics. Input from these diverse stakeholders were then distilled into a set of desired outcomes and metrics that could be included in a scientific model.  Notably, while the techincal group knew the general scope of the modeling exercise (HCRs that account for herring as forage), detailed modeling of many components of the ecosystem could not begin in earnest until this step was finished.
+The fisheries management process in New England usually starts when managers percieve a problem causing a management goal or objective to be unmet. Managers will propose solutions and a technical group, typically composed of scientists and policy analysts from state agencies and the National Marine Fisheries Service (NMFS), will analyze these possible solutions. Both managers and the technical group can be aided and advised by an Advisory Panel, a closed group appointed by managers that is typically drawn from members of the fishing industry, processing sector, and Environmental Non-Governmental Organizations (ENGOs). In addition to the public comment process, the Advisory Panel is one of the mechanisms for stakeholders to raise awareness of management problems to managers. The Council will eventually select a solution through a vote and NMFS will, after verifying that it is consistent with applicable laws, translate those solutions into regulations and enforce those regulations. Management actions, particularly contentious ones, can take years to develop and implement.
 
-The NEFMC desired to have results from the MSE ready to inform fisheries management decisions within one year, which left little time to develop the technical aspects of the MSE.  A particularly challenging aspect of the time frame was deciding what technical aspects of the MSE (e.g., operating models) could be compromised (i.e., perhaps not ideal from a scientific or best-practices standpoint) while ensuring the results would still accurately portray the trade-offs among objectives and remain relevant for decision-making. 
+In January 2016, the New England Fishery Management Council (NEFMC), the political body responsible for federally managed species in the northeast US, requested an MSE to evaluate harvest control rules (HCRs) for herring \footnote{The process is described in detail in Feeney \textit{et al}, YYYY}. Fishery managers wanted to develop an HCR that, among other things, accounted for the role of Atlantic herring as forage in the ecosystem. However, the exact ''accounting'' system was left to be defined by stakeholder-driven workshops that were open to the public. Two stakeholder workshops were conducted, one in May 2016 and another in December 2016. Members of the herring, lobster, groundfish, tuna, recreational, and whale-watching industries participated, as well as ENGOs, federal and state agencies, and academics. Input from these diverse stakeholders were then utilized to construct the closed-loop simulation portion of the MSE. Notably, while the techincal group knew the general scope of the modeling exercise (HCRs that account for herring as forage), detailed modeling of many components of interest could not begin in earnest until this step was finished.
 
-**Background on herring**
-Mostly used as lobster bait. Caught with purse seines (night, inshore), single and paired midwater trawl (anytime, anywhere) and bottomtrawl (mostly southern new england).  High volume, low prices. large boats.  Single species stock assessments indicated biomass was historically high. Small retrospective pattern?  Changes over time in some life-history parameters (weight-at-age=growth). Higher uncertainty about other parameters (M and steepness).  Show up in diets of many predators that are sampled in NEFSC's bottom-trawl survey.  It's forage, so it's also eaten by birds, whales, and other things.   
-<!-- not sure where these parapgraphs belong -->
+The NEFMC desired to have results from the MSE ready to inform fisheries management decisions within one year, which left little time to develop the technical aspects of the MSE. A particularly challenging aspect of the time frame was deciding what technical aspects of the MSE (e.g., operating models) could be compromised or short-cut (i.e., perhaps not ideal from a scientific or best-practices standpoint) while ensuring the results would still accurately portray the trade-offs among objectives and remain relevant for decision-making. Thus, the methods described represent the reality of what was achieved in order to enable managers to make informed decisions within their preferred time frames, and this reality is then contrasted with more ideal scientific approaches that should be the ultimate goal for use in future decision making (i.e., the "dream").
 
 #Methods
 **Herring** 
  
-*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table 1). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
+*Basics.--* An MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The MSE was a modified version of that used in @Deroba2014EvaluatingRho, and symbols were largely consistent with @Deroba2014EvaluatingRho (Table \ref{symtab}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate (Table XX T1-T2).
+<!---markdown style table. fucking escape characters-->
+```{r symboltable, tab.cap="Table of Symbols \\label{symtab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+|	Symbol	|	Definition
+|:--------	|:--------------------------------------------------------
+|	$y$	|	year
+|	$a$	|	age
+|	$R$	|	herring recruitment
+|	$SSB$	|	herring spawning stock biomass
+|	$F$	|	fishing mortality
+|	$h$	|	steepness
+|	$\\varepsilon_R$	|	recrutment process error
+|	$\\sigma_R^2$	|	variance of recruitment process error
+|	$\\omega$	|	autocorrelation of recruitment error
+|	$N$	|	herring abundance
+|	$m$	|	herring maturity
+|	$W$	|	herring weight
+|	$\\widehat{N}$	|	assessed herring abundance
+|	$\\rho$	|	bias in assessed herring abundance
+|	$\\varepsilon_{\\phi}$	|	assessment error
+|	$\\tau$	|	autocorrelation of assessment error
+|	$\\sigma_{\\phi}^2$	|	variance of assessment error
+|	$B$	|	herring total biomass
+|	$\\widehat{SSB}$	|	assessed herring spawning stock biomass
+|	$\\widehat{B}$	|	assessed herring total biomass
+|	$M$	|	herring natural mortality
+|	$MSY$	|	herring maximum sustainable yield
+|	$SSB_{up}$	|	upper biomass parameter for biomass based control rule
+|	$SSB_{low}$	|	lower biomass parameter for biomass based control rule
+|	$\\psi$	|	proportion of $F_{MSY}$ for biomass based control rule
+|	$F_{MSY}$	|	fishing mortality at herring maximum sustainable yield
+|	$\\tilde{F}$	|	target herring fishing mortality
+|	$S$	|	herring fishery selectivity
+|	$\\bar{F}$	|	fishing mortality that would remove quota from herring population
+|	$Q$	|	quota for herring fishery
+|	$F$	|	realized herring fishery mortality
+|	$\\varepsilon_{\\theta}$	|	implementation error
+|	$\\sigma_{\\theta}^2$	|	variance of implementation error
+|	$P$	|	denotes a quantity that applies to a predator of herring
+|	$N^P$	|	predator abundance
+|	$S^P$	|	annual predator survival
+|	$R^P$	|	predator recruitment from Beverton-Holt relationship
+|	$\\bar{R}^P$	|	predator recruitment as modified by a relationship with herring
+|	$v$	|	annual predator natural mortality
+|	$u$	|	annual predator exploitation mortality
+|	$Fwint$	|	intercept of Ford-Walford relationship
+|	$Fwslope$	|	slope of Ford-Walford relationship
+|	$B^P$	|	predator biomass
+|	$N_{thresh}$	|	threshold in herring abundance that induces a reaction from a predator
+|	$AnnAlpha$	|	intercept of Ford-Walford relationship as modified by a relationship with herring
+|	$AnnRho$	|	slope of Ford-Walford relationship as modified by a relationship with herring
+|	$\\delta$	|	exponent relating herring abundance to predator survival
+|	$Havgwt$	|	average weight of herring
+|	$\\lambda$	|	exponent relating herring average weight to tuna growth
+|	$T$	|	inflection point of the relationship between herring average weight and tuna growth
+|	$SSB_{MSY}$	|	herring spawning stock biomass at maximum sustainable yield
+|	$IAV$	|	interannual variation in herring yield
+|	$SSB_{MSY}^P$	|	predator spawning stock biomass at maximum sustainable yield
+|	GR	|	gross revenue
+|	NR	|	net operating revenues
+|	i	|	fleet (trawl, t, or purse seine, s)
+|	q	|	quantity landed
+|	c()	|	cost function
+|	p	|	function relating landings to prices
+|	t	|	denotes trawl fishery in economic model
+|	s	|	denotes purse seine fishery in economic model
+|	$a_i$	|	parameter of price and landing model
+|	b	|	parameter of price and landing model
+|	$\\gamma$	|	parameter of price and landing model
+|	$\\alpha$	|	parameter of price and landing model
+|	$\\theta_i$	|	parameter of price and landing model
+|	$\\beta$	|	parameter of price and landing model
+|	$\\xi$	|	parameter of economic stationarity metric
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
 
 Recruitment followed Beverton-Holt dynamics [@francis1992use] (Table XX T3-T5):
 \begin{equation}
@@ -121,26 +197,54 @@ The variance of assessment errors ($\sigma_\phi^2$ ) equaled 0.05 and autocorrel
 tabl <- "
 | Operating Model Name | Herring productivity | Herring growth   | Assessment bias  |
 |:---------------------|:---------------------|:-----------------|:-----------------|
-| LowBigBiased         | Low: high M, low h   | 1970s: larger    | 60% overestimate |
-| LowSmallBiased       | Low: high M, low h   | Current: smaller | 60% overestimate |
-| LowBigCorrect        | Low: high M, low h   | 1970s: larger    | None             |
-| LowSmallCorrect      | Low: high M, low h   | Current: smaller | None             |
-| HighBigBiased        | High: low M, high h  | 1970s: larger    | 60% overestimate |
-| HighSmallBiased      | High: low M, high h  | Current: smaller | 60% overestimate |
-| HighBigCorrect       | High: low M, high h  | 1970s: larger    | None             |
-| HighSmallCorrect     | High: low M, high h  | Current: smaller | None             |
+| LowFastBiased        | Low: high $M$, low $h$ (0.44)  | 1976-1985: fast | 60% overestimate |
+| LowSlowBiased        | Low: high $M$, low $h$ (0.44)  | 2005-2014: slow | 60% overestimate |
+| LowFastCorrect       | Low: high $M$, low $h$ (0.44)  | 1976-1985: fast | None             |
+| LowSlowCorrect       | Low: high $M$, low $h$ (0.44)  | 2005-2014: slow | None             |
+| HighFastBiased       | High: low $M$, high $h$ (0.79) | 1976-1985: fast | 60% overestimate |
+| HighSlowBiased       | High: low $M$, high $h$ (0.79) | 2005-2014: slow | 60% overestimate |
+| HighFastCorrect      | High: low $M$, high $h$ (0.79) | 1976-1985: fast | None             |
+| HighSlowCorrect      | High: low $M$, high $h$ (0.79) | 2005-2014: slow | None             |
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
+```{r MortsWts, tab.cap="Herring natural mortality and mean weights-at-age (kg) \\label{MWttab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+|Age	|High $M$	|Low $M$	|Fast Growth	|Slow Growth |
+|:----|:----|:----|:----|:----|
+|1	|0.81	|0.54	|0.01	|0.02|
+|2	|0.65	|0.43	|0.03	|0.04|
+|3	|0.54	|0.36	|0.09	|0.07|
+|4	|0.48	|0.32	|0.16	|0.11|
+|5	|0.45	|0.3	|0.21	|0.14|
+|6	|0.42	|0.28	|0.25	|0.16|
+|7	|0.41	|0.27	|0.28	|0.18|
+|8+	|0.40	|0.26	|0.31	|0.21|
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
 
-The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models [@Deroba2015atlantic].  Natural mortality in recent stock assessments has varied among ages and years, with $M$ being higher during 1996-2014 than in previous years  [@NEFSC2012Assessment;@Deroba2015atlantic].  Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher $M$ during 1996-2014, such that $M$ was constant among years [@NEFSC2012Assessment;@Deroba2015atlantic].  To capture uncertainty in $M$ in the MSE, operating models were run with either relatively high or low $M_a$ (Table 2; Figure 1).  Relatively high $M_a$ values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment.  Relatively low $M_a$ values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment.  In the MSE, $M_a$ was always time invariant.
+The specific values used in the operating models for each of the uncertainties were premised on data used in recent stock assessments or estimates from fits of stock assessment models [@Deroba2015atlantic].  Natural mortality in recent stock assessments has varied among ages and years, with $M$ being higher during 1996-2014 than in previous years  [@NEFSC2012Assessment;@Deroba2015atlantic].  Natural mortality, however, has also been identified as an uncertainty in the stock assessments and sensitivity runs have been conducted without higher $M$ during 1996-2014, such that $M$ was constant among years [@NEFSC2012Assessment;@Deroba2015atlantic].  To capture uncertainty in $M$ in the MSE, operating models were run with either relatively high or low $M_a$ (Table \ref{MWttab}; Figure 1).  Relatively high $M_a$ values equaled the age-specific natural mortality rates used for the years 1996-2014 in the stock assessment.  Relatively low $M_a$ values in the MSE equaled the age-specific natural mortality rates used for the years 1965-1995 in the stock assessment.  In the MSE, $M_a$ was always time invariant.
 
-Uncertainty in estimates of stock-recruit parameters were represented in the MSE by using the parameters estimated by stock assessments fit with and without the higher $M$ during 1996-2014.  Stock assessment fits with higher $M$ during 1996-2014 produced estimates of steepness and $SSB_{F=0}$ that were lower than in stock assessment fits without higher $M$ during 1996-2014 (Table 3; Figure 1).  Thus, operating models with relatively high $M_a$ always had relatively low steepness and $SSB_{F=0}$, and the opposite held with relatively low $M_a$ (Table 2).
+Uncertainty in estimates of stock-recruit parameters were represented in the MSE by using the parameters estimated by stock assessments fit with and without the higher $M$ during 1996-2014.  Stock assessment fits with higher $M$ during 1996-2014 produced estimates of steepness and $SSB_{F=0}$ that were lower than in stock assessment fits without higher $M$ during 1996-2014 (Table 3; Figure 1).  Thus, operating models with relatively high $M_a$ always had relatively low steepness and $SSB_{F=0}$, and the opposite held with relatively low $M_a$ (Table \ref{OMs}).
 
-Uncertainty in Atlantic herring size-at-age was accounted for by having operating models with either fast or slow growth (i.e., weights-at-age; Table 2; Figure 3).  Atlantic herring weight-at-age generally declined from the mid-1980s through the mid-1990s, and has been relatively stable since.  Reasons for the decline are speculative and no causal relationships have been established.  Thus, fast growth operating models had weights-at-age that equaled the January 1 weights-at-age from the most recent stock assessment averaged over the years 1976-1985, while the slow growth operating models averaged over the years 2005-2014 (@Deroba2015atlantic).  In the MSE, weight-at-age was always time invariant.
+Uncertainty in Atlantic herring size-at-age was accounted for by having operating models with either fast or slow growth (i.e., weights-at-age; Table \ref{MWttab}; Figure 3).  Atlantic herring weight-at-age generally declined from the mid-1980s through the mid-1990s, and has been relatively stable since.  Reasons for the decline are speculative and no causal relationships have been established.  Thus, fast growth operating models had weights-at-age that equaled the January 1 weights-at-age from the most recent stock assessment averaged over the years 1976-1985, while the slow growth operating models averaged over the years 2005-2014 (@Deroba2015atlantic).  In the MSE, weight-at-age was always time invariant.
 
-Differences in $M$, stock-recruit parameters, and weights-at-age led to differences in unfished and $MSY$ reference points among operating models (Table 3).  The effect of $M$ and stock-recruit parameters was larger than the effect of differences in weight-at-age (Table 3).
+Differences in $M$, stock-recruit parameters, and weights-at-age led to differences in unfished and $MSY$ reference points among operating models (Table \ref{RefPts}).  The effect of $M$ and stock-recruit parameters was larger than the effect of differences in weight-at-age (Table \ref{RefPts}).
+
+```{r refpt,tab.cap="Unfished and MSY reference points for the Atlantic herring operating models \\label{RefPts}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis' }
+tabl <- "
+| Steepness | Natural Mortality | Growth | Unfished SSB | SSB MSY | MSY | F MSY |
+|:----|:----|:----|:----|:----|:----|:----|
+| 0.44 | High | Slow | 845176 | 324977 | 66061 | 0.31 |
+| 0.44 | High | Fast | 845176 | 335849 | 60969 | 0.28 |
+| 0.79 | Low | Slow | 1347080 | 369089 | 129171 | 0.54 |
+| 0.79 | Low | Fast | 1347080 | 405485 | 120360 | 0.45 |
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
 
 To address concerns about possible stock assessment bias, operating models with and without a positive bias were included.  In operating models without bias, $\rho$=0 and the only assessment error was that caused by the unbiased measurement errors ($\epsilon_{\phi y}$).  In operating models with bias, $\rho$=0.6, which was based on the degree of retrospective pattern in $SSB$ from the most recent stock assessment [@Deroba2015atlantic].
 
@@ -275,7 +379,7 @@ Common terns were identified at the stakeholder workshop as the recommended seab
 ### Tern population model
 There is no published stock assessment or population model for most seabirds in the Northeast US. Therefore, Gulf of Maine Common and Arctic tern population parameters were drawn from accounts in the Birds of North America [@hatch_arctic_2002; @nisbet_common_2002] and estimated from counts of breeding pairs and estimates of fledgling success summarized by the Gulf of Maine Seabird Working Group (GOMSWG; data at http://gomswg.org/minutes.html), as corrected and updated by seabird experts from throughout Maine. While we analyzed both Arctic and Common tern information, the stakeholder workshop identified Common terns as the example species for modeling, and this species has more extensive data and a generally higher proportion of herring in its diet based on that data. Therefore, the model is based on common terns in the Gulf of Maine. 
 
-Adult breeding pairs by colony were combined with estimated productivity of fledglings per nest to estimate the annual number of fledglings for each year. A survival rate of 10% was applied to fledglings from each year to represent ârecruitsâ to the breeding adult population age 4 and up [@nisbet_common_2002]. This âstock-recruitâ information was used to estimate steepness for the delay difference model based on common tern information only. Fitting parameters with R nls [@Rcite] had variable success, with the full dataset unable to estimate a significant beta parameter (cyan line, Fig. \ref{ternSR}) for common terns, and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (bright green line overlaid with black, Fig. \ref{ternSR}). Therefore, steepness was estimated to give a relationship (black line, Fig. \ref{ternSR}) falling between these two lines. The resulting stock recruit relationship set steepness at 0.26, a theoretical maximum breeding adult population of 45,000 pairs (@nisbet_common_2002, 1930âs New England population), and a theoretical maximum recruitment of 4,500 individuals annually (reflecting approximately a productivity of 1.0 at âcarrying capacityâ resulting in a stable population). Average common tern productivity is 1.02 (all GOM colony data combined). Adult mortality was assumed to be 0.1 for the delay difference model (survival of 90% [@nisbet_common_2002] for adults).
+Adult breeding pairs by colony were combined with estimated productivity of fledglings per nest to estimate the annual number of fledglings for each year. A survival rate of 10% was applied to fledglings from each year to represent "recruits" to the breeding adult population age 4 and up [@nisbet_common_2002]. This "stock-recruit" information was used to estimate steepness for the delay difference model based on common tern information only. Fitting parameters with R nls [@Rcite] had variable success, with the full dataset unable to estimate a significant beta parameter (cyan line, Fig. \ref{ternSR}) for common terns, and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (bright green line overlaid with black, Fig. \ref{ternSR}). Therefore, steepness was estimated to give a relationship (black line, Fig. \ref{ternSR}) falling between these two lines. The resulting stock recruit relationship set steepness at 0.26, a theoretical maximum breeding adult population of 45,000 pairs (@nisbet_common_2002, 1930's New England population), and a theoretical maximum recruitment of 4,500 individuals annually (reflecting approximately a productivity of 1.0 at "carrying capacity" resulting in a stable population). Average common tern productivity is 1.02 (all GOM colony data combined). Adult mortality was assumed to be 0.1 for the delay difference model (survival of 90% [@nisbet_common_2002] for adults).
 
 
 ```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns \\label{ternSR}", out.width='400pt', message = FALSE, warning = FALSE}
@@ -960,7 +1064,12 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 
 **Herring**
 
-For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes.  Median SSB,  $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics.  Additional performance metrics included the proportion of the last 50 years of each simulation with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion of the last 50 years that are overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of the last 50 years that overfishing occurred), and *Q*=0 (i.e., proportion of the last 50 years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded over the last 50 years of each simulation (Table XX T10).  These performance metrics were highlighted to be of interest at the stakeholder workshops.  
+For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes.  Median SSB,  $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics.  Additional performance metrics included the proportion of the last 50 years of each simulation with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion of the last 50 years that are overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of the last 50 years that overfishing occurred), and *Q*=0 (i.e., proportion of the last 50 years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded over the last 50 years of each simulation (Table XX T10):
+\begin{equation}
+IAV=\frac{\sqrt{\frac{1}{50}\sum\limits_{y=1}^{50}(Y_{y+1}-Y_{y})^2}}{(\frac{1}{50}\sum\limits_{y=1}^{50}Y_y)}.
+\end{equation}
+
+These performance metrics were highlighted to be of interest at the stakeholder workshops.  
 
 **Predators**
 Predator performance metrics included those described at the stakeholder workshop, as well as several others drawn from MSE best practices [@punt_management_2016]. Each of the simulated herring time series for every operating model, control rule, and simulation was passed to each predator model, resulting in outputs as described below using the equations above.
@@ -977,7 +1086,7 @@ Stakeholders expressed interest in predator condition for fish and marine mammal
 Productivity, the number of fledglings per breeding pair, was output for the tern model. Productivity was calculated as recruitment times 10 (to account for the 10% survival rate of fledglings to adults) divided by tern abundance 4 years earlier in the simulation. 
 
 ### Status relative to thresholds
-Stakeholders were interested in different measures of population status depending on the predator. For commercially fished species, status relative to current management reference points was preferred. Tuna and dogfish biomass was divided by a biomass reference point specified in current stock assessments: tuna $SSB_{MSY}$ was 13226 [@iccat_report_2015], and dogfish $SSB_{MSY}$ was 159288 [@rago_biological_2010]. Because dogfish were fully exploited in our model, they did not reach $SSB_{MSY}$, so we also evaluated status relative to 0.5 $SSB_{MSY}$ ("overfished"). Tuna condition status was assessed by dividing the output population average weight with the equilibrium average weight. Common tern colonies are managed to improve productivity, so stakeholders suggested that a common tern productivity level of 0.8 would be a minimum threshold, while a productivity of 1.0 would be a target. In addition, total population status was measured relative to current population numbers using the rationale that maintaining at least the current population was desirable. The average common tern population of nesting pairs (including Monomoy) from 1998-2015 was 16000. 
+Stakeholders were interested in different measures of population status depending on the predator. For commercially fished species, status relative to current management reference points was preferred. Tuna and dogfish biomass was divided by a biomass reference point specified in current stock assessments: tuna $SSB_{MSY}^P$ was 13226 [@iccat_report_2015], and dogfish $SSB_{MSY}^P$ was 159288 [@rago_biological_2010]. Because dogfish were fully exploited in our model, they did not reach $SSB_{MSY}^P$, so we also evaluated status relative to 0.5 $SSB_{MSY}^P$ ("overfished"). Tuna condition status was assessed by dividing the output population average weight with the equilibrium average weight. Common tern colonies are managed to improve productivity, so stakeholders suggested that a common tern productivity level of 0.8 would be a minimum threshold, while a productivity of 1.0 would be a target. In addition, total population status was measured relative to current population numbers using the rationale that maintaining at least the current population was desirable. The average common tern population of nesting pairs (including Monomoy) from 1998-2015 was 16000. 
 
 ### Frequency of good status
 Evaluating the frequency of desirable or undesirable states over the course of a simulation is suggested by @punt_management_2016. We calculated two metrics for each of the status determinations. First, we calculated the minimum number of years in any individual simulation that a metric was above a given threshold. This is a "worst case scenario" metric. Second, we calculated the median proportion of years across all simulations for a control rule that were above the threshold. This is an "average performance" metric addressing how often good status is maintained.
@@ -1144,7 +1253,7 @@ All of the control rule alternatives offered options that had near zero frequenc
 
 #Discussion
 
-Relative results insensitive to OM, which has been found before.
+Results were generally robust among operating models when presented relative to biological reference points (e.g., $\frac{yield}{MSY}$), but absolute scale differed among operating models.  This result has been previously reported (@Deroba2012Evaluating) and is likely why the results of most MSEs are presented in relative units (e.g., @Amar2009TheFishery; @Deroba2012Evaluating; @Wiedenmann2017).  While convenient scientifically, the differences in absolute scale can create challenges when communicating with stakeholders because most people are more comfortable with absolute units (e.g., fishing industry representatives think in tons and not fractions of $MSY$; Feeney et al., this issue). Thus, reporting results in absolute units will still have value in public settings, and scientists should attempt to convey the reasons for differences in scale among operating models (Feeney et al., this issue).
 
 CC options not flexible and can usually be outperformed by other CRs, unless stability is a heavily preferred objective.
 
@@ -1170,31 +1279,45 @@ If we care about herring as forage, then including herring biomass is effectivel
 ## The Dream
 In this section, we discuss the limitations of the quantiative models and simplifications necessary to meet decision-making time frames while incorporating ecosystem and economic models into management strategy evaluation.
 
+### Herring Dreams
 
-### Economics
-<!---ML will tighten these up a bit. -->
-We did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal qualitative effects. The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs. A bigger problem is that, in the long run, firms can enter and exit this industry.  If firms can enter and exit, then exclusion of fixed costs from the model could result in misleading recommendations. We did not model firm entry and exit; this is a difficult decision to model. Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible.  Less than three-quarters of the permitted herring vessels were active in the fishery, suggesting that firms could enter if future profitability is expected to be high.
+### Predator Dreams
 
-We also assume that marginal costs are equal to average variable costs, constant for each fleet, and do not depend on the level of biomass. A more rigorous approach might include estimating a (economic) production function for the herring fishery; this was not done in the interest of time.  It is difficult to predict how estimating a true cost function and integrating those results would change the results of the study.
+### Economic Dreams
+The economic model of the herring fishery did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal effect when comparing HCRs within or across OMs.  Net revenues would all be overestimated by the same fixed amount.  The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs.  However, in the long run, firms can enter and exit this industry.  Less than three-quarters of the permitted herring vessels were active in the fishery, suggesting that firms could enter if future profitability is expected to be high.  We did not model firm entry and exit; this is a difficult decision to model.  Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible on the timeline requested by NEFMC.  
 
-Catch in the economic model can be different from the yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the market model suggests that this is not so simple.
+We also assume that marginal costs are equal to average variable costs, constant for each fleet, and do not depend on the level of biomass. A more rigorous approach might include estimating a (economic) production function for the herring fishery; this was not done in the interest of time.  It is difficult to predict how estimating a true cost function and integrating those results would change the results of the study.  
 
-The largest limitation of the economic component of the model is that only the herring fishery is quantitatively modeled. Consumers of landed herring and economic valuation of \textit{in-situ} herring are not considered.    
+The largest limitation of the economic component of the model is that only the herring fishery is quantitatively modeled. Consumers of landed herring and economic valuation of \textit{in-situ} herring are not considered.  Consumer welfare measures could be determined from a demand curve for herring.  Equation \ref{ARDL} estimates a price-quantity relationship, not necessarily a demand curve for herring.  Rigorous estimation of a demand curve for herring likely requires modeling goods are substitutes for herring, possibly including  mackerel, menhaden, squid, and other likely substitute bait. This was not done due to limited time available. 
 
-Equation \ref{ARDL} estimates a price-quantity relationship, not necessarily a demand curve for herring.  If we believe that the lobster bait market is well functioning, then consumer welfare measures could be determined from a demand curve for herring.  Rigorous estimation of a demand curve for herring likely requires modeling goods are substitutes for herring, possibly including  mackerel, menhaden, squid,  and substitute bait. This was not done due to limited time available. 
-
-@Finnoff2003HarvestingEcosystem and @Brown2005AFisheries describe methods to trace the effects of changes in harvest or biomass of one species through an ecosystem.  The predator section models a few representative consumers of live herring: terns, tuna, whales, and predatory fish. Ecosystem Valuation methods could be used to measure changes in outcomes for those species in dollar value [@loomis1996economic; @richardson2009total; @lew2015willingness].  People may derive value from changes in the status of these predators through either use or non-use values.  For example, people may directly value higher abundances of an animal or protection of an endangered species, even if they have no plans to watch or view them [@lew2010valuing; @lew2017temporal].  Quantifying these values typically is done using stated preference methods with data collected using surveys; these studies are costly and time consuming to develop and conduct rigorously.  Benefit transfer, a method in which valuation from previous studies is applied to a new study area,may be the only way to overcome these barriers [@navrud2007environmental; @johnston2010methods].
+@Finnoff2003HarvestingEcosystem and @Brown2005AFisheries describe methods to trace the effects of changes in harvest or biomass of one species through an ecosystem.  The predator section models a few representative consumers of live herring: terns, tuna, whales, and predatory fish. Ecosystem valuation methods could be used to measure changes in outcomes for those species in dollar value [@loomis1996economic; @richardson2009total; @lew2015willingness].  People may derive value from changes in the status of these predators through either use or non-use values.  For example, people may directly value higher abundances of an animal or protection of an endangered species, even if they have no plans to watch or view them [@lew2010valuing; @lew2017temporal].  Quantifying these values typically is done using stated preference methods with data collected using surveys; these studies are costly and time consuming to develop and conduct rigorously.  Benefit transfer, a method in which valuation from previous studies is applied to a new study area,may be the only way to overcome these barriers [@navrud2007environmental; @johnston2010methods].
 
 Consumers may also derive use value from changes in the modeled species. For example, changes in whale populations may change outcomes for whale-watching customers [@Larson2004RevealingData].  This type of value can be quantified using both stated and revealed preference data, both of which typically require collection of survey data; these studies are also costly and time consuming to develp and conduct rigorously.  Perhaps more discouragingly, the precise good being valued (say, a doubling of the tern population) needs to be known quite early in the research process.  In this application, development of a valuation survey for terns would not have been able to start until after the predator modeling was nearly complete. Benefit transfer may be the only way to value some of the use values on the timeframe required by NEFMC.
 
 Another avenue for use value to arise is though changes in costs, catches, or prices in the associated commercial fishery.  For example, increases in biomass of spiny dogfish could lead to both higher quotas and lower costs to catch more abundant fish.  Examining changes in costs would require an economic model of production for the spiny dogfish fishery (similar to the model not used for the herring fleet) [@holland1999empirical; @hutniczak2014increasing; @reimer2017fisheries]. Changes in product quality could result in higher prices [@Larkin1999IntrinsicFishery; @Asche2015EconomicFisheries].  For example, because larger tuna receives higher prices, the effects of changes in average weight could be deduced from existing hedonic models [@McConnell2000HedonicHawaii; @Carroll2001PricingManagement].
 
-One of the difficulties with including a quantitative economic model is that it's difficult to know which predator and performance metric to formally model.  For example, prior to completing the predator models, we did not know that tuna weight but not abundances would be sensitive to various harvest control rules.  If we had tried to model how changes in abundance affect affect costs of harvesting tuna, this would have not been a fruitful use of time.
-
 Note that increases in the biomass of a particular predator could be a net ``bad''  for society.  For example, an increase in the biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.  The ability to manipulate the ecosystem with a prey-level ABC control rule to achieve desirable outcomes depends on the rates at which these increases in prey are converted into social utility. This conversion depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these technologies are not particularly well understood at this time.
 
+### Integration Realities
+<!---These two paragraphs are more like difficulties with doing an integrated model, not necessarily an economic problem.  If they are the only integration problems/weaknesses, I can  put them back in the economic dreams section.-->
+
+Catch in the economic model can be different from the yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the economic model suggest a assymetric error term in which the error depends on prices of inputs and outputs. 
+
+One of the difficulties with including a quantitative economic model is that it's difficult to know which predator and performance metric to formally model.  For example, prior to completing the predator models, we did not know that tuna weight but not abundances would be sensitive to various harvest control rules.  If we had tried to model how changes in abundance affect affect costs of harvesting tuna, this would have not been a fruitful use of time.
+
+<!---CJFAS requires References, Tables, then Figures.
+I don't want to move the tables and figures right now. It will cause massive headaches for any merges.
+-->
+
+# References
+<div id="refs"></div>
+
+\newpage
+# Tables
+hi!
+\newpage
+
+# Figures
+hi. A figure!
 
 
-
--------------------------------
-#References

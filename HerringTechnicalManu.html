@@ -133,7 +133,7 @@ $(document).ready(function () {
 <li><p>Discuss our approach to developing an MSE on a relatively truncated timetable in order to meet management time frames, and identify the lessons learned throughout the process, especially as they relate to using MSE as a tool to advance an ecosystem based approach to management <span class="citation">(Plagányi et al. 2014)</span>.</p></li>
 </ol>
 <p>The fisheries management process in New England usually starts when managers percieve a problem causing a management goal or objective to be unmet. Managers will propose solutions and a technical group, typically composed of scientists and policy analysts from state agencies and the National Marine Fisheries Service (NMFS), will analyze these possible solutions. Both managers and the technical group can be aided and advised by an Advisory Panel, a closed group appointed by managers that is typically drawn from members of the fishing industry, processing sector, and Environmental Non-Governmental Organizations (ENGOs). In addition to the public comment process, the Advisory Panel is one of the mechanisms for stakeholders to raise awareness of management problems to managers. The Council will eventually select a solution through a vote and NMFS will, after verifying that it is consistent with applicable laws, translate those solutions into regulations and enforce those regulations. Management actions, particularly contentious ones, can take years to develop and implement.</p>
-<p>In January 2016, the New England Fishery Management Council (NEFMC), the political body responsible for federally managed species in the northeast US, requested an MSE to evaluate harvest control rules (HCRs) for Atlantic herring (hereafter herring) <em>Clupea harengus</em> . Fishery managers wanted to develop an HCR that, among other things, accounted for the role of Atlantic herring as forage in the ecosystem; however, the exact ``accounting’’ system was left to stakeholders. Perhaps because recent herring management actions have been quite contentious, managers decided that any member of the public was a stakeholder. Stakeholder input was solicited on objectives, performance metrics, and control rules themselves during a workshop in May 2016. Members of the herring, lobster, groundfish, tuna, recreational fishermen, and whale-watching industries participated as well as ENGOs, federal and state agencies, and academics. Input from these diverse stakeholders were then distilled into a set of desired outcomes and metrics that could be included in a scientific model. Notably, while the techincal group knew the general scope of the modeling exercise (HCRs that account for herring as forage), detailed modeling of many components of the ecosystem could not begin in earnest until this step was finished.</p>
+<p>In January 2016, the New England Fishery Management Council (NEFMC), the political body responsible for federally managed species in the northeast US, requested an MSE to evaluate harvest control rules (HCRs) for Atlantic herring (hereafter herring) <em>Clupea harengus</em> . Fishery managers wanted to develop an HCR that, among other things, accounted for the role of Atlantic herring as forage in the ecosystem. However, the exact ‘’accounting’’ system was left to stakeholders. Perhaps because recent herring management actions have been quite contentious, managers decided that any member of the public was a stakeholder. Stakeholder input was solicited on objectives, performance metrics, and control rules themselves during a workshop in May 2016. Members of the herring, lobster, groundfish, tuna, recreational fishermen, and whale-watching industries participated as well as ENGOs, federal and state agencies, and academics. Input from these diverse stakeholders were then distilled into a set of desired outcomes and metrics that could be included in a scientific model. Notably, while the techincal group knew the general scope of the modeling exercise (HCRs that account for herring as forage), detailed modeling of many components of the ecosystem could not begin in earnest until this step was finished.</p>
 <p>The NEFMC desired to have results from the MSE ready to inform fisheries management decisions within one year, which left little time to develop the technical aspects of the MSE. A particularly challenging aspect of the time frame was deciding what technical aspects of the MSE (e.g., operating models) could be compromised (i.e., perhaps not ideal from a scientific or best-practices standpoint) while ensuring the results would still accurately portray the trade-offs among objectives and remain relevant for decision-making.</p>
 <p><strong>Background on herring</strong> Mostly used as lobster bait. Caught with purse seines (night, inshore), single and paired midwater trawl (anytime, anywhere) and bottomtrawl (mostly southern new england). High volume, low prices. large boats. Single species stock assessments indicated biomass was historically high. Small retrospective pattern? Changes over time in some life-history parameters (weight-at-age=growth). Higher uncertainty about other parameters (M and steepness). Show up in diets of many predators that are sampled in NEFSC’s bottom-trawl survey. It’s forage, so it’s also eaten by birds, whales, and other things.<br />
 <!-- not sure where these parapgraphs belong --></p>
@@ -149,7 +149,7 @@ Recruitment followed Beverton-Holt dynamics <span class="citation">(Francis 1992
  \varrho \sim N(0,\sigma_R^2) \\
  SSB_y=\sum\limits_{a=1}^{8+}N_{a,y}m_aW_a. \\
 \end{equation}\]</span>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD The variance of recruitment process errors (<span class="math inline">\(\sigma_R^2\)</span>) equaled 0.36 and the degree of autocorrelation (<span class="math inline">\(\omega\)</span>) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment <span class="citation">(Deroba 2015)</span>.</p>
+<p>The variance of recruitment process errors (<span class="math inline">\(\sigma_R^2\)</span>) equaled 0.36 and the degree of autocorrelation (<span class="math inline">\(\omega\)</span>) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment <span class="citation">(Deroba 2015)</span>.</p>
 <p><em>Assessment Error.–</em> A stock assessment was approximated (i.e., assessment errors) similar to <span class="citation">Punt et al. (2008)</span> and <span class="citation">Deroba (2014)</span>. Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias_{} (Table XX T6-T7):</p>
 <span class="math display">\[\begin{equation}
 \widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
@@ -170,51 +170,120 @@ Recruitment followed Beverton-Holt dynamics <span class="citation">(Francis 1992
 <tbody>
 <tr class="odd">
 <td align="left">Truth</td>
-<td align="left">Low: high M, low h</td>
-<td align="left">1970s: larger</td>
+<td align="left">Low: high M, low h (0.44)</td>
+<td align="left">1976-1985: fast</td>
 <td align="left">60% overestimate</td>
 </tr>
 <tr class="even">
 <td align="left">Consequences</td>
-<td align="left">Low: high M, low h</td>
-<td align="left">Current: smaller</td>
+<td align="left">Low: high M, low h (0.44)</td>
+<td align="left">2005-2014: slow</td>
 <td align="left">60% overestimate</td>
 </tr>
 <tr class="odd">
 <td align="left">Fake news</td>
-<td align="left">Low: high M, low h</td>
-<td align="left">1970s: larger</td>
+<td align="left">Low: high M, low h (0.44)</td>
+<td align="left">1976-1985: fast</td>
 <td align="left">None</td>
 </tr>
 <tr class="even">
 <td align="left">Bob</td>
-<td align="left">Low: high M, low h</td>
-<td align="left">Current: smaller</td>
+<td align="left">Low: high M, low h (0.44)</td>
+<td align="left">2005-2014: slow</td>
 <td align="left">None</td>
 </tr>
 <tr class="odd">
 <td align="left">Bart Simpson</td>
-<td align="left">High: low M, high h</td>
-<td align="left">1970s: larger</td>
+<td align="left">High: low M, high h (0.79)</td>
+<td align="left">1976-1985: fast</td>
 <td align="left">60% overestimate</td>
 </tr>
 <tr class="even">
 <td align="left">Beavis</td>
-<td align="left">High: low M, high h</td>
-<td align="left">Current: smaller</td>
+<td align="left">High: low M, high h (0.79)</td>
+<td align="left">2005-2014: slow</td>
 <td align="left">60% overestimate</td>
 </tr>
 <tr class="odd">
 <td align="left">Something</td>
-<td align="left">High: low M, high h</td>
-<td align="left">1970s: larger</td>
+<td align="left">High: low M, high h (0.79)</td>
+<td align="left">1976-1985: fast</td>
 <td align="left">None</td>
 </tr>
 <tr class="even">
 <td align="left">Something else</td>
-<td align="left">High: low M, high h</td>
-<td align="left">Current: smaller</td>
+<td align="left">High: low M, high h (0.79)</td>
+<td align="left">2005-2014: slow</td>
 <td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Age</th>
+<th align="left">High M</th>
+<th align="left">Low M</th>
+<th align="left">Fast Growth</th>
+<th align="left">Slow Growth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">0.81</td>
+<td align="left">0.54</td>
+<td align="left">0.01</td>
+<td align="left">0.02</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">0.65</td>
+<td align="left">0.43</td>
+<td align="left">0.03</td>
+<td align="left">0.04</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">0.54</td>
+<td align="left">0.36</td>
+<td align="left">0.09</td>
+<td align="left">0.07</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">0.48</td>
+<td align="left">0.32</td>
+<td align="left">0.16</td>
+<td align="left">0.11</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">0.45</td>
+<td align="left">0.3</td>
+<td align="left">0.21</td>
+<td align="left">0.14</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">0.42</td>
+<td align="left">0.28</td>
+<td align="left">0.25</td>
+<td align="left">0.16</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">0.41</td>
+<td align="left">0.27</td>
+<td align="left">0.28</td>
+<td align="left">0.18</td>
+</tr>
+<tr class="even">
+<td align="left">8+</td>
+<td align="left">0.40</td>
+<td align="left">0.26</td>
+<td align="left">0.31</td>
+<td align="left">0.21</td>
 </tr>
 </tbody>
 </table>
@@ -340,8 +409,9 @@ In general, if support for a relationship between herring and predator recruitme
 B_{y+1}^P = S_{y}^P (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, or
 \end{equation}\]</span>
 <span class="math display">\[\begin{equation}
-B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}.
+B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}, 
 \end{equation}\]</span>
+<p>where either <span class="math inline">\(AnnAlpha\)</span> or <span class="math inline">\(AnnRho\)</span> are defined for a predator using herring population parameters (see Eqn.  below).</p>
 <p>Finally, herring population size <span class="math inline">\(N_{y}\)</span> could be related to predator survival using a multiplier on constant predator annual natural mortality <span class="math inline">\(v\)</span>:</p>
 <span class="math display">\[\begin{equation}
 v_{y} =  v e ^ {-(\frac{N_{y}}{N_{F=0}})\delta} \label{varmort_equation},
@@ -568,7 +638,11 @@ Modeled herring relative population size-dogfish natural mortality relationship
 <div id="performance-metrics" class="section level2">
 <h2><strong>Performance Metrics</strong></h2>
 <p><strong>Herring</strong></p>
-<p>For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years. Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes. Median SSB, <span class="math inline">\(\frac{SSB}{SSB_{F=0}}\)</span>, <span class="math inline">\(\frac{SSB}{SSB_{MSY}}\)</span>, <em>yield</em>, <span class="math inline">\(\frac{yield}{MSY}\)</span>, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics. Additional performance metrics included the proportion of the last 50 years of each simulation with <span class="math inline">\(SSB &lt; SSB_{MSY}\)</span>, <span class="math inline">\(SSB &lt; \frac{SSB_{MSY}}{2}\)</span> (i.e., proportion of the last 50 years that are overfished), <span class="math inline">\(SSB &lt; 0.3SSB_{F=0}\)</span>, <span class="math inline">\(SSB &lt; 0.75SSB_{F=0}\)</span>, fully-selected <span class="math inline">\(F &gt; F_{MSY}\)</span> (i.e., proportion of the last 50 years that overfishing occurred), and <em>Q</em>=0 (i.e., proportion of the last 50 years that the fishery was closed). Interannual variation in yield (<em>IAV</em>) was also recorded over the last 50 years of each simulation (Table XX T10). These performance metrics were highlighted to be of interest at the stakeholder workshops.</p>
+For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years. Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes. Median SSB, <span class="math inline">\(\frac{SSB}{SSB_{F=0}}\)</span>, <span class="math inline">\(\frac{SSB}{SSB_{MSY}}\)</span>, <em>yield</em>, <span class="math inline">\(\frac{yield}{MSY}\)</span>, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish over the last 50 years of each simulation were recorded as performance metrics. Additional performance metrics included the proportion of the last 50 years of each simulation with <span class="math inline">\(SSB &lt; SSB_{MSY}\)</span>, <span class="math inline">\(SSB &lt; \frac{SSB_{MSY}}{2}\)</span> (i.e., proportion of the last 50 years that are overfished), <span class="math inline">\(SSB &lt; 0.3SSB_{F=0}\)</span>, <span class="math inline">\(SSB &lt; 0.75SSB_{F=0}\)</span>, fully-selected <span class="math inline">\(F &gt; F_{MSY}\)</span> (i.e., proportion of the last 50 years that overfishing occurred), and <em>Q</em>=0 (i.e., proportion of the last 50 years that the fishery was closed). Interannual variation in yield (<em>IAV</em>) was also recorded over the last 50 years of each simulation (Table XX T10):
+<span class="math display">\[\begin{equation}
+IAV=\frac{\sqrt{\frac{1}{50}\sum\limits_{y=1}^{50}(Y_{y+1}-Y_{y})^2}}{(\frac{1}{50}\sum\limits_{y=1}^{50}Y_y)}.
+\end{equation}\]</span>
+<p>These performance metrics were highlighted to be of interest at the stakeholder workshops.</p>
 <p><strong>Predators</strong> Predator performance metrics included those described at the stakeholder workshop, as well as several others drawn from MSE best practices <span class="citation">(Punt et al. 2016b)</span>. Each of the simulated herring time series for every operating model, control rule, and simulation was passed to each predator model, resulting in outputs as described below using the equations above.</p>
 <p>All predator performance metrics were calculated based on the final 50 years of each replicate simulation. For all metrics other than “frequency of good status” metrics, we took the median value over the final 50 years of each replicate simulation. Then, the 25th percentile, the median, and the 75th percentile of these 100 medians were calcualted to represent the performance metric for a particular control rule. Results reported here focus on the median.</p>
 <div id="biomass-abundance-recruitment" class="section level3">
@@ -585,7 +659,7 @@ Modeled herring relative population size-dogfish natural mortality relationship
 </div>
 <div id="status-relative-to-thresholds" class="section level3">
 <h3>Status relative to thresholds</h3>
-<p>Stakeholders were interested in different measures of population status depending on the predator. For commercially fished species, status relative to current management reference points was preferred. Tuna and dogfish biomass was divided by a biomass reference point specified in current stock assessments: tuna <span class="math inline">\(SSB_{MSY}\)</span> was 13226 <span class="citation">(ICCAT 2015)</span>, and dogfish <span class="math inline">\(SSB_{MSY}\)</span> was 159288 <span class="citation">(Rago and Sosebee 2010)</span>. Because dogfish were fully exploited in our model, they did not reach <span class="math inline">\(SSB_{MSY}\)</span>, so we also evaluated status relative to 0.5 <span class="math inline">\(SSB_{MSY}\)</span> (“overfished”). Tuna condition status was assessed by dividing the output population average weight with the equilibrium average weight. Common tern colonies are managed to improve productivity, so stakeholders suggested that a common tern productivity level of 0.8 would be a minimum threshold, while a productivity of 1.0 would be a target. In addition, total population status was measured relative to current population numbers using the rationale that maintaining at least the current population was desirable. The average common tern population of nesting pairs (including Monomoy) from 1998-2015 was 16000.</p>
+<p>Stakeholders were interested in different measures of population status depending on the predator. For commercially fished species, status relative to current management reference points was preferred. Tuna and dogfish biomass was divided by a biomass reference point specified in current stock assessments: tuna <span class="math inline">\(SSB_{MSY}^P\)</span> was 13226 <span class="citation">(ICCAT 2015)</span>, and dogfish <span class="math inline">\(SSB_{MSY}^P\)</span> was 159288 <span class="citation">(Rago and Sosebee 2010)</span>. Because dogfish were fully exploited in our model, they did not reach <span class="math inline">\(SSB_{MSY}^P\)</span>, so we also evaluated status relative to 0.5 <span class="math inline">\(SSB_{MSY}^P\)</span> (“overfished”). Tuna condition status was assessed by dividing the output population average weight with the equilibrium average weight. Common tern colonies are managed to improve productivity, so stakeholders suggested that a common tern productivity level of 0.8 would be a minimum threshold, while a productivity of 1.0 would be a target. In addition, total population status was measured relative to current population numbers using the rationale that maintaining at least the current population was desirable. The average common tern population of nesting pairs (including Monomoy) from 1998-2015 was 16000.</p>
 </div>
 <div id="frequency-of-good-status" class="section level3">
 <h3>Frequency of good status</h3>
