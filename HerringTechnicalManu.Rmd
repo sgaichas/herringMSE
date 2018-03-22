@@ -76,7 +76,7 @@ knit_hooks$set(output = function(x, options) {
 
 #Introduction
 
-Atlantic herring (hereafter herring) *Clupea harengus* in the Northwest Atlantic are preyed upon by fish, seabirds, and marine mammals, and can account for 20-50% of the diet of these predators (Overholtz and Link 2007; Smith and Link 2010; Curti et al., 2013). Herring are also subject to a directed fishery, mostly using midwater trawls, purse seines, and bottom trawls, that averaged 85,000mt of landings during 2008-2017. Much of the landings are also used as bait in the relatively high value American lobster Homarus americanus fishery. Herring life-history traits (e.g., weight-at-age) have also varied through time and have a complex stock strucutre that creates uncertainty in their assessment and management. Thus, herring are of broad interest in the region, but anticipating the relative performance of mangement strategies (e.g., harvest control rules) in the face of uncertainties is challenging, which makes a management strategy evaluation (MSE) for herring in the region a potentially informative tool.
+Atlantic herring (hereafter herring) *Clupea harengus* in the Northwest Atlantic are preyed upon by fish, seabirds, and marine mammals, and can account for 20-50% of the diet of these predators (Overholtz and Link 2007; Smith and Link 2010; Curti et al., 2013). Herring are also subject to a directed fishery, mostly using midwater trawls, purse seines, and bottom trawls, that averaged 85,000mt of landings during 2008-2017. Much of the landings are also used as bait in the relatively high value American lobster *Homarus americanus* fishery. Herring life-history traits (e.g., weight-at-age) have also varied through time and have a complex stock strucutre that creates uncertainty in their assessment and management. Thus, herring are of broad interest in the region, but anticipating the relative performance of mangement strategies (e.g., harvest control rules) in the face of uncertainties is challenging, which makes a management strategy evaluation (MSE) for herring in the region a potentially informative tool.
 
 Management strategy evaluation uses simulation to evaluate the trade-offs resulting from alternative management options in the face of uncertainty [@punt2016management]. MSEs require time, however, for stakeholder input, data collection, and model development [@butterworth2007management] (Punt et al., 2014). As such, the process can take much longer than "traditional" management time frames [@butterworth2007management]. The development time is also likely to lengthen when explicit ecosystem, multi-species, or socioeconomic considerations are desired because the data and modeling needs, and subsequent uncertainties, are all greater than in a single species approach. This manuscript chronicles the development of an MSE done on a truncated timetable (~12 months) required to meet management time frames. The objectives of this manuscript were to:
 
@@ -136,7 +136,7 @@ tabl <- "
 |	$N^P$	|	predator abundance
 |	$S^P$	|	annual predator survival
 |	$R^P$	|	predator recruitment from Beverton-Holt relationship
-|	$\\bar{B}^P$	|	predator recruitment as modified by a relationship with herring
+|	$\\bar{R}^P$	|	predator recruitment as modified by a relationship with herring
 |	$v$	|	annual predator natural mortality
 |	$u$	|	annual predator exploitation mortality
 |	$Fwint$	|	intercept of Ford-Walford relationship
