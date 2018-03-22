@@ -1258,19 +1258,7 @@ Results were generally robust among operating models when presented relative to 
 
 The constant catch, conditional constant catch, and restricting annual changes in the quota by 15% produced less variable yield than the other biomass based alternatives, but at the expense of yield, more frequent low levels of herring biomass, and more outcomes relatively detrimental to predators. This result is consistent with previous simulations of similar harvest control rules for lake whitefish *Coregonus clupeaformis* in the Laurential Great Lakes (@Deroba2012Evaluating) and roundfish stock managed by the International Council for the Exploration of the Sea (@Kell2006). For lake whitefish, @Deroba2012Evaluating found that a conditional constant catch rule could achieve similar stability in yield as a 15% restriction on the interannual change to a quota applied to a biomass based control rule, but with higher yields.  A broader range of percent restrictions on the interannual variation in the quota should be evaluated, however, before assuming that these conclusions are general.  A 15% restriction was used in this analysis because they amount was specifed as desirable by stakeholders.  Conceivably, a different percentage may strike a more agreeable tradeoff between stability and other metrics of interest.  The performance of restraints on the interannual variation in quotas also depends on stock status and variation in life history traits, such as growth (Punt et al., 2002; @Kell2006), and so should likely be evaluated on a case by case basis.
 
-If short-term stability is an objective, then using quota blocks may be effective.  Some BB CR options with quota blocks could produce similar performance as annual changes in the quota.  Although, at similar level of yields, the quota blocks produced more options with lower biomass.  Thus, a closed-loop simulation should be used to evaluate the changes in relative performance between applying a CR annually or using a quota blocks.
-
-We assumed reference points were known without error, and so our results may not generalize to cases where such values are poorly estimated.  Incorporating error in the estimation of reference points within simulations is an area of active research, but is not straightforward.  For example, the reference points (e.g., MSY) depend on life history traits that may change through time, and so how to accommodate time varying life history in the calculation of the reference values would need to be considered as part of a management strategy.  See Deroba and Bence.
-
-We did not incorporate a full stock assessment due to time contraints.  Discuss pros and cons; this is part of the reality and dream, as is the above paragraph.
-
-MICE can be a reasonable approach to conducting science to meet relatively short managment time frames.  Scientists may have to sacrifice some dreams in order to meet realities of doing research in support of managment.  Review other MICE literature.  Discuss MICE in the context of multi-species/ecosystemy based management, and whether this even qualifies as ecosystem based.
-
-Dive into the "forage" fish debate!?  While herring may constitute "large" fractions of diet, our population level analyses suggest only relatively weak relationships.  Likely due to alternative prey.  Herring abundance may also not be the most important aspect for predators, as their condition seems to be more directly linked to tuna condition, and tuna condition has been good at low herring N and visa versa.
-
-An open stakeholder driven process produced dividends for this analysis in the form of improved relationships and data.  Greater attention should be paid to what stakeholders are involved and how they are involved in MSE processes.  Probably leave a short paragraph assuming Feeney et al. accepted.
-
-Econ something.  Sorry M-Y, but that's the best I can do getting started on Econ discussion topics.
+If short-term stability in yield is a fishery objective, then using quota blocks where the target harvest is the same for multiple years may be an effective method that costs little in the performance of other metrics.  The biomass based options with three or five year quota blocks produced similar ranges of performance and similar tradeoffs as annual changes in the quota. Thus, short-term stability could be gained at no long-term cost with appropriately selected harvest policy parameters.  Although, at similar level of yields, the quota block alternatives produced more options with lower biomass.  Thus, a closed-loop simulation should be used to evaluate the changes in relative performance between applying a control rule annually or using multi-year specifications.  In a simulation of lake whitefish, Li et al. (2016) found that the method of specifying target harvests between stock assessments was less important to relative performance than assessment frequency.  Furthermore, setting target harvest to the same value for multiple years between assessments, as in the quota blocks used here, performed similarly to using projections in the interim years. 
 
 If we care about herring as forage, then including herring biomass is effectively double counting.  Alternatively, it suggests that something was left out of the ecosystem model.  <!---ML will tighten up -->
 
@@ -1280,7 +1268,15 @@ In this section, we discuss the limitations of the quantiative models and simpli
 
 ### Herring Dreams
 
+We assumed reference points were known without error, and so our results may not generalize to cases where such values are poorly estimated.  Incorporating error in the estimation of reference points within simulations is an area of active research, but is not straightforward.  For example, the reference points (e.g., MSY) depend on life history traits that may change through time, and so how to accommodate time varying life history in the calculation of the reference values would need to be considered as part of a management strategy.  See Deroba and Bence.
+
+We did not incorporate a full stock assessment due to time contraints.  Discuss pros and cons; this is part of the reality and dream, as is the above paragraph.
+
 ### Predator Dreams
+
+MICE can be a reasonable approach to conducting science to meet relatively short managment time frames.  Scientists may have to sacrifice some dreams in order to meet realities of doing research in support of managment.  Review other MICE literature.  Discuss MICE in the context of multi-species/ecosystemy based management, and whether this even qualifies as ecosystem based.
+
+Dive into the "forage" fish debate!?  While herring may constitute "large" fractions of diet, our population level analyses suggest only relatively weak relationships.  Likely due to alternative prey.  Herring abundance may also not be the most important aspect for predators, as their condition seems to be more directly linked to tuna condition, and tuna condition has been good at low herring N and visa versa.
 
 ### Economic Dreams
 The economic model of the herring fishery did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal effect when comparing HCRs within or across OMs.  Net revenues would all be overestimated by the same fixed amount.  The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs.  However, in the long run, firms can enter and exit this industry.  Less than three-quarters of the permitted herring vessels were active in the fishery, suggesting that firms could enter if future profitability is expected to be high.  We did not model firm entry and exit; this is a difficult decision to model.  Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible on the timeline requested by NEFMC.  
@@ -1307,6 +1303,10 @@ One of the difficulties with including a quantitative economic model is that it'
 <!---CJFAS requires References, Tables, then Figures.
 I don't want to move the tables and figures right now. It will cause massive headaches for any merges.
 -->
+
+##Conclusion
+
+An open stakeholder driven process produced dividends for this analysis in the form of improved relationships and data.  Greater attention should be paid to what stakeholders are involved and how they are involved in MSE processes.  Probably leave a short paragraph assuming Feeney et al. accepted.
 
 # References
 <div id="refs"></div>
