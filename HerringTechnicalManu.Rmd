@@ -5,12 +5,12 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -619,13 +619,13 @@ ternproddiet + facet_wrap(~colony) #+ theme(text=element_text(size=16))
 
 ```
 
-The estimated population size of herring on the Northeast US shelf had some relationship to the amount of herring in tern diet at several colonies (4 of 13 common tern colony diets related to herring Age 1 recruitment, 6 of 13 common tern colony diets related to herring total B, and 4 of 13 common tern colony diets related to herring SSB; detailed statistics and plots available upon request). However, statistically significant direct relationships between herring population size and tern productivity were rare, with only Ship Island productivity increasing with herring total B, and Eastern Egg Rock, Matinicus Rock, Ship, and Monomoy Islands productivity increasing with herring SSB. Given that Monomoy Island tern chicks consistently received the lowest proportion of herring in their diets of any colony (0-11%), we donât consider this relationship further to build the model.  
+The estimated population size of herring on the Northeast US shelf had some relationship to the amount of herring in tern diet at several colonies (4 of 13 common tern colony diets related to herring Age 1 recruitment, 6 of 13 common tern colony diets related to herring total B, and 4 of 13 common tern colony diets related to herring SSB; detailed statistics and plots available upon request). However, statistically significant direct relationships between herring population size and tern productivity were rare, with only Ship Island productivity increasing with herring total B, and Eastern Egg Rock, Matinicus Rock, Ship, and Monomoy Islands productivity increasing with herring SSB. Given that Monomoy Island tern chicks consistently received the lowest proportion of herring in their diets of any colony (0-11%), we don't consider this relationship further to build the model.  
 
 Based on tern feeding observations, we would expect the number of age 1 herring in the population to be most related to tern productivity since that is the size class terns target, but this relationship was not found in analyzing the data. Herring total biomass was positively related to tern diets at nearly half of the colonies, and reflects all size classes including the smaller sizes most useful as tern forage, but was only directly related to tern productivity at one colony.  Herring SSB was not considered further as an index of tern prey because it represents sizes larger than tern forage. 
 
 <!--Examining all colonies together shows some relationship between herring population size and herring in tern diets, but no consistent relationship between the proportion of herring in tern diets and tern productivity, or between herring population size and tern productivity. Therefore, a reasonable lower bound on the potential for herring to influence tern productivity in the Gulf of Maine is âno relationship,â and any herring control rule (short of one that severely overfishes or eliminates the stock) would not expected to affect tern productivity under this assumption.--> 
 
-To represent the potential for herring to influence tern productivity, we parameterized a tern ârecruitment multiplierâ based on herring assessed total biomass and common tern productivity across all colonies (except Monomoy where terns eat sandlance). This relationship includes a threshold herring biomass where common tern productivity would drop below 1.0, and above that threshold productivity exceeds 1.0 (Fig. \ref{herrternmod}). The threshold of ~400,000 tons is set where a linear relationship between herring total biomass and common tern productivity crosses productivity=1 (black dashed line in Fig. \ref{herrternmod}). However, the selected threshold is uncertain because there are few observations of common tern productivity at low herring total biomass (1975-1985). The linear relationship does not have a statistically significant slope; a curve was fit to represent a level contribution of herring total biomass to common tern productivity above the threshold. The curve descends below the threshold, dropping below 0.5 productivity at around 50,000 tons and representing the extreme assumption that herring extinction would result in tern productivity of 0. Although the relationship of tern productivity to herring biomass at extremely low herring populations has not been quantified, control rules that allow herring extinction do not meet stated management objectives for herring, so this extreme assumption for terns will not change any decisions to include or exclude control rules. 
+To represent the potential for herring to influence tern productivity, we parameterized a tern "recruitment multiplier" based on herring assessed total biomass and common tern productivity across all colonies (except Monomoy where terns eat sandlance). This relationship includes a threshold herring biomass where common tern productivity would drop below 1.0, and above that threshold productivity exceeds 1.0 (Fig. \ref{herrternmod}). The threshold of ~400,000 tons is set where a linear relationship between herring total biomass and common tern productivity crosses productivity=1 (black dashed line in Fig. \ref{herrternmod}). However, the selected threshold is uncertain because there are few observations of common tern productivity at low herring total biomass (1975-1985). The linear relationship does not have a statistically significant slope; a curve was fit to represent a level contribution of herring total biomass to common tern productivity above the threshold. The curve descends below the threshold, dropping below 0.5 productivity at around 50,000 tons and representing the extreme assumption that herring extinction would result in tern productivity of 0. Although the relationship of tern productivity to herring biomass at extremely low herring populations has not been quantified, control rules that allow herring extinction do not meet stated management objectives for herring, so this extreme assumption for terns will not change any decisions to include or exclude control rules. 
 
 ```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success \\label{herrternmod}", out.width='400pt', message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
@@ -1038,9 +1038,9 @@ While some food habits data existed for marine mammals, consultation with marine
 
 Potential effects of changes in herring production and/or biomass on marine mammals were instead evaluated using an updated version of an existing food web model for the Gulf of Maine [@link_northeast_2008; @link_response_2009; @link_documentation_2006] and incorporating food web model parameter uncertainty. Overall, food web modeling showed that a simulated increase in herring production in the Gulf of Maine may produce modest but uncertain benefits to marine mammal predators, primarily because increased herring was associated with decreases in other forage groups also preyed on by marine mammals. Please see Appendix 1 of this document for full analyses and results. 
 
-## Summary of predator model input parameters
-Table 2. Predator model input parameters
-```{r pars, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+Predator model input parameters are summarized in Table \ref{predpars}. 
+
+```{r pars, tab.cap="Predator model input parameters\\label{predpars}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 | Parameter                | Tuna         | Tern         | Dogfish      |
 |:-------------------------|:-------------|:-------------|:-------------|
@@ -1060,6 +1060,7 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+
 ##**Performance Metrics**
 
 **Herring**
