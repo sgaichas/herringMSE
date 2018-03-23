@@ -247,45 +247,14 @@ The estimated population size of herring on the Northeast US shelf had some rela
 
 Based on tern feeding observations, we would expect the number of age 1 herring in the population to be most related to tern productivity since that is the size class terns target, but this relationship was not found in analyzing the data. Herring total biomass was positively related to tern diets at nearly half of the colonies, and reflects all size classes including the smaller sizes most useful as tern forage, but was only directly related to tern productivity at one colony.  Herring SSB was not considered further as an index of tern prey because it represents sizes larger than tern forage. 
 
-<!--Examining all colonies together shows some relationship between herring population size and herring in tern diets, but no consistent relationship between the proportion of herring in tern diets and tern productivity, or between herring population size and tern productivity. Therefore, a reasonable lower bound on the potential for herring to influence tern productivity in the Gulf of Maine is âno relationship,â and any herring control rule (short of one that severely overfishes or eliminates the stock) would not expected to affect tern productivity under this assumption.--> 
+<!--Examining all colonies together shows some relationship between herring population size and herring in tern diets, but no consistent relationship between the proportion of herring in tern diets and tern productivity, or between herring population size and tern productivity. Therefore, a reasonable lower bound on the potential for herring to influence tern productivity in the Gulf of Maine is no relationship, and any herring control rule (short of one that severely overfishes or eliminates the stock) would not expected to affect tern productivity under this assumption.--> 
 
 To represent the potential for herring to influence tern productivity, we parameterized a tern "recruitment multiplier" based on herring assessed total biomass and common tern productivity across all colonies (except Monomoy where terns eat sandlance). This relationship includes a threshold herring biomass where common tern productivity would drop below 1.0, and above that threshold productivity exceeds 1.0 (Fig. \ref{herrternmod}). The threshold of ~400,000 tons is set where a linear relationship between herring total biomass and common tern productivity crosses productivity=1 (black dashed line in Fig. \ref{herrternmod}). However, the selected threshold is uncertain because there are few observations of common tern productivity at low herring total biomass (1975-1985). The linear relationship does not have a statistically significant slope; a curve was fit to represent a level contribution of herring total biomass to common tern productivity above the threshold. The curve descends below the threshold, dropping below 0.5 productivity at around 50,000 tons and representing the extreme assumption that herring extinction would result in tern productivity of 0. Although the relationship of tern productivity to herring biomass at extremely low herring populations has not been quantified, control rules that allow herring extinction do not meet stated management objectives for herring, so this extreme assumption for terns will not change any decisions to include or exclude control rules. 
 
 When included in the model using $\gamma$ = 1.09 in equation \ref{recwithherring_equation}, this relationship adjusts the modeled common tern population increase to match the current average increase in common tern nesting pairs observed in the data (Fig. \ref{terntrendwherring}). There is still considerable uncertainty around this mean population trajectory which cannot be reflected in our simple model. 
 
 ### Groundfish
-Because no specific groundfish was identified as a representative herring predator during the stakeholder workshop, the first decision was which groundfish to model. Annual diet estimates (based on sample sizes of ~100+ stomachs) are available for the top three groundfish predators of herring (those with herring occurring in the diets most often in the entire NEFSC food habits database): spiny dogfish, Atlantic cod, and silver hake. Cod and spiny dogfish were considered first because their overall diet proportions of herring are higher, and because silver hake has the least recently updated assessment. Diet compositions by year were estimated for spiny dogfish, Georges Bank cod, and Gulf of Maine cod to match the scale of stock assessments. Full weighted diet compositions were estimated, and suggest considerable interannual variability in the herring proportion in groundfish diets (filled blue proportions of bars in Fig. \ref{gfishdiets}).  
-
-```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database \\label{gfishdiets}", message = FALSE, warning = FALSE}
-
-#dogdiet   <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/dogfishdietcomp.csv")
-#GBcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GBcoddietcomp.csv")
-#GOMcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GOMcoddietcomp.csv")
-
-names(dogdiet)[1]<-"Year"
-names(GBcoddiet)[1]<-"Year" 
-names(GOMcoddiet)[1]<-"Year"
-
-dogdiet <- cbind(dogdiet, Pred=rep("dogfish", dim(dogdiet)[1]))
-GBcoddiet <- cbind(GBcoddiet, Pred=rep("GBcod", dim(GBcoddiet)[1]))
-GOMcoddiet <- cbind(GOMcoddiet, Pred=rep("GOMcod", dim(GOMcoddiet)[1]))
-
-dogdiet <- gather(dogdiet, Prey, Percent, -Year, -Pred)
-GBcoddiet <- gather(GBcoddiet, Prey, Percent, -Year, -Pred)
-GOMcoddiet <- gather(GOMcoddiet, Prey, Percent, -Year, -Pred)
-
-dogcoddiet <- bind_rows(dogdiet, GBcoddiet, GOMcoddiet)
-
-dogcoddiet$fillwhite <- with(dogcoddiet, ifelse(Prey=="CLUHAR", 1,0))
-
-compplot2 <- ggplot(dogcoddiet, aes(Year, Percent, colour=Prey)) + 
-  geom_bar(stat = "identity", aes(fill=fillwhite)) 
-  #geom_bar(stat = "identity") 
-
-compplot2 + facet_wrap("Pred", nrow=3) + theme(legend.position="none")
-
-```
-
+Because no specific groundfish was identified as a representative herring predator during the stakeholder workshop, the first decision was which groundfish to model. Annual diet estimates (based on sample sizes of ~100+ stomachs) are available for the top three groundfish predators of herring (those with herring occurring in the diets most often in the entire NEFSC food habits database): spiny dogfish, Atlantic cod, and silver hake. Cod and spiny dogfish were considered first because their overall diet proportions of herring are higher, and because silver hake has the least recently updated assessment. Diet compositions by year were estimated for spiny dogfish, Georges Bank cod, and Gulf of Maine cod to match the scale of stock assessments. Full weighted diet compositions were estimated, and suggest considerable interannual variability in the herring proportion in groundfish diets (filled blue proportions of bars in Figure \ref{gfishdiets}).  
 
 
 Some interannual variation in diet may be explained by changing herring abundance. Dogfish and both cod stocks had positive relationships between the amount of herring observed in annual diets and the size of the herring population according to the most recent assessment (statistics and plots available upon request). This suggests that these groundfish predators are opportunistic, eating herring in proportion to their availability in the ecosystem. However, monotonically declining cod populations for both GOM and GB cod stocks resulted in either no herring-cod relationship, or a negative relationship between herring populations and cod populations (Fig. \ref{gfishBherrdiet}). Only dogfish spawning stock biomass had a positive relationship with the proporiton of herring in dogfish diet. Therefore, we selected dogfish as the groundfish predator for modeling.
@@ -295,10 +264,12 @@ Some interannual variation in diet may be explained by changing herring abundanc
 The dogfish model stock recruitment function, initial population, and annual natural mortality were adapted from information in [@rago_implications_1998; @rago_biological_2010; @bubley_reassessment_2012; @rago_update_2013]. Due to differential growth and fishing mortality by sex, our model best represents female dogfish (a split-sex delay difference model was not feasible within the time constraints of this MSE). Further, dogfish stock-recruit modeling to date based on Ricker functions [@rago_biological_2010] captures more nuances in productivity than the Beverton-Holt model we used. Our recruitment parameterization reflects a stock with generally low productivity and relatively high resilience, which we recognize is a rough approximation for a species such as dogfish. The annual fishing exploitation rate applied is average of the catch/adult female biomass from the most recent years of the 2016 data update provided to the Mid-Atlantic Fishery Management Council (Rago pers comm). 
 
 ### Herring-dogfish relationship model
-There was a weak positive relationship between dogfish total biomass and herring total biomass from the respective stock assessments (Fig. \ref{pupherring}), but no clear relationship between dogfish weight or dogfish recruitment and herring population size. During the recent period of relatively low dogfish recruitment (1995-2007), there is a positive relationship between dogfish pup average weight and herring proportion in diet, suggesting a potential growth and or recruitment mechanism; however this relationship does not hold throughout the time series (Fig. \ref{pupherring}). 
+There was a weak positive relationship between dogfish total biomass and herring total biomass from the respective stock assessments (Fig. \ref{pupherring}), but no clear relationship between dogfish weight or dogfish recruitment and herring population size. During the recent period of relatively low dogfish recruitment (1995-2007), there is a positive relationship between dogfish pup average weight and herring proportion in diet, suggesting a potential growth and or recruitment mechanism; however this relationship does not hold throughout the time series (Figure \ref{pupherring}). 
 
 Therefore, to simulate a potential positive relationship between herring and dogfish, we assumed that dogfish survival increased (natural mortality was reduced) by an unspecified mechanism as herring abundance increased (Fig. \ref{herringdogfish}). Because dogfish are fully exploited by fisheries in this model, the impact of this change in natural mortality on total survival has small to moderate benefits to dogfish population numbers and biomass. Using a $\delta$ = 0.2 in equation \ref{varmort_equation} results in weak increases in dogfish biomass with herring abundance consistent with observations.
+
 ### Marine mammals
+
 Because no specific marine mammal was identified as a representative herring predator in the stakeholder workshop, as with groundfish, the first decision was which marine mammal to model. Diet information for a wide range of marine mammals on the Northeast US shelf suggests that minke whales, humpback whales, harbor seals, and harbor porpoises have the highest proportions of herring in their diets [@smith_consumption_2015], and therefore may show some reaction to changes in the herring ABC control rule. 
 
 While some food habits data existed for marine mammals, consultation with marine mammal stock assessment scientists at the Northeast Fisheries Science Center confirmed that no data were available to parameterize a stock-recruitment relationship for any of these marine mammal species in the Northeast US region, and no such information was available in the literature for stocks in this region. Althouth it may be possible to develop stock-recruitment models for one or more of these species in the future, it was not possible within the time frame of the herring MSE. Therefore, we were unable to model marine mammals within the same framework as other predators. 
@@ -307,51 +278,9 @@ Potential effects of changes in herring production and/or biomass on marine mamm
 
 Predator model input parameters are summarized in Table \ref{predpars}. 
 
-### Economic model
-Econ model goes here.
+## Economics
 
-## Performance Metrics
-
-For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes. We report performance metrics over the final fifty years as a way to describe the long-run performance of a particular control rule. 
-
-### Herring performance metrics
-
-Median SSB, $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish  were recorded as herring performance metrics.  Additional performance metrics included the proportion of years with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion years the the stock is overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of years that overfishing occurred), and *Q*=0 (i.e., proportion of years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded (Table XX T10):
-\begin{equation}
-IAV=\frac{\sqrt{\frac{1}{50}\sum\limits_{y=1}^{50}(Y_{y+1}-Y_{y})^2}}{(\frac{1}{50}\sum\limits_{y=1}^{50}Y_y)}.
-\end{equation}
-
-These performance metrics were highlighted to be of interest at the stakeholder workshops.  
-
-### Predators
-Predator performance metrics included those described at the stakeholder workshop, as well as several others drawn from MSE best practices [@punt_management_2016]. Each of the simulated herring time series for every operating model, control rule, and simulation was passed to each predator model, resulting in outputs as described below using the equations above.
-
-For all metrics other than "frequency of good status" metrics, we report the median value for each simulation. Then, the 25th percentile, the median, and the 75th percentile of these 100 medians were calcualted to represent the performance metric for a particular control rule. Results reported here focus on the median.
-<!-- 
-We don't need all these mini sections, do we?
--->
-### Biomass, Abundance, Recruitment
-Population abundance and recruitment in numbers were output for all modeled predators. Population biomass was output for tuna and dogfish. These quantities were directly output by the models.
-
-### Predator condition
-Stakeholders expressed interest in predator condition for fish and marine mammal predators at the first workshop. While delay difference models do not track individuals or age cohorts, a measure of population average weight (population biomass/population numbers) was output for tuna and dogfish. 
-
-### Predator productivity
-Productivity, the number of fledglings per breeding pair, was output for the tern model. Productivity was calculated as recruitment times 10 (to account for the 10% survival rate of fledglings to adults) divided by tern abundance 4 years earlier in the simulation. 
-
-### Status relative to thresholds
-Stakeholders were interested in different measures of population status depending on the predator. For commercially fished species, status relative to current management reference points was preferred. Tuna and dogfish biomass was divided by a biomass reference point specified in current stock assessments: tuna $SSB_{MSY}^P$ was 13226 [@iccat_report_2015], and dogfish $SSB_{MSY}^P$ was 159288 [@rago_biological_2010]. Because dogfish were fully exploited in our model, they did not reach $SSB_{MSY}^P$, so we also evaluated status relative to 0.5 $SSB_{MSY}^P$ ("overfished"). Tuna condition status was assessed by dividing the output population average weight with the equilibrium average weight. Common tern colonies are managed to improve productivity, so stakeholders suggested that a common tern productivity level of 0.8 would be a minimum threshold, while a productivity of 1.0 would be a target. In addition, total population status was measured relative to current population numbers using the rationale that maintaining at least the current population was desirable. The average common tern population of nesting pairs (including Monomoy) from 1998-2015 was 16000. 
-
-### Frequency of good status
-Evaluating the frequency of desirable or undesirable states over the course of a simulation is suggested by @punt_management_2016. We calculated two metrics for each of the status determinations. First, we calculated the minimum number of years in any individual simulation that a metric was above a given threshold. This is a "worst case scenario" metric. Second, we calculated the median proportion of years across all simulations for a control rule that were above the threshold. This is an "average performance" metric addressing how often good status is maintained.
-
-**An Economic Model of the Herring Fishery** 
-
-*Basics and Intro--*
-There are many economic methods that can inform ecosystem approaches to fisheries management[^a].  @Kirkley2011AConsiderations use a static input-output model to simulate the effects of changes in herring quotas and predator biomass levels on the New England economy. Their analysis suggested that the effects of changes in herring catch on other segments of the economy are quite small; we, therefore confined the analysis to the herring fleet. @Lehuta2013InvestigatingEngland also construct an coupled ecological-economic model of herring under the assumption of competitive output markets for herring and zero economic profit.  We did not make this assumption.  
-
-[^a]: @Edwards2004PortfolioStocks and @Jin2016ApplyingEBFM illustrate a portfolio approach. @Jin2003LinkingEcosystem and @Jin2012DevelopmentEngland link regional economic models to ecosystem models. @Tschirhart2000GeneralEcosystem and @Finnoff2003HarvestingEcosystem link structural economic models of constrained optimization to ecosystem models.  
-
+### The Herring Fishery
 The economic model of the herring fishery converts \textit{yield} from the herring component into Gross Revenues (GR) and Net Operating Revenues (NR).  There are two fleets,trawl and purse seine, that are assumed to have the ability to catch 70 and 30% of the \textit{yield} respectively[^c].  The midwater trawl, paired midwater trawl, and bottom trawl are all aggregated into the trawl fleet. Gross Revenue, Net Revenue, and the constraints on harvest can be represented as ($y$ subscripts omitted here for simplicity):
 
 [^c]: The fishery is managed with four sub-ACLs and the purse seine fleet can only fish in one of the four areas.  This  70/30 split corresponds to recent history.
@@ -368,13 +297,10 @@ q^s &\leq .3yield; \hspace{2mm} q^t \leq .7yield
 \end{align}
 The optimization problem in equation \ref{optimization_problem} contains two embedded assumptions: total catch is less than or equal to Yield and that a fleet may  catching less than it's fraction of yield (presumably because it may be more profitable to select a lower level of landings).
 
-*Production and Costs--*
 Economic data collected from 2011-2015 by the Northest Fisheries Observer Program (NEFOP) are used to construct average daily costs for the trawl and purse seine fleets.  Fuel prices were much lower in 2011-2014 compared to 2015. We adjusted fuel prices to the 2011-2014 average; sensitivity analysis was performed by settting fuel prices to the 2015 levels but results not reported here.  Other costs of fishing included water, oil, and damage costs. Crew pay and fixed costs were not included.  
 
 We construct average catch per day fished for each fleet from the Vessel Trip Report databases over the same time period.  The trip lengths in the VTR and observer data were very similar. This allows us to construct the average cost of catching a metric ton of herring for the trawl and purse seine fleet ($c^t$ and $c^s$ respectively).  We assume that the average cost is equal to the marginal cost for each fleet.  These figures are presented in Table \ref{costs_combined}.
 
-
-*Prices--*
 Annual prices were constructed from NMFS dealer data for 1982 through 2016[^d]. Annual landings were constructed from the processed ME DMR landings dataset for the same time period.  Exploratory analysis suggested both a regime change in the mid-1990s and likely non-stationarity of both landings and prices.  We used the Bounds testing methodology developed by @Pesaran2001BoundsRelationships test for a long-run relationship between prices and quantities. This method does not require pretesting for stationarity; however, the test statistic does have an inconclusive zone in which knowledge of stationarity would required. A long-run relationship between prices and landings can be modeled as:
 
 [^d]: Prices have been normalized to 2015 real dollars using the Bureau of Labor Statistics (BLS) Producer Price Index (PPI) for Unprocessed and Packaged Fish (WPU0223). Because Atlantic Herring was not federally managed prior to the implementation of the Herring FMP in 2000; the NMFS dealer databases may not contain all landings prior to this time. The ME DMR data do not contain prices but is a census of landings.
@@ -401,12 +327,50 @@ Equation \ref{ECM} was first estimated on the full 1982-2015 dataset; model sele
 MY's code for running regressions is here: /home/mlee/Documents/Herring_PDT_work/Amendment8/MSE_ABC/price_things/  herring_realprice_timeseries.do  herring_realprice_timeseries2.do
 -->
 
-*Net Operating Revenues--*
 The simulation of Gross operating revenues occurs in a few steps.  Herring prices in a year are simulated using equations \ref{optimization_problem} and \ref{ARDL}, parameters from Table \ref{ardl_regression} previous year prices (initialized to the 2011-2015 average for the first year) under the assumption that both fleets combine to land the entire Yield.  If simulated prices are higher than the marginal cost of the trawl fleet($63.24/mt), both fleets are assumed to catch the entire Yield.  Otherwise, we use equations \ref{optimization_problem} and \ref{ARDL} to solve for quantity landed by the trawl fleet when the purse seine fleet lands 30% of yield. If it optimal for the trawl fishery to land nothing, we use equations \ref{optimization_problem} and \ref{ARDL} to find the purse seine's optimal amount of landings[^f]. Net revenues to the fishery can then be calculated directly from equation \ref{optimization_problem}.
 
 [^f]: Because the marginal costs for the purse seine are always less than the marginal costs of the trawl fishery, any landings by the trawl fleet imply the purse seine fleet is landing 30% of the yield.  
 
-*Stability --*
+## Performance Metrics
+
+For each combination of control rule shape and operating model, 100 simulations were conducted, each for 150 years.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes. We report performance metrics over the final fifty years as a way to describe the long-run performance of a particular control rule. 
+
+### Herring performance metrics
+
+Median SSB, $\frac{SSB}{SSB_{F=0}}$,  $\frac{SSB}{SSB_{MSY}}$, *yield*, $\frac{yield}{MSY}$, biomass of herring dying due to M, and the proportion of the herring population comprised of age-1 fish  were recorded as herring performance metrics.  Additional performance metrics included the proportion of years with $SSB < SSB_{MSY}$, $SSB < \frac{SSB_{MSY}}{2}$ (i.e., proportion years the the stock is overfished), $SSB < 0.3SSB_{F=0}$, $SSB < 0.75SSB_{F=0}$, fully-selected $F > F_{MSY}$ (i.e., proportion of years that overfishing occurred), and *Q*=0 (i.e., proportion of years that the fishery was closed).  Interannual variation in yield (*IAV*) was also recorded (Table XX T10):
+\begin{equation}
+IAV=\frac{\sqrt{\frac{1}{50}\sum\limits_{y=1}^{50}(Y_{y+1}-Y_{y})^2}}{(\frac{1}{50}\sum\limits_{y=1}^{50}Y_y)}.
+\end{equation}
+
+These performance metrics were highlighted to be of interest at the stakeholder workshops.  
+
+### Predator Performance Metrics
+Predator performance metrics included those described at the stakeholder workshop, as well as several others drawn from MSE best practices [@punt_management_2016]. Each of the simulated herring time series for every operating model, control rule, and simulation was passed to each predator model, resulting in outputs as described below using the equations above.
+
+For all metrics other than "frequency of good status" metrics, we report the median value for each simulation. Then, the 25th percentile, the median, and the 75th percentile of these 100 medians were calcualted to represent the performance metric for a particular control rule. Results reported here focus on the median.
+<!-- 
+We don't need all these mini sections, do we?
+-->
+
+#### Biomass, Abundance, Recruitment
+Population abundance and recruitment in numbers were output for all modeled predators. Population biomass was output for tuna and dogfish. These quantities were directly output by the models.
+
+#### Predator condition
+Stakeholders expressed interest in predator condition for fish and marine mammal predators at the first workshop. While delay difference models do not track individuals or age cohorts, a measure of population average weight (population biomass/population numbers) was output for tuna and dogfish. 
+
+#### Predator productivity
+Productivity, the number of fledglings per breeding pair, was output for the tern model. Productivity was calculated as recruitment times 10 (to account for the 10% survival rate of fledglings to adults) divided by tern abundance 4 years earlier in the simulation. 
+
+#### Status relative to thresholds
+Stakeholders were interested in different measures of population status depending on the predator. For commercially fished species, status relative to current management reference points was preferred. Tuna and dogfish biomass was divided by a biomass reference point specified in current stock assessments: tuna $SSB_{MSY}^P$ was 13226 [@iccat_report_2015], and dogfish $SSB_{MSY}^P$ was 159288 [@rago_biological_2010]. Because dogfish were fully exploited in our model, they did not reach $SSB_{MSY}^P$, so we also evaluated status relative to 0.5 $SSB_{MSY}^P$ ("overfished"). Tuna condition status was assessed by dividing the output population average weight with the equilibrium average weight. Common tern colonies are managed to improve productivity, so stakeholders suggested that a common tern productivity level of 0.8 would be a minimum threshold, while a productivity of 1.0 would be a target. In addition, total population status was measured relative to current population numbers using the rationale that maintaining at least the current population was desirable. The average common tern population of nesting pairs (including Monomoy) from 1998-2015 was 16000. 
+
+#### Frequency of good status
+Evaluating the frequency of desirable or undesirable states over the course of a simulation is suggested by @punt_management_2016. We calculated two metrics for each of the status determinations. First, we calculated the minimum number of years in any individual simulation that a metric was above a given threshold. This is a "worst case scenario" metric. Second, we calculated the median proportion of years across all simulations for a control rule that were above the threshold. This is an "average performance" metric addressing how often good status is maintained.
+
+### Economic Performance Metrics
+Median Gross and Net Revenues were performance metrics that were constructed directly from the economic submodel.  
+
+#### Stability
 Stakeholders were interested in understanding stability of the herring industry. We computed Interannual Variation (IAV) of Net Revenues. While IAV can summarize variability, it does not provide insight into the equilibrium properties of the time series.  An additional performance metric, stationarity, is used to assess the stability of net revenues over the terminal period. For each simulation, we perform an econometric test of stationarity [@Dickey1979DistributionRoot], by estimating 
 
 \begin{equation}
@@ -418,6 +382,80 @@ for each simulation. Econometric evidence that $\beta=0$ is evidence of a unit r
 Z  &= \frac{\sum_{i=1}^k \phi^{-1} (1-p_i)}{\sqrt(k)}
 \end{align}
 $Z$ has a standard normal distribution under the null hypothesis of no stable equilibrium.  We report the p-value associated with rejecting the null that particular control rule leads to non-stationary trajectory of revenue; small values are evidence of a stable equilbrium.  Second, we classify a particular simulation as stationary if we reject the null $H_0: \beta=0$ in favor of $H_A: \beta<0$ at the 10% significance level and  report the percentage of simulations that are stationary; large values are evidence of a stable equilibrium.
+
+
+#Results
+Stakeholders had wide-ranging, diverse, and often conflicting preferences. One of our first findings is that there often weaker tradeoffs than anticipated.  For example, the XXX for Dogfish, tuna, and XXX were relatively insensitive to both Operating Model and HCR type (Figure YAY). Other performance metrics were highly related to each other, like Net Revenue and Yield/MSY (Figure XY-scatter).  
+
+As second finding was that two classes of control rules (Constant Catch and the 3-year biomass based with a limit on adjustment) performed poorly relative to the other control rules.  Here’s a few results that illustrate that finding (Figure ZZZ). Perhaps stationarity goes here?
+
+## Effects of Operating Models
+
+The effect of growth on the relative performance of control rules was relatively minor for all metrics than the effect of *M* and steepness (INSERT A PLOT - maybe boxplot among all CRs?).  Furthermore, performance of control rules was similar between the operating models with different *M* and steepness values when reported relative to biological reference points (e.g., $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$), but the scale of results in absolute values was generally different (INSERT PLOT).  Consequently, results were only reported in relative units for the low *M*/high steepness, and slow growth operating model, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.
+
+Positive bias in assessment errors resulted in more control rules that led to lower amounts of biomass, more frequent biomass levels below $SSB_{MSY}$, higher *IAV*, but a generally similar range of yield (BOXPLOT).  ##Perhaps also add summary effect and boxplot for predator and econ metrics##.  For the sake of brevity, additional results and tradeoffs (see below) were only reported using an unbiased assessment error operating model.
+
+## Tradeoffs 
+
+### Herring
+
+Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, $\frac{yield}{MSY}$ vs. the frequncy that *Q*=0, and $\frac{yield}{MSY}$ vs. the frequncy that $SSB < \frac{SSB_{MSY}}{2}$.
+
+Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of $yield$ and $SSB$ than other control rules ().  At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with less $SSB$, such that the short-term stability of such quota blocks comes at the potential cost of less $SSB$.
+
+Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of $yield$ and *IAV* than other control rules (). Restricting the interannual change in the quota for the biomass based control rule or using one of the constant catch variants produced options with lower *IAV* than the biomass based alternatives, but biomass based options were available that could attain higher yields that the other control rules could not.  Thus, restricting the interannual change in the quota or using constant catch variants can produce more stable yields than alternatives, but at the cost of yield.
+
+Tradeoffs for $\frac{yield}{MSY}$ vs. the frequncy that *Q*=0 were similar to that of $\frac{yield}{MSY}$ vs. *IAV*.  Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of results than other control rule alternatives.  Restricting the interannual change in the quota for the biomass based control rule or using one of the constant catch variants produced less, and often no fishery closures, that could not be achieved by the biomass based control rules, but at the cost of not offering options that could achieve yields as high as biomass based control rules.
+
+All of the control rule alternatives offered options that had near zero frequency of $SSB < \frac{SSB_{MSY}}{2}$.  At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with higher frequency of $SSB < \frac{SSB_{MSY}}{2}$, such that the short-term stability of such quota blocks comes at the potential cost of more frequently dropping to relatively low levels of biomass.  While restricting the interannual change in the quota or using one of the constant catch variants offered options that had near zero frequency of $SSB <\frac{SSB_{MSY}}{2}$, these options could not achieve as high of yield as biomass based options that also had near zero frequency of $SSB <\frac{SSB_{MSY}}{2}$.  Some constant catch options also had near 100% frequency of $SSB <\frac{SSB_{MSY}}{2}$.
+
+# Discussion
+
+Results were generally robust among operating models when presented relative to biological reference points (e.g., $\frac{yield}{MSY}$), but absolute scale differed among operating models.  This result has been previously reported (@Deroba2012Evaluating) and is likely why the results of most MSEs are presented in relative units (e.g., @Amar2009TheFishery; @Deroba2012Evaluating; @Wiedenmann2017).  While convenient scientifically, the differences in absolute scale can create challenges when communicating with stakeholders because most people are more comfortable with absolute units (e.g., fishing industry representatives think in tons and not fractions of $MSY$; Feeney et al., this issue). Thus, reporting results in absolute units will still have value in public settings, and scientists should attempt to convey the reasons for differences in scale among operating models (Feeney et al., this issue).
+
+The constant catch, conditional constant catch, and restricting annual changes in the quota by 15% produced less variable yield than the other biomass based alternatives, but at the expense of yield, more frequent low levels of herring biomass, and more outcomes relatively detrimental to predators. This result is consistent with previous simulations of similar harvest control rules for lake whitefish *Coregonus clupeaformis* in the Laurential Great Lakes (@Deroba2012Evaluating) and roundfish stock managed by the International Council for the Exploration of the Sea (@Kell2006). For lake whitefish, @Deroba2012Evaluating found that a conditional constant catch rule could achieve similar stability in yield as a 15% restriction on the interannual change to a quota applied to a biomass based control rule, but with higher yields.  A broader range of percent restrictions on the interannual variation in the quota should be evaluated, however, before assuming that these conclusions are general.  A 15% restriction was used in this analysis because they amount was specifed as desirable by stakeholders.  Conceivably, a different percentage may strike a more agreeable tradeoff between stability and other metrics of interest.  The performance of restraints on the interannual variation in quotas also depends on stock status and variation in life history traits, such as growth (Punt et al., 2002; @Kell2006), and so should likely be evaluated on a case by case basis.
+
+If short-term stability in yield is a fishery objective, then using quota blocks where the target harvest is the same for multiple years may be an effective method that costs little in the performance of other metrics.  The biomass based options with three or five year quota blocks produced similar ranges of performance and similar tradeoffs as annual changes in the quota. Thus, short-term stability could be gained at no long-term cost with appropriately selected harvest policy parameters.  Although, at similar level of yields, the quota block alternatives produced more options with lower biomass.  Thus, a closed-loop simulation should be used to evaluate the changes in relative performance between applying a control rule annually or using multi-year specifications.  In a simulation of lake whitefish, Li et al. (2016) found that the method of specifying target harvests between stock assessments was less important to relative performance than assessment frequency.  Furthermore, setting target harvest to the same value for multiple years between assessments, as in the quota blocks used here, performed similarly to using projections in the interim years. 
+
+If we care about herring as forage, then including herring biomass is effectively double counting.  Alternatively, it suggests that something was left out of the ecosystem model.  <!---ML will tighten up -->
+
+## The Dream
+In this section, we discuss the limitations of the quantiative models and simplifications necessary to meet decision-making time frames while incorporating ecosystem and economic models into management strategy evaluation.
+
+### Herring Dreams
+
+The application of the biomass based and conditional constant catch control rules assumed $MSY$ reference points were known without error, which has been assumed in several other studies (Irwin et al., 2008; Punt et al., 2008).  Such reference points are likely to be uncertain in most cases, however, and the bias and precision of reference point estimates depends on life hisory traits and autocorrelation in recruitment (Haltuch et al., 2008; Haltuch et al., 2009).  How the relative performance of control rules would change in the presence of error in reference points is unclear and should be a topic for future research.  Given that assessment error affects relative control rule performance [@Deroba2008], errors in reference point estimation may compound those issues and affect results in meaningful ways.  Incorporating realistic errors in reference point estimation, however, will be challenging because the effects will depend on exploitation history and the degree to which life hisotry traits vary among years (Brodziak et al., 2008; Legault and Palmer 2016).  This MSE evaluated uncertianty in life history traits, but not time variation in those traits.  Methods for estimating reference points and the proper response of managment in the presence of time varying life history traits is an active area of research and has been a focal point of MSEs (@Amar2009TheFishery; Legault and Palmer 2016).  For example, increases in natural mortality through time have different implications on reference points depending on whether a per recruit approach is used or if managment is concerned with limiting total mortality, where a per recruit approach would increase target $F$ but limiting total mortality would require decreasing target $F$ (Legault and Palmer 2016).  An MSE for Gulf of Alaska walleye pollock *Theragra chalcogramma* demonstrated that management strategies (i.e., the combination of harvest control rule and estimation model) performed differently depending on how reference points were estimated in the presence of regime shifts in recruitment, with estimates of unfished biomass depending on the range of years used to estimate average recruitment (@Amar2009TheFishery).  Atlantic herring have experienced time varying growth, and the possibility of time varying natural mortality has been considered an uncertainty in recent stock assessments (@NEFSC_2012; @Deroba2015atlantic).  Thus, evaluating the effect of errors in reference point estimation would be a prudent advancement of the MSE.  The stakeholder driven process, however, was already overwhelming for many participants given the time frame, and so adding this additional realism would likely be best completed as a separate exercise that would rely moreso on technical experts than stakeholder input.
+
+This herring MSE did not incorporate a true stock assessment as part of the managment strategy.  The approach taken offered the advanatage of simplicity, brevity, and the ability to control bias in the assessment without having to specify a source of the bias (e.g., misspecified $M$, incorrect selectivity), as would be required with the incorporation of a true stock assessment. Conceivably, relative control rule performance could vary depending on the mispecification that induces a bias in a true stock assessment model, and so several alternative sources of bias would likely have to be evaluated as part of an MSE, significantly increasing computing time in an already demanding time frame.  Given the technical nature of stock assessments, constructing an evaluation of the effect of different sources of bias in a stock assessment also could likely be conducted outside of a stakeholder process.  None the less, incorporating a true stock assessment is considered best practice and may induce realism, such as levels of autocorrelation among assessment fits, that cannot be reproduced otherwise [@cox2008practical;@punt_management_2016].  Consequently, this MSE and subsequent managment decisions should be revisited as such additional realism is implemented.
+
+### Predator Dreams
+
+MICE can be a reasonable approach to conducting science to meet relatively short managment time frames.  Scientists may have to sacrifice some dreams in order to meet realities of doing research in support of managment.  Review other MICE literature.  Discuss MICE in the context of multi-species/ecosystemy based management, and whether this even qualifies as ecosystem based.
+
+Dive into the "forage" fish debate!?  While herring may constitute "large" fractions of diet, our population level analyses suggest only relatively weak relationships.  Likely due to alternative prey.  Herring abundance may also not be the most important aspect for predators, as their condition seems to be more directly linked to tuna condition, and tuna condition has been good at low herring N and visa versa.
+
+### Economic Dreams
+
+The economic model of the herring fishery did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal effect when comparing HCRs within or across OMs.  Net revenues would all be overestimated by the same fixed amount.  The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs.  However, in the long run, firms can enter and exit this industry.  Less than three-quarters of the permitted herring vessels were active in the fishery, suggesting that firms could enter if future profitability is expected to be high.  We did not model firm entry and exit; this is a difficult decision to model.  Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible on the timeline requested by NEFMC.  
+
+We also assume that marginal costs are equal to average variable costs, constant for each fleet, and do not depend on the level of biomass. A more rigorous approach might include estimating a (economic) production function for the herring fishery; this was not done in the interest of time.  It is difficult to predict how estimating a true cost function and integrating those results would change the results of the study.  
+
+The largest limitation of the economic component of the model is that only the herring fishery is quantitatively modeled. Consumers of landed herring and economic valuation of \textit{in-situ} herring are not considered.  Consumer welfare measures could be determined from a demand curve for herring.  Equation \ref{ARDL} estimates a price-quantity relationship, not necessarily a demand curve for herring.  Rigorous estimation of a demand curve for herring likely requires modeling goods are substitutes for herring, possibly including  mackerel, menhaden, squid, and other likely substitute bait. This was not done due to limited time available. 
+
+
+There are many economic methods that can inform ecosystem approaches to fisheries management[^a].  @Kirkley2011AConsiderations use a static input-output model to simulate the effects of changes in herring quotas and predator biomass levels on the New England economy. Their analysis suggested that the effects of changes in herring catch on other segments of the economy are quite small; we, therefore confined the analysis to the herring fleet. @Lehuta2013InvestigatingEngland also construct an coupled ecological-economic model of herring under the assumption of competitive output markets for herring and zero economic profit.  We did not make this assumption.  
+
+
+[^a]: @Edwards2004PortfolioStocks and @Jin2016ApplyingEBFM illustrate a portfolio approach. @Jin2003LinkingEcosystem and @Jin2012DevelopmentEngland link regional economic models to ecosystem models. @Tschirhart2000GeneralEcosystem and @Finnoff2003HarvestingEcosystem link structural economic models of constrained optimization to ecosystem models.  
+
+
+@Finnoff2003HarvestingEcosystem and @Brown2005AFisheries describe methods to trace the effects of changes in harvest or biomass of one species through an ecosystem.  The predator section models a few representative consumers of live herring: terns, tuna, whales, and predatory fish. Ecosystem valuation methods could be used to measure changes in outcomes for those species in dollar value [@loomis1996economic; @richardson2009total; @lew2015willingness].  People may derive value from changes in the status of these predators through either use or non-use values.  For example, people may directly value higher abundances of an animal or protection of an endangered species, even if they have no plans to watch or view them [@lew2010valuing; @lew2017temporal].  Quantifying these values typically is done using stated preference methods with data collected using surveys; these studies are costly and time consuming to develop and conduct rigorously.  Benefit transfer, a method in which valuation from previous studies is applied to a new study area,may be the only way to overcome these barriers [@navrud2007environmental; @johnston2010methods].
+
+Consumers may also derive use value from changes in the modeled species. For example, changes in whale populations may change outcomes for whale-watching customers [@Larson2004RevealingData].  This type of value can be quantified using both stated and revealed preference data, both of which typically require collection of survey data; these studies are also costly and time consuming to develp and conduct rigorously.  Perhaps more discouragingly, the precise good being valued (say, a doubling of the tern population) needs to be known quite early in the research process.  In this application, development of a valuation survey for terns would not have been able to start until after the predator modeling was nearly complete. Benefit transfer may be the only way to value some of the use values on the timeframe required by NEFMC.
+
+Another avenue for use value to arise is though changes in costs, catches, or prices in the associated commercial fishery.  For example, increases in biomass of spiny dogfish could lead to both higher quotas and lower costs to catch more abundant fish.  Examining changes in costs would require an economic model of production for the spiny dogfish fishery (similar to the model not used for the herring fleet) [@holland1999empirical; @hutniczak2014increasing; @reimer2017fisheries]. Changes in product quality could result in higher prices [@Larkin1999IntrinsicFishery; @Asche2015EconomicFisheries].  For example, because larger tuna receives higher prices, the effects of changes in average weight could be deduced from existing hedonic models [@McConnell2000HedonicHawaii; @Carroll2001PricingManagement].
+
+Note that increases in the biomass of a particular predator could be a net ``bad''  for society.  For example, an increase in the biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.  The ability to manipulate the ecosystem with a prey-level ABC control rule to achieve desirable outcomes depends on the rates at which these increases in prey are converted into social utility. This conversion depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these technologies are not particularly well understood at this time.
 
 <!---
 Comment out economic crap.
@@ -440,86 +478,18 @@ What we ask of fishery governance is that it coordinate institutional  rules and
 
 Fishery management must, among other things, incorporate multiple objectives, promote legitimacy by reflecting accepted norms, and have low transactions costs [@Hanna1999StrengtheningResources]. User participation in decision-making is a way to increase regulatory legitimacy [@Hanna1995UserCouncil]. One drawback to user-participation is that meetings tend to attract participants with the most extreme views [@Osborne2000MeetingsParticipation; @Turner2005MeetingsAnalysis].
 -->
--------------------------------
-
-#Results
-Stakeholders had wide-ranging, diverse, and often conflicting preferences. One of our first findings is that there often weaker tradeoffs than anticipated.  For example, the XXX for Dogfish, tuna, and XXX were relatively insensitive to both Operating Model and HCR type (Figure YAY). Other performance metrics were highly related to each other, like Net Revenue and Yield/MSY (Figure XY-scatter).  
-
-As second finding was that two classes of control rules (Constant Catch and the 3-year biomass based with a limit on adjustment) performed poorly relative to the other control rules.  Here’s a few results that illustrate that finding (Figure ZZZ). Perhaps stationarity goes here?
-**Effects of Operating Models**
-
-The effect of growth on the relative performance of control rules was relatively minor for all metrics than the effect of *M* and steepness (INSERT A PLOT - maybe boxplot among all CRs?).  Furthermore, performance of control rules was similar between the operating models with different *M* and steepness values when reported relative to biological reference points (e.g., $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$), but the scale of results in absolute values was generally different (INSERT PLOT).  Consequently, results were only reported in relative units for the low *M*/high steepness, and slow growth operating model, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.
-
-Positive bias in assessment errors resulted in more control rules that led to lower amounts of biomass, more frequent biomass levels below $SSB_{MSY}$, higher *IAV*, but a generally similar range of yield (BOXPLOT).  ##Perhaps also add summary effect and boxplot for predator and econ metrics##.  For the sake of brevity, additional results and tradeoffs (see below) were only reported using an unbiased assessment error operating model.
-
-**Tradeoffs**
-
-*Herring*
-
-Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, $\frac{yield}{MSY}$ vs. the frequncy that *Q*=0, and $\frac{yield}{MSY}$ vs. the frequncy that $SSB < \frac{SSB_{MSY}}{2}$.
-
-Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of $yield$ and $SSB$ than other control rules ().  At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with less $SSB$, such that the short-term stability of such quota blocks comes at the potential cost of less $SSB$.
-
-Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of $yield$ and *IAV* than other control rules (). Restricting the interannual change in the quota for the biomass based control rule or using one of the constant catch variants produced options with lower *IAV* than the biomass based alternatives, but biomass based options were available that could attain higher yields that the other control rules could not.  Thus, restricting the interannual change in the quota or using constant catch variants can produce more stable yields than alternatives, but at the cost of yield.
-
-Tradeoffs for $\frac{yield}{MSY}$ vs. the frequncy that *Q*=0 were similar to that of $\frac{yield}{MSY}$ vs. *IAV*.  Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of results than other control rule alternatives.  Restricting the interannual change in the quota for the biomass based control rule or using one of the constant catch variants produced less, and often no fishery closures, that could not be achieved by the biomass based control rules, but at the cost of not offering options that could achieve yields as high as biomass based control rules.
-
-All of the control rule alternatives offered options that had near zero frequency of $SSB < \frac{SSB_{MSY}}{2}$.  At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with higher frequency of $SSB < \frac{SSB_{MSY}}{2}$, such that the short-term stability of such quota blocks comes at the potential cost of more frequently dropping to relatively low levels of biomass.  While restricting the interannual change in the quota or using one of the constant catch variants offered options that had near zero frequency of $SSB <\frac{SSB_{MSY}}{2}$, these options could not achieve as high of yield as biomass based options that also had near zero frequency of $SSB <\frac{SSB_{MSY}}{2}$.  Some constant catch options also had near 100% frequency of $SSB <\frac{SSB_{MSY}}{2}$.
-
-#Discussion
-
-Results were generally robust among operating models when presented relative to biological reference points (e.g., $\frac{yield}{MSY}$), but absolute scale differed among operating models.  This result has been previously reported (@Deroba2012Evaluating) and is likely why the results of most MSEs are presented in relative units (e.g., @Amar2009TheFishery; @Deroba2012Evaluating; @Wiedenmann2017).  While convenient scientifically, the differences in absolute scale can create challenges when communicating with stakeholders because most people are more comfortable with absolute units (e.g., fishing industry representatives think in tons and not fractions of $MSY$; Feeney et al., this issue). Thus, reporting results in absolute units will still have value in public settings, and scientists should attempt to convey the reasons for differences in scale among operating models (Feeney et al., this issue).
-
-The constant catch, conditional constant catch, and restricting annual changes in the quota by 15% produced less variable yield than the other biomass based alternatives, but at the expense of yield, more frequent low levels of herring biomass, and more outcomes relatively detrimental to predators. This result is consistent with previous simulations of similar harvest control rules for lake whitefish *Coregonus clupeaformis* in the Laurential Great Lakes (@Deroba2012Evaluating) and roundfish stock managed by the International Council for the Exploration of the Sea (@Kell2006). For lake whitefish, @Deroba2012Evaluating found that a conditional constant catch rule could achieve similar stability in yield as a 15% restriction on the interannual change to a quota applied to a biomass based control rule, but with higher yields.  A broader range of percent restrictions on the interannual variation in the quota should be evaluated, however, before assuming that these conclusions are general.  A 15% restriction was used in this analysis because they amount was specifed as desirable by stakeholders.  Conceivably, a different percentage may strike a more agreeable tradeoff between stability and other metrics of interest.  The performance of restraints on the interannual variation in quotas also depends on stock status and variation in life history traits, such as growth (Punt et al., 2002; @Kell2006), and so should likely be evaluated on a case by case basis.
-
-If short-term stability in yield is a fishery objective, then using quota blocks where the target harvest is the same for multiple years may be an effective method that costs little in the performance of other metrics.  The biomass based options with three or five year quota blocks produced similar ranges of performance and similar tradeoffs as annual changes in the quota. Thus, short-term stability could be gained at no long-term cost with appropriately selected harvest policy parameters.  Although, at similar level of yields, the quota block alternatives produced more options with lower biomass.  Thus, a closed-loop simulation should be used to evaluate the changes in relative performance between applying a control rule annually or using multi-year specifications.  In a simulation of lake whitefish, Li et al. (2016) found that the method of specifying target harvests between stock assessments was less important to relative performance than assessment frequency.  Furthermore, setting target harvest to the same value for multiple years between assessments, as in the quota blocks used here, performed similarly to using projections in the interim years. 
-
-If we care about herring as forage, then including herring biomass is effectively double counting.  Alternatively, it suggests that something was left out of the ecosystem model.  <!---ML will tighten up -->
-
-## The Dream
-In this section, we discuss the limitations of the quantiative models and simplifications necessary to meet decision-making time frames while incorporating ecosystem and economic models into management strategy evaluation.
-
-### Herring Dreams
-
-The application of the biomass based and conditional constant catch control rules assumed $MSY$ reference points were known without error, which has been assumed in several other studies (Irwin et al., 2008; Punt et al., 2008).  Such reference points are likely to be uncertain in most cases, however, and the bias and precision of reference point estimates depends on life hisory traits and autocorrelation in recruitment (Haltuch et al., 2008; Haltuch et al., 2009).  How the relative performance of control rules would change in the presence of error in reference points is unclear and should be a topic for future research.  Given that assessment error affects relative control rule performance (@Deroba2008), errors in reference point estimation may compound those issues and affect results in meaningful ways.  Incorporating realistic errors in reference point estimation, however, will be challenging because the effects will depend on exploitation history and the degree to which life hisotry traits vary among years (Brodziak et al., 2008; Legault and Palmer 2016).  This MSE evaluated uncertianty in life history traits, but not time variation in those traits.  Methods for estimating reference points and the proper response of managment in the presence of time varying life history traits is an active area of research and has been a focal point of MSEs (@Amar2009TheFishery; Legault and Palmer 2016).  For example, increases in natural mortality through time have different implications on reference points depending on whether a per recruit approach is used or if managment is concerned with limiting total mortality, where a per recruit approach would increase target $F$ but limiting total mortality would require decreasing target $F$ (Legault and Palmer 2016).  An MSE for Gulf of Alaska walleye pollock *Theragra chalcogramma* demonstrated that management strategies (i.e., the combination of harvest control rule and estimation model) performed differently depending on how reference points were estimated in the presence of regime shifts in recruitment, with estimates of unfished biomass depending on the range of years used to estimate average recruitment (@Amar2009TheFishery).  Atlantic herring have experienced time varying growth, and the possibility of time varying natural mortality has been considered an uncertainty in recent stock assessments (@NEFSC_2012; @Deroba2015atlantic).  Thus, evaluating the effect of errors in reference point estimation would be a prudent advancement of the MSE.  The stakeholder driven process, however, was already overwhelming for many participants given the time frame, and so adding this additional realism would likely be best completed as a separate exercise that would rely moreso on technical experts than stakeholder input.
-
-This herring MSE did not incorporate a true stock assessment as part of the managment strategy.  The approach taken offered the advanatage of simplicity, brevity, and the ability to control bias in the assessment without having to specify a source of the bias (e.g., misspecified $M$, incorrect selectivity), as would be required with the incorporation of a true stock assessment. Conceivably, relative control rule performance could vary depending on the mispecification that induces a bias in a true stock assessment model, and so several alternative sources of bias would likely have to be evaluated as part of an MSE, significantly increasing computing time in an already demanding time frame.  Given the technical nature of stock assessments, constructing an evaluation of the effect of different sources of bias in a stock assessment also could likely be conducted outside of a stakeholder process.  None the less, incorporating a true stock assessment is considered best practice and may induce realism, such as levels of autocorrelation among assessment fits, that cannot be reproduced otherwise (Cox and Kronlund 2008; @punt_management_2016).  Consequently, this MSE and subsequent managment decisions should be revisited as such additional realism is implemented.
-
-### Predator Dreams
-
-MICE can be a reasonable approach to conducting science to meet relatively short managment time frames.  Scientists may have to sacrifice some dreams in order to meet realities of doing research in support of managment.  Review other MICE literature.  Discuss MICE in the context of multi-species/ecosystemy based management, and whether this even qualifies as ecosystem based.
-
-Dive into the "forage" fish debate!?  While herring may constitute "large" fractions of diet, our population level analyses suggest only relatively weak relationships.  Likely due to alternative prey.  Herring abundance may also not be the most important aspect for predators, as their condition seems to be more directly linked to tuna condition, and tuna condition has been good at low herring N and visa versa.
-
-### Economic Dreams
-The economic model of the herring fishery did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal effect when comparing HCRs within or across OMs.  Net revenues would all be overestimated by the same fixed amount.  The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs.  However, in the long run, firms can enter and exit this industry.  Less than three-quarters of the permitted herring vessels were active in the fishery, suggesting that firms could enter if future profitability is expected to be high.  We did not model firm entry and exit; this is a difficult decision to model.  Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible on the timeline requested by NEFMC.  
-
-We also assume that marginal costs are equal to average variable costs, constant for each fleet, and do not depend on the level of biomass. A more rigorous approach might include estimating a (economic) production function for the herring fishery; this was not done in the interest of time.  It is difficult to predict how estimating a true cost function and integrating those results would change the results of the study.  
-
-The largest limitation of the economic component of the model is that only the herring fishery is quantitatively modeled. Consumers of landed herring and economic valuation of \textit{in-situ} herring are not considered.  Consumer welfare measures could be determined from a demand curve for herring.  Equation \ref{ARDL} estimates a price-quantity relationship, not necessarily a demand curve for herring.  Rigorous estimation of a demand curve for herring likely requires modeling goods are substitutes for herring, possibly including  mackerel, menhaden, squid, and other likely substitute bait. This was not done due to limited time available. 
-
-@Finnoff2003HarvestingEcosystem and @Brown2005AFisheries describe methods to trace the effects of changes in harvest or biomass of one species through an ecosystem.  The predator section models a few representative consumers of live herring: terns, tuna, whales, and predatory fish. Ecosystem valuation methods could be used to measure changes in outcomes for those species in dollar value [@loomis1996economic; @richardson2009total; @lew2015willingness].  People may derive value from changes in the status of these predators through either use or non-use values.  For example, people may directly value higher abundances of an animal or protection of an endangered species, even if they have no plans to watch or view them [@lew2010valuing; @lew2017temporal].  Quantifying these values typically is done using stated preference methods with data collected using surveys; these studies are costly and time consuming to develop and conduct rigorously.  Benefit transfer, a method in which valuation from previous studies is applied to a new study area,may be the only way to overcome these barriers [@navrud2007environmental; @johnston2010methods].
-
-Consumers may also derive use value from changes in the modeled species. For example, changes in whale populations may change outcomes for whale-watching customers [@Larson2004RevealingData].  This type of value can be quantified using both stated and revealed preference data, both of which typically require collection of survey data; these studies are also costly and time consuming to develp and conduct rigorously.  Perhaps more discouragingly, the precise good being valued (say, a doubling of the tern population) needs to be known quite early in the research process.  In this application, development of a valuation survey for terns would not have been able to start until after the predator modeling was nearly complete. Benefit transfer may be the only way to value some of the use values on the timeframe required by NEFMC.
-
-Another avenue for use value to arise is though changes in costs, catches, or prices in the associated commercial fishery.  For example, increases in biomass of spiny dogfish could lead to both higher quotas and lower costs to catch more abundant fish.  Examining changes in costs would require an economic model of production for the spiny dogfish fishery (similar to the model not used for the herring fleet) [@holland1999empirical; @hutniczak2014increasing; @reimer2017fisheries]. Changes in product quality could result in higher prices [@Larkin1999IntrinsicFishery; @Asche2015EconomicFisheries].  For example, because larger tuna receives higher prices, the effects of changes in average weight could be deduced from existing hedonic models [@McConnell2000HedonicHawaii; @Carroll2001PricingManagement].
-
-Note that increases in the biomass of a particular predator could be a net ``bad''  for society.  For example, an increase in the biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.  The ability to manipulate the ecosystem with a prey-level ABC control rule to achieve desirable outcomes depends on the rates at which these increases in prey are converted into social utility. This conversion depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these technologies are not particularly well understood at this time.
 
 ### Integration Realities
-<!---These two paragraphs are more like difficulties with doing an integrated model, not necessarily an economic problem.  If they are the only integration problems/weaknesses, I can  put them back in the economic dreams section.-->
+<!---These two paragraphs are more like difficulties with doing an integrated model, not necessarily an economic problem.  If they are the only integration problems/weaknesses, I can  put them back in the economic dream or economic model section.  -->
 
 Catch in the economic model can be different from the yield (from the herring model). This is frequently handled as symmetric implimentation error in the fisheries literature (as it is in this model). However, the economic model suggest a assymetric error term in which the error depends on prices of inputs and outputs. 
 
 One of the difficulties with including a quantitative economic model is that it's difficult to know which predator and performance metric to formally model.  For example, prior to completing the predator models, we did not know that tuna weight but not abundances would be sensitive to various harvest control rules.  If we had tried to model how changes in abundance affect affect costs of harvesting tuna, this would have not been a fruitful use of time.
 
-##Conclusion
+# Conclusion
 
 An open stakeholder driven process produced dividends for this analysis in the form of improved relationships and data.  Greater attention should be paid to what stakeholders are involved and how they are involved in MSE processes.  Probably leave a short paragraph assuming Feeney et al. accepted.
 
-<!---CJFAS requires References, Tables, then Figures.
-I don't want to move the tables and figures right now. It will cause massive headaches for any merges.
--->
 
 # References
 <div id="refs"></div>
@@ -1185,6 +1155,38 @@ ternpoptrend +   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, size = 1) +
   geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated"))
 
+
+```
+
+\newpage
+<!-- This might be in the wrong spot --->
+```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database \\label{gfishdiets}", message = FALSE, warning = FALSE}
+
+#dogdiet   <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/dogfishdietcomp.csv")
+#GBcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GBcoddietcomp.csv")
+#GOMcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GOMcoddietcomp.csv")
+
+names(dogdiet)[1]<-"Year"
+names(GBcoddiet)[1]<-"Year" 
+names(GOMcoddiet)[1]<-"Year"
+
+dogdiet <- cbind(dogdiet, Pred=rep("dogfish", dim(dogdiet)[1]))
+GBcoddiet <- cbind(GBcoddiet, Pred=rep("GBcod", dim(GBcoddiet)[1]))
+GOMcoddiet <- cbind(GOMcoddiet, Pred=rep("GOMcod", dim(GOMcoddiet)[1]))
+
+dogdiet <- gather(dogdiet, Prey, Percent, -Year, -Pred)
+GBcoddiet <- gather(GBcoddiet, Prey, Percent, -Year, -Pred)
+GOMcoddiet <- gather(GOMcoddiet, Prey, Percent, -Year, -Pred)
+
+dogcoddiet <- bind_rows(dogdiet, GBcoddiet, GOMcoddiet)
+
+dogcoddiet$fillwhite <- with(dogcoddiet, ifelse(Prey=="CLUHAR", 1,0))
+
+compplot2 <- ggplot(dogcoddiet, aes(Year, Percent, colour=Prey)) + 
+  geom_bar(stat = "identity", aes(fill=fillwhite)) 
+  #geom_bar(stat = "identity") 
+
+compplot2 + facet_wrap("Pred", nrow=3) + theme(legend.position="none")
 
 ```
 
