@@ -5,14 +5,14 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document:
-    toc: yes
-    toc_depth: 4
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+    toc: yes
+    toc_depth: 4
+  html_document:
     toc: yes
     toc_depth: 4
   word_document: null
@@ -639,7 +639,7 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
 \newpage
-
+<!--
 \begin{table}[htpb]
 \begin{centering}
 \begin{tabular}{l r r r r r r r r}\hline
@@ -651,6 +651,16 @@ Trawl	&	62.43 & 61.4	&2.9&	3,833	&	5,009	&	4,315	&	573	&	2,005	\\\hline
 \caption{Marginal cost of 1mt of herring, daily catch, trip length, and cost per day for the purse seine and trawl fleets averaged over 2011-2015. \label{costs_combined}}
 \end{centering}
 \end{table}
+-->
+```{r costs, tab.cap="Marginal cost of 1mt of herring, daily catch, trip length, and cost per day for the purse seine and trawl fleets averaged over 2011-2015.\\label{costs_combined}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Year | Marginal Cost (\\$/mt) | Catch (mt/day)   | Trip length days  | Cost Low|per High |day Raw |  Observed trips | VTR  trips  |
+|:-----|---------------:|---------:|------------:|---:|---:|---:|----------:|------:|
+|Seine	|	14.27 | 87.5| 1.0|	1,249	|	1,664	|	1,396	|	207	|	1,413	|
+|Trawl	|	62.43 | 61.4	|2.9|	3,833	|	5,009	|	4,315	|	573	|	2,005	|
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
 
 \newpage
 
@@ -677,7 +687,26 @@ PSS	F-statistic	&	10.2	&	9.34	\\\hline
 \caption{Regression results from the ``ARDL'' specification (Equation \ref{ARDL}), PSS Bounds test and associated critical values.  1995-2015 data only. The explanatory variables enter in levels in the first column and natural logarithms in the second column.  \label{ardl_regression}}
 \end{center}
 \end{table}
-
+<!--
+```{r regresults, tab.cap="Regression results from the ``ARDL'' specification (Equation \ref{ARDL}), PSS Bounds test and associated critical values.  1995-2015 data only. The explanatory variables enter in levels in the first column and natural logarithms in the second column.\\label{ardl_regression}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Model |   (1)   price |    (2)    *ln* price | 
+|:---------------|:------:|:-------:|
+|Price$_{t-1}$		|	0.646***	|	0.666***	|
+|		|	-0.0937	|	-0.0935	|
+|Quantity		|	-1.194***	|	-0.395***	|
+|		|	-0.277	|	-0.0956	|
+|Constant		|	217.8***	|	6.423***	|
+|		|	-48.16	|	-1.484	|
+|Observations		|	21	|	21	|
+|R-squared		|	0.906	|	0.906	|
+|BGp		|	0.34	|	0.547	|
+|BGF		|	1	|	0.4	|
+|PSS	F-statistic	|	10.2	|	9.34	|
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+-->
 \newpage
 
 
