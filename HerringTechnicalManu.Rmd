@@ -27,6 +27,8 @@ library(tidyr)
 library(dplyr)
 library(broom)
 library(knitr)
+library(gridExtra)
+library(grid)
 
 data.dir <- './data'
 
@@ -373,7 +375,7 @@ Some metrics were redundant, showed similar tradeoffs, or were expected not to v
 
 ## Effect of Operating Models
 
-Several performance metrics performed relatively similarly among operating models, and also were stable among control rules (Figure YAY).  Herring metrics reported relative to reference points were generally less sensitive to operating model than metrics in absolute units (Figure YAY).  Consequently, results below focus on herring metrics reported relative to reference points, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.  Dogfish were also robust to operating model and did not vary among control rules (Figure YAY), and were not considered further.  Tuna were effected by variation in herring growth among operating models, but did not vary among control rules (Figure YAY), and were also not considered further because herring growth is not within the control of a management strategy (i.e., harvest control rule).  Other than tuna, most metrics were affected by differences in herring *M* and steepness more than herring growth (Figure YAY).  The general lack of sensitivity of the predator metrics to the range of control rules and/or operating models was not anticipated by most participants in the stakeholder process.  Given the focus on metrics that were relatively robust to operating models, additional results were only reported for the operating model with low *M*, high steepness, and slow growth.
+Several performance metrics performed relatively similarly among operating models, and also were stable among control rules (Fig. \ref{YAY}).  Herring metrics reported relative to reference points were generally less sensitive to operating model than metrics in absolute units (Fig. \ref{YAY}).  Consequently, results below focus on herring metrics reported relative to reference points, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.  Dogfish were also robust to operating model and did not vary among control rules (Fig. \ref{YAY}), and were not considered further.  Tuna were effected by variation in herring growth among operating models, but did not vary among control rules (Fig. \ref{YAY}), and were also not considered further because herring growth is not within the control of a management strategy (i.e., harvest control rule).  Other than tuna, most metrics were affected by differences in herring *M* and steepness more than herring growth (Fig. \ref{YAY}).  The general lack of sensitivity of the predator metrics to the range of control rules and/or operating models was not anticipated by most participants in the stakeholder process.  Given the focus on metrics that were relatively robust to operating models, additional results were only reported for the operating model with low *M*, high steepness, and slow growth.
 
 ## Effect of Harvest Control Rules
 
@@ -1350,3 +1352,93 @@ qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "current herring abundan
 #TotalSurv<-(1-PredAnnualNatM)*(1-Predexploit) #total annual predator survival
 
 ```
+
+\newpage
+
+```{r YAY, fig.cap="Differences between operating models for key metrics\\label{YAY}", fig.height=11, fig.width=8.5, message = FALSE, warning = FALSE}
+metrics <- c('stouffer',
+             'fisherchi',
+             'p50_NR',
+             'PropClosure',
+             'MedSSBrelSSBmsy',
+             'PropSSBrelhalfSSBmsy',
+             'YieldrelMSY',
+             'Yvar',
+             'MedPropYrs_goodProd_Targplustern', 
+             'MedPropYrs_okBstatus', 
+             'MedPropYrs_goodAvWtstatus'
+             )
+
+metlabels <- c('stationary',
+               'stableeq',
+               'revenue',
+               'closure',
+               'relSSB',
+               'overfished',
+               'relyield',
+               'yieldvar',
+               'ternprod',
+               'dogstatus',
+               'tunawt'
+               )
+
+OMs <- unique(allres$OM)
+
+OMlabels <- c('LowFastBiased', 
+              'LowSlowBiased', 
+              'LowFastCorrect', 
+              'LowSlowCorrect',  
+              'HighFastBiased',  
+              'HighSlowBiased', 
+              'HighFastCorrect',
+              'HighSlowCorrect'
+              )
+
+#OM (8) x metric (11) boxplot--
+
+# plotting <- function(d, xvar, yvars, xlabs, ylabs){
+#   P <- list()
+#   for (i in 1:length(yvars)){
+#     if(i < length(yvars)){
+#       p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) + 
+#       geom_boxplot() + labs(y=ylabs[i]) +
+#       theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
+#     }
+#     if(i == length(yvars)){
+#       p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) + 
+#         geom_boxplot() + labs(y=ylabs[i]) +
+#         scale_x_discrete(labels = xlabs)
+#     }
+#     P <- c(P, list(p))
+#   }
+#   return(list(plots=P, num=length(yvars)))
+# }
+
+#trying to align left side of plots--still not working
+plotting <- function(d, xvar, yvars, xlabs, ylabs){
+  P <- list()
+  for (i in 1:length(yvars)){
+    if(i < length(yvars)){
+      p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) + 
+        geom_boxplot() + labs(y=ylabs[i]) +
+        theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
+    }
+    if(i == length(yvars)){
+      p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) + 
+        geom_boxplot() + labs(y=ylabs[i]) +
+        scale_x_discrete(labels = xlabs)
+    }
+    gp <- ggplotGrob(p)
+    P <- c(P, list(gp))
+  }
+  return(list(plots=P, num=length(yvars)))
+}
+
+#PLOTS <- plotting(d)
+#do.call(grid.arrange, c(PLOTS$plots, nrow = PLOTS$num))
+
+metOM <- plotting(allres, "OM", metrics, OMlabels, metlabels)
+do.call(grid.arrange, c(metOM$plots, nrow = metOM$num))
+
+```
+
