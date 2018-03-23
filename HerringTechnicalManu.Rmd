@@ -385,13 +385,17 @@ Given the focus on metrics that were relatively robust to operating models, addi
 
 ## Tradeoffs 
 
-At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with less $SSB$, such that the short-term stability of such quota blocks comes at the potential cost of less $SSB$.  All three biomass based variants had alternatives that could achive yield near $MSY$ over a range of $SSB$ levels.
+At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with less $SSB$, such that the short-term stability of such quota blocks comes at the potential cost of less $SSB$ (Fig. \ref{yieldSSB}).  All three biomass based variants had alternatives that could achive yield near $MSY$ over a range of $SSB$ levels.
 
-At similar levels of yield, the application of quota blocks resulted in lower extreme highs in $IAV$.  The application of quota blocks also reduced the number of alternatives near $MSY$, further illustrating the tradeoff between stability and yield.
+At similar levels of yield, the application of quota blocks resulted in lower extreme highs in $IAV$ (Fig. \ref{yieldIAV}).  The application of quota blocks also reduced the number of alternatives near $MSY$, further illustrating the tradeoff between stability and yield.
 
-All three biomass based alternatives could achieve >90%$MSY$ with nearly zero fishery closures, although the number of alternatives was fewer with longer quota blocks.  While the tradeoffs were generally similar between $\frac{yield}{MSY}$ and the frequncy that *Q*=0 for all three alternatives, vertical patterning becomes evident with longer quota blocks.  This patterning was caused by biomass based control rule shapes becoming more alike with longer quota blocks, with their performance dominated by the length of fishery closures dictated by the quota block length than by the specific shape of the control rule.  As an extreme example, if a 50 year quota block was applied, any control rule that would close the fishery early in the time series would have a nearly identical frequency of *Q*=0 near 100%, but these same contrl rules would behave much differently with shorter quota blocks where the responsiveness of the specific control rules would drive results.
+All three biomass based alternatives could achieve >90%$MSY$ with nearly zero fishery closures, although the number of alternatives was fewer with longer quota blocks (Fig. \ref{yieldPropClosure}).  While the tradeoffs were generally similar between $\frac{yield}{MSY}$ and the frequncy that *Q*=0 for all three alternatives, vertical patterning becomes evident with longer quota blocks.  This patterning was caused by biomass based control rule shapes becoming more alike with longer quota blocks, with their performance dominated by the length of fishery closures dictated by the quota block length than by the specific shape of the control rule.  As an extreme example, if a 50 year quota block was applied, any control rule that would close the fishery early in the time series would have a nearly identical frequency of *Q*=0 near 100%, but these same contrl rules would behave much differently with shorter quota blocks where the responsiveness of the specific control rules would drive results.
 
-All of the control rule alternatives offered options that had near zero frequency of $SSB < \frac{SSB_{MSY}}{2}$.  At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with higher frequency of $SSB < \frac{SSB_{MSY}}{2}$, such that the short-term stability of such quota blocks comes at the potential cost of more frequently dropping to relatively low levels of biomass.
+All of the control rule alternatives offered options that had near zero frequency of $SSB < \frac{SSB_{MSY}}{2}$ (Fig. \ref{yieldProbOF}).  At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with higher frequency of $SSB < \frac{SSB_{MSY}}{2}$, such that the short-term stability of such quota blocks comes at the potential cost of more frequently dropping to relatively low levels of biomass.
+
+All of the control rule alternatives offered options that had high frequency of good tern productivity (equal to or greater than the management target of 1.0; Fig. \ref{yieldbirds}). At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with slightly lower frequency of good tern producivity, however, the difference is between >80% and >90% frequency of good productivity. 
+
+All of the control rule alternatives resulted in good stability characteristics across a range of net revenues for the fishery (Fig. \ref{revenuestability}). Min-Yang will explain this.
 
 # Discussion
 
@@ -1494,3 +1498,122 @@ do.call(grid.arrange, c(metCR$plots, nrow = metCR$num))
 
 ```
 
+\newpage
+
+```{r yieldSSB, fig.cap="Tradeoff between herring relative yield and relative SSB for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldSSB}", message = FALSE, warning = FALSE}
+
+# pick one OM
+HiSlowCorrectOM <- allres %>%
+  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
+
+# pick BB CRs only
+HSCOM_BBsonly <- HiSlowCorrectOM %>%
+  filter(CR %in% c("BB", "BB3yr", "BB5yr"))
+
+ggplot(HSCOM_BBsonly, aes(x=MedSSBrelSSBmsy, y=YieldrelMSY, colour=CR)) + 
+  geom_point(alpha=0.2) + 
+  scale_x_continuous(limits = c(0,3.5)) + 
+  #geom_hline(yintercept=1) + 
+  labs(y="relative yield", x="SSB/SSBmsy", colour="Control rule type")
+
+```
+
+\newpage
+
+```{r yieldIAV, fig.cap="Tradeoff between herring relative yield and variation in yield for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldIAV}", message = FALSE, warning = FALSE}
+
+# pick one OM
+#HiSlowCorrectOM <- allres %>%
+#  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
+
+# pick BB CRs only
+#HSCOM_BBsonly <- HiSlowCorrectOM %>%
+#  filter(CR %in% c("BB", "BB3yr", "BB5yr"))
+
+ggplot(HSCOM_BBsonly, aes(x=Yvar, y=YieldrelMSY, colour=CR)) + 
+  geom_point(alpha=0.2) + 
+  scale_x_continuous(limits = c(0,3.5)) + 
+  #geom_hline(yintercept=1) + 
+  labs(y="relative yield", x="variation in yield", colour="Control rule type")
+
+```
+
+\newpage
+
+```{r yieldclose, fig.cap="Tradeoff between herring relative yield and frequency of fishery closure for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldPropClosure}", message = FALSE, warning = FALSE}
+
+# pick one OM
+#HiSlowCorrectOM <- allres %>%
+#  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
+
+# pick BB CRs only
+#HSCOM_BBsonly <- HiSlowCorrectOM %>%
+#  filter(CR %in% c("BB", "BB3yr", "BB5yr"))
+
+ggplot(HSCOM_BBsonly, aes(x=PropClosure, y=YieldrelMSY, colour=CR)) + 
+  geom_point(alpha=0.2) + 
+  scale_x_continuous(limits = c(0,1)) + 
+  #geom_hline(yintercept=1) + 
+  labs(y="relative yield", x="frequency of closure", colour="Control rule type")
+
+```
+
+\newpage
+
+```{r yieldOF, fig.cap="Tradeoff between herring relative yield and probability of the stock is overfished for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldProbOF}", message = FALSE, warning = FALSE}
+
+# pick one OM
+#HiSlowCorrectOM <- allres %>%
+#  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
+
+# pick BB CRs only
+#HSCOM_BBsonly <- HiSlowCorrectOM %>%
+#  filter(CR %in% c("BB", "BB3yr", "BB5yr"))
+
+ggplot(HSCOM_BBsonly, aes(x=PropSSBrelhalfSSBmsy, y=YieldrelMSY, colour=CR)) + 
+  geom_point(alpha=0.2) + 
+  scale_x_continuous(limits = c(0,1)) + 
+  #geom_hline(yintercept=1) + 
+  labs(y="relative yield", x="frequency of overfished", colour="Control rule type")
+
+```
+
+\newpage
+
+```{r yieldbirds, fig.cap="Tradeoff between herring relative yield and probability of good tern productivity for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldbirds}", message = FALSE, warning = FALSE}
+
+# pick one OM
+#HiSlowCorrectOM <- allres %>%
+#  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
+
+# pick BB CRs only
+#HSCOM_BBsonly <- HiSlowCorrectOM %>%
+#  filter(CR %in% c("BB", "BB3yr", "BB5yr"))
+
+ggplot(HSCOM_BBsonly, aes(x=MedPropYrs_goodProd_Targplustern, y=YieldrelMSY, colour=CR)) + 
+  geom_point(alpha=0.2) + 
+  scale_x_continuous(limits = c(0,1)) + 
+  #geom_hline(yintercept=1) + 
+  labs(y="relative yield", x="frequency of good tern productivity", colour="Control rule type")
+
+```
+
+\newpage
+
+```{r revenuestability, fig.cap="Tradeoff between herring fleet revenue and stability for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{revenuestability}", message = FALSE, warning = FALSE}
+
+# pick one OM
+#HiSlowCorrectOM <- allres %>%
+#  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
+
+# pick BB CRs only
+#HSCOM_BBsonly <- HiSlowCorrectOM %>%
+#  filter(CR %in% c("BB", "BB3yr", "BB5yr"))
+
+ggplot(HSCOM_BBsonly, aes(x=p50_NR, y=stouffer, colour=CR)) + 
+  geom_point(alpha=0.2) + 
+  scale_y_continuous(limits = c(0,1)) + 
+  #geom_hline(yintercept=0.9) + 
+  labs(y="stability", x="Net revenue")
+
+```
