@@ -5,14 +5,14 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document:
+    toc: yes
+    toc_depth: 4
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-    toc: yes
-    toc_depth: 4
-  html_document:
     toc: yes
     toc_depth: 4
   word_document: null
@@ -382,7 +382,10 @@ Z  &= \frac{\sum_{i=1}^k \phi^{-1} (1-p_i)}{\sqrt(k)}
 $Z$ has a standard normal distribution under the null hypothesis of dis-equilibrium.  We define the performance metric *Equilibrium1* as the $p$-value associated with rejecting the null hypothesis that particular control rule leads to dis-equilibrium of net revenue. Small values of *Equilibrium1* are evidence of a stable equilbrium.  As a robustness check, we define the performance metric *Equilibrium2* as the percentage of simulations in which we reject the null $H_0: \beta=0$ from equation \ref{DF_estimated}.   Large values of *Equilibrium2* are evidence of a stable equilbrium.
 
 #Results
-The MSE evaluated the performance of thousands of control rules across eight operating models.  Stakeholders had wide-ranging, diverse, and often conflicting preferences. A major piece of management advice is to present information that can actually understood and used by managers. Characterizing performance metrics and control rules that are particularly sensitive to model perturbations is an essential part of that process.  
+
+Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only results for metrics that are commonly of interest were reported further.  Namely, $\frac{yield}{MSY}$, $\frac{SSB}{SSB_{MSY}}$, *IAV*, the frequncy that *Q*=0, and the frequncy that $SSB < \frac{SSB_{MSY}}{2}$.
+
+## Effect of Operating Models
 
 Many performance metrics were characterized by minimal variation in outcomes across operating model, harvest control rule type, or both.  For example, the XXX for Dogfish, tuna, and XXX were relatively insensitive to both Operating Model and HCR type (Figure YAY).  Other performance metrics were highly correlated, like Net Revenue and Yield/MSY (Figure XY-scatter).  A second finding was that one characteristic of the operating models (growth) had minimal effects on all metrics, particularly relative to the effects of *M* and steepness (INSERT A PLOT - maybe boxplot among all CRs?). Furthermore, performance of control rules was similar between the operating models with different *M* and steepness values when reported relative to biological reference points (e.g., $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$), but the scale of results in absolute values was generally different (INSERT PLOT).  Consequently, results were only reported in relative units for the low *M*/high steepness, and slow growth operating model, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.
 
@@ -394,7 +397,7 @@ We therefore focus the remainder of this section on describing performance metri
 
 ### Herring
 
-Several of the herring performance metrics were redundant and exhibited similar tradeoffs.  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, $\frac{yield}{MSY}$ vs. the frequncy that *Q*=0, and $\frac{yield}{MSY}$ vs. the frequncy that $SSB < \frac{SSB_{MSY}}{2}$.
+  So, only a few tradeoffs that are commonly of interest were reported.  Namely, $\frac{yield}{MSY}$ vs. $\frac{SSB}{SSB_{MSY}}$, $\frac{yield}{MSY}$ vs. *IAV*, $\frac{yield}{MSY}$ vs. the frequncy that *Q*=0, and $\frac{yield}{MSY}$ vs. the frequncy that $SSB < \frac{SSB_{MSY}}{2}$.
 
 Biomass based control rule variants without a restriction on interannual change in the quota provided a broader range of $yield$ and $SSB$ than other control rules ().  At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with less $SSB$, such that the short-term stability of such quota blocks comes at the potential cost of less $SSB$.
 
