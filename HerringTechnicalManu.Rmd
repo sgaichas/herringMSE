@@ -375,11 +375,13 @@ Some metrics were redundant, showed similar tradeoffs, or were expected not to v
 
 ## Effect of Operating Models
 
-Several performance metrics performed relatively similarly among operating models, and also were stable among control rules (Fig. \ref{YAY}).  Herring metrics reported relative to reference points were generally less sensitive to operating model than metrics in absolute units (Fig. \ref{YAY}).  Consequently, results below focus on herring metrics reported relative to reference points, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.  Dogfish were also robust to operating model and did not vary among control rules (Fig. \ref{YAY}), and were not considered further.  Tuna were effected by variation in herring growth among operating models, but did not vary among control rules (Fig. \ref{YAY}), and were also not considered further because herring growth is not within the control of a management strategy (i.e., harvest control rule).  Other than tuna, most metrics were affected by differences in herring *M* and steepness more than herring growth (Fig. \ref{YAY}).  The general lack of sensitivity of the predator metrics to the range of control rules and/or operating models was not anticipated by most participants in the stakeholder process.  Given the focus on metrics that were relatively robust to operating models, additional results were only reported for the operating model with low *M*, high steepness, and slow growth.
+Several performance metrics performed relatively similarly among operating models, and also were stable among control rules (Fig. \ref{YAY}).  Herring metrics reported relative to reference points were generally less sensitive to operating model than metrics in absolute units (Fig. \ref{YAY}).  Consequently, results below focus on herring metrics reported relative to reference points, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.  Dogfish were also robust to operating model and did not vary among control rules (Fig. \ref{YAY}), and were not considered further.  Tuna were effected by variation in herring growth among operating models, but did not vary among control rules (Fig. \ref{YAY}), and were also not considered further because herring growth is not within the control of a management strategy (i.e., harvest control rule).  Other than tuna, most metrics were affected by differences in herring *M* and steepness more than herring growth (Fig. \ref{YAY}).  The general lack of sensitivity of the predator metrics to the range of control rules and/or operating models was not anticipated by most participants in the stakeholder process.  
 
 ## Effect of Harvest Control Rules
 
-The constant catch, conditional constant catch, and the biomass based control rule with a 15% restriction, generally had less interannual variation in yield than the other biomass based control rules (Figure ZZZ).  This stability, however, came at the cost of foregone yield, with fewer options for those three classes of control rule that could achieve yields near $MSY$ (Figure ZZZ).  The constant catch and biomass based control rule with a 15% restriction also had more alternatives that led to poor tern production than other control rules (Figure ZZZ).  The conditional constant catch rule, however, performed well for tern production because the cap of 0.5$F_{MSY}$ on fishing mortality effectively prevented levels of mortatliy that decreased herring abundance to levels where tern production would be compromised.  Ultimately, the NEFMC eliminated the constant catch, conditional constant catch, and biomass based rule with a 15% restriction from consideration because of the foregone yield and/or relatively poor performance of some alternatives for the tern production metric.  Therefore, more detailed tradeoff analyses below focus on the biomass based control rule applied annually, or with three or five year quota blocks.
+The constant catch, conditional constant catch, and the biomass based control rule with a 15% restriction, generally had less interannual variation in yield than the other biomass based control rules (Fig. \ref{ZZZ}).  This stability, however, came at the cost of foregone yield, with fewer options for those three classes of control rule that could achieve yields near $MSY$ (Fig. \ref{ZZZ}).  The constant catch and biomass based control rule with a 15% restriction also had more alternatives that led to poor tern production than other control rules (Fig. \ref{ZZZ}).  The conditional constant catch rule, however, performed well for tern production because the cap of 0.5$F_{MSY}$ on fishing mortality effectively prevented levels of mortatliy that decreased herring abundance to levels where tern production would be compromised.  Ultimately, the NEFMC eliminated the constant catch, conditional constant catch, and biomass based rule with a 15% restriction from consideration because of the foregone yield and/or relatively poor performance of some alternatives for the tern production metric.  
+
+Given the focus on metrics that were relatively robust to operating models, additional results were only reported for the operating model with low *M*, high steepness, and slow growth ("HighSlowCorrect" in figures). Further, due to Council decisions to eliminate the three control rule types above, more detailed tradeoff analyses below focus on the biomass based control rule applied annually ("BB"), or with three ("BB3yr") or five year ("BB5yr") quota blocks.
 
 ## Tradeoffs 
 
@@ -1369,8 +1371,8 @@ metrics <- c('stouffer',
              'MedPropYrs_goodAvWtstatus'
              )
 
-metlabels <- c('stationary',
-               'stableeq',
+metlabels <- c('eq1',
+               'eq2',
                'revenue',
                'closure',
                'relSSB',
@@ -1439,6 +1441,56 @@ plotting <- function(d, xvar, yvars, xlabs, ylabs){
 
 metOM <- plotting(allres, "OM", metrics, OMlabels, metlabels)
 do.call(grid.arrange, c(metOM$plots, nrow = metOM$num))
+
+```
+
+\newpage
+
+```{r ZZZ, fig.cap="Differences between control rule types for key metrics\\label{ZZZ}", fig.height=11, fig.width=8.5, message = FALSE, warning = FALSE}
+
+#note this one is over ALL OM
+
+metrics <- c('stouffer',
+             'p50_NR',
+             'PropClosure',
+             'MedSSBrelSSBmsy',
+             'PropSSBrelhalfSSBmsy',
+             'YieldrelMSY',
+             'Yvar',
+             'MedPropYrs_goodProd_Targplustern' 
+             )
+
+metlabels <- c('eq1',
+               'revenue',
+               'closure',
+               'relSSB',
+               'overfished',
+               'relyield',
+               'yieldvar',
+               'ternprod'
+               )
+
+plotting2 <- function(d, xvar, yvars, ylabs){
+  P <- list()
+  for (i in 1:length(yvars)){
+    if(i < length(yvars)){
+      p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) +
+        geom_boxplot() + labs(y=ylabs[i]) +
+        theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
+    }
+    if(i == length(yvars)){
+      p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) +
+        geom_boxplot() + labs(y=ylabs[i]) 
+    }
+    gp <- ggplotGrob(p)
+    P <- c(P, list(gp))
+  }
+  return(list(plots=P, num=length(yvars)))
+}
+
+metCR <- plotting2(allres, "CR", metrics, metlabels)
+do.call(grid.arrange, c(metCR$plots, nrow = metCR$num))
+
 
 ```
 
