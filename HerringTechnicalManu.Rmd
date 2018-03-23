@@ -5,14 +5,14 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document:
-    toc: yes
-    toc_depth: 4
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+    toc: yes
+    toc_depth: 4
+  html_document:
     toc: yes
     toc_depth: 4
   word_document: null
@@ -554,6 +554,7 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+
 \newpage
 
 ```{r OMs, tab.cap="Operating model uncertainties addressed\\label{OMs}", echo=FALSE, message=FALSE, warnings=FALSE,  results='asis'}
@@ -571,7 +572,9 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+
 \newpage
+
 ```{r MortsWts, tab.cap="Herring natural mortality and mean weights-at-age (kg) \\label{MWttab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |Age	|High $M$	|Low $M$	|Fast Growth	|Slow Growth |
@@ -589,6 +592,7 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
 \newpage
+
 ```{r refpt,tab.cap="Unfished and MSY reference points for the Atlantic herring operating models \\label{RefPts}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis' }
 tabl <- "
 | Steepness | Natural Mortality | Growth | Unfished SSB | SSB MSY | MSY | F MSY |
@@ -600,6 +604,7 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+
 \newpage
 
 ```{r popsources, tab.cap="Predator population model specification and parameter sources\\label{predsource}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
@@ -616,7 +621,9 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+
 \newpage
+
 ```{r pars, tab.cap="Predator model input parameters\\label{predpars}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 | Parameter                | Tuna         | Tern         | Dogfish      |
@@ -637,6 +644,8 @@ tabl <- "
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
+
+\newpage
 
 \begin{table}[htpb]
 \begin{centering}
@@ -675,6 +684,9 @@ PSS	F-statistic	&	10.2	&	9.34	\\\hline
 \caption{Regression results from the ``ARDL'' specification (Equation \ref{ARDL}), PSS Bounds test and associated critical values.  1995-2015 data only. The explanatory variables enter in levels in the first column and natural logarithms in the second column.  \label{ardl_regression}}
 \end{center}
 \end{table}
+
+\newpage
+
 
 # Figures
 ```{r, fig.cap="Modeled herring average weight-tuna growth relationship \\label{herringtuna}", out.width='300pt', message = FALSE, warning = FALSE}
