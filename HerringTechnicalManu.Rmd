@@ -5,14 +5,14 @@ author: Jonathan Deroba, Sarah Gaichas, Min-Yang Lee, Rachel G. Feeney, Deirdre 
   Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document:
-    toc: yes
-    toc_depth: 4
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+    toc: yes
+    toc_depth: 4
+  html_document:
     toc: yes
     toc_depth: 4
   word_document: null
@@ -96,7 +96,7 @@ knit_hooks$set(output = function(x, options) {
 
 #Abstract
 
-Atlantic herring in the Northwest Atlantic have been managed with interim harvest control rules (HCRs) with no analysis to inform the long-term tradeoffs achieved by a range of alternative HCRs.  A stakeholder driven managment strategy evaluation (MSE) was conducted that incorporated objectives and performance metrics related to herring, fishery economics, and predators of herring.  The MSE process, including stakeholder engagement and technical model development, was completed within about one year in order to meet management needs.  Constat catch, conditional constant catch, and a biomass-based control rule with a 15% restriction on the interannual change in the quota could achieve more stable yields than biomass based control rules without such restrictions, but could not attain as high of yields and resulted in more negative outcomes for terns (i.e., a predator of herring) and were ultimately removed from consideration by managers.  A similar range of performance could be achieved by applying the biomass based control rule annually, or by setting quotas to the same value for three or five year blocks.  Predators (i.e., dogfish, tuna, and terns) were generally insensitive to the range of control rules evaluated except in extreme cases, and net revenues were stable across a range of net revenues provided by nearly all control rules.  In order to meet managment time frames, some aspects of the simulations were less than might be considered scientifically ideal.  None the less, using "models of intermediate complexity" were informative, met the needs of managers, and formed a foundation for future improvements to the MSE. An open dialogue between scientists and managers about needs and expectations was helpful in the timely completion of the MSE, and this communication should continue as the MSE is revisited and improved.
+Atlantic herring in the Northwest Atlantic have been managed with interim harvest control rules (HCRs) with no analysis to inform the long-term tradeoffs achieved by a range of alternative HCRs.  A stakeholder driven managment strategy evaluation (MSE) was conducted that incorporated objectives and performance metrics related to herring, fishery economics, and predators of herring.  The MSE process, including stakeholder engagement and technical model development, was completed within about one year in order to meet management needs.  Constant catch, conditional constant catch, and a biomass-based control rule with a 15% restriction on the interannual change in the quota could achieve more stable yields than biomass based control rules without such restrictions, but could not attain as high of yields and resulted in more negative outcomes for terns (i.e., a predator of herring) and were ultimately removed from consideration by managers.  A similar range of performance could be achieved by applying the biomass based control rule annually, or by setting quotas to the same value for three or five year blocks.  Predators (i.e., dogfish, tuna, and terns) were generally insensitive to the range of control rules evaluated except in extreme cases, and net revenues were stable across a range of net revenues provided by nearly all control rules.  In order to meet managment time frames, some aspects of the simulations were less than might be considered scientifically ideal.  None the less, using "models of intermediate complexity" were informative, met the needs of managers, and formed a foundation for future improvements to the MSE. An open dialogue between scientists and managers about needs and expectations was helpful in the timely completion of the MSE, and this communication should continue as the MSE is revisited and improved.
 
 #Introduction
 
@@ -300,9 +300,7 @@ Predator model input parameters are summarized in Table \ref{predpars}.
 ## Economics
 
 ### The Herring Fishery
-The economic model of the herring fishery converts yield, $Y$, from the herring component into Gross Revenues (GR) and Net Operating Revenues (NR).  There are two fleets,trawl and purse seine, that are assumed to have the ability to catch 70 and 30% of the yield respectively[^c].  The midwater trawl, paired midwater trawl, and bottom trawl are all aggregated into the trawl fleet. Gross Revenue, Net Revenue, and the constraints on harvest can be represented as ($y$ subscripts omitted here for simplicity):
-
-[^c]: The fishery is managed with four sub-ACLs and the purse seine fleet can only fish in one of the four areas.  This  70/30 split corresponds to recent history.
+The economic model of the herring fishery converts yield, $Y$, from the herring model component into Gross Revenues (GR) and Net Operating Revenues (NR).  There are two fleets,trawl and purse seine, that are assumed to have the ability to catch 70 and 30% of the yield, respectively. This division corresponds to recent historical patterns.  The midwater trawl, paired midwater trawl, and bottom trawl are all aggregated into the trawl fleet. Gross Revenue, Net Revenue, and the constraints on harvest can be represented as ($y$ subscripts omitted here for simplicity):
 
 \begin{align}
 GR&=p(q^t+q^s)q^t+p(q^t+q^s)q^s\\
@@ -314,9 +312,9 @@ where $q^i$ is the quantity landed for fleet $i$, $c^i(q^i)$ is cost function fo
 \max_{q_i} NR^i&=p(q^t+q^s)q^i - c^i(q^i)\\
 q^s &\leq .3yield; \hspace{2mm} q^t \leq .7yield 
 \end{align}
-The optimization problem in equation \ref{optimization_problem} contains two embedded assumptions: total catch is less than or equal to Yield and that a fleet may  catching less than it's fraction of yield (presumably because it may be more profitable to select a lower level of landings).
+The optimization problem in equation \ref{optimization_problem} contains two embedded assumptions: total catch is less than or equal to Yield and that a fleet may  catching less than its fraction of yield (presumably because it may be more profitable to select a lower level of landings).
 
-Economic data collected from 2011-2015 by the Northest Fisheries Observer Program (NEFOP) are used to construct average daily costs for the trawl and purse seine fleets.  Fuel prices were much lower in 2011-2014 compared to 2015. We adjusted fuel prices to the 2011-2014 average; sensitivity analysis was performed by settting fuel prices to the 2015 levels but results not reported here.  Other costs of fishing included water, oil, and damage costs. Crew pay and fixed costs were not included.  
+Economic data collected from 2011-2015 by the Northest Fisheries Observer Program (NEFOP) are used to construct average daily costs for the trawl and purse seine fleets.  Fuel prices were much lower in 2011-2014 compared to 2015. We adjusted fuel prices to the 2011-2014 average; sensitivity analysis was performed by setting fuel prices to the 2015 levels but results not reported here.  Other costs of fishing included water, oil, and damage costs. Crew pay and fixed costs were not included.  
 
 We construct average catch per day fished for each fleet from the Vessel Trip Report databases over the same time period.  The trip lengths in the VTR and observer data were very similar. This allows us to construct the average cost of catching a metric ton of herring for the trawl and purse seine fleet ($c^t$ and $c^s$ respectively).  We assume that the average cost is equal to the marginal cost for each fleet.  These figures are presented in Table \ref{costs_combined}.
 
@@ -452,7 +450,7 @@ Although we selected predators with high herring diet proportions, observed pred
 Our models are designed for evaluating alternative herring control rules, not predator stock assessment and population prediction. We caution against generalizing results for these particular predators to other predators, as population parameters and herring relationships differ. *Dive into the "forage" fish debate!? This is where we caution against borrowing conclusions for one system and assuming they work in another, ref Pikitch and Hilborn, why not*
 
 ### Economic Dreams
-The economic model of the herring fishery did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal effect when comparing HCRs within or across OMs.  Net revenues would all be overestimated by the same fixed amount.  The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs.  However, in the long run, firms can enter and exit this industry.  Less than three-quarters of the permitted herring vessels were active in the fishery, suggesting that firms could enter if future profitability is expected to be high.  We did not model firm entry and exit; this is a difficult decision to model.  Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon; however, understanding exactly how these decisions are made was not possible on the timeline requested by NEFMC.  
+The economic model of the herring fishery did not include fixed costs. If firms do not enter or exit, then the exclusion of fixed costs from the model has minimal effect when comparing HCRs within or across OMs.  Net revenues would all be overestimated by the same fixed amount.  The stationarity metric would be unaffected; however, IAV constructed without fixed costs will be smaller than the true IAV that contains fixed costs.  In reality, firms can enter and exit this industry.  Economic theory suggests that firms will enter (exit) if they anticipate large positive (negative) profits over a particular planning horizon. While this fishery is characterized by limited acces, less than three-quarters of the herring vessels with limited access permits are active in the fishery, suggesting that firms could enter if future.  Understanding exactly how these entry and exit decisions are made was not possible on the timeline requested by NEFMC and we did include firm entry and exit in the simulation model.
 
 We also assume that marginal costs are equal to average variable costs, constant for each fleet, and do not depend on the level of biomass. A more rigorous approach might include estimating a (economic) production function for the herring fishery; this was not done in the interest of time.  It is difficult to predict how estimating a true cost function and integrating those results would change the results of the study.  
 
