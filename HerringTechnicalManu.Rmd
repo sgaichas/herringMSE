@@ -187,7 +187,9 @@ The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.
 
 ## Predators
 
-There are two components of predator modeling for the herring MSE: a predator population model, and a herring-predator relationship model to link herring with predator populations. Here, we give an overview of the modeling process, and we describe the decisions made in parameterizing individual predator models and herring-predator relationships in the following sections. The overall population in numbers for each predator $P$ each year $N_{y}^P$ is modeled with a delay-difference function: 
+Bluefin tuna were identified at the stakeholder workshop as the recommended highly migratory herring predator, and common terns were identified at the stakeholder workshop as the recommended seabird herring predator, so these predators were modeled. No specific groundfish or marine mammal was identified as a representative herring predator during the stakeholder workshop. In sections below we discuss these decisions further.
+
+There were two modeling components for each predator included in the herring MSE: a predator population model, and a herring-predator relationship model to link herring with predator populations. Here, we give an overview of the modeling process, and we describe the decisions made in parameterizing individual predator models and herring-predator relationships in the following sections. The overall population in numbers for each predator $P$ each year $N_{y}^P$ is modeled with a delay-difference function: 
 \begin{equation}
 N_{y+1}^P = N_{y}^PS_{y}^P +  R_{y+1}^P \label{delaydiffN_equation},
 \end{equation}
@@ -235,8 +237,6 @@ v_{y} =  v e ^ {-(\frac{N_{y}}{N_{F=0}})\delta} \label{varmort_equation},
 where 0 < $\delta$ <1 links herring population size to predator survival.
 
 After specifying the population model parameters and herring-predator relationship, we applied the [@hilborn_quantitative_2003] equilibruim calculation for the delay difference model with F=0 to get the unfished spawners per recruit ratio. This ratio was then used in a new equilibruim calculation with the current predator exploitation rate to estimate Beverton-Holt stock recruitment parameters, equilibrium recruitment and equilibrium individual weight under exploitation. Then, each model was run forward for 150 years with output from the herring operating model specifying the herring population characteristics. 
-
-Bluefin tuna were identified at the stakeholder workshop as the recommended highly migratory herring predator. Common terns were identified at the stakeholder workshop as the recommended seabird herring predator. No specific groundfish or marine mammal was identified as a representative herring predator during the stakeholder workshop.
 
 ### Tuna population model
 Western Atlantic bluefin tuna population parameters were drawn from the 2014 stock assessment [@iccat_report_2015], the growth curve from [@restrepo_updated_2010], and recruitment parameters from a detailed examination of alternative stock recruit relationships [@porch_making_2016]. Ultimately, the âlow recruitmentâ scenario was selected to represent bluefin tuna productivity in the Gulf of Maine, which defines Bmsy as 13,226 t and therefore affects measures of status relative to Bmsy. Continuation of the current tuna fishing strategy (F<0.5Fmsy under the low recruitment scenario) is assumed. All predator population model parameters are listed in Table 2. 
