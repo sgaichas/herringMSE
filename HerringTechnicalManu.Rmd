@@ -479,9 +479,9 @@ What we ask of fishery governance is that it coordinate institutional  rules and
 ### Integration Realities
 <!---These two paragraphs are more like difficulties with doing an integrated model, not necessarily an economic problem.  If they are the only integration problems/weaknesses, I can  put them back in the economic dream or economic model section.  -->
 
-Catch in the economic model can be different from the yield (from the herring model). This is frequently handled as symmetric implementation error in the fisheries literature (as it is in this model). However, the economic model suggest a assymetric error term in which the error depends on prices of inputs and outputs. 
+Catch in the economic model can be different from the yield (from the herring model). This is frequently handled as symmetric implementation error in the fisheries literature (as it is in this model). However, the economic model suggest an assymetric error term in which the error depends on prices of inputs and outputs. 
 
-One of the difficulties with including a quantitative economic model is that it's difficult to know which predator and performance metric to formally model.  For example, prior to completing the predator models, we did not know that tuna weight but not abundances would be sensitive to various harvest control rules.  If we had tried to model how changes in abundance affect affect costs of harvesting tuna, this would have not been a fruitful use of time.
+One of the difficulties with including a quantitative economic model is that it is difficult to know which predator and performance metric to formally model.  For example, prior to completing the predator models, we did not know that tuna weight but not abundances would be sensitive to various operating models, but not harvest control rules.  In this setting, spending research time examining how changes in abundance affect affect costs of harvesting tuna, would have resulted in additional performance measures that would not help  managers select among control rules.
 
 
 # References
