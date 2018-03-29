@@ -740,6 +740,12 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 
 
 # Figures
+
+\listoffigures
+
+\newpage
+
+
 ```{r, fig.cap="Modeled herring average weight-tuna growth relationship \\label{herringtuna}", out.width='300pt', message = FALSE, warning = FALSE}
 # from MSE_TunaLink.R
 FWalpha       <-  0.020605  #ford-walford plot intercept parameter 
