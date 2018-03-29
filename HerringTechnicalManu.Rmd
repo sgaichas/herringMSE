@@ -486,7 +486,9 @@ Note that increases in the biomass of a particular predator could be a net ``bad
 
 In order to meet management timelines, the development of the herring, predator, and economic models must be done in parallel, not in sequence.  This requires an educated guess about which predators and predator outcomes are sensitive to changes in HCRs; this difficult.  For example, prior to completing the predator models, we did not know that tuna weight but not abundances would be sensitive to various operating models, but not harvest control rules.  Spending research time examining how changes in abundance affect affect costs of harvesting tuna, would have resulted in additional performance measures that would not help  managers select among control rules.
 
-## Making stuffs better
+## Making stuffs better. 
+This is the best section ever.
+
 
 
 
