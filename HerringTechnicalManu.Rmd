@@ -145,14 +145,12 @@ Recruitment followed Beverton-Holt dynamics [@francis1992use]:
 The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
 
 ### Assessment Error
-A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\rho_{}$:
-
-\begin{equation}
-\widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
-\varepsilon_{\phi,y}=\vartheta\varepsilon_{\phi,y-1}+\sqrt{1-\vartheta^2}\tau_y \\
-\tau \sim N(0,\sigma_\phi^2). \\
-\end{equation}
-
+A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\rho$:
+\begin{align}
+\widehat{N}_{a,y}&=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
+\varepsilon_{\phi,y}&=\vartheta\varepsilon_{\phi,y-1}+\sqrt{1-\vartheta^2}\tau_y \\
+\tau &\sim N(0,\sigma_\phi^2). 
+\end{align}
 The variance of assessment errors ($\sigma_\phi^2$) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  A range of values for $\sigma_\phi^2$ and $\vartheta$ were not evaluated because previous research using a similar approach to applying assessment errors has found relative control rule performance to be robust to these quantities [@punt2008evaluation; @irwin2008evaluating; @Deroba2012Evaluating].  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$, and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 
 ### Operating Models
