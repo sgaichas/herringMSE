@@ -5,12 +5,12 @@ author: Jonathan J. Deroba, Sarah K. Gaichas, Min-Yang Lee, Rachel G. Feeney, De
   Boelke, Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -145,13 +145,11 @@ Recruitment followed Beverton-Holt dynamics [@francis1992use]:
 The variance of recruitment process errors ($\sigma_R^2$) equaled 0.36 and the degree of autocorrelation ($\omega$) equaled 0.1, which are values consistent with recruitment estimates from a recent Atlantic herring stock assessment [@Deroba2015atlantic].
 
 ### Assessment Error
-A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\rho$:
+A stock assessment was approximated (i.e., assessment errors) similar to @punt2008evaluation and @Deroba2014EvaluatingRho.  Assessment error was modeled as a year-specific lognormal random deviation common to all ages, with first-order autocorrelation and a term that created the option to include bias $\rho_{}$:
 
 \begin{equation}
 \widehat{N}_{a,y}=[N_{a,y}(\rho+1)]e^{\varepsilon_{\phi,y}-\frac{\sigma_\phi^2}{2}} \\
-
 \varepsilon_{\phi,y}=\vartheta\varepsilon_{\phi,y-1}+\sqrt{1-\vartheta^2}\tau_y \\
-
 \tau \sim N(0,\sigma_\phi^2). \\
 \end{equation}
 
@@ -198,7 +196,6 @@ The conditional constant catch rule used a constant desired catch amount unless 
 Implementation errors were also included in a similar way as in @punt2008evaluation and @Deroba2012Evaluating, as year-specific lognormal random deviations:
 \begin{equation}
 F_{a,y}=\bar{F}_yS_ae^{\varepsilon_{\theta,y}-\frac{\sigma_\theta^2}{2}} \\
-
 \varepsilon_{\theta} \sim N(0,\sigma_\theta^2).
 \end{equation}
 The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.
