@@ -5,12 +5,12 @@ author: Jonathan J. Deroba, Sarah K. Gaichas, Min-Yang Lee, Rachel G. Feeney, De
   Boelke, Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -754,12 +754,12 @@ AnnualAlpha   <-  c()
 
 AnnualAlpha<-(0.9*FWalpha) + ((1.1*FWalpha) - (0.9*FWalpha))/(1+exp((1-preypredgrow)*(100*(preyAvgWt-BFTGrowThresh)/BFTGrowThresh))) #alpha changes with herring avg wt, not slope
 
-qplot(preyAvgWt, AnnualAlpha, geom="line") 
+qplot(preyAvgWt, AnnualAlpha, geom="line", xlab="Herring average weight", ylab="AnnAlpha parameter") 
 
 ```
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns \\label{ternSR}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns assuming 10\\% fledgling->adult survival \\label{ternSR}", out.width='400pt', message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -778,8 +778,8 @@ terntotalpop <- ternpopproddiet %>%
 ternrec <- ggplot(terntotalpop, aes(x=totpairs, y=totfledge*.1, colour=species)) +
   geom_point() +
   scale_y_continuous(limits = c(0,5000)) +
-  scale_x_continuous(limits = c(0,45000)) +
-  ggtitle("Tern stock and recruitment assuming 10% fledgling->adult survival")
+  scale_x_continuous(limits = c(0,45000)) #+
+  #ggtitle("Tern stock and recruitment assuming 10% fledgling->adult survival")
 
 BHfun <- function(x,a,b){
   (x/a)/(1+(1/a*b)*x)
@@ -794,7 +794,9 @@ ternrec+
   stat_function(fun=BHfun, args=list(a= 5.445551,b=0.0002266453), col="green", lwd=2)+
   stat_function(fun=BHfun, args=list(a= 9.786020,b=-0.0001570145), col="cyan3")+
   stat_function(fun=BHsteep, args=list(steep=0.41, Rmax=2900, Smax=45000), col="black") +
-  stat_function(fun=BHsteep, args=list(steep=0.26, Rmax=4500, Smax=45000), col="black")
+  stat_function(fun=BHsteep, args=list(steep=0.26, Rmax=4500, Smax=45000), col="black") +
+  labs(x="Number of nesting pairs", y="Number of Recruits (Fledglings/10)")
+
 
 ```
  
@@ -940,14 +942,16 @@ simTern <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 
 ternpoptrend +   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, size = 1) +
-  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated"))
+  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated"))+
+  labs(y="Number of nesting pairs", x="Years")
+
 
 
 ```
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Major diet items for Gulf of Maine tern fledgelings \\label{chickdiet}",  out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Gulf of Maine tern annual productivity distributions by majority diet item offered to fledgelings. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{chickdiet}",  out.width='400pt', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/TernMajorDietItems.png")
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -967,13 +971,14 @@ dietitem <- ggplot(majorterndiet, aes(x=majority.diet, y=productivity, colour=sp
   geom_hline(yintercept = 1) + 
   geom_boxplot()
 
-dietitem + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))                  
+dietitem + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x="Species group", y="Tern productivity")
 
 ```
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and tern productivity by colony \\label{proddiet}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and annual tern productivity (fledglings/nest) by Gulf of Maine colony. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{proddiet}", out.width='400pt', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/ternproddiet.png")
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -985,17 +990,18 @@ dietitem + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ternproddiet <- ggplot(ternpopproddiet, aes(x=prop.herring, y=productivity, colour=species)) +
   geom_point() +
-  geom_hline(yintercept = 1) +
+  geom_hline(yintercept = 1) #+
   #stat_smooth(method = "lm", formula = y ~ x, size = 1) +
   #stat_smooth(method = "loess", formula = y ~ x, size = 1) +
-  ggtitle("Herring proportion in diet and tern productivity GOM")
+  #ggtitle("Herring proportion in diet and tern productivity GOM")
 
-ternproddiet + facet_wrap(~colony) #+ theme(text=element_text(size=16))
+ternproddiet + facet_wrap(~colony) + #theme(text=element_text(size=16))
+  labs(x="Proportion of herring in diet", y="Productivity")
 
 ```
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success \\label{herrternmod}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{herrternmod}", out.width='400pt', message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -1031,8 +1037,8 @@ ternpopnomon_herringpop <- left_join(terntotpop_noMon, herring)
 
 totprodnomonherr <- ggplot(ternpopnomon_herringpop, aes(x=HerringTotalB, y=totfledge/totpairs, colour=species)) +
   geom_point() +
-  geom_hline(yintercept = 1) +
-  ggtitle("Tern production (no Monomoy) and assessed herring tot B")
+  geom_hline(yintercept = 1) #+
+  #ggtitle("Tern production (no Monomoy) and assessed herring tot B")
 
 #totprodnomonherr + stat_smooth(method = "lm", formula = y ~ x, size = 1) 
 
@@ -1053,7 +1059,8 @@ totprodnomonherr +
   scale_x_continuous(limits = c(0,2500000)) +
   geom_line(aes(x=HerringTotalB, y=recmult), lwd=1.5) +
   geom_line(aes(x=HerringTotalB, y=9.439e-01 + 1.210e-07*HerringTotalB), color="black", lty=3) +
-  geom_line(aes(x=seq(0,2500000,length.out=51), y=(HerrAlpha*(seq(0,2500000,length.out=51)/HerringThresh))/((HerrAlpha-1)+(seq(0,2500000,length.out=51)/HerringThresh))))
+  geom_line(aes(x=seq(0,2500000,length.out=51), y=(HerrAlpha*(seq(0,2500000,length.out=51)/HerringThresh))/((HerrAlpha-1)+(seq(0,2500000,length.out=51)/HerringThresh)))) +
+  labs(x="Herring total biomass (metric tons)", y="Tern productivity (fledglings per nesting pair)")
 
 
 ```
@@ -1199,14 +1206,15 @@ simTern <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 
 ternpoptrend +   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, size = 1) +
-  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated"))
+  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated")) +
+  labs(x="Year", y="Number of nesting pairs")
 
 
 ```
 
 \newpage
 <!-- This might be in the wrong spot --->
-```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database \\label{gfishdiets}", message = FALSE, warning = FALSE}
+```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database. Herring proportion in diet is highlighted in solid fill. \\label{gfishdiets}", message = FALSE, warning = FALSE}
 
 #dogdiet   <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/dogfishdietcomp.csv")
 #GBcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GBcoddietcomp.csv")
@@ -1229,10 +1237,10 @@ dogcoddiet <- bind_rows(dogdiet, GBcoddiet, GOMcoddiet)
 dogcoddiet$fillwhite <- with(dogcoddiet, ifelse(Prey=="CLUHAR", 1,0))
 
 compplot2 <- ggplot(dogcoddiet, aes(Year, Percent, colour=Prey)) + 
-  geom_bar(stat = "identity", aes(fill=fillwhite)) 
+  geom_bar(stat = "identity", aes(fill=fillwhite))
   #geom_bar(stat = "identity") 
 
-compplot2 + facet_wrap("Pred", nrow=3) + theme(legend.position="none")
+compplot2 + facet_wrap("Pred", nrow=3) + theme(legend.position="none") 
 
 ```
 
