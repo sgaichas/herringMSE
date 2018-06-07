@@ -297,7 +297,7 @@ Some interannual variation in diet may be explained by changing herring abundanc
 
 
 ### Dogfish population model
-The dogfish model stock recruitment function, initial population, and annual natural mortality were adapted from information in @rago_implications_1998; @rago_biological_2010; @bubley_reassessment_2012, and @rago_update_2013. Due to differential growth and fishing mortality by sex, our model best represents female dogfish (a split-sex delay difference model was not feasible within the time constraints of this MSE). Further, dogfish stock-recruit modeling to date based on Ricker functions [@rago_biological_2010] captures more nuances in productivity than the Beverton-Holt model we used. Our recruitment parameterization reflects a stock with generally low productivity and relatively high resilience, which we recognize is a rough approximation for a species such as dogfish. The annual fishing exploitation rate applied is the average of the catch/adult female biomass from the most recent years of the 2016 data update provided to the Mid-Atlantic Fishery Management Council (Rago pers comm). 
+The dogfish model stock recruitment function, initial population, and annual natural mortality were adapted from information in @rago_implications_1998; @rago_biological_2010; @bubley_reassessment_2012, and @rago_update_2013. Due to differential growth and fishing mortality by sex, our model best represents female dogfish (a split-sex delay difference model was not feasible within the time constraints of this MSE). Further, dogfish stock-recruit modeling to date based on Ricker functions [@rago_biological_2010] captures more nuances in productivity than the Beverton-Holt model we used. Our recruitment parameterization reflects a stock with generally low productivity and relatively high resilience, which we recognize is a rough approximation for a species such as dogfish. The annual fishing exploitation rate applied is the average of the catch/adult female biomass from the most recent years of the 2016 data update provided to the Mid-Atlantic Fishery Management Council (Rago pers comm 2016). 
 
 ### Herring-dogfish relationship model
 There was a weak positive relationship between dogfish total biomass and herring total biomass from the respective stock assessments (Fig. \ref{pupherring}), but no clear relationship between dogfish weight or dogfish recruitment and herring population size. During the recent period of relatively low dogfish recruitment (1995-2007), there is a positive relationship between juvenile dogfish (pup) average weight and herring proportion in diet, suggesting a potential growth and or recruitment mechanism; however this relationship does not hold throughout the time series (Fig. \ref{pupherring}). 
@@ -625,17 +625,17 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 
 \newpage
 
-```{r popsources, tab.cap="Predator population model specification and parameter sources\\label{predsource}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r popsources, tab.cap="Predator population model specification and parameter sources. See methods for details of Gulf of Maine Seabird Working Group (GOMSWG) data. \\label{predsource}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |                      | Highly migratory     | Seabird              | Groundfish           | Marine mammal        |
 |:---------------------|:---------------------|:---------------------|:---------------------|:---------------------|
 | Stakeholder preferred species | Bluefin tuna | Common tern | not specified | not specified |
 | Species modeled     | Bluefin tuna (western Atlantic stock) | Common tern (Gulf of Maine colonies as defined by the GOM Seabird Working Group) | Spiny dogfish (GOM and GB cod stocks also examined) | none, data limited (Minke & humpback whales, harbor porpoise, harbor seal examined) |
-| Stock-recruitment   | Current assessment and literature | Derived from observations | Current assessment and literature | No time series data for our region | 
-| Natural mortality | Current assessment | Literature | Current assessment | Derivable from assessment? |
-| Fishing mortality | Current assessment | n/a | Current assessment | Derivable from assessment? |
-| Initial population | Current assessment | Derived from observations | Current assessment | Derivable from assessment? |
-| Weight at age | Literature | Literature | Literature | Literature | 
+| Stock-recruitment   | @iccat_report_2015 and @porch_making_2016 | Derived from GOMSWG data | @rago_implications_1998 and @rago_biological_2010 | No time series data for our region | 
+| Natural mortality | @iccat_report_2015 | @nisbet_common_2002 | @rago_update_2013 and Rago pers. comm. 2016 | Derivable from @hayes_us_2017? |
+| Fishing mortality | @iccat_report_2015 | n/a | @rago_update_2013 and Rago pers. comm. 2016 | Derivable from @hayes_us_2017? |
+| Initial population | @iccat_report_2015 | Derived from GOMSWG data | @rago_update_2013 and Rago pers. comm. 2016 | Derivable from @hayes_us_2017? |
+| Weight at age | @restrepo_updated_2010 | @nisbet_common_2002 | @rago_implications_1998 | Depending on species, derivable from literature | 
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
