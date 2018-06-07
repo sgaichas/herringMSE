@@ -86,7 +86,49 @@ knit_hooks$set(output = function(x, options) {
     default_output_hook(x,options)
 })
 
+#a better plotting theme than ggplot default? from https://rpubs.com/Koundy/71792
+theme_Publication <- function(base_size=14, base_family="") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+      
+}
 
+scale_fill_Publication <- function(...){
+      library(scales)
+      discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+scale_colour_Publication <- function(...){
+      library(scales)
+      discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
 ```
 
 \doublespacing
@@ -754,7 +796,8 @@ AnnualAlpha   <-  c()
 
 AnnualAlpha<-(0.9*FWalpha) + ((1.1*FWalpha) - (0.9*FWalpha))/(1+exp((1-preypredgrow)*(100*(preyAvgWt-BFTGrowThresh)/BFTGrowThresh))) #alpha changes with herring avg wt, not slope
 
-qplot(preyAvgWt, AnnualAlpha, geom="line", xlab="Herring average weight", ylab="AnnAlpha parameter") 
+qplot(preyAvgWt, AnnualAlpha, geom="line", xlab="Herring average weight", ylab="Tuna AnnAlpha parameter") +
+  theme_Publication() + scale_colour_Publication()
 
 ```
 \newpage
@@ -795,7 +838,8 @@ ternrec+
   stat_function(fun=BHfun, args=list(a= 9.786020,b=-0.0001570145), col="cyan3")+
   stat_function(fun=BHsteep, args=list(steep=0.41, Rmax=2900, Smax=45000), col="black") +
   stat_function(fun=BHsteep, args=list(steep=0.26, Rmax=4500, Smax=45000), col="black") +
-  labs(x="Number of nesting pairs", y="Number of Recruits (Fledglings/10)")
+  labs(x="Number of nesting pairs", y="Number of Recruits (Fledglings/10)") +
+  theme_Publication() + scale_colour_Publication()
 
 
 ```
@@ -943,7 +987,8 @@ simTern <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 ternpoptrend +   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, size = 1) +
   geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated"))+
-  labs(y="Number of nesting pairs", x="Years")
+  labs(y="Number of nesting pairs", x="Years") +
+  theme_Publication() + scale_colour_Publication()
 
 
 
@@ -972,7 +1017,8 @@ dietitem <- ggplot(majorterndiet, aes(x=majority.diet, y=productivity, colour=sp
   geom_boxplot()
 
 dietitem + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  labs(x="Species group", y="Tern productivity")
+  labs(x="Species group", y="Tern productivity")+
+  theme_Publication() + scale_colour_Publication()
 
 ```
 
@@ -996,7 +1042,8 @@ ternproddiet <- ggplot(ternpopproddiet, aes(x=prop.herring, y=productivity, colo
   #ggtitle("Herring proportion in diet and tern productivity GOM")
 
 ternproddiet + facet_wrap(~colony) + #theme(text=element_text(size=16))
-  labs(x="Proportion of herring in diet", y="Productivity")
+  labs(x="Proportion of herring in diet", y="Productivity")+
+  theme_Publication() + scale_colour_Publication()
 
 ```
 \newpage
@@ -1060,7 +1107,8 @@ totprodnomonherr +
   geom_line(aes(x=HerringTotalB, y=recmult), lwd=1.5) +
   geom_line(aes(x=HerringTotalB, y=9.439e-01 + 1.210e-07*HerringTotalB), color="black", lty=3) +
   geom_line(aes(x=seq(0,2500000,length.out=51), y=(HerrAlpha*(seq(0,2500000,length.out=51)/HerringThresh))/((HerrAlpha-1)+(seq(0,2500000,length.out=51)/HerringThresh)))) +
-  labs(x="Herring total biomass (metric tons)", y="Tern productivity (fledglings per nesting pair)")
+  labs(x="Herring total biomass (metric tons)", y="Tern productivity (fledglings per nesting pair)")+
+  theme_Publication() + scale_colour_Publication()
 
 
 ```
@@ -1207,7 +1255,8 @@ simTern <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 ternpoptrend +   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, size = 1) +
   geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated")) +
-  labs(x="Year", y="Number of nesting pairs")
+  labs(x="Year", y="Number of nesting pairs")+
+  theme_Publication() + scale_colour_Publication()
 
 
 ```
@@ -1290,7 +1339,8 @@ gfishpopfood <- filter(gfishpopfood, !is.na(prey))
 gfishSSBdiet <- ggplot(gfishpopfood, aes(x=dietprop, y=SSB, colour=prey)) + 
   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, size = 1) 
-gfishSSBdiet + facet_wrap(~species)
+gfishSSBdiet + facet_wrap(~species)+
+  theme_Publication() + scale_colour_Publication()
 
 
 ```
@@ -1367,8 +1417,10 @@ dogherrB <- ggplot(dogfishfoodherr, aes(x=HerringTotalB, y=TotJan1B)) +
 #stat_smooth(method = "loess", formula = y ~ x, size = 1) + 
 #stat_smooth(method = "lm", formula = y ~ x, size = 1)
 
-dogherrB
-pupwtdiet
+dogherrB+
+  theme_Publication() + scale_colour_Publication()
+pupwtdiet+
+  theme_Publication() + scale_colour_Publication()
 ```
 
 \newpage
@@ -1384,7 +1436,8 @@ PredAnnualNatM   <-  c()
 
 PredAnnualNatM<-PredannualA*exp(-(preypopratio)*preyprednatm) 
 
-qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "current herring abundance / unfished herring abundance", ylab = "dogfish annual natural mortality v") 
+qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "current herring abundance / unfished herring abundance", ylab = "dogfish annual natural mortality v") +
+  theme_Publication() + scale_colour_Publication()
 
 #TotalSurv<-(1-PredAnnualNatM)*(1-Predexploit) #total annual predator survival
 
