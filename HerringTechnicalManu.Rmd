@@ -1533,7 +1533,7 @@ OMlabels <- c('LowFastBiased',
 #   return(list(plots=P, num=length(yvars)))
 # }
 
-#trying to align left side of plots--still not working
+#trying to align left side of plots--still not working--> finally works!
 plotting <- function(d, xvar, yvars, xlabs, ylabs){
   P <- list()
   for (i in 1:length(yvars)){
@@ -1550,17 +1550,22 @@ plotting <- function(d, xvar, yvars, xlabs, ylabs){
         theme_Publication() + scale_colour_Publication()+ 
         theme(plot.margin=unit(c(0,1,2,1),"mm"))
     }
-    gp <- ggplotGrob(p)
-    P <- c(P, list(gp))
+    #gp <- ggplotGrob(p)
+    P[[i]] <- p
   }
-  return(list(plots=P, num=length(yvars)))
+  #return(list(plots=P, num=length(yvars)))
+  gp <- lapply(P, ggplotGrob)
+  g <- do.call(rbind, c(gp, size="first"))
+  g$widths <- do.call(unit.pmax, lapply(gp, "[[", "widths"))
+  return(g)
 }
 
 #PLOTS <- plotting(d)
 #do.call(grid.arrange, c(PLOTS$plots, nrow = PLOTS$num))
 
 metOM <- plotting(allres, "OM", metrics, OMlabels, metlabels)
-do.call(grid.arrange, c(metOM$plots, nrow = metOM$num))
+grid.newpage()
+grid.draw(metOM)
 
 ```
 
@@ -1626,15 +1631,23 @@ plotting2 <- function(d, xvar, yvars, ylabs){
         theme_Publication() + scale_colour_Publication() + 
         theme(plot.margin=unit(c(0,1,2,1),"mm"))
     }
-    gp <- ggplotGrob(p)
-    P <- c(P, list(gp))
+    #gp <- ggplotGrob(p)
+    P[[i]] <- p
   }
-  return(list(plots=P, num=length(yvars)))
+  #return(list(plots=P, num=length(yvars)))
+  gp <- lapply(P, ggplotGrob)
+  g <- do.call(rbind, c(gp, size="first"))
+  g$widths <- do.call(unit.pmax, lapply(gp, "[[", "widths"))
+  return(g)
 }
 
-metCR <- plotting2(allres, "CR", metrics, metlabels)
-do.call(grid.arrange, c(metCR$plots, nrow = metCR$num))
+#PLOTS <- plotting(d)
+#do.call(grid.arrange, c(PLOTS$plots, nrow = PLOTS$num))
 
+metCR <- plotting2(allres, "CR", metrics, metlabels)
+#do.call(grid.arrange, c(metCR$plots, nrow = metCR$num))
+grid.newpage()
+grid.draw(metCR)
 
 ```
 
