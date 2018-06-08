@@ -1263,7 +1263,7 @@ ternpoptrend +   geom_point() +
 
 \newpage
 <!-- This might be in the wrong spot --->
-```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database. Herring proportion in diet is highlighted in solid fill. \\label{gfishdiets}", message = FALSE, warning = FALSE}
+```{r,eval=sg_figs, fig.cap="Annual diet compositions for major groundfish predators of herring estimated from NEFSC food habits database. Herring proportion in diet is highlighted in solid fill. \\label{gfishdiets}", fig.height=8, fig.width=11, out.width='\\linewidth', message = FALSE, warning = FALSE}
 
 #dogdiet   <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/dogfishdietcomp.csv")
 #GBcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GBcoddietcomp.csv")
@@ -1289,7 +1289,15 @@ compplot2 <- ggplot(dogcoddiet, aes(Year, Percent, colour=Prey)) +
   geom_bar(stat = "identity", aes(fill=fillwhite))
   #geom_bar(stat = "identity") 
 
-compplot2 + facet_wrap("Pred", nrow=3) + theme(legend.position="none") 
+herrindiet <- dogcoddiet %>%
+  filter(Prey %in% c("CLUHAR", "CLUFAM"))
+
+compplot3 <- ggplot(herrindiet, aes(Year, Percent)) + 
+  #geom_bar(stat = "identity", aes(fill=fillwhite))
+  geom_bar(stat = "identity", aes(fill=Prey)) 
+
+compplot3 + facet_wrap("Pred", nrow=3)  +
+  theme_Publication() + scale_colour_Publication() # + theme(legend.position="none")
 
 ```
 
