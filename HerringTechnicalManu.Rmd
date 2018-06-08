@@ -106,9 +106,9 @@ theme_Publication <- function(base_size=14, base_family="") {
                panel.grid.major = element_line(colour="#f0f0f0"),
                panel.grid.minor = element_blank(),
                legend.key = element_rect(colour = NA),
-               legend.position = "bottom",
-               legend.direction = "horizontal",
-               legend.key.size= unit(0.2, "cm"),
+               legend.position = "right",
+               legend.direction = "vertical",
+               legend.key.size= unit(0.4, "cm"),
                legend.margin = unit(0, "cm"),
                legend.title = element_text(face="italic"),
                plot.margin=unit(c(10,5,5,5),"mm"),
@@ -784,7 +784,7 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 \newpage
 
 
-```{r, fig.cap="Modeled herring average weight-tuna growth relationship \\label{herringtuna}", out.width='300pt', message = FALSE, warning = FALSE}
+```{r, fig.cap="Modeled herring average weight-tuna growth relationship \\label{herringtuna}", message = FALSE, warning = FALSE}
 # from MSE_TunaLink.R
 FWalpha       <-  0.020605  #ford-walford plot intercept parameter 
 FWrho         <-  0.9675  #ford-walford plot slope parameter
@@ -802,7 +802,7 @@ qplot(preyAvgWt, AnnualAlpha, geom="line", xlab="Herring average weight", ylab="
 ```
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns assuming 10\\% fledgling->adult survival \\label{ternSR}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns assuming 10\\% fledgling->adult survival \\label{ternSR}", message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -846,7 +846,7 @@ ternrec+
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Gulf of Maine tern annual productivity distributions by majority diet item offered to fledgelings. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{chickdiet}",  out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Gulf of Maine tern annual productivity distributions by majority diet item offered to fledgelings. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{chickdiet}", message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/TernMajorDietItems.png")
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -874,7 +874,7 @@ dietitem + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and annual tern productivity (fledglings/nest) by Gulf of Maine colony. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{proddiet}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and annual tern productivity (fledglings/nest) by Gulf of Maine colony. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{proddiet}", fig.height=8, fig.width=10,  out.width='\\linewidth', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/ternproddiet.png")
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -898,7 +898,7 @@ ternproddiet + facet_wrap(~colony) + #theme(text=element_text(size=16))
 ```
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{herrternmod}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{herrternmod}", message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -1113,7 +1113,7 @@ simTern1 <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 
 ```
 
-```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns with and without simulated herring-common tern productivity relationship \\label{terntrendwherring}", out.width='400pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns with and without simulated herring-common tern productivity relationship \\label{terntrendwherring}", message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -1253,8 +1253,8 @@ simTern <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 
 ternpoptrend +   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, size = 1) +
-  geom_point(data=simTern1, aes(x=yr, y=PredN, colour="Simulated common terns, no herring link")) +
-  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated common terns, herring link")) +
+  geom_point(data=simTern1, aes(x=yr, y=PredN, colour="Simulated common terns,\nno herring link")) +
+  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated common terns,\n herring link")) +
   labs(x="Year", y="Number of nesting pairs")+
   theme_Publication() + scale_colour_Publication()
 
@@ -1295,7 +1295,7 @@ compplot2 + facet_wrap("Pred", nrow=3) + theme(legend.position="none")
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Relationship of assessed groundfish spawning stock biomass (SSB) with the proportion of herring in diet \\label{gfishBherrdiet}", out.width='400pt',message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Relationship of assessed groundfish spawning stock biomass (SSB) with the proportion of herring in diet \\label{gfishBherrdiet}", message = FALSE, warning = FALSE}
 #codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
 #codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
 #dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
@@ -1426,7 +1426,7 @@ pupwtdiet+
 \newpage
 -->
 
-```{r, eval=sg_figs, fig.cap="Modeled herring relative population size-dogfish natural mortality relationship \\label{herringdogfish}", out.width='300pt', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Modeled herring relative population size-dogfish natural mortality relationship \\label{herringdogfish}", message = FALSE, warning = FALSE}
 # from MSE_GroundfishLink.R
 PredannualA   <-  0.092  #0.6 #predator annual natural mortality rate (0-1); serves as max if time varying
 Predexploit   <-  0.092  #0.3 #predator annual exploitation rate (0-1)
@@ -1648,7 +1648,8 @@ ggplot(HSCOM_BBsonly, aes(x=MedSSBrelSSBmsy, y=YieldrelMSY, colour=CR)) +
   geom_point(alpha=0.2) + 
   scale_x_continuous(limits = c(0,3.5)) + 
   #geom_hline(yintercept=1) + 
-  labs(y="relative yield", x="SSB/SSBmsy", colour="Control rule type")
+  labs(y="relative yield", x="SSB/SSBmsy", colour="Control rule type") +
+  theme_Publication() + scale_colour_Publication()
 
 ```
 
@@ -1668,7 +1669,8 @@ ggplot(HSCOM_BBsonly, aes(x=Yvar, y=YieldrelMSY, colour=CR)) +
   geom_point(alpha=0.2) + 
   scale_x_continuous(limits = c(0,3.5)) + 
   #geom_hline(yintercept=1) + 
-  labs(y="relative yield", x="variation in yield", colour="Control rule type")
+  labs(y="relative yield", x="variation in yield", colour="Control rule type") +
+  theme_Publication() + scale_colour_Publication()
 
 ```
 
@@ -1688,7 +1690,8 @@ ggplot(HSCOM_BBsonly, aes(x=PropClosure, y=YieldrelMSY, colour=CR)) +
   geom_point(alpha=0.2) + 
   scale_x_continuous(limits = c(0,1)) + 
   #geom_hline(yintercept=1) + 
-  labs(y="relative yield", x="frequency of closure", colour="Control rule type")
+  labs(y="relative yield", x="frequency of closure", colour="Control rule type") +
+  theme_Publication() + scale_colour_Publication()
 
 ```
 
@@ -1708,7 +1711,8 @@ ggplot(HSCOM_BBsonly, aes(x=PropSSBrelhalfSSBmsy, y=YieldrelMSY, colour=CR)) +
   geom_point(alpha=0.2) + 
   scale_x_continuous(limits = c(0,1)) + 
   #geom_hline(yintercept=1) + 
-  labs(y="relative yield", x="frequency of overfished", colour="Control rule type")
+  labs(y="relative yield", x="frequency of overfished", colour="Control rule type") +
+  theme_Publication() + scale_colour_Publication()
 
 ```
 
@@ -1728,7 +1732,8 @@ ggplot(HSCOM_BBsonly, aes(x=MedPropYrs_goodProd_Targplustern, y=YieldrelMSY, col
   geom_point(alpha=0.2) + 
   scale_x_continuous(limits = c(0,1)) + 
   #geom_hline(yintercept=1) + 
-  labs(y="relative yield", x="frequency of good tern productivity", colour="Control rule type")
+  labs(y="relative yield", x="frequency of good tern productivity", colour="Control rule type") +
+  theme_Publication() + scale_colour_Publication()
 
 ```
 
@@ -1746,13 +1751,17 @@ ggplot(HSCOM_BBsonly, aes(x=MedPropYrs_goodProd_Targplustern, y=YieldrelMSY, col
 
 # pick BBextras CRs only
 HSCOM_BBsonly <- HiSlowCorrectOM %>%
-  filter(CR %in% c("BB", "BB3yr", "BB3yrPerc", "BB5yr"))
+  filter(CR %in% c("BB", "BB3yr", "BB5yr", "BB3yrPerc"))
+
+HSCOM_BBsonly$CR <- factor(HSCOM_BBsonly$CR, levels = c("BB", "BB3yr", "BB5yr", "BB3yrPerc"))
 
 ggplot(HSCOM_BBsonly, aes(x=p50_NR, y=stouffer, colour=CR)) + 
   geom_point(alpha=0.2) + 
   scale_y_continuous(limits = c(0,1)) + 
   #geom_hline(yintercept=0.9) + 
-  labs(y="equil1", x="net revenue")
+  labs(y="equil1", x="net revenue") +
+  theme_Publication() + scale_colour_Publication()
+
 #Reset this
 HSCOM_BBsonly <- HiSlowCorrectOM %>%
   filter(CR %in% c("BB", "BB3yr", "BB5yr"))
