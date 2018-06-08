@@ -1446,7 +1446,7 @@ qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "current herring abundan
 
 \newpage
 
-```{r YAY, fig.cap="Differences between operating models for key metrics\\label{YAY}", fig.height=11, fig.width=8.5, message = FALSE, warning = FALSE}
+```{r YAY, fig.cap="Differences between operating models for key metrics\\label{YAY}", fig.height=14, fig.width=11.5, out.width='\\linewidth', message = FALSE, warning = FALSE}
 # metrics <- c('stouffer',
 #              'stationary',
 #              'p50_NR',
@@ -1540,12 +1540,15 @@ plotting <- function(d, xvar, yvars, xlabs, ylabs){
     if(i < length(yvars)){
       p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) + 
         geom_boxplot() + labs(y=ylabs[i]) +
-        theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
+        theme_Publication() + scale_colour_Publication() + 
+        theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank(), plot.margin=unit(c(2,1,2,1),"mm"))
     }
     if(i == length(yvars)){
       p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) + 
         geom_boxplot() + labs(y=ylabs[i]) +
-        scale_x_discrete(labels = xlabs)
+        scale_x_discrete(labels = xlabs) +
+        theme_Publication() + scale_colour_Publication()+ 
+        theme(plot.margin=unit(c(0,1,2,1),"mm"))
     }
     gp <- ggplotGrob(p)
     P <- c(P, list(gp))
@@ -1614,11 +1617,14 @@ plotting2 <- function(d, xvar, yvars, ylabs){
     if(i < length(yvars)){
       p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) +
         geom_boxplot() + labs(y=ylabs[i]) +
-        theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
+        theme_Publication() + scale_colour_Publication() + 
+        theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank(), plot.margin=unit(c(2,1,2,1),"mm"))
     }
     if(i == length(yvars)){
       p <- ggplot(d, aes_string(x=xvar, y=yvars[i])) +
-        geom_boxplot() + labs(y=ylabs[i]) 
+        geom_boxplot() + labs(y=ylabs[i]) +
+        theme_Publication() + scale_colour_Publication() + 
+        theme(plot.margin=unit(c(0,1,2,1),"mm"))
     }
     gp <- ggplotGrob(p)
     P <- c(P, list(gp))
