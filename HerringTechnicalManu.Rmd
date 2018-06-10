@@ -1312,7 +1312,7 @@ compplot3 + facet_wrap("Pred", labeller=labeller(Pred = labels), nrow=3)  +
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Relationship of groundfish predator spawning stock biomass (SSB) with the percentage of herring in diet: dogfish, Georges Bank cod, and Gulf of Maine cod.  \\label{gfishBherrdiet}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Relationship of groundfish predator (dogfish, Georges Bank cod, and Gulf of Maine cod) spawning stock biomass (SSB) with the percentage of herring in diet: both all clupeids including Atlantic herring (All Clupeids) and Atlantic herring only (A. herring). Linear model fit (line) with 95\\% CI band (gray shading) is shown for significant relationships. \\label{gfishBherrdiet}", message = FALSE, warning = FALSE}
 #codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
 #codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
 #dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
@@ -1336,6 +1336,7 @@ names(codpops)[1]<-"Yr"
 names(dogfish)[2:12] <- c("LargeB", "MedB", "RecAge1t",
                           "TotJan1B","survSSB", "survSSB_MA","stocExpB",
                           "stocTotB", "stocSSB", "SSBkgtow", "SSB")
+
 #put all in t not 1000t
 dogfish <- dogfish %>%
   mutate_at(vars(LargeB, MedB, RecAge1t,TotJan1B, survSSB, survSSB_MA,
@@ -1353,11 +1354,26 @@ gfishpopfood <- left_join(gfishpops, gfishdiet, by=c("Yr"="Year", "species"="spe
 
 gfishpopfood <- filter(gfishpopfood, !is.na(prey)) 
 
+sppdat <- gfishpopfood %>%
+  group_by(species) %>%
+  #filter(prey == "CLUHAR") %>%
+  filter(prey == "CLUALL") %>%
+  do(fitHerDiet = lm(SSB ~ dietprop, data = .))
+
+sppcoef <- tidy(sppdat, fitHerDiet)
+#filter(sppcoef, p.value<0.1)
+
+#only GBcod diet prop is significant for CLUHAR and CLUALL, plot line only for those
+
+GBcodfood <-gfishpopfood %>%
+  filter(species == "GBcod")
+
 gfishSSBdiet <- ggplot(gfishpopfood, aes(x=dietprop, y=SSB, colour=prey)) + 
-  geom_point() +
-  stat_smooth(method = "lm", formula = y ~ x, size = 1) 
-gfishSSBdiet + facet_wrap(~species)+
-  theme_Publication() + scale_colour_Publication()
+  geom_point() 
+
+gfishSSBdiet + facet_wrap(~species) + 
+  stat_smooth(data = GBcodfood, method = "lm", formula = y ~ x, size = 1) +
+  theme_Publication() + scale_colour_Publication(labels=c("All Clupeids", "A. herring"))
 
 
 ```
