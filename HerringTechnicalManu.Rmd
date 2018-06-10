@@ -1263,7 +1263,7 @@ ternpoptrend +   geom_point() +
 
 \newpage
 <!-- This might be in the wrong spot --->
-```{r,eval=sg_figs, fig.cap="Annual proportion of herring in diet compositions for major groundfish predators of herring estimated from NEFSC food habits database. Prey identified to herring family as well as Atlantic herring are included. \\label{gfishdiets}", fig.height=8, fig.width=11, out.width='\\linewidth', message = FALSE, warning = FALSE}
+```{r,eval=sg_figs, fig.cap="Annual percent of herring in diet compositions for major groundfish predators of herring (dogfish and two cod stocks) estimated from NEFSC food habits database. Prey identified to herring family (Clupeidae, open bars) as well as Atlantic herring (filled bars) are included. \\label{gfishdiets}", fig.height=8, fig.width=11, out.width='\\linewidth', message = FALSE, warning = FALSE}
 
 #dogdiet   <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/dogfishdietcomp.csv")
 #GBcoddiet <- read.csv("/Users/sgaichas/Documents/0_Data/MSE/GroundfishDat/GBcoddietcomp.csv")
@@ -1292,19 +1292,27 @@ compplot2 <- ggplot(dogcoddiet, aes(Year, Percent, colour=Prey)) +
 herrindiet <- dogcoddiet %>%
   filter(Prey %in% c("CLUHAR", "CLUFAM"))
 
-compplot3 <- ggplot(herrindiet, aes(Year, Percent)) + 
-  #geom_bar(stat = "identity", aes(fill=fillwhite))
+#herrindiet$fillwhite <- with(herrindiet, ifelse(Prey=="CLUHAR", 1,0))
+
+compplot3 <- ggplot(herrindiet, aes(Year, Percent, colour=Prey)) + 
+  #geom_bar(stat = "identity", aes(fill=fillwhite)) +
   geom_bar(stat = "identity", aes(fill=Prey)) +
+  scale_colour_manual(values=c("#ef3b2c", "#7fc97f"),
+                    labels=c("Clupeidae", "A. herring")) +
+  scale_fill_manual(values=c(NA,"#7fc97f"),
+                    labels=c("Clupeidae", "A. herring")) +
   ylim(0,100)
 
-compplot3 + facet_wrap("Pred", nrow=3)  +
-  theme_Publication() + scale_colour_Publication() # + theme(legend.position="none")
+labels <- c(dogfish = "dogfish", GBcod = "Georges Bank cod stock", GOMcod = "Gulf of Maine cod stock")
+
+compplot3 + facet_wrap("Pred", labeller=labeller(Pred = labels), nrow=3)  +
+  theme_Publication()  # + theme(legend.position="none")
 
 ```
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Relationship of assessed groundfish spawning stock biomass (SSB) with the proportion of herring in diet \\label{gfishBherrdiet}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Relationship of groundfish predator spawning stock biomass (SSB) with the percentage of herring in diet: dogfish, Georges Bank cod, and Gulf of Maine cod.  \\label{gfishBherrdiet}", message = FALSE, warning = FALSE}
 #codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
 #codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
 #dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
