@@ -317,11 +317,11 @@ The resulting model based on common tern population dynamics in the Gulf of Main
 
 
 ### Herring-tern relationship model
-The relationship between herring abundance and tern reproductive success was built based on information from individual colonies on annual productivity, proportion of herring in the diet, and amount of herring in the population as estimated by the current stock assessment. Since little of this information has appeared in the peer-reviewed literature, we present it in detail here.  First, productivity information was evaluated by major diet item recorded for chicks over all colonies and years. In general, common tern productivity was higher when a streamlined fish species was the major diet item relative to invertebrates, but having herring as the major diet item resulted in about the same distribution of productivities as having unidentified juvenile hake (*Urophycis* or *Merluccius* sp.) or sandlance (*Ammodytes* sp.) as the major diet item for these colonies (Fig. \ref{chickdiet}). 
+The relationship between herring abundance and tern reproductive success was built based on information from individual colonies on annual productivity, proportion of herring in the diet, and amount of herring in the population as estimated by the current stock assessment. Since little of this information has appeared in the peer-reviewed literature, we present it in detail here.  First, productivity information was evaluated by major diet item recorded for chicks over all colonies and years. In general, common tern productivity was higher when a streamlined fish species ("hake", "herring", and "sandlance" in Fig. \ref{chickdiet}) was the major diet item relative to invertebrates ("amphipod", "euphausiid", "inverts"=unidentified invertebrates in Fig. \ref{chickdiet}). However, having herring as the major diet item resulted in about the same distribution of annual productivities as having unidentified juvenile hake (*Urophycis* or *Merluccius* sp.) or sandlance (*Ammodytes* sp.) as the major diet item for these colonies (Fig. \ref{chickdiet}). 
 
-Individual colonies showed different trends in number of nesting pairs, productivity, and proportion of herring in the diet (plots available upon request). When both Arctic and common terns shared a colony, interannual changes in productivity were generally similar between species, suggesting that conditions at and around the colony (weather, predation pressure, and prey fields) strongly influenced productivity rather than species-specific traits. Only two colonies (Machias Seal Island near the Canadian Border and Stratton Island in southern Maine) showed a significant positive correlation between the proportion of herring in the chick diet and productivity. Other islands showed either non-significant (no) relationships, or in one case (Metinic Island) a significant negative relationship (Fig. \ref{proddiet}). 
+Individual colonies showed different trends in number of nesting pairs, productivity, and proportion of herring in the diet (plots available upon request). When both Arctic and common terns shared a colony, interannual changes in productivity were generally similar between species, suggesting that conditions at and around the colony (weather, predation pressure, and prey fields) strongly influenced productivity rather than species-specific traits. Only two colonies (Machias Seal Island near the US/Canada Border and Stratton Island in southern Maine) showed a significant positive correlation between the proportion of herring in the chick diet and productivity (Machias Seal: Spearman's rank rho = 0.63, p = 0.019; Stratton: Spearman's rank rho = 0.52, p = 0.035). Other islands showed either non-significant (no) relationships, or in one case (Metinic Island) a significant negative relationship (Fig. \ref{proddiet}). 
 
-The estimated population size of herring on the Northeast US shelf had some relationship to the amount of herring in tern diet at several colonies (4 of 13 common tern colony diets related to herring Age 1 recruitment, 6 of 13 common tern colony diets related to herring total biomass (B), and 4 of 13 common tern colony diets related to herring SSB; detailed statistics and plots available upon request). However, statistically significant direct relationships between herring population size and tern productivity were rare, with only Ship Island productivity increasing with herring total B, and Eastern Egg Rock, Matinicus Rock, Ship, and Monomoy Islands productivity increasing with herring SSB. Given that Monomoy Island tern chicks consistently displayed the lowest proportion of herring in their diets of any colony (0-11%), we don't consider this relationship further to build the model.  
+The estimated population size of herring on the Northeast US shelf had some relationship to the amount of herring in tern diet at several colonies (4 of 13 common tern colony diets related to herring Age 1 recruitment, 6 of 13 common tern colony diets related to herring total biomass (B), and 4 of 13 common tern colony diets related to herring SSB; detailed statistics and plots available upon request). However, statistically significant direct relationships between herring population size and tern productivity were rare, with only Ship Island productivity increasing with herring total B (), and Eastern Egg Rock, Matinicus Rock, Ship, and Monomoy Islands productivity increasing with herring SSB. Given that Monomoy Island tern chicks consistently displayed the lowest proportion of herring in their diets of any colony (0-11%), we don't consider this relationship further to build the model.  
 
 Based on tern feeding observations, we would expect the number of age 1 herring in the population to be most related to tern productivity since that is the size class terns target, but this relationship was not found in analyzing the data. Herring total biomass was positively related to tern diets at nearly half of the colonies, and reflects all size classes including the smaller sizes most useful as tern forage, but was only directly related to tern productivity at one colony.  Herring SSB was not considered further as an index of tern prey because it represents sizes larger than tern forage. 
 
@@ -443,7 +443,7 @@ $Z$ has a standard normal distribution under the null hypothesis of dis-equilibr
 
 #Results
 
-Some performance metrics were redundant, showed similar tradeoffs, or were expected not to vary among operating models or control rules.  For example, the proportion of age-1 herring in the population was insensitive to control rules because the fishery does not select age-1 fish.  Such metrics were listed above to accurately document the outcome of the stakeholder process, but results below were focused on metrics likely of broad interest or with possible sensitivities to operating models or control rules.
+Some performance metrics were redundant, showed similar tradeoffs, or were expected not to vary among operating models or control rules.  For example, the proportion of age-1 herring in the population was insensitive to control rules because the fishery does not select age-1 fish.  Such metrics were listed above to accurately document the outcome of the stakeholder process, but results below were focused on metrics likely of broad interest or with possible sensitivities to operating models or control rules. A subset of eleven metrics is presented with abbreviations for reference in figures: herring relative yield ("relyeild") $\frac{yield}{MSY}$; herring interannual variation in yield ("yieldvar") *IAV* above; the proportion of years *Q*=0 ("closure") the herring fishery was closed; herring relative spawning stock biomass ("relSSB") $\frac{SSB}{SSB_{F=0}}$; the proportion of years the herring stock is overfished ("overfished") $SSB < \frac{SSB_{MSY}}{2}$; probability of good tern productivity ("ternprod") the median proportion of years that tern fledglings/breeding pair >= 1.0; probability of good dogfish status ("dogstatus") the median proportion of years that dogfish SSB relative 0.5 $SSB_{MSY}^P$ >= 1.0; probability of good tuna weight status ("tunawt") the median proportion of years that tuna population weight (population population biomass/population numbers) >= average; median herring fishery net revenue ("net revenue") as described above; herring fishery stable equilibrium ("equil1") if metric is small as described above; and herring fishery stable equilibrium ("equil2") if metric is large as described above. 
 
 ## Effect of Operating Models
 
@@ -867,16 +867,16 @@ dietitem <- ggplot(majorterndiet, aes(x=majority.diet, y=productivity, colour=sp
   geom_hline(yintercept = 1) + 
   geom_boxplot()
 
-dietitem + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  labs(x="Prey species group", y="Tern productivity", color='Tern species') +
+dietitem + theme_Publication() + #element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(x="Majority prey species group", y="Tern productivity", color='Tern species') +
   scale_colour_manual(values=c("#fdb462","#386cb0")) +
-  theme_Publication() #+ scale_colour_Publication()
+  theme(axis.text.x = element_text(size=8))
 
 ```
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and annual tern productivity (fledglings/nest) by Gulf of Maine colony. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{proddiet}", fig.height=8, fig.width=10,  out.width='\\linewidth', message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and annual tern productivity (fledglings/nest) by Gulf of Maine colony. Colony names are at the top of each subplot; I = island. Two colonies, Machias Seal and Stratton above, have significant positive Spearman's rank correlations between herring proportion in diet and annual productivity for common terns. No linear model slopes were significant, so none are shown in the plot. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{proddiet}", fig.height=8, fig.width=10,  out.width='\\linewidth', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/ternproddiet.png")
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -901,7 +901,7 @@ ternproddiet + facet_wrap(~colony) + #theme(text=element_text(size=16))
 ```
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{herrternmod}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success. Total annual productivity (fledglings per nest) for both tern species relative to assessed herring total biomass is shown, but the modeled relationship (curve) is based only on common terns. A linear relationship between herring total biomass and common tern productivity crosses tern productivity=1 (black dotted line) at ~400,000 tons herring total biomass. This linear relationship does not have a statistically significant slope; the curve was fit to represent a level but positive contribution of herring total biomass to common tern productivity above the threshold. The black horizontal line represents the target tern productivity of 1.0 fledgling per nest. \\label{herrternmod}", message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -1124,7 +1124,7 @@ simTern1 <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 
 ```
 
-```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns with and without simulated herring-common tern productivity relationship. Linear model fit (line) with 95\\% CI band (gray shading) is shown for significant relationships. \\label{terntrendwherring}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns with and without the simulated herring-common tern productivity relationship. Linear model fit (line) with 95\\% CI band (gray shading) is shown for significant relationships. \\label{terntrendwherring}", message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -1492,7 +1492,7 @@ qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "Current herring abundan
 
 \newpage
 
-```{r YAY, fig.cap="Differences between operating models for key metrics. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of each metric (x-axis label) measured across all control rule replicates and control rule types. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further than 1.5 box lengths from the box (outliers) are represented by points. \\label{YAY}", fig.height=14, fig.width=11.5, out.width='\\linewidth', message = FALSE, warning = FALSE}
+```{r YAY, fig.cap="Differences between operating models (OM) for key metrics. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of the distribution of medians for final 50 years of each simulation for each performance metric (x-axis label, please see text for definitions) and operating model (see Table 2 for definitions) across all control rule types. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further than 1.5 box lengths from the box (outliers) are represented by points. \\label{YAY}", fig.height=14, fig.width=11.5, out.width='\\linewidth', message = FALSE, warning = FALSE}
 # metrics <- c('stouffer',
 #              'stationary',
 #              'p50_NR',
@@ -1617,7 +1617,7 @@ grid.draw(metOM)
 
 \newpage
 
-```{r ZZZ, fig.cap="Differences between control rule types for key metrics. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of each metric (x-axis label) measured across all control rule replicates and operating models. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further than 1.5 box lengths from the box (outliers) are represented by points.\\label{ZZZ}", fig.height=11, fig.width=8.5, message = FALSE, warning = FALSE}
+```{r ZZZ, fig.cap="Differences between control rule types for key metrics. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of the distribution of medians for final 50 years of each simulation for each performance metric (x-axis label, please see text for definitions) and control rule type (CR; described in the text Harvest control rules section: biomass based with 1 (BB), 3 (BB3yr), and 5 (BB5yr) quota blocks, biomass based 3 year quota block with a 15\\% restriction on interannual quota change (BB3yrPerc), constant catch (CC), and conditional constant catch(CCC)) across all operating models. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further than 1.5 box lengths from the box (outliers) are represented by points.\\label{ZZZ}", fig.height=11, fig.width=8.5, message = FALSE, warning = FALSE}
 
 #note this one is over ALL OM
 
@@ -1699,7 +1699,7 @@ grid.draw(metCR)
 
 \newpage
 
-```{r yieldSSB, fig.cap="Tradeoff between herring relative yield and relative SSB for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldSSB}", message = FALSE, warning = FALSE}
+```{r yieldSSB, fig.cap="Tradeoff between herring relative yield and relative SSB for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation. \\label{yieldSSB}", message = FALSE, warning = FALSE}
 
 # pick one OM
 HiSlowCorrectOM <- allres %>%
@@ -1721,7 +1721,7 @@ ggplot(HSCOM_BBsonly, aes(x=MedSSBrelSSBmsy, y=YieldrelMSY, colour=CR)) +
 
 \newpage
 
-```{r yieldIAV, fig.cap="Tradeoff between herring relative yield and variation in yield for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldIAV}", message = FALSE, warning = FALSE}
+```{r yieldIAV, fig.cap="Tradeoff between herring relative yield and variation in yield for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldIAV}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1743,7 +1743,7 @@ ggplot(HSCOM_BBsonly, aes(x=Yvar, y=YieldrelMSY, colour=CR)) +
 
 \newpage
 
-```{r yieldclose, fig.cap="Tradeoff between herring relative yield and frequency of fishery closure for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldPropClosure}", message = FALSE, warning = FALSE}
+```{r yieldclose, fig.cap="Tradeoff between herring relative yield and frequency of fishery closure for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldPropClosure}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1765,7 +1765,7 @@ ggplot(HSCOM_BBsonly, aes(x=PropClosure, y=YieldrelMSY, colour=CR)) +
 
 \newpage
 
-```{r yieldOF, fig.cap="Tradeoff between herring relative yield and probability of the stock is overfished for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldProbOF}", message = FALSE, warning = FALSE}
+```{r yieldOF, fig.cap="Tradeoff between herring relative yield and probability of the stock is overfished for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldProbOF}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1787,7 +1787,7 @@ ggplot(HSCOM_BBsonly, aes(x=PropSSBrelhalfSSBmsy, y=YieldrelMSY, colour=CR)) +
 
 \newpage
 
-```{r yieldbirds, fig.cap="Tradeoff between herring relative yield and probability of good tern productivity for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldbirds}", message = FALSE, warning = FALSE}
+```{r yieldbirds, fig.cap="Tradeoff between herring relative yield and probability of good tern productivity for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medianstaken over the final 50 years of each simulation.\\label{yieldbirds}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1809,7 +1809,7 @@ ggplot(HSCOM_BBsonly, aes(x=MedPropYrs_goodProd_Targplustern, y=YieldrelMSY, col
 
 \newpage
 
-```{r revenuestability, fig.cap="Tradeoff between herring fleet Net Revenue and Equil1 for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks compared with 3 year quota block with a 15\\% restriction on annual quota changes (BB3yrPerc).\\label{revenuestability}", message = FALSE, warning = FALSE}
+```{r revenuestability, fig.cap="Tradeoff between herring fleet Net Revenue and Equil1 for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks compared with 3 year quota block with a 15\\% restriction on annual quota changes (BB3yrPerc). Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{revenuestability}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
