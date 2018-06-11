@@ -39,6 +39,10 @@ if(!require(gridExtra)) {
 if(!require(grid)) {  
   install.packages("grid")
   require(grid)}
+if(!require(ggthemes)) {  
+  install.packages("ggthemes")
+  require(ggthemes)}
+
 
 data.dir <- './data'
 
@@ -512,7 +516,7 @@ We also assume that marginal costs are equal to average variable costs, constant
 
 Catch in the economic model can be different from both quota and yield (from the herring model). This is frequently handled as symmetric implementation error in the fisheries literature (as it is in this model). However, the economic model suggests that either an assymetric error term, inwhich the error depends on prices of inputs and outputs, or a more integrated biological and economic model is warranted. 
 
-Consumer welfare measures could be determined from a demand curve for herring.  Equation \ref{ARDL} estimates a price-quantity relationship, which is not necessarily a demand curve for herring.  Rigorous estimation of a demand curve for herring likely requires modeling goods are substitutes for herring, possibly including  mackerel, menhaden, squid, and other likely substitute bait. This was not done due to limited time available.  @Kirkley2011AConsiderations use a static input-output model to simulate the effects of changes in herring quotas and predator biomass levels on the New England economy. Because the @Kirkley2011AConsiderations analysis suggested that the effects of changes in herring catch on other segments of the economy are quite small, economic analysis  was confined to the herring fleet.
+Consumer welfare measures could be determined from a demand curve for herring.  Equation \ref{ARDL} estimates a price-quantity relationship, which is not necessarily a demand curve for herring.  Rigorous estimation of a demand curve for herring requires modeling all goods that are substitutes for herring, including mackerel, menhaden, squid, and other substitute baits. This was not done due to limited time available.  @Kirkley2011AConsiderations use a static input-output model to simulate the effects of changes in herring quotas and predator biomass levels on the New England economy. Because the @Kirkley2011AConsiderations analysis suggested that the effects of changes in herring catch on other segments of the economy are quite small, economic analysis  was confined to the herring fleet.
 
 Economic methods that can inform ecosystem approaches to fisheries management include portfolio methods [@Edwards2004PortfolioStocks; @Jin2016ApplyingEBFM], coupled ecosystem-region models [@Jin2003LinkingEcosystem;  @Jin2012DevelopmentEngland; @Kirkley2011AConsiderations], and bioeconomic models [@Tschirhart2000GeneralEcosystem; @Finnoff2003HarvestingEcosystem; @Brown2005AFisheries;@Lehuta2013InvestigatingEngland] of varying complexity.  However, there was simply not enough time to employ these methods, nor to link economic outcomes to sociocultural outcomes [@zador2017linking].  The largest limitation of the economic model is that only the herring fishery is quantitatively modeled. Humans who indirectly use \textit{in-situ} herring were not formally modeled.  
 
@@ -524,7 +528,7 @@ These changes are not confined to an extractive sector of the economy.  For exam
 
 Note that increases in the biomass of a particular predator could be a net ``bad''  for society.  For example, an increase in the biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.  The ability to manipulate the ecosystem with a prey-level ABC control rule to achieve desirable outcomes depends on the rates at which these increases in prey are converted into social utility. This conversion depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these relationships are not particularly well understood at this time.
 
-In order to meet management timelines, the herring, predator, and economic models were developed in parallel, and not in sequence.  This required an educated guess about which predators and predator metrics/outcomes were sensitive to the range of HCRs.  For example, prior to completing the predator models, we did not know that tuna weight but not abundance would be sensitive to various operating models (i.e., fast and slow herring growth) but not the harvest control rules.  Developing the predator models in sequence may have revealed this result earlier in the process and resulted in efficiency gains. Spending research time examining how changes in herring abundance affect costs of harvesting tuna, would have resulted in additional performance measures that would not help managers select among control rules because herring abundance had relatively little effect on tuna.
+In order to meet management timelines, the herring, predator, and economic models were developed in parallel, and not in sequence.  This required an educated guess about which predators and predator outcomes were sensitive to the range of HCRs.  For example, prior to completing the predator models, we did not anticipate that tuna weight would be sensitive to various operating models (i.e., fast and slow herring growth) but not the harvest control rules.  Developing the herring, predator, and economic models sequentially could have have allowed for a model of tuna fishery that accounts for the size-dependent prices [@Carroll2001PricingManagement].  In contrast, devoting scarce research time to examine the costs of harvesting tuna would not have resulted in performance measures that would help managers select among control rules because changes herring abundance had relatively little effect on tuna.
 
 The simulation model used in this MSE can be thought of as a model of intermediate complexity [@plaganyi_multispecies_2014]. Future MSE models that are designed to address the role of herring as forage in the ecosystem should graduate to advanced complexity.  These advances should include more realstic models of the scientific process, herring stocks, predator-prey relationships, human behavior, and ecosystem valuation methods. However, linking the appropriate components to derive the desired set of performance metrics for management decision making need not be an insurmountable challenge. For example, fairly simple methods were used to link environmental drivers, prey and predator species, and detailed social and economic components of fisheries in the Gulf of Alaska [@zador2017linking]. The expert opinion of stakeholders involved in the MSE can be used to specify similar conceptual models in New England. In future iterations of the MSE, conceptual and qualitative modeling might be used to map out where critical data and further integrated model development would most efficiently address priority management needs. 
 
@@ -719,12 +723,12 @@ Trawl	&	62.43 & 61.4	&2.9&	3,833	&	5,009	&	4,315	&	573	&	2,005	\\\hline
 \end{centering}
 \end{table}
 -->
-```{r costs, tab.cap="Marginal cost of 1mt of herring, daily catch, trip length, and cost per day for the purse seine and trawl fleets averaged over 2011-2015.\\label{costs_combined}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+```{r costs, tab.cap="Marginal cost of 1mt of herring, daily catch, trip length, and adjusted cost per day for the purse seine and trawl fleets averaged over 2011-2015.\\label{costs_combined}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
-| Year | Marginal Cost (\\$/mt) | Catch (mt/day)   | Trip length days  | Cost Low|per High |day Raw |  Observed trips | VTR  trips  |
-|:-----|---------------:|---------:|------------:|---:|---:|---:|----------:|------:|
-|Seine	|	14.27 | 87.5| 1.0|	1,249	|	1,664	|	1,396	|	207	|	1,413	|
-|Trawl	|	62.43 | 61.4	|2.9|	3,833	|	5,009	|	4,315	|	573	|	2,005	|
+| Year | Marginal Cost (\\$/mt) | Catch (mt/day)   | Trip length (days)  | Adjusted Cost (\\$/day) |  Observed trips  | VTR  trips  |
+|:-----|---------------:|---------:|------------:|-------------:|-------:|------:|
+|Seine	|	14.27 | 87.5| 1.0|	1,249	|	207	|	1,413	|
+|Trawl	|	62.43 | 61.4	|2.9|	3,833	|	573	|	2,005	|
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
