@@ -312,7 +312,7 @@ The inflection point of $T$ = 0.15 kg average weight aligns with 0 tuna weight a
 ### Tern population model
 There is no published stock assessment or population model for most seabirds in the Northeast US. Therefore, Gulf of Maine common and Arctic tern (*Sterna paradisaea*) population parameters were drawn from accounts in the Birds of North America [@hatch_arctic_2002; @nisbet_common_2002] and estimated from counts of breeding pairs and estimates of fledgling success summarized by the Gulf of Maine Seabird Working Group (GOMSWG; data at http://gomswg.org/minutes.html), as corrected and updated by seabird experts from throughout Maine. While we initially analyzed both Arctic and common tern information, the stakeholder workshop identified common terns as the example species for modeling, and this species has more extensive data and a generally higher proportion of herring in its diet based on that data. Therefore, this predator model is based on common terns in the Gulf of Maine. 
 
-Adult breeding pairs by colony were combined with estimated productivity of fledglings per nest to estimate the annual number of fledglings for each year. A survival rate of 10% was applied to fledglings from each year to represent "recruits" to the breeding adult population age 4 and up [@nisbet_common_2002]. This "stock-recruit" information was used to estimate steepness for the delay difference model based on common tern information only. Fitting parameters with R nls [@Rcite] had variable success, with the full dataset unable to estimate a significant beta parameter (cyan line, Figure \ref{ternSR}) for common terns, and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (bright green line overlaid with black, Figure \ref{ternSR}). Therefore, steepness was estimated to give a relationship (black line, Fig. \ref{ternSR}) falling between these two lines. The resulting stock recruit relationship set steepness at 0.26, a theoretical maximum breeding adult population of 45,000 pairs (@nisbet_common_2002, 1930's New England population), and a theoretical maximum recruitment of 4,500 individuals annually (reflecting approximately a productivity of 1.0 at "carrying capacity" resulting in a stable population). Average common tern productivity is 1.02 (all Gulf of Maine colony data combined). Adult mortality was assumed to be 0.1 for the delay difference model (survival of 90% [@nisbet_common_2002] for adults).
+Adult breeding pairs by colony were combined with estimated productivity of fledglings per nest to estimate the annual number of fledglings for each year. A survival rate of 10% was applied to fledglings from each year to represent "recruits" to the breeding adult population age 4 and up [@nisbet_common_2002]. This "stock-recruit" information was used to estimate steepness for the delay difference model based on common tern information only. Fitting parameters with R nls [@Rcite] had variable success, with the full dataset unable to estimate a significant beta parameter (dashed line, Figure \ref{ternSR}) for common terns, and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (dotted line, Figure \ref{ternSR}). Therefore, steepness was estimated to give a relationship (solid line, Fig. \ref{ternSR}) falling between these two lines. The resulting stock recruit relationship set steepness at 0.26, a theoretical maximum breeding adult population of 45,000 pairs (@nisbet_common_2002, 1930's New England population), and a theoretical maximum recruitment of 4,500 individuals annually (reflecting approximately a productivity of 1.0 at "carrying capacity" resulting in a stable population). Average common tern productivity is 1.02 (all Gulf of Maine colony data combined). Adult mortality was assumed to be 0.1 for the delay difference model (survival of 90% [@nisbet_common_2002] for adults).
 The resulting model based on common tern population dynamics in the Gulf of Maine (with no link to herring) predicts that the population will increase to its carrying capacity under steady conditions over a 150 year simulation. The actual population has increased at ~2% per year between 1998 and 2015 (GOMSWG data). Given the lack of detailed demographic information in the delay-difference model, this was considered a good representation of the average observed trend in current common tern population dynamics. 
 
 
@@ -784,7 +784,7 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 \newpage
 
 
-```{r, fig.cap="Modeled herring average weight-tuna growth relationship \\label{herringtuna}", message = FALSE, warning = FALSE}
+```{r, fig.cap="Modeled herring average weight-tuna growth relationship. \\label{herringtuna}", message = FALSE, warning = FALSE}
 # from MSE_TunaLink.R
 FWalpha       <-  0.020605  #ford-walford plot intercept parameter 
 FWrho         <-  0.9675  #ford-walford plot slope parameter
@@ -802,7 +802,7 @@ qplot(preyAvgWt, AnnualAlpha, geom="line", xlab="Herring average weight", ylab="
 ```
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns assuming 10\\% fledgling->adult survival \\label{ternSR}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns assuming 10\\% fledgling->adult survival. Fitted parameters with the full common tern time dataset unable to estimate a significant beta parameter (dashed line), and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (dotted line). Therefore, steepness was estimated to give a relationship (solid black line) falling between these two lines. \\label{ternSR}", message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -834,9 +834,9 @@ BHsteep <- function(Sdat, steep, Rmax, Smax){
 }
 
 ternrec+
-  stat_function(fun=BHfun, args=list(a= 5.445551,b=0.0002266453), col="green", lwd=2)+
-  stat_function(fun=BHfun, args=list(a= 9.786020,b=-0.0001570145), col="cyan3")+
-  stat_function(fun=BHsteep, args=list(steep=0.41, Rmax=2900, Smax=45000), col="black") +
+  #stat_function(fun=BHfun, args=list(a= 5.445551,b=0.0002266453), col="black", lwd=1, linetype="dashed")+
+  stat_function(fun=BHfun, args=list(a= 9.786020,b=-0.0001570145), col="black",  linetype="dashed")+
+  stat_function(fun=BHsteep, args=list(steep=0.41, Rmax=2900, Smax=45000), col="black", linetype="dotted") +
   stat_function(fun=BHsteep, args=list(steep=0.26, Rmax=4500, Smax=45000), col="black") +
   labs(x="Number of nesting pairs", y="Number of Recruits (Fledglings/10)") +
   theme_Publication() + scale_colour_Publication()
@@ -984,6 +984,13 @@ totprodnomonherr +
 terntotalpop19982015 <- terntotalpop %>%
   filter(yr>1997)
 
+#ternsigtrend <- terntotalpop19982015 %>%
+#  group_by(species) %>%
+#  do(fitpoptrend = lm(yr ~ totpairs, data = .))
+#terncoef <- tidy(ternsigtrend, fitpoptrend)
+#filter(terncoef, p.value<0.05)
+# both intercepts are significant at this p
+
 ternpoptrend <- ggplot(terntotalpop19982015, aes(x=yr, y=totpairs, colour=species))
 
 # plot with actual data and simulated data from pop model
@@ -1113,7 +1120,7 @@ simTern1 <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 
 ```
 
-```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns with and without simulated herring-common tern productivity relationship \\label{terntrendwherring}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Population trends for Gulf of Maine terns with and without simulated herring-common tern productivity relationship. Linear model fit (line) with 95\\% CI band (gray shading) is shown for significant relationships. \\label{terntrendwherring}", message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -1253,8 +1260,8 @@ simTern <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 
 ternpoptrend +   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, size = 1) +
-  geom_point(data=simTern1, aes(x=yr, y=PredN, colour="Simulated common terns,\nno herring link")) +
-  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated common terns,\n herring link")) +
+  geom_point(data=simTern1, aes(x=yr, y=PredN, colour="Simulated,\nno herring link")) +
+  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated,\nherring link")) +
   labs(x="Year", y="Number of nesting pairs")+
   theme_Publication() + scale_colour_Publication()
 
