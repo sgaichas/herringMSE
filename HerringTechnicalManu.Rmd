@@ -784,7 +784,7 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 \newpage
 
 
-```{r, fig.cap="Modeled herring average weight-tuna growth relationship. \\label{herringtuna}", message = FALSE, warning = FALSE}
+```{r, fig.cap="Modeled herring average weight (population >180mm in length) to tuna growth relationship. See text (Herring-tuna relationship model section) for derivation. \\label{herringtuna}", message = FALSE, warning = FALSE}
 # from MSE_TunaLink.R
 FWalpha       <-  0.020605  #ford-walford plot intercept parameter 
 FWrho         <-  0.9675  #ford-walford plot slope parameter
@@ -796,13 +796,13 @@ AnnualAlpha   <-  c()
 
 AnnualAlpha<-(0.9*FWalpha) + ((1.1*FWalpha) - (0.9*FWalpha))/(1+exp((1-preypredgrow)*(100*(preyAvgWt-BFTGrowThresh)/BFTGrowThresh))) #alpha changes with herring avg wt, not slope
 
-qplot(preyAvgWt, AnnualAlpha, geom="line", xlab="Herring average weight", ylab="Tuna AnnAlpha parameter") +
+qplot(preyAvgWt, AnnualAlpha, geom="line", xlab="Herring average weight (kg)", ylab="Tuna AnnAlpha parameter") +
   theme_Publication() + scale_colour_Publication()
 
 ```
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns assuming 10\\% fledgling->adult survival. Fitted parameters with the full common tern time dataset unable to estimate a significant beta parameter (dashed line), and a truncated dataset resulting in low population production rates inconsistent with currently observed common tern trends (dotted line). Therefore, steepness was estimated to give a relationship (solid black line) falling between these two lines. \\label{ternSR}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns assuming 10\\% fledgling to adult survival. Fitted parameters with all years of the common tern dataset included a non-significant beta parameter (dashed line), while fits to a truncated dataset resulted in low population production rates inconsistent with currently observed common tern trends (dotted line). Therefore, steepness was estimated to give a relationship (solid black line) falling between these two lines. \\label{ternSR}", message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -838,15 +838,16 @@ ternrec+
   stat_function(fun=BHfun, args=list(a= 9.786020,b=-0.0001570145), col="black",  linetype="dashed")+
   stat_function(fun=BHsteep, args=list(steep=0.41, Rmax=2900, Smax=45000), col="black", linetype="dotted") +
   stat_function(fun=BHsteep, args=list(steep=0.26, Rmax=4500, Smax=45000), col="black") +
-  labs(x="Number of nesting pairs", y="Number of Recruits (Fledglings/10)") +
-  theme_Publication() + scale_colour_Publication()
+  labs(x="Number of nesting pairs", y="Number of recruits (fledglings/10)", color='Tern species') +
+  scale_colour_manual(values=c("#fdb462","#386cb0")) +
+  theme_Publication() #+ scale_colour_Publication()
 
 
 ```
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Gulf of Maine tern annual productivity distributions by majority diet item offered to fledgelings. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{chickdiet}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Gulf of Maine tern annual productivity distributions by majority diet item offered to fledglings. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of annual productivity measured across all nesting colonies in the Gulf of Maine where that prey species was the majority in the diet. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further from the box (outliers) are represented by points. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{chickdiet}", message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/TernMajorDietItems.png")
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -867,8 +868,9 @@ dietitem <- ggplot(majorterndiet, aes(x=majority.diet, y=productivity, colour=sp
   geom_boxplot()
 
 dietitem + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  labs(x="Species group", y="Tern productivity")+
-  theme_Publication() + scale_colour_Publication()
+  labs(x="Prey species group", y="Tern productivity", color='Tern species') +
+  scale_colour_manual(values=c("#fdb462","#386cb0")) +
+  theme_Publication() #+ scale_colour_Publication()
 
 ```
 
@@ -892,8 +894,9 @@ ternproddiet <- ggplot(ternpopproddiet, aes(x=prop.herring, y=productivity, colo
   #ggtitle("Herring proportion in diet and tern productivity GOM")
 
 ternproddiet + facet_wrap(~colony) + #theme(text=element_text(size=16))
-  labs(x="Proportion of herring in diet", y="Productivity")+
-  theme_Publication() + scale_colour_Publication()
+  labs(x="Proportion of herring in diet", y="Productivity", color='Tern species') +
+  scale_colour_manual(values=c("#fdb462","#386cb0")) +
+  theme_Publication() #+ scale_colour_Publication()
 
 ```
 \newpage
@@ -955,10 +958,11 @@ totprodnomonherr +
   scale_y_continuous(limits = c(0,1.8)) +
   scale_x_continuous(limits = c(0,2500000)) +
   geom_line(aes(x=HerringTotalB, y=recmult), lwd=1.5) +
-  geom_line(aes(x=HerringTotalB, y=9.439e-01 + 1.210e-07*HerringTotalB), color="black", lty=3) +
-  geom_line(aes(x=seq(0,2500000,length.out=51), y=(HerrAlpha*(seq(0,2500000,length.out=51)/HerringThresh))/((HerrAlpha-1)+(seq(0,2500000,length.out=51)/HerringThresh)))) +
-  labs(x="Herring total biomass (metric tons)", y="Tern productivity (fledglings per nesting pair)")+
-  theme_Publication() + scale_colour_Publication()
+  geom_line(aes(x=HerringTotalB, y=9.439e-01 + 1.210e-07*HerringTotalB), color="black", lty=3, show.legend = FALSE) +
+  geom_line(aes(x=seq(0,2500000,length.out=51), y=(HerrAlpha*(seq(0,2500000,length.out=51)/HerringThresh))/((HerrAlpha-1)+(seq(0,2500000,length.out=51)/HerringThresh)), show.legend = FALSE)) +
+  labs(x="Herring total biomass (metric tons)", y="Tern productivity (fledglings per nesting pair)", color='Tern species') +
+  scale_colour_manual(values=c("#fdb462","#386cb0")) +
+  theme_Publication() #+ scale_colour_Publication()
 
 
 ```
@@ -1259,11 +1263,12 @@ h<-1
 simTern <- data.frame(yr=seq(1998,2015,1), PredN=PredN[6:23])
 
 ternpoptrend +   geom_point() +
-  stat_smooth(method = "lm", formula = y ~ x, size = 1) +
-  geom_point(data=simTern1, aes(x=yr, y=PredN, colour="Simulated,\nno herring link")) +
-  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated,\nherring link")) +
-  labs(x="Year", y="Number of nesting pairs")+
-  theme_Publication() + scale_colour_Publication()
+  stat_smooth(method = "lm", formula = y ~ x, size = 1, show.legend = FALSE) +
+  geom_point(data=simTern1, aes(x=yr, y=PredN, colour="Simulated, no herring link")) +
+  geom_point(data=simTern, aes(x=yr, y=PredN, colour="Simulated, herring link")) +
+  labs(x="Year", y="Number of nesting pairs", color='Tern species') +
+  scale_colour_manual(values=c("#fdb462","#386cb0","#7fc97f","#ef3b2c")) +
+  theme_Publication() #+ scale_colour_Publication()
 
 
 ```
@@ -1319,7 +1324,7 @@ compplot3 + facet_wrap("Pred", labeller=labeller(Pred = labels), nrow=3)  +
 
 \newpage
 
-```{r, eval=sg_figs, fig.cap="Relationship of groundfish predator (dogfish, Georges Bank cod, and Gulf of Maine cod) spawning stock biomass (SSB) with the percentage of herring in diet: both all clupeids including Atlantic herring (All Clupeids) and Atlantic herring only (A. herring). Linear model fit (line) with 95\\% CI band (gray shading) is shown for significant relationships. \\label{gfishBherrdiet}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, fig.cap="Relationship of groundfish predator (dogfish, GBcod = Georges Bank cod, and GOMcod = Gulf of Maine cod) spawning stock biomass (SSB) with the percentage of herring in diet: both all clupeids including Atlantic herring (All Clupeids) and Atlantic herring only (A. herring). Linear model fit (line) with 95\\% CI band (gray shading) is shown for significant relationships. \\label{gfishBherrdiet}", message = FALSE, warning = FALSE}
 #codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
 #codGOM<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMcodpop.csv")
 #dogfish<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/dogfishpop.csv")
@@ -1379,7 +1384,8 @@ gfishSSBdiet <- ggplot(gfishpopfood, aes(x=dietprop, y=SSB, colour=prey)) +
   geom_point() 
 
 gfishSSBdiet + facet_wrap(~species) + 
-  stat_smooth(data = GBcodfood, method = "lm", formula = y ~ x, size = 1) +
+  stat_smooth(data = GBcodfood, method = "lm", formula = y ~ x, size = 1, show.legend = FALSE) +
+  labs(x="Percent herring in diet") +
   theme_Publication() + scale_colour_Publication(labels=c("All Clupeids", "A. herring"))
 
 
@@ -1477,7 +1483,7 @@ PredAnnualNatM   <-  c()
 
 PredAnnualNatM<-PredannualA*exp(-(preypopratio)*preyprednatm) 
 
-qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "current herring abundance / unfished herring abundance", ylab = "dogfish annual natural mortality v") +
+qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "Current herring abundance / unfished herring abundance", ylab = "Dogfish annual natural mortality (v)") +
   theme_Publication() + scale_colour_Publication()
 
 #TotalSurv<-(1-PredAnnualNatM)*(1-Predexploit) #total annual predator survival
@@ -1486,7 +1492,7 @@ qplot(preypopratio, PredAnnualNatM, geom="line", xlab = "current herring abundan
 
 \newpage
 
-```{r YAY, fig.cap="Differences between operating models for key metrics\\label{YAY}", fig.height=14, fig.width=11.5, out.width='\\linewidth', message = FALSE, warning = FALSE}
+```{r YAY, fig.cap="Differences between operating models for key metrics. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of each metric (x-axis label) measured across all control rule replicates and control rule types. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further than 1.5 box lengths from the box (outliers) are represented by points. \\label{YAY}", fig.height=14, fig.width=11.5, out.width='\\linewidth', message = FALSE, warning = FALSE}
 # metrics <- c('stouffer',
 #              'stationary',
 #              'p50_NR',
@@ -1611,7 +1617,7 @@ grid.draw(metOM)
 
 \newpage
 
-```{r ZZZ, fig.cap="Differences between control rule types for key metrics\\label{ZZZ}", fig.height=11, fig.width=8.5, message = FALSE, warning = FALSE}
+```{r ZZZ, fig.cap="Differences between control rule types for key metrics. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of each metric (x-axis label) measured across all control rule replicates and operating models. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further than 1.5 box lengths from the box (outliers) are represented by points.\\label{ZZZ}", fig.height=11, fig.width=8.5, message = FALSE, warning = FALSE}
 
 #note this one is over ALL OM
 
@@ -1693,7 +1699,7 @@ grid.draw(metCR)
 
 \newpage
 
-```{r yieldSSB, fig.cap="Tradeoff between herring relative yield and relative SSB for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldSSB}", message = FALSE, warning = FALSE}
+```{r yieldSSB, fig.cap="Tradeoff between herring relative yield and relative SSB for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldSSB}", message = FALSE, warning = FALSE}
 
 # pick one OM
 HiSlowCorrectOM <- allres %>%
@@ -1708,13 +1714,14 @@ ggplot(HSCOM_BBsonly, aes(x=MedSSBrelSSBmsy, y=YieldrelMSY, colour=CR)) +
   scale_x_continuous(limits = c(0,3.5)) + 
   #geom_hline(yintercept=1) + 
   labs(y="relative yield", x="SSB/SSBmsy", colour="Control rule type") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
   theme_Publication() + scale_colour_Publication()
 
 ```
 
 \newpage
 
-```{r yieldIAV, fig.cap="Tradeoff between herring relative yield and variation in yield for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldIAV}", message = FALSE, warning = FALSE}
+```{r yieldIAV, fig.cap="Tradeoff between herring relative yield and variation in yield for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldIAV}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1729,13 +1736,14 @@ ggplot(HSCOM_BBsonly, aes(x=Yvar, y=YieldrelMSY, colour=CR)) +
   scale_x_continuous(limits = c(0,3.5)) + 
   #geom_hline(yintercept=1) + 
   labs(y="relative yield", x="variation in yield", colour="Control rule type") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
   theme_Publication() + scale_colour_Publication()
 
 ```
 
 \newpage
 
-```{r yieldclose, fig.cap="Tradeoff between herring relative yield and frequency of fishery closure for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldPropClosure}", message = FALSE, warning = FALSE}
+```{r yieldclose, fig.cap="Tradeoff between herring relative yield and frequency of fishery closure for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldPropClosure}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1750,13 +1758,14 @@ ggplot(HSCOM_BBsonly, aes(x=PropClosure, y=YieldrelMSY, colour=CR)) +
   scale_x_continuous(limits = c(0,1)) + 
   #geom_hline(yintercept=1) + 
   labs(y="relative yield", x="frequency of closure", colour="Control rule type") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
   theme_Publication() + scale_colour_Publication()
 
 ```
 
 \newpage
 
-```{r yieldOF, fig.cap="Tradeoff between herring relative yield and probability of the stock is overfished for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldProbOF}", message = FALSE, warning = FALSE}
+```{r yieldOF, fig.cap="Tradeoff between herring relative yield and probability of the stock is overfished for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldProbOF}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1771,13 +1780,14 @@ ggplot(HSCOM_BBsonly, aes(x=PropSSBrelhalfSSBmsy, y=YieldrelMSY, colour=CR)) +
   scale_x_continuous(limits = c(0,1)) + 
   #geom_hline(yintercept=1) + 
   labs(y="relative yield", x="frequency of overfished", colour="Control rule type") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
   theme_Publication() + scale_colour_Publication()
 
 ```
 
 \newpage
 
-```{r yieldbirds, fig.cap="Tradeoff between herring relative yield and probability of good tern productivity for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{yieldbirds}", message = FALSE, warning = FALSE}
+```{r yieldbirds, fig.cap="Tradeoff between herring relative yield and probability of good tern productivity for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks.\\label{yieldbirds}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1792,13 +1802,14 @@ ggplot(HSCOM_BBsonly, aes(x=MedPropYrs_goodProd_Targplustern, y=YieldrelMSY, col
   scale_x_continuous(limits = c(0,1)) + 
   #geom_hline(yintercept=1) + 
   labs(y="relative yield", x="frequency of good tern productivity", colour="Control rule type") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
   theme_Publication() + scale_colour_Publication()
 
 ```
 
 \newpage
 
-```{r revenuestability, fig.cap="Tradeoff between herring fleet Net Revenue and Equil1 for HighSlowCorrect operating model and biomass based control rules with 1, 3, or 5 year quota blocks\\label{revenuestability}", message = FALSE, warning = FALSE}
+```{r revenuestability, fig.cap="Tradeoff between herring fleet Net Revenue and Equil1 for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks compared with 3 year quota block with a 15\\% restriction on annual quota changes (BB3yrPerc).\\label{revenuestability}", message = FALSE, warning = FALSE}
 
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
@@ -1818,7 +1829,8 @@ ggplot(HSCOM_BBsonly, aes(x=p50_NR, y=stouffer, colour=CR)) +
   geom_point(alpha=0.2) + 
   scale_y_continuous(limits = c(0,1)) + 
   #geom_hline(yintercept=0.9) + 
-  labs(y="equil1", x="net revenue") +
+  labs(y="equil1", x="net revenue", colour="Control rule type") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
   theme_Publication() + scale_colour_Publication()
 
 #Reset this
