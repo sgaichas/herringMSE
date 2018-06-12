@@ -5,12 +5,12 @@ author: Jonathan J. Deroba, Sarah K. Gaichas, Min-Yang Lee, Rachel G. Feeney, De
   Boelke, Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -148,8 +148,9 @@ R.G. Feeney: New England Fisheries Management Council,50 Water Street, Mill 2, N
 D. Boelke: New England Fisheries Management Council,50 Water Street, Mill 2, Newburyport, MA 01950. DBoelke@nefmc.org
 
 B.J. Irwin: U.S. Geological Survey. Georgia Cooperative Fish and Wildlife Research Unit.  University of Georgia. 180 E. Green St. Athens, GA 30602. irwin@uga.edu.
-
+<!---commented out 
 This draft manuscript is distributed solely for purposes of scientific peer review. Its content is deliberative and predecisional, so it must not be disclosed or released by reviewers. Because the manuscript has not yet been approved for publication by the U.S. Geological Survey (USGS), it does not represent any official USGS finding or policy.
+-->
 \newpage
 
 
