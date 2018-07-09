@@ -5,12 +5,12 @@ author: Jonathan J. Deroba, Sarah K. Gaichas, Min-Yang Lee, Rachel G. Feeney, De
   Boelke, Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -485,6 +485,8 @@ If short-term stability in yield is a fishery objective, then using quota blocks
 
 Nearly every stakeholder group proposed metrics that measured the health of the herring stock.  The herring biomass performance metric could capture passive (non-use) value associated with herring biomass.  It may also be related to active use values if higher herring biomass improves ecotourism, recreational, or commercial fishery outcomes.  Finally, a herring biomass performance metric may be a proxy for unmodeled recreational, ecotourism, or socio-economic components of the ecosystem that are believed to be positively associated with herring biomass. 
 
+The simulation model used in this MSE can be thought of as a model of intermediate complexity [@plaganyi_multispecies_2014]. Future MSE models that are designed to address the role of herring as forage in the ecosystem should graduate to advanced complexity.  These advances should include more realistic models of the scientific process, herring stocks, predator-prey relationships, human behavior, and ecosystem valuation methods. However, linking the appropriate components to derive the desired set of performance metrics for management decision making need not be an insurmountable challenge. For example, fairly simple methods were used to link environmental drivers, prey and predator species, and detailed social and economic components of fisheries in the Gulf of Alaska [@zador2017linking]. The expert opinion of stakeholders involved in the MSE can be used to specify similar conceptual models in New England. In future iterations of the MSE, conceptual and qualitative modeling might be used to map out where critical data and further integrated model development would most efficiently address priority management needs.
+
 ## The Dream
 In this section, we discuss the limitations of the models and simplifications necessary to meet decision-making time frames while incorporating ecosystem and economic models into management strategy evaluation.  
 
@@ -530,9 +532,6 @@ These changes are not confined to an extractive sector of the economy.  For exam
 Note that increases in the biomass of a particular predator could be a net ``bad''  for society.  For example, an increase in the biomass of a predator that is low-valued but skilled at consuming herring could result in disproportionate increases in that low-valued predator. If that low-valued predator is not a complete specialist (in consuming herring), it may also drive down the biomass of high-valued predators.  The ability to manipulate the ecosystem with a prey-level ABC control rule to achieve desirable outcomes depends on the rates at which these increases in prey are converted into social utility. This conversion depends on the ecosystem technology (conversion of prey into additional biomass of high- and low-valued predators), human technology (conversion of prey and predator biomass into catch or tourism), and human preferences (converting catch or tourism into utility). Despite our current efforts, many of these relationships are not particularly well understood at this time.
 
 In order to meet management timelines, the herring, predator, and economic models were developed in parallel, and not in sequence.  This required an educated guess about which predators and predator outcomes were sensitive to the range of HCRs.  For example, prior to completing the predator models, we did not anticipate that tuna weight would be sensitive to various operating models (i.e., fast and slow herring growth) but not the harvest control rules.  Developing the herring, predator, and economic models sequentially could have allowed for a model of the tuna fishery that accounts for the size-dependent prices [@Carroll2001PricingManagement].  In contrast, devoting scarce research time to examine the costs of harvesting tuna would not have resulted in performance measures that would help managers select among control rules because changes in herring abundance had relatively little effect on tuna.
-
-### Conclusion
-The simulation model used in this MSE can be thought of as a model of intermediate complexity [@plaganyi_multispecies_2014]. Future MSE models that are designed to address the role of herring as forage in the ecosystem should graduate to advanced complexity.  These advances should include more realistic models of the scientific process, herring stocks, predator-prey relationships, human behavior, and ecosystem valuation methods. However, linking the appropriate components to derive the desired set of performance metrics for management decision making need not be an insurmountable challenge. For example, fairly simple methods were used to link environmental drivers, prey and predator species, and detailed social and economic components of fisheries in the Gulf of Alaska [@zador2017linking]. The expert opinion of stakeholders involved in the MSE can be used to specify similar conceptual models in New England. In future iterations of the MSE, conceptual and qualitative modeling might be used to map out where critical data and further integrated model development would most efficiently address priority management needs. 
 
 # Acknowledgements
 We thank the more than 80 individuals from the fishing industry, federal and state agencies, academia, environmental organizations, and other entities who gave their time to contribute to the workshops. Madeleine Hall-Arber, Jessica Joyce, Laura Singer, and Tiffany Vidal provided excellent workshop facilitation. Beth Goettel, Linda Welch, and Aly McKnight contributed seabird data and expertise. This manuscript benefitted from the peer review panel: Lisa Kerr (Chair), Gavin Fay, Douglas Lipton, and John Wiedenmann. Statements herein should neither be considered formal positions of the NEFMC, NMFS, nor a consensus of the participants.  Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
