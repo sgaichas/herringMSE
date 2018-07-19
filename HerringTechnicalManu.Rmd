@@ -5,12 +5,12 @@ author: Jonathan J. Deroba, Sarah K. Gaichas, Min-Yang Lee, Rachel G. Feeney, De
   Boelke, Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
-  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
+  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -282,11 +282,11 @@ where $\gamma$ > 1 links herring population size relative to the threshold level
 If a relationship between predator growth and herring population size was evident, annual changes in growth were modeled by modifying either the Ford-Walford intercept ($\alpha_y^P$) or slope ($\rho_y^P$):
 
 \begin{equation}
-B_{y+1}^P = S_{y}^P (\alpha_y^P N_{y} + Fw_{slope} B_{y}) + \alpha_y^PR_{y+1}, or
+B_{y+1}^P = S_{y}^P (\alpha_y^P N_{y}^P + Fw_{slope} B_{y}^P) + \alpha_y^PR_{y+1}^P, or
 \end{equation}
 
 \begin{equation}
-B_{y+1} = S_{y} (Fw_{int} N_{y} + \rho_y^P B_{y}) + Fw_{int} R_{y+1}, 
+B_{y+1}^P = S_{y}^P (Fw_{int} N_{y}^P + \rho_y^P B_{y}^P) + Fw_{int} R_{y+1}^P, 
 \end{equation}
 
 where either $\alpha_y^P$ or $\rho_y^P$ are defined for a predator using herring population parameters (see Eqn. \ref{tunagrow_equation} below).
