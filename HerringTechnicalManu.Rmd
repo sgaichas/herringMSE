@@ -581,10 +581,11 @@ tabl <- "
 |	$R^P_y$	|	predator recruitment from Beverton-Holt relationship
 |	$\\bar{R}^P_y$	|	predator recruitment as modified by a relationship with herring
 |	$v_y$	|	annual predator natural mortality
-|	$u_y$	|	annual predator exploitation mortality
+|	$u$	|	annual predator exploitation mortality
 |	$Fw_{int}$	|	intercept of Ford-Walford relationship
 |	$Fw_{slope}$	|	slope of Ford-Walford relationship
 |	$B^P_y$	|	predator biomass
+| $\\gamma$ | multiplier relating herring abundance threshold to predator recruitment
 |	$N_{thresh}$	|	threshold in herring abundance that induces a reaction from a predator
 |	$\\alpha_y^P$	|	intercept of Ford-Walford relationship as modified by a relationship with herring
 |	$\\rho_y^P$	|	slope of Ford-Walford relationship as modified by a relationship with herring
@@ -689,17 +690,17 @@ tabl <- "
 |:--------------------------------------------------------------------------|:-------------|:-------------|:-------------|
 | Numbers or Weight?       | Weight       | Numbers      | Weight       |
 | Unfished spawning pop (metric tons for fish, n of nesting pairs for tern)   | 6.69E+04     | 45000        | 300000       |
-| Steepness            | 1.0          | 0.26         | 0.97         |
-| Annual nat. mortality rate | 0.14         | 0.1          | 0.092        |
-| Annual exploitation rate   | 0.079        | 0.00         | 0.092        |
-| Growth intercept  | 0.020605     | 0.00015      | 0.000278     |
-| Growth slope   | 0.9675       | 0.0          | 0.9577       |
-| Initial abundance (n for fish, n nesting pairs for tern)        | 111864       | 3000         | 49629630     |
-| Initial biomass  (metric tons for fish, kg for tern but not used in model)        | 27966        | 1.5          | 134000       |
+| Steepness *h*           | 1.0          | 0.26         | 0.97         |
+| Base annual nat. mortality rate *v* | 0.14         | 0.1          | 0.092        |
+| Annual exploitation rate *u*  | 0.079        | 0.00         | 0.092        |
+| Growth intercept $Fw_{int}$ | 0.020605     | 0.00015      | 0.000278     |
+| Growth slope $Fw_{slope}$  | 0.9675       | 0.0          | 0.9577       |
+| Initial abundance $N^P_1$ (n for fish, n nesting pairs for tern)        | 111864       | 3000         | 49629630     |
+| Initial biomass $B^P_1$ (metric tons for fish, kg for tern but not used in model)        | 27966        | 1.5          | 134000       |
 | Recruit delay (age, years)  | 1            | 4            | 10           |
-| Prey-recruitment link    | 1 (off)      | 1.09         | 1 (off)      |
-| Prey-mortality link      | 0 (off)      | 0 (off)      | 0.2          |
-| Prey-growth link         | 1.1          | 1 (off)      | 1 (off)      |
+| Prey-recruitment link $\\gamma$   | 1 (off)      | 1.09         | 1 (off)      |
+| Prey-mortality link $\\delta$     | 0 (off)      | 0 (off)      | 0.2          |
+| Prey-growth link  $\\lambda$       | 1.1          | 1 (off)      | 1 (off)      |
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
