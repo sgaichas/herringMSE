@@ -5,12 +5,12 @@ author: Jonathan J. Deroba, Sarah K. Gaichas, Min-Yang Lee, Rachel G. Feeney, De
   Boelke, Brian J. Irwin
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
+  html_document: null
   pdf_document:
     includes:
       in_header: preamble-latex.tex
     keep_tex: yes
     pandoc_args: --latex-engine=xelatex
-  html_document: null
   word_document: null
 bibliography: HerringMSE.bib
 ---
@@ -261,9 +261,9 @@ S_{y}^P =  (1-v_{y})(1-u) \label{survival_equation},
 \end{equation}
 and annual recruitment $R_{y}^P$ (delayed until recruitment age a) is a Beverton-Holt function defined as above for herring.
 
-Predator population biomass is defined with Ford-Walford plot intercept ($FWint$) and slope ($FWslope$) growth parameters
+Predator population biomass is defined with Ford-Walford plot intercept ($Fw_{int}$) and slope ($Fw_{slope}$) growth parameters
 \begin{equation}
-B_{y+1}^P = S_{y}^P (FWint N_{y}^P + FWslope B_{y}^P) + FWint R_{y+1}^P \label{delaydiffB_equation}
+B_{y+1}^P = S_{y}^P (Fw_{int} N_{y}^P + Fw_{slope} B_{y}^P) + Fw_{int} R_{y+1}^P \label{delaydiffB_equation}
 \end{equation}
 
 Parameterizing this model requires specification of the stock-recruitment relationship (steepness $h$ and unfished spawning stock size in numbers or biomass), the natural mortality rate, the fishing mortality (exploitation) rate, the initial population size, and the weight at age of the predator (Ford-Walford plot intercept and slope parameters). For each predator, population parameters were derived from different sources (Table \ref{predsource}).
@@ -279,17 +279,17 @@ In general, if support for a relationship between herring and predator recruitme
 
 where $\gamma$ > 1 links herring population size relative to the threshold level to predator recruitment.
 
-If a relationship between predator growth and herring population size was evident, annual changes in growth were modeled by modifying either the Ford-Walford intercept ($AnnAlpha$) or slope ($AnnRho$):
+If a relationship between predator growth and herring population size was evident, annual changes in growth were modeled by modifying either the Ford-Walford intercept ($\alpha_y^P$) or slope ($\rho_y^P$):
 
 \begin{equation}
-B_{y+1}^P = S_{y}^P (AnnAlpha_{y} N_{y} + FWslope B_{y}) + AnnAlpha_{y}R_{y+1}, or
+B_{y+1}^P = S_{y}^P (\alpha_y^P N_{y} + Fw_{slope} B_{y}) + \alpha_y^PR_{y+1}, or
 \end{equation}
 
 \begin{equation}
-B_{y+1} = S_{y} (FWint N_{y} + AnnRho_{y} B_{y}) + FWint R_{y+1}, 
+B_{y+1} = S_{y} (Fw_{int} N_{y} + \rho_y^P B_{y}) + Fw_{int} R_{y+1}, 
 \end{equation}
 
-where either $AnnAlpha$ or $AnnRho$ are defined for a predator using herring population parameters (see Eqn. \ref{tunagrow_equation} below).
+where either $\alpha_y^P$ or $\rho_y^P$ are defined for a predator using herring population parameters (see Eqn. \ref{tunagrow_equation} below).
 
 Finally, herring population size $N_{y}$ could be related to predator survival using an annual multiplier on constant predator annual natural mortality $v$: 
 
@@ -304,9 +304,9 @@ After specifying the population model parameters and herring-predator relationsh
 Western Atlantic bluefin tuna population parameters were drawn from the 2014 stock assessment [@iccat_report_2015], the growth curve from [@restrepo_updated_2010], and recruitment parameters from a detailed examination of alternative stock recruit relationships [@porch_making_2016]. Ultimately, the "low recruitment" scenario was selected to represent bluefin tuna productivity in the Gulf of Maine, which defines Bmsy as 13,226 t and therefore affects measures of status relative to Bmsy. Continuation of the current tuna fishing strategy (F<0.5Fmsy under the low recruitment scenario) is assumed. All predator population model parameters are listed in Table \ref{predpars}. 
 
 ### Herring-tuna relationship model
-Tuna diets are variable depending on location and timing of foraging [@chase_differences_2002; @golet_changes_2013; @logan_diet_2015; @golet_paradox_2015], but for the purposes of this analysis, we assumed that herring is an important enough prey of tuna to impact tuna growth in the Northeast US shelf ecosystem. A relationship between bluefin tuna growth and herring average weight was implemented based on information and methods in @golet_paradox_2015. The relationship between tuna condition anomaly (defined as proportional departures from the weight-at-length relationship used in the assessment) and average weight of tuna-prey-sized herring ($Havgwt_{y}$, herring >180 mm collected from commercial herring fisheries) was modeled as a generalized logistic function with lower and upper bounds on tuna growth parameters:
+Tuna diets are variable depending on location and timing of foraging [@chase_differences_2002; @golet_changes_2013; @logan_diet_2015; @golet_paradox_2015], but for the purposes of this analysis, we assumed that herring is an important enough prey of tuna to impact tuna growth in the Northeast US shelf ecosystem. A relationship between bluefin tuna growth and herring average weight was implemented based on information and methods in @golet_paradox_2015. The relationship between tuna condition anomaly (defined as proportional departures from the weight-at-length relationship used in the assessment) and average weight of tuna-prey-sized herring ($\bar{W}_{y}$, herring >180 mm collected from commercial herring fisheries) was modeled as a generalized logistic function with lower and upper bounds on tuna growth parameters:
 \begin{equation}
-AnnAlpha_{y} = (0.9 FWint) + \frac{(1.1 FWint) - (0.9 FWint)}{1+e^{(1-\lambda)*(100(Havgwt_{y}-T)/T)}} \label{tunagrow_equation},
+\alpha_y^P = (0.9 Fw_{int}) + \frac{(1.1 Fw_{int}) - (0.9 Fw_{int})}{1+e^{(1-\lambda)*(100(\bar{W}_{y}-T)/T)}} \label{tunagrow_equation},
 \end{equation} 
 where $\lambda$ > 1 links herring average weight anomalies to tuna growth.
    
@@ -544,73 +544,72 @@ tabl <- "
 |:--------	|:--------------------------------------------------------
 |	$y$	|	year
 |	$a$	|	age
-|	$R$	|	herring recruitment
-|	$SSB$	|	herring spawning stock biomass
-|	$F$	|	fishing mortality
+|	$R_y$	|	herring recruitment
+|	$SSB_y$	|	herring spawning stock biomass
 |	$h$	|	steepness
-|	$\\varepsilon_R$	|	recrutment process error
+|	$\\varepsilon_{R,y}$	|	recrutment process error
 |	$\\sigma_R^2$	|	variance of recruitment process error
 |	$\\omega$	|	autocorrelation of recruitment error
-|	$N$	|	herring abundance
-|	$m$	|	herring maturity
-|	$W$	|	herring weight
-|	$\\widehat{N}$	|	assessed herring abundance
+|	$N_{a,y}$	|	herring abundance
+|	$m_a$	|	herring maturity
+|	$W_a$	|	herring weight
+|	$\\widehat{N}_{a,y}$	|	assessed herring abundance
 |	$\\rho$	|	bias in assessed herring abundance
-|	$\\varepsilon_{\\phi}$	|	assessment error
+|	$\\varepsilon_{\\phi,y}$	|	assessment error
 |	$\\tau$	|	autocorrelation of assessment error
 |	$\\sigma_{\\phi}^2$	|	variance of assessment error
-|	$B$	|	herring total biomass
-|	$\\widehat{SSB}$	|	assessed herring spawning stock biomass
-|	$\\widehat{B}$	|	assessed herring total biomass
-|	$M$	|	herring natural mortality
-| $Y$ | herring yield
+|	$B_y$	|	herring total biomass
+|	$\\widehat{SSB}_y$	|	assessed herring spawning stock biomass
+|	$\\widehat{B}_y$	|	assessed herring total biomass
+|	$M_a$	|	herring natural mortality
+| $Y_y$ | herring yield
 |	$MSY$	|	herring maximum sustainable yield
 |	$SSB_{up}$	|	upper biomass parameter for biomass based control rule
 |	$SSB_{low}$	|	lower biomass parameter for biomass based control rule
 |	$\\psi$	|	proportion of $F_{MSY}$ for biomass based control rule
 |	$F_{MSY}$	|	fishing mortality at herring maximum sustainable yield
-|	$\\tilde{F}$	|	target herring fishing mortality
-|	$S$	|	herring fishery selectivity
-|	$\\bar{F}$	|	fishing mortality that would remove quota from herring population
-|	$Q$	|	quota for herring fishery
-|	$F$	|	realized herring fishery mortality
-|	$\\varepsilon_{\\theta}$	|	implementation error
+|	$\\tilde{F}_y$	|	target herring fishing mortality
+|	$S_a$	|	herring fishery selectivity
+|	$\\bar{F}_y$	|	fishing mortality that would remove quota from herring population
+|	$Q_y$	|	quota for herring fishery
+|	$F_y$	|	realized herring fishery mortality
+|	$\\varepsilon_{\\theta,y}$	|	implementation error
 |	$\\sigma_{\\theta}^2$	|	variance of implementation error
 |	$P$	|	denotes a quantity that applies to a predator of herring
-|	$N^P$	|	predator abundance
-|	$S^P$	|	annual predator survival
-|	$R^P$	|	predator recruitment from Beverton-Holt relationship
-|	$\\bar{R}^P$	|	predator recruitment as modified by a relationship with herring
-|	$v$	|	annual predator natural mortality
-|	$u$	|	annual predator exploitation mortality
-|	$Fwint$	|	intercept of Ford-Walford relationship
-|	$Fwslope$	|	slope of Ford-Walford relationship
-|	$B^P$	|	predator biomass
+|	$N^P_y$	|	predator abundance
+|	$S^P_y$	|	annual predator survival
+|	$R^P_y$	|	predator recruitment from Beverton-Holt relationship
+|	$\\bar{R}^P_y$	|	predator recruitment as modified by a relationship with herring
+|	$v_y$	|	annual predator natural mortality
+|	$u_y$	|	annual predator exploitation mortality
+|	$Fw_{int}$	|	intercept of Ford-Walford relationship
+|	$Fw_{slope}$	|	slope of Ford-Walford relationship
+|	$B^P_y$	|	predator biomass
 |	$N_{thresh}$	|	threshold in herring abundance that induces a reaction from a predator
-|	$AnnAlpha$	|	intercept of Ford-Walford relationship as modified by a relationship with herring
-|	$AnnRho$	|	slope of Ford-Walford relationship as modified by a relationship with herring
+|	$\\alpha_y^P$	|	intercept of Ford-Walford relationship as modified by a relationship with herring
+|	$\\rho_y^P$	|	slope of Ford-Walford relationship as modified by a relationship with herring
 |	$\\delta$	|	exponent relating herring abundance to predator survival
-|	$Havgwt$	|	average weight of herring
+|	$\\bar{W}_{y}$	|	average weight of herring
 |	$\\lambda$	|	exponent relating herring average weight to tuna growth
 |	$T$	|	inflection point of the relationship between herring average weight and tuna growth
 |	$SSB_{MSY}$	|	herring spawning stock biomass at maximum sustainable yield
 |	$IAV$	|	interannual variation in herring yield
 |	$SSB_{MSY}^P$	|	predator spawning stock biomass at maximum sustainable yield
-|	GR	|	gross revenue
-|	NR	|	net operating revenues
-|	i	|	fleet (trawl, t, or purse seine, s)
-|	q	|	quantity landed
+|	$GR_y$	|	gross revenue
+|	$NR_y$	|	net operating revenues
+|	$i$	|	fleet (trawl, t, or purse seine, s)
+|	$q_y$	|	quantity landed
 |	c()	|	cost function
 |	p	|	function relating landings to prices
 |	t	|	denotes trawl fishery in economic model
 |	s	|	denotes purse seine fishery in economic model
-|	$a_i$	|	parameter of price and landing model
-|	b	|	parameter of price and landing model
-|	$\\gamma$	|	parameter of price and landing model
-|	$\\alpha$	|	parameter of price and landing model
-|	$\\theta_i$	|	parameter of price and landing model
-|	$\\beta$	|	parameter of price and landing model
-|	$\\xi$	|	parameter of economic stationarity metric
+|	$a_i$	|	input to price and landing model
+|	b	|	input to price and landing model
+|	$\\gamma$	|	input to price and landing model
+|	$\\alpha$	|	input to price and landing model
+|	$\\theta_i$	|	input to price and landing model
+|	$\\beta$	|	input to price and landing model
+|	$\\xi$	|	input to economic stationarity metric
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
@@ -690,14 +689,14 @@ tabl <- "
 |:--------------------------------------------------------------------------|:-------------|:-------------|:-------------|
 | Numbers or Weight?       | Weight       | Numbers      | Weight       |
 | Unfished spawning pop (metric tons for fish, n of nesting pairs for tern)   | 6.69E+04     | 45000        | 300000       |
-| Steepness *h*            | 1.0          | 0.26         | 0.97         |
-| Annual nat. mortality rate *v*| 0.14         | 0.1          | 0.092        |
-| Annual exploitation rate *u*  | 0.079        | 0.00         | 0.092        |
-| Growth intercept *FWint* | 0.020605     | 0.00015      | 0.000278     |
-| Growth slope *FWslope *  | 0.9675       | 0.0          | 0.9577       |
+| Steepness            | 1.0          | 0.26         | 0.97         |
+| Annual nat. mortality rate | 0.14         | 0.1          | 0.092        |
+| Annual exploitation rate   | 0.079        | 0.00         | 0.092        |
+| Growth intercept  | 0.020605     | 0.00015      | 0.000278     |
+| Growth slope   | 0.9675       | 0.0          | 0.9577       |
 | Initial abundance (n for fish, n nesting pairs for tern)        | 111864       | 3000         | 49629630     |
 | Initial biomass  (metric tons for fish, kg for tern but not used in model)        | 27966        | 1.5          | 134000       |
-| Recruit delay (age, years) *a*  | 1            | 4            | 10           |
+| Recruit delay (age, years)  | 1            | 4            | 10           |
 | Prey-recruitment link    | 1 (off)      | 1.09         | 1 (off)      |
 | Prey-mortality link      | 0 (off)      | 0 (off)      | 0.2          |
 | Prey-growth link         | 1.1          | 1 (off)      | 1 (off)      |
