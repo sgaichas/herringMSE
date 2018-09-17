@@ -45,7 +45,7 @@ if(!require(ggthemes)) {
 
 
 data.dir <- './data'
-images.dir <- './images'
+image.dir <- './images'
 
 #The sg_figs option can be set to FALSE to skip making SG's figures on the fly. Or TRUE to make them. 
 sg_figs <- TRUE
@@ -143,6 +143,10 @@ Fishery managers are increasingly asked to balance the direct and indirect effec
 -->
 
 ## Introduction: Atlantic herring
+```{r intro}
+knitr::include_graphics(file.path(image.dir, 'allcomponents.png'))
+```
+
 <!--Atlantic herring (hereafter herring; *Clupea harengus*) in the Northwest Atlantic are preyed upon by fish, seabirds, and marine mammals, and can account for 20-50% of the diet of these predators [@overholtz_consumption_2007; @smith_trophic_2010;@curti_evaluating_2013]. Herring are also subject to a directed fishery, mostly using midwater trawls, purse seines, and bottom trawls, that averaged 85,000mt of landings during 2008-2017. Much of the herring landed are used as bait in the relatively high value American lobster (*Homarus americanus*) fishery. Herring life-history traits (e.g., weight-at-age) have varied through time, and their complex stock structure creates uncertainty in their assessment and management [@NEFSC2012Assessment; @Deroba2015atlantic]. Thus, herring are of broad interest in the region, but anticipating the relative performance of mangement strategies (e.g., harvest control rules) in the face of uncertainties is challenging, which makes a management strategy evaluation (MSE) for herring in the region a potentially informative tool.
 
 The federal fisheries management process in New England usually starts when the New England Fishery Managment Council (NEFMC), the political body responsible for federally managed species in the northeast US, perceives a problem causing a management goal or objective to be unmet. Managers will propose a range of potential solutions and a technical group, typically composed of scientists and policy analysts from state agencies and the National Marine Fisheries Service (NMFS), will analyze these possible solutions. Council meetings are public, and stakholder input is solicited through open comment periods and diverse advisory panels.  Once the NEFMC votes on a solution, NMFS will, after verifying that it is consistent with applicable laws, translate those solutions into regulations and enforce those regulations. Management actions, particularly contentious ones, can take several years to develop and implement.
@@ -247,6 +251,9 @@ F_{a,y}=\bar{F}_yS_ae^{\varepsilon_{\theta,y}-\frac{\sigma_\theta^2}{2}} \\
 The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.  The US Atlantic herring fishery in the Northwest Atlantic generally catches about the full amount of annual quota.  Catches are monitored through manadatory federal and state reporting requirements, which are used to close the fishery within 10% of the annual quota.  Thus, unbiased implementation errors seemed justified.
 -->
 ## Predators
+```{r predoverview}
+knitr::include_graphics(file.path(image.dir, 'herrtopreds.png'))
+```
 
 <!--The food web of the Northeast US continental shelf large marine ecosystem is characterized by many diverse predators and prey [@link_does_2002]. There is a wealth of scientific information to characterize predator-prey relationships in this region, including feeding ecology data for fish predators [e.g., @smith_trophic_2010], seabirds [@hall_composition_2000], bluefin tuna (*Thunnus thynnus*) [@chase_differences_2002; @golet_changes_2013; @logan_diet_2015; @golet_paradox_2015], and marine mammals [@smith_consumption_2015]. Consumption of herring by predators has been extensively studied in this ecosystem [@overholtz_consumption_2000; @overholtz_consumption_2007], and multiple methods were evaluated to include this consumption within the most recent herring benchmark stock assessment [@NEFSC2012Assessment]. 
 
@@ -1367,6 +1374,10 @@ grid.draw(metCR)
 
 ```
 
+## Predator results summary
+```{r predresultsum}
+knitr::include_graphics(file.path(image.dir, 'herrtopreds_results.png'))
+```
 
 <!--
 The constant catch, conditional constant catch, and the biomass based control rule with a 15% restriction, generally had less interannual variation in yield than the other biomass based control rules (Figure \ref{ZZZ}).  This stability, however, came at the cost of foregone yield, with fewer options for those three classes of control rule that could achieve yields near $MSY$ (Figure \ref{ZZZ}).  The constant catch and biomass based control rule with a 15% restriction also had more alternatives that led to poorer tern production than other control rules (Figure \ref{ZZZ}).  The conditional constant catch rule, however, performed well for tern production because the cap of 0.5$F_{MSY}$ on fishing mortality effectively prevented levels of mortality that decreased herring abundance to levels where tern production would be compromised.  Figure \ref{ZZZ} shows that the biomass based control rule with a 15% restriction would often lead to dis-equilibria of Net Revenue and the HCR type responsible for the long right-tails seen in Figure \ref{YAY}.  This finding of a dis-equilibrium is likely occurring because the 15% restriction explicitly introduces memory into the HCR, causing current period Net Revenue to be related to previous period landings.  The dis-equilibrium tests applied to harvest control rules that have 3- or 5- year constant quotas use less data (the 10 or 16 year time periods corresponding to the final 50 years) and therefore have lower statistical power than those applied to the HCRs that are set annually. However, the standard BB3yr and BB5yr HCRs are characterized by equilibrium (Figure \ref{ZZZ}), so we are doubtful that this finding is caused by a statistical power problem.  Ultimately, the NEFMC eliminated the constant catch, conditional constant catch, and biomass based rule with a 15% restriction from consideration because of the foregone yield and/or relatively poor performance of some alternatives for the tern production metric.  
@@ -1374,8 +1385,7 @@ The constant catch, conditional constant catch, and the biomass based control ru
 Given that the metrics reported in results below focus on those that were relatively robust to operating models, additional results were only reported for the operating model with low *M*, high steepness, and slow growth ("HighSlowCorrect" in figures). Further, due to Council decisions to eliminate the constant catch, conditional constant catch, and a biomass based rule with a 15% restriction, more detailed tradeoff analyses below focus on the biomass based control rule applied annually ("BB"), or with three ("BB3yr") or five year ("BB5yr") quota blocks.
 
 -->
-## Tradeoffs 
----
+## Tradeoffs in Remaining Control rules
 
 ```{r yieldSSB, fig.cap="Tradeoff between herring relative yield and relative SSB for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation. \\label{yieldSSB}", message = FALSE, warning = FALSE}
 
