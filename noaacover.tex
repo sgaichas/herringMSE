@@ -1,0 +1,19 @@
+\usepackage[absolute,overlay]{textpos}
+
+{
+ \usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/background_new.jpg}}
+\begin{frame}[plain]
+\begin{textblock*}{90mm}(30mm,35mm)\Large
+  \inserttitle \\
+      \vspace{2mm}
+    \normalsize {\insertdate}
+\end{textblock*}
+
+\begin{textblock*}{90mm}(20mm,65mm)
+  \small
+  \insertauthor\\
+  \vspace{2mm}
+  \insertinstitute\\
+\end{textblock*}
+\end{frame}
+}

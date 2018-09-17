@@ -1,8 +1,8 @@
 ---
 title: 'Are any herring harvest control rules good for both fisheries and predators?'
-author: | 
-  | Sarah K. Gaichas, Jonathan J. Deroba, Min-Yang Lee
-  | NOAA NMFS Northeast Fisheries Science Center, Woods Hole, MA, USA
+author: Sarah K. Gaichas, Jonathan J. Deroba, Min-Yang Lee
+institute: NOAA NMFS Northeast Fisheries Science Center, Woods Hole, MA, USA
+date: Today
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
   beamer_presentation:
@@ -10,6 +10,8 @@ output:
     slide_level: 2
     keep_tex: true
     latex_engine: xelatex
+    includes:
+      in_header: noaacover.tex
   ioslides_presentation:
     smaller: true
 bibliography: HerringMSE.bib
