@@ -6,6 +6,7 @@ author: |
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
   beamer_presentation:
+    fig_caption: false
     slide_level: 2
     keep_tex: true
     latex_engine: xelatex
@@ -44,6 +45,7 @@ if(!require(ggthemes)) {
 
 
 data.dir <- './data'
+images.dir <- './images'
 
 #The sg_figs option can be set to FALSE to skip making SG's figures on the fly. Or TRUE to make them. 
 sg_figs <- TRUE
