@@ -1487,7 +1487,67 @@ All of the control rule alternatives offered options that had near zero frequenc
 All of the control rule alternatives offered options that had high frequency of good tern productivity (equal to or greater than the management target of 1.0; Figure \ref{yieldbirds}). At similar levels of yield, using three or five year blocks for the biomass based control rule produced more control rule shapes with slightly lower frequency of good tern producivity, however, the difference is between >80% and >90% frequency of good productivity. 
 
 The control rule alternatives resulted in good stability characteristics across a range of net revenues for the fishery (Figure \ref{revenuestability}). We have included results from the biomass based control rule with a 15% restriction on interannual variation in the quota to illustrate the relatively poor performance of this control rule type.
+-->
+---
+```{r}
+Nrulesgoodterns <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  group_by(OM,CR)%>%
+  filter(MedPropYrs_goodProd_Targplustern>0.9) %>%
+  summarize(tern90 = n())
 
+Nrulesgoodfishery <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  group_by(OM,CR)%>%
+  filter(YieldrelMSY>0.9) %>%
+  summarize(yield90 = n())
+
+Nrulesgoodherring <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  group_by(OM,CR)%>%
+  filter(MedSSBrelSSBmsy>0.9) %>%
+  summarize(SSB90 = n())
+
+Nrulesgoodternherrfish <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  filter(MedPropYrs_goodProd_Targplustern>0.9 & MedSSBrelSSBmsy>0.9 & YieldrelMSY>0.9) %>%
+  group_by(OM,CR)%>%
+  summarize(ternfishherr90 = n(), 
+            minF = min(FracFtarg), 
+            maxF = max(FracFtarg),
+            minloB = min(FracBmsyThreshLo), 
+            maxloB = max(FracBmsyThreshLo),
+            minhiB = min(FracBmsyThreshHi),
+            maxhiB = max(FracBmsyThreshHi)
+  )
+
+CRsgoodternherrfish <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  filter(MedPropYrs_goodProd_Targplustern>0.9 & MedSSBrelSSBmsy>0.9 & YieldrelMSY>0.9) %>%
+  group_by(OM,CR) %>%
+  select(OM, CR, FracBmsyThreshLo, FracBmsyThreshHi,FracFtarg) %>%
+  mutate(id = seq(1:n()))
+
+  
+  
+with(CRsgoodternherrfish, 
+     plot(x=c(0,FracBmsyThreshLo, FracBmsyThreshHi, 4),
+          y=c(0,0,FracFtarg, FracFtarg), type="l"))  
+  
+#p1 <- ggplot(CRsgoodternherrfish[1,], aes(x=c(0,FracBmsyThreshLo, FracBmsyThreshHi, 4),
+#                                      y=c(0,0,FracFtarg, FracFtarg)),
+#             colour=CR)+
+#  geom_line()
+#
+#p1 + facet_wrap("OM")
+
+#p1 <- ggplot(Nrulesgoodternherrfish, aes(x=c(minloB, maxloB, minhiB, maxhiB), y=c(0,0,minF, maxF)), colour=CR) +
+#  geom_point()
+#p1 + facet_wrap("OM")
+
+```
+
+<!--
 # Discussion
 
 Results were generally robust among operating models when presented relative to biological reference points (e.g., $\frac{yield}{MSY}$), but absolute scale differed among operating models.  This result has been previously reported [@Deroba2012Evaluating] and is likely why the results of most MSEs are presented in relative units [@Amar2009TheFishery; @Deroba2012Evaluating; @Wiedenmann2017].  While convenient scientifically, the differences in absolute scale can create challenges when communicating with stakeholders because most people are more comfortable with absolute units (e.g., fishing industry representatives think in tons and not fractions of $MSY$; @Feeney2018blending). Thus, reporting results in absolute units will still have value in public settings, and scientists should attempt to convey the reasons for differences in scale among operating models [@Feeney2018blending].
