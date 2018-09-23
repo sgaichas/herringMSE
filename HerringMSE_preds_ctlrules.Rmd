@@ -10,8 +10,6 @@ output:
     slide_level: 2
     keep_tex: true
     latex_engine: xelatex
-    includes:
-      in_header: noaacover.tex
   ioslides_presentation:
     smaller: true
 bibliography: HerringMSE.bib
@@ -1523,7 +1521,7 @@ Nrulesgoodternherrfish <- allres %>%
 
 CRsgoodternherrfish <- allres %>%
   filter(CR %in% c("BB", "BB3yr")) %>%
-  filter(MedPropYrs_goodProd_Targplustern>0.9 & MedSSBrelSSBmsy>0.9 & YieldrelMSY>0.9) %>%
+  filter(MedPropYrs_goodProd_Targplustern > 0.9 & MedSSBrelSSBmsy > 0.9 & YieldrelMSY > 0.9) %>%
   group_by(OM,CR) %>%
   select(OM, CR, FracBmsyThreshLo, FracBmsyThreshHi,FracFtarg) %>%
   mutate(id = seq(1:n()),
@@ -1532,16 +1530,30 @@ CRsgoodternherrfish <- allres %>%
   gather(CRpart, x, Xmin,FracBmsyThreshLo, FracBmsyThreshHi,Xmax) %>%
   arrange(OM, CR, id) %>%
   mutate(y = case_when(CRpart == "Xmin" | CRpart == "FracBmsyThreshLo" ~ 0,
-                       CRpart == "Xmax" | CRpart == "FracBmsyThreshHi" ~ FracFtarg))
+                       CRpart == "FracBmsyThreshHi" | CRpart == "Xmax" ~ FracFtarg)) %>%
+  mutate(bigkey = paste0(OM, CR, id))
   
 #with(CRsgoodternherrfish, 
 #     plot(x=c(0,FracBmsyThreshLo, FracBmsyThreshHi, 4),
 #          y=c(0,0,FracFtarg, FracFtarg), type="l"))  
   
-p1 <- ggplot(CRsgoodternherrfish, aes(x=x, y=y,colour=CR)) +
-  geom_path()
+p1 <- ggplot(CRsgoodternherrfish, aes(x=x, y=y, colour=CR)) + 
+  geom_line(aes(group=bigkey), alpha=0.3) +
+  labs(y="F/Fmsy", x="SSB/SSBmsy", colour="Control rule type") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
+  theme_Publication() + scale_colour_Publication()
 
-p1 + facet_wrap("OM")
+OMlabels <- c('LowFastBiased', 
+              'LowSlowBiased', 
+              'LowFastCorrect', 
+              'LowSlowCorrect',  
+              'HighFastBiased',  
+              'HighSlowBiased', 
+              'HighFastCorrect',
+              'HighSlowCorrect'
+              )
+
+p1 + facet_wrap("OM", ncol=4)#, labeller=labeller(OM = OMlabels))
 
 #p1 <- ggplot(Nrulesgoodternherrfish, aes(x=c(minloB, maxloB, minhiB, maxhiB), y=c(0,0,minF, maxF)), colour=CR) +
 #  geom_point()
