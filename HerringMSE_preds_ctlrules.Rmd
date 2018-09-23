@@ -2,7 +2,7 @@
 title: 'Are any herring harvest control rules good for both fisheries and predators?'
 author: Sarah K. Gaichas, Jonathan J. Deroba, Min-Yang Lee
 institute: NOAA NMFS Northeast Fisheries Science Center, Woods Hole, MA, USA
-date: Today
+date: September 26, 2018
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
   beamer_presentation:
@@ -17,7 +17,7 @@ bibliography: HerringMSE.bib
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, fig.align='center', out.width = "\\linewidth")
+knitr::opts_chunk$set(echo = FALSE, fig.align='center', out.width = "\\linewidth", warning = FALSE)
 if(!require(ggplot2)) {  
   install.packages("ggplot2")
   require(ggplot2)}
@@ -42,6 +42,12 @@ if(!require(grid)) {
 if(!require(ggthemes)) {  
   install.packages("ggthemes")
   require(ggthemes)}
+if(!require(readr)) {  
+  install.packages("readf")
+  require(readr)}
+if(!require(kableExtra)) {  
+  install.packages("kableExtra")
+  require(kableExtra)}
 
 
 data.dir <- './data'
@@ -190,20 +196,29 @@ The variance of assessment errors ($\sigma_\phi^2$) equaled 0.05 and autocorrela
 -->
 ### Operating Models
 
-```{r OMs, tab.cap="Operating model uncertainties addressed\\label{OMs}", echo=FALSE, message=FALSE, warnings=FALSE,  results='asis'}
+```{r OMs,  echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+#tab.cap="Operating model uncertainties addressed\\label{OMs}",
 tabl <- "
-| Operating Model Name | Herring productivity | Herring growth   | Assessment bias  |
+|Operating Model Name|Herring Productivity|Herring Growth|Assessment Bias|
 |:---------------------|:---------------------|:-----------------|:-----------------|
-| LowFastBiased        | Low: high $M$, low $h$ (0.44)  | 1976-1985: fast | 60% overestimate |
-| LowSlowBiased        | Low: high $M$, low $h$ (0.44)  | 2005-2014: slow | 60% overestimate |
-| LowFastCorrect       | Low: high $M$, low $h$ (0.44)  | 1976-1985: fast | None             |
-| LowSlowCorrect       | Low: high $M$, low $h$ (0.44)  | 2005-2014: slow | None             |
-| HighFastBiased       | High: low $M$, high $h$ (0.79) | 1976-1985: fast | 60% overestimate |
-| HighSlowBiased       | High: low $M$, high $h$ (0.79) | 2005-2014: slow | 60% overestimate |
-| HighFastCorrect      | High: low $M$, high $h$ (0.79) | 1976-1985: fast | None             |
-| HighSlowCorrect      | High: low $M$, high $h$ (0.79) | 2005-2014: slow | None             |
+| LowFastBiased        | Low: high M, low h (0.44)  | 1976-1985: fast | 60% overestimate |
+| LowSlowBiased        | Low: high M, low h (0.44)  | 2005-2014: slow | 60% overestimate |
+| LowFastCorrect       | Low: high M, low h (0.44)  | 1976-1985: fast | None             |
+| LowSlowCorrect       | Low: high M, low h (0.44)  | 2005-2014: slow | None             |
+| HighFastBiased       | High: low M, high h (0.79) | 1976-1985: fast | 60% overestimate |
+| HighSlowBiased       | High: low M, high h (0.79) | 2005-2014: slow | 60% overestimate |
+| HighFastCorrect      | High: low M, high h (0.79) | 1976-1985: fast | None             |
+| HighSlowCorrect      | High: low M, high h (0.79) | 2005-2014: slow | None             |
 "
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+df<-read_delim(tabl, delim="|")
+df<-df[-c(1,2) ,c("Operating Model Name","Herring Productivity","Herring Growth","Assessment Bias")]
+knitr::kable(
+  df, booktabs = TRUE 
+  #caption = 'Operating model uncertainties addressed\\label{OMs}.'
+) %>%
+  kable_styling(latex_options = "scale_down")
+
+#cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
 <!--The stakeholder workshops identified uncertainties about herring life history traits and stock assessment.  The effect of some of these uncertainties on harvest control rule performance was evaluated by simulating the control rules for each of eight operating models (Table \ref{OMs}).  The uncertainties addressed by the eight operating models included: Atlantic herring natural mortality and steepness, Atlantic herring weight-at-age, and possible bias in the stock assessment beyond the unbiased measurement error ($\varepsilon_{\phi y}$). 
@@ -220,8 +235,11 @@ Differences in $M$, stock-recruit parameters, and weights-at-age led to differen
 
 To address concerns about possible stock assessment bias, operating models with and without a positive bias were included.  In operating models without bias, $\rho$=0 and the only assessment error was that caused by the unbiased measurement errors ($\epsilon_{\phi y}$).  In operating models with bias, $\rho$ equaled 0.6, which was based on the degree of retrospective pattern in $SSB$ from the most recent stock assessment [@Deroba2015atlantic].
 -->
+## Herring Methods
+
 ### Harvest Control Rules
 <!--Several  classes of control rules were evaluated, including a biomass based control rule [@katsukawa2004numerical], a constant catch rule, and a conditional constant catch rule [@clark2004conditional; @Deroba2012Evaluating].  The biomass based control rule was defined by three parameters: the proportion ($\psi$) of $F_{MSY}$ that dictates the maximum desired fishing mortality rate ($\tilde{F}$), an upper SSB threshold ($SSB_{up}$), and a lower SSB threshold ($SSB_{low}$).  The $\tilde{F}$ equaled the maximum when $\widehat{SSB}$ was above the upper threshold, declined linearly between the upper and lower thresholds, and equaled zero below the lower threshold:
+-->
 
   \begin{equation}
   \label{Fy_equation}
@@ -232,7 +250,7 @@ To address concerns about possible stock assessment bias, operating models with 
       0, & \text{if}\ \widehat{SSB}_y \leq SSB_{low}
     \end{cases}
   \end{equation}
-
+<!--
 The $\tilde{F}_y$ was then used to set a quota in year y + 1.  $\tilde{F}_{ay}$ equaled $\tilde{F}_y$ times $S_a$, and $S_a$ was time and simulation invariant selectivity at age equal to the values for the mobile gear fishery as in @Deroba2015atlantic.  $\tilde{F}_y$ was used to set a quota in the following year to approximate the practice of using projections based on an assessment using data through year y - 1 to set quotas in the following year(s).  Furthermore, although $\tilde{F}_y$ was set using $\widehat{SSB}_y$, the quota was based on $\widehat{B}_y$ because the fishery selects some immature ages.  The fully selected fishing mortality rate that would remove the quota from the true population ($\bar{F}_y$) was found using Newton-Raphson iterations.
 Several variations of the biomass based rule were also evaluated.  These variations included applying the control rule annually, using the same quota for three year blocks such that the control rule is applied every fourth year (i.e., $Q_{y+1}=Q_{y+2}=Q_{y+3}$), using the same quota for 5 year blocks, and using the same quota for three year blocks but restricting the change in the quota to 15% in either direction when the control rule was reapplied in the fourth year.  Thus, four variants of the biomass based control rule were evaluated: 1) annual application, 2) three year blocks, 3) five year blocks, and 4) 3 year blocks with a 15% restriction.
 
@@ -1543,21 +1561,17 @@ p1 <- ggplot(CRsgoodternherrfish, aes(x=x, y=y, colour=CR)) +
   guides(colour = guide_legend(override.aes = list(alpha = 1))) +
   theme_Publication() + scale_colour_Publication()
 
-OMlabels <- c('LowFastBiased', 
-              'LowSlowBiased', 
-              'LowFastCorrect', 
-              'LowSlowCorrect',  
-              'HighFastBiased',  
-              'HighSlowBiased', 
-              'HighFastCorrect',
-              'HighSlowCorrect'
+OMlabels <- c(HiM_LowSteep_AssBias_OldWt = 'LowFastBiased', 
+              HiM_LowSteep_AssBias_RecWt = 'LowSlowBiased', 
+              HiM_LowSteep_NoAssBias_OldWt = 'LowFastCorrect', 
+              HiM_LowSteep_NoAssBias_RecWt = 'LowSlowCorrect',  
+              LoM_HiSteep_AssBias_OldWt =  'HighFastBiased',  
+              LoM_HiSteep_AssBias_RecWt = 'HighSlowBiased', 
+              LoM_HiSteep_NoAssBias_OldWt = 'HighFastCorrect',
+              LoM_HiSteep_NoAssBias_RecWt = 'HighSlowCorrect'
               )
 
-p1 + facet_wrap("OM", ncol=4)#, labeller=labeller(OM = OMlabels))
-
-#p1 <- ggplot(Nrulesgoodternherrfish, aes(x=c(minloB, maxloB, minhiB, maxhiB), y=c(0,0,minF, maxF)), colour=CR) +
-#  geom_point()
-#p1 + facet_wrap("OM")
+p1 + facet_wrap("OM", labeller=labeller(OM = OMlabels), nrow=2) + theme(legend.position="bottom")
 
 ```
 
