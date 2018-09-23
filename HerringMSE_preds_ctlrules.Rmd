@@ -15,6 +15,7 @@ output:
 bibliography: HerringMSE.bib
 ---
 
+# Yes (In the Northwest Atlantic)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, fig.align='center', out.width = "\\linewidth", warning = FALSE)
@@ -74,28 +75,27 @@ if(sg_figs){
 
 allres <- readRDS(file.path(data.dir,"allres.rds"))
 
-
-#to get table captions and numbering
-tn = local({
-  i = 0
-  function(x) {
-    i <<- i + 1
-    #paste('\n\n:Table ', i, ': ', x, sep = '')
-    paste('\n\n:', x, sep = '')
-    # The : before Table tells pandoc to wrap your caption in <caption></caption>
-  }
-})
-knit_hooks$set(tab.cap = function(before, options, envir) {
-  if(!before)
-    tn(options$tab.cap)
-})
-default_output_hook = knit_hooks$get("output")
-knit_hooks$set(output = function(x, options) {
-  if (is.null(options$tab.cap) == F)  
-    x
-  else
-    default_output_hook(x,options)
-})
+# #to get table captions and numbering
+# tn = local({
+#   i = 0
+#   function(x) {
+#     i <<- i + 1
+#     #paste('\n\n:Table ', i, ': ', x, sep = '')
+#     paste('\n\n:', x, sep = '')
+#     # The : before Table tells pandoc to wrap your caption in <caption></caption>
+#   }
+# })
+# knit_hooks$set(tab.cap = function(before, options, envir) {
+#   if(!before)
+#     tn(options$tab.cap)
+# })
+# default_output_hook = knit_hooks$get("output")
+# knit_hooks$set(output = function(x, options) {
+#   if (is.null(options$tab.cap) == F)  
+#     x
+#   else
+#     default_output_hook(x,options)
+# })
 
 #a better plotting theme than ggplot default? from https://rpubs.com/Koundy/71792
 theme_Publication <- function(base_size=14, base_family="") {
@@ -159,6 +159,10 @@ The federal fisheries management process in New England usually starts when the 
 -->
 
 ## Introduction: MSE
+```{r introMSE}
+knitr::include_graphics(file.path(image.dir, 'MSECSIRO.png'))
+```
+
 <!--Management strategy evaluation uses simulation to evaluate the tradeoffs resulting from alternative management options in the face of uncertainty [@punt_management_2016]. MSEs require time, however, for stakeholder input, data collection, and model development [@butterworth2007management; @punt_management_2016]. As such, the process can take much longer than "traditional" management time frames [@butterworth2007management]. The development time is also likely to lengthen when explicit ecosystem, multi-species, or socioeconomic considerations are included because the data and modeling needs, and subsequent uncertainties, are all greater than in a single species approach. This manuscript chronicles the development of a MSE done on a truncated timetable (~12 months) required to meet management time frames. The objectives of this manuscript were to:
 
 1. Evaluate the relative performance of HCRs at meeting herring fishery objectives, including those related to predators of herring, as informed by stakeholder input, and,
@@ -167,12 +171,19 @@ The federal fisheries management process in New England usually starts when the 
 -->
 
 ## The Dream and The Reality
+```{r dreamreality}
+knitr::include_graphics(file.path(image.dir, 'MgtProcess.png'))
+```
+
+
 <!--During January 2016, the NEFMC requested a MSE to evaluate harvest control rules (HCRs) for herring (see @Feeney2018blending for more detail. Fishery managers wanted to develop a HCR that, among other things, accounted for the role of Atlantic herring as forage in the ecosystem. The exact "accounting" system was left to be defined by stakeholder-driven workshops that were open to the public, except that the main interest was in the effect that herring have on predators and not top-down effects of predators on herring. Two stakeholder workshops were conducted, one in May 2016 and another in December 2016. Members of the herring, lobster, groundfish, tuna, recreational, and whale-watching industries participated, as well as environmental non-government organizations (ENGO), federal and state agencies, and academics. Input from these diverse stakeholders were then utilized to construct the closed-loop simulation portion of the MSE. Notably, while the techincal group knew the general scope of the modeling exercise (HCRs that account for herring as forage), detailed modeling of many components of interest could not begin in earnest until this step was finished.
 
 Constucting an ecosystem model with an interdisciplinary team of scientists to support these management decisions would be a useful and perhaps ideal tool. However, the NEFMC desired results from the MSE within one year, which constrained the development of many components of the model.  Deciding how to allocate scarce research effort and time to various components of model development is always challenging; the limited time available for model development made this process even more challenging.  Relatively simple models linking key ecosystem components can have many advantages over more complex models for ecosystem analysis [@plaganyi_multispecies_2014; @collie_ecosystem_2016; @punt_exploring_2016]. These "models of intermediate complexity for ecosystem assessments" [MICE; @plaganyi_multispecies_2014] can also be a reasonable approach to conducting science to meet relatively short management timelines while ensuring the models and results reasonably describe the tradeoffs among objectives and remain relevant for decision-making.  The methods in this article describe the reality of what was achieved in order to enable managers to make informed decisions within their preferred time frames.  This reality is then contrasted with more comprehensive scientific approaches that could better inform future decisionmaking (i.e., the "dream").  This manuscript is a companion to @Feeney2018blending  which more fully describes the management context and how this MSE was blended with fisheries management.
 -->
 
 ## Herring Methods
+
+- Lots of modeling
 <!--A MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The herring component was modified from @Deroba2014EvaluatingRho, and symbols are largely consistent (Table \ref{symtab}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$, but simulations were of sufficient length to make the starting values moot.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate.
 
 Recruitment followed Beverton-Holt dynamics [@francis1992use]:
@@ -194,21 +205,22 @@ A stock assessment was approximated (i.e., assessment errors) similar to @punt20
 \end{align}
 The variance of assessment errors ($\sigma_\phi^2$) equaled 0.05 and autocorrelation ($\vartheta$) equaled 0.7.  A range of values for $\sigma_\phi^2$ and $\vartheta$ were not evaluated because previous research using a similar approach to applying assessment errors has found relative control rule performance to be robust to these quantities [@punt2008evaluation; @irwin2008evaluating; @Deroba2012Evaluating].  Rho ($\rho$) allowed for the inclusion of bias in the assessed value of abundance (see below; @Deroba2014EvaluatingRho).  Assessed spawning stock biomass ($\widehat{SSB}_y$) was calculated similarly to $SSB_y$ except with $N_{a,y}$ replaced with $\widehat{N}_{a,y}$, and assessed total biomass ($\widehat{B}_y$) was calculated as the sum across ages of the product of $\widehat{N}_{a,y}$ and $W_a$.
 -->
+
 ### Operating Models
 
 ```{r OMs,  echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 #tab.cap="Operating model uncertainties addressed\\label{OMs}",
 tabl <- "
 |Operating Model Name|Herring Productivity|Herring Growth|Assessment Bias|
-|:---------------------|:---------------------|:-----------------|:-----------------|
-| LowFastBiased        | Low: high M, low h (0.44)  | 1976-1985: fast | 60% overestimate |
-| LowSlowBiased        | Low: high M, low h (0.44)  | 2005-2014: slow | 60% overestimate |
-| LowFastCorrect       | Low: high M, low h (0.44)  | 1976-1985: fast | None             |
-| LowSlowCorrect       | Low: high M, low h (0.44)  | 2005-2014: slow | None             |
-| HighFastBiased       | High: low M, high h (0.79) | 1976-1985: fast | 60% overestimate |
-| HighSlowBiased       | High: low M, high h (0.79) | 2005-2014: slow | 60% overestimate |
-| HighFastCorrect      | High: low M, high h (0.79) | 1976-1985: fast | None             |
-| HighSlowCorrect      | High: low M, high h (0.79) | 2005-2014: slow | None             |
+|:------------------|:---------------------|:-----------------|:-----------------|
+| LowFastBiased     | Low: high M, low h (0.44)  | 1976-1985: fast | 60% overestimate |
+| LowSlowBiased     | Low: high M, low h (0.44)  | 2005-2014: slow | 60% overestimate |
+| LowFastCorrect    | Low: high M, low h (0.44)  | 1976-1985: fast | None             |
+| LowSlowCorrect    | Low: high M, low h (0.44)  | 2005-2014: slow | None             |
+| HighFastBiased    | High: low M, high h (0.79) | 1976-1985: fast | 60% overestimate |
+| HighSlowBiased    | High: low M, high h (0.79) | 2005-2014: slow | 60% overestimate |
+| HighFastCorrect   | High: low M, high h (0.79) | 1976-1985: fast | None             |
+| HighSlowCorrect   | High: low M, high h (0.79) | 2005-2014: slow | None             |
 "
 df<-read_delim(tabl, delim="|")
 df<-df[-c(1,2) ,c("Operating Model Name","Herring Productivity","Herring Growth","Assessment Bias")]
@@ -238,6 +250,8 @@ To address concerns about possible stock assessment bias, operating models with 
 ## Herring Methods
 
 ### Harvest Control Rules
+
+- Biomass Based (1, 3, and 5 year blocks of catch)
 <!--Several  classes of control rules were evaluated, including a biomass based control rule [@katsukawa2004numerical], a constant catch rule, and a conditional constant catch rule [@clark2004conditional; @Deroba2012Evaluating].  The biomass based control rule was defined by three parameters: the proportion ($\psi$) of $F_{MSY}$ that dictates the maximum desired fishing mortality rate ($\tilde{F}$), an upper SSB threshold ($SSB_{up}$), and a lower SSB threshold ($SSB_{low}$).  The $\tilde{F}$ equaled the maximum when $\widehat{SSB}$ was above the upper threshold, declined linearly between the upper and lower thresholds, and equaled zero below the lower threshold:
 -->
 
@@ -250,6 +264,10 @@ To address concerns about possible stock assessment bias, operating models with 
       0, & \text{if}\ \widehat{SSB}_y \leq SSB_{low}
     \end{cases}
   \end{equation}
+ 
+- Biomass Based with a 15% restriction on interannual change 
+- Constant Catch (proportion of MSY)
+- Conditional Constant Catch (not to exceed max F)
 <!--
 The $\tilde{F}_y$ was then used to set a quota in year y + 1.  $\tilde{F}_{ay}$ equaled $\tilde{F}_y$ times $S_a$, and $S_a$ was time and simulation invariant selectivity at age equal to the values for the mobile gear fishery as in @Deroba2015atlantic.  $\tilde{F}_y$ was used to set a quota in the following year to approximate the practice of using projections based on an assessment using data through year y - 1 to set quotas in the following year(s).  Furthermore, although $\tilde{F}_y$ was set using $\widehat{SSB}_y$, the quota was based on $\widehat{B}_y$ because the fishery selects some immature ages.  The fully selected fishing mortality rate that would remove the quota from the true population ($\bar{F}_y$) was found using Newton-Raphson iterations.
 Several variations of the biomass based rule were also evaluated.  These variations included applying the control rule annually, using the same quota for three year blocks such that the control rule is applied every fourth year (i.e., $Q_{y+1}=Q_{y+2}=Q_{y+3}$), using the same quota for 5 year blocks, and using the same quota for three year blocks but restricting the change in the quota to 15% in either direction when the control rule was reapplied in the fourth year.  Thus, four variants of the biomass based control rule were evaluated: 1) annual application, 2) three year blocks, 3) five year blocks, and 4) 3 year blocks with a 15% restriction.
@@ -268,6 +286,7 @@ F_{a,y}=\bar{F}_yS_ae^{\varepsilon_{\theta,y}-\frac{\sigma_\theta^2}{2}} \\
 \end{equation}
 The variance of implementation errors ($\sigma_\theta^2$) equaled 0.001.  The US Atlantic herring fishery in the Northwest Atlantic generally catches about the full amount of annual quota.  Catches are monitored through manadatory federal and state reporting requirements, which are used to close the fishery within 10% of the annual quota.  Thus, unbiased implementation errors seemed justified.
 -->
+
 ## Predators
 ```{r predoverview}
 knitr::include_graphics(file.path(image.dir, 'herrtopreds.png'))
@@ -328,9 +347,12 @@ where 0 < $\delta$ <1 links herring population size to predator survival.
 
 After specifying the population model parameters and herring-predator relationship, we applied the [@hilborn_quantitative_2003] equilibruim calculation for the delay difference model with $F$=0 to get the unfished spawners per recruit ratio. This ratio was then used in a second equilibruim calculation with the current predator exploitation rate to estimate Beverton-Holt stock recruitment parameters, equilibrium recruitment and equilibrium individual weight under exploitation. Then, each model was run forward for 150 years with output from the herring operating model specifying the herring population characteristics. 
 -->
-## Tuna population and herring-tuna relationship models
+## Predator population and herring-predatpr relationship models
 
-```{r, fig.cap="Modeled herring average weight (population >180mm in length) to tuna growth relationship. See text (Herring-tuna relationship model section) for derivation. \\label{herringtuna}", message = FALSE, warning = FALSE}
+- Lots of data analysis and modeling
+
+```{r, message = FALSE, warning = FALSE, fig.align='left', fig.show='hold', out.width='0.49\\linewidth'}
+# fig.cap="Modeled herring average weight (population >180mm in length) to tuna growth relationship.",See text (Herring-tuna relationship model section) for derivation. \\label{herringtuna}
 # from MSE_TunaLink.R
 FWalpha       <-  0.020605  #ford-walford plot intercept parameter 
 FWrho         <-  0.9675  #ford-walford plot slope parameter
@@ -357,7 +379,7 @@ Tuna diets are variable depending on location and timing of foraging [@chase_dif
 where $\lambda$ > 1 links herring average weight anomalies to tuna growth.
    
 The inflection point of $T$ = 0.15 kg average weight aligns with 0 tuna weight anomaly from Fig. 2C on p 186 in @golet_paradox_2015, and upper and lower bounds were determined by estimating the growth intercept with weight at age 10% higher or lower, respectively from the average weight at age obtained by applying the length to weight conversion reported in the 2014 stock assessment [@iccat_report_2015] to the length at age estimated from the @restrepo_updated_2010 growth curve (Fig. \ref{herringtuna}). When included in the model with $\lambda$ = 1.1 in equation \ref{tunagrow_equation}, the simulated variation in tuna weight at age covered the observed range reported in @golet_paradox_2015. 
--->
+
 ## Tern population and herring-tern relationship models
 
 ```{r, eval=sg_figs, fig.cap="Stock-recruitment function for Gulf of Maine common terns assuming 10\\% fledgling to adult survival. Fitted parameters with all years of the common tern dataset included a non-significant beta parameter (dashed line), while fits to a truncated dataset resulted in low population production rates inconsistent with currently observed common tern trends (dotted line). Therefore, steepness was estimated to give a relationship (solid black line) falling between these two lines. \\label{ternSR}", message = FALSE, warning = FALSE}
@@ -403,7 +425,7 @@ ternrec+
 
 ```
 
----
+
 
 ```{r, eval=sg_figs, fig.cap="Gulf of Maine tern annual productivity distributions by majority diet item offered to fledglings. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of annual productivity measured across all nesting colonies in the Gulf of Maine where that prey species was the majority in the diet. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further from the box (outliers) are represented by points. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{chickdiet}", message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/TernMajorDietItems.png")
@@ -432,7 +454,7 @@ dietitem + theme_Publication() + #element_text(angle = 90, vjust = 0.5, hjust=1)
 
 ```
 
----
+
 
 ```{r, eval=sg_figs, fig.cap="Herring proporiton in diet and annual tern productivity (fledglings/nest) by Gulf of Maine colony. Colony names are at the top of each subplot; I = island. Two colonies, Machias Seal and Stratton above, have significant positive Spearman's rank correlations between herring proportion in diet and annual productivity for common terns. No linear model slopes were significant, so none are shown in the plot. The black line represents the target tern productivity of 1.0 fledgling per nest. \\label{proddiet}", fig.height=8, fig.width=10,  out.width='\\linewidth', message = FALSE, warning = FALSE}
 #knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/ternproddiet.png")
@@ -457,9 +479,10 @@ ternproddiet + facet_wrap(~colony) + #theme(text=element_text(size=16))
   theme_Publication() #+ scale_colour_Publication()
 
 ```
----
 
-```{r, eval=sg_figs, fig.cap="Modeled influence of herring total biomass on tern reproductive success. Total annual productivity (fledglings per nest) for both tern species relative to assessed herring total biomass is shown, but the modeled relationship (curve) is based only on common terns. A linear relationship between herring total biomass and common tern productivity crosses tern productivity=1 (black dotted line) at ~400,000 tons herring total biomass. This linear relationship does not have a statistically significant slope; the curve was fit to represent a level but positive contribution of herring total biomass to common tern productivity above the threshold. The black horizontal line represents the target tern productivity of 1.0 fledgling per nest. \\label{herrternmod}", message = FALSE, warning = FALSE}
+-->
+```{r, eval=sg_figs,  message=FALSE, warning=FALSE,fig.align='right', fig.show='hold', out.width='0.49\\linewidth'}
+#fig.cap="Modeled influence of herring total biomass on tern reproductive success. The black horizontal line represents the target tern productivity of 1.0 fledgling per nest. \\label{herrternmod}",Total annual productivity (fledglings per nest) for both tern species relative to assessed herring total biomass is shown, but the modeled relationship (curve) is based only on common terns. A linear relationship between herring total biomass and common tern productivity crosses tern productivity=1 (black dotted line) at ~400,000 tons herring total biomass. This linear relationship does not have a statistically significant slope; the curve was fit to represent a level but positive contribution of herring total biomass to common tern productivity above the threshold. 
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
 #reconcile names
@@ -524,8 +547,8 @@ totprodnomonherr +
 
 
 ```
+<!--
 
----
 
 ```{r, eval=sg_figs, message = FALSE, warning = FALSE}
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
@@ -859,7 +882,7 @@ Because no specific groundfish was identified as a representative herring predat
 
 
 Some interannual variation in diet may be explained by changing herring abundance. Dogfish and both cod stocks had positive relationships between the amount of herring observed in annual diets and the size of the herring population according to the most recent assessment (statistics and plots available upon request). This suggests that these groundfish predators are opportunistic, eating herring in proportion to their availability in the ecosystem. However, monotonically declining cod populations for both Gulf of Maine and Georges Bank cod stocks resulted in either no herring-cod relationship, or a negative relationship between herring populations and cod populations (Fig. \ref{gfishBherrdiet}). Only dogfish spawning stock biomass had a positive relationship with the proportion of herring in dogfish diet. Therefore, we selected dogfish as the groundfish predator for modeling.
--->
+
 
 ## Dogfish population population and herring-dogfish relationship models
 
@@ -910,7 +933,7 @@ compplot3 + facet_wrap("Pred", labeller=labeller(Pred = labels), nrow=3)  +
 
 ```
 
----
+
 
 ```{r, eval=sg_figs, fig.cap="Relationship of groundfish predator (dogfish, GBcod = Georges Bank cod, and GOMcod = Gulf of Maine cod) spawning stock biomass (SSB) with the percentage of herring in diet: both all clupeids including Atlantic herring (All Clupeids) and Atlantic herring only (A. herring). Linear model fit (line) with 95\\% CI band (gray shading) is shown for significant relationships. \\label{gfishBherrdiet}", message = FALSE, warning = FALSE}
 #codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
@@ -978,7 +1001,7 @@ gfishSSBdiet + facet_wrap(~species) +
 
 
 ```
----
+
 <!--
 ```{r, eval=sg_figs, fig.cap="Dogfish population relationships with herring total biomass (left) and herring proportion in diet (right) \\label{pupherring}", out.width='.49\\linewidth', fig.show='hold', fig.align='center', message = FALSE, warning = FALSE}
 #codGB<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GBcodpop.csv")
@@ -1057,10 +1080,10 @@ pupwtdiet+
   theme_Publication() + scale_colour_Publication()
 ```
 
----
 -->
 
-```{r, eval=sg_figs, fig.cap="Modeled herring relative population size-dogfish natural mortality relationship \\label{herringdogfish}", message = FALSE, warning = FALSE}
+```{r, eval=sg_figs, message = FALSE, warning = FALSE, fig.show='hold', out.width='0.49\\linewidth'}
+#fig.cap="Modeled herring relative population size-dogfish natural mortality relationship \\label{herringdogfish}",
 # from MSE_GroundfishLink.R
 PredannualA   <-  0.092  #0.6 #predator annual natural mortality rate (0-1); serves as max if time varying
 Predexploit   <-  0.092  #0.3 #predator annual exploitation rate (0-1)
@@ -1095,9 +1118,13 @@ While some food habits data existed for marine mammals, consultation with marine
 Potential effects of changes in herring production and/or biomass on marine mammals were instead evaluated using an updated version of an existing food web model for the Gulf of Maine [@link_northeast_2008; @link_response_2009; @link_documentation_2006] and incorporating food web model parameter uncertainty. Overall, food web modeling showed that a simulated increase in herring production in the Gulf of Maine may produce modest but uncertain benefits to marine mammal predators, primarily because increased herring was associated with decreases in other forage groups also preyed on by marine mammals. However, this could not be pursued further within the MSE framework. <!--Please see Appendix 1 of this document for full analyses and results.--> 
 
 <!--Predator model input parameters are summarized in Table \ref{predpars}. 
-
+-->
 ## Economics
 
+- some modeling, should have been lots more
+- the dream: predator response links to ecosystem services, human well being
+- takes way more time
+<!--
 ### The Herring Fishery
 The economic model of the herring fishery converts yield, $Y$, from the herring model component into Gross Revenues (GR) and Net Operating Revenues (NR).  There are two fleets, trawl and purse seine, that are assumed to have the ability to catch 70 and 30% of the yield, respectively. This division corresponds to recent historical patterns.  The midwater trawl, paired midwater trawl, and bottom trawl are all aggregated into the trawl fleet. Gross Revenue, Net Revenue, and the constraints on harvest can be represented as (year subscripts omitted here for simplicity):
 
@@ -1141,7 +1168,7 @@ MY's code for running regressions is here: /home/mlee/Documents/Herring_PDT_work
 -->
 
 <!--The simulation of Gross operating revenues occurs in a few steps.  Herring prices in a year are simulated using equations \ref{optimization_problem} and \ref{ARDL} and parameters from Table \ref{ardl_regression} previous year prices (initialized to the 2011-2015 average for the first year) under the assumption that both fleets combine to land the entire Yield.  Following @Lehuta2013InvestigatingEngland, if the price of herring is sufficiently high, we assume that consumers find it worthwhile to switch to menhaden.  If the simulated prices are higher than the price of menhaden (\$242/mt) plus transport costs (\$133/mt), we set the price of herring to \$375/mt.  When simulated prices are higher than the marginal cost of the trawl fleet(\$63.24/mt), both fleets are assumed to catch the entire Yield.  Otherwise, we use equations \ref{optimization_problem} and \ref{ARDL} to solve for quantity landed by the trawl fleet when the purse seine fleet lands 30% of yield. If it is optimal for the trawl fishery to land nothing, we use equations \ref{optimization_problem} - \ref{ARDL} to find the purse seine's optimal amount of landings. Because the marginal costs for the purse seine are always less than the marginal costs of the trawl fishery, any landings by the trawl fleet imply the purse seine fleet is landing 30% of the yield.  Net revenues to the fishery can then be calculated directly from equation \ref{optimization_problem}.
--->
+
 ## Performance Metrics
 <!--
 For each combination of control rule and operating model (43,680 unique combinations), 100 simulations lasting 150 years were conducted.  Preliminary simulations suggested that this number of simulations and years was sufficient for results to be insensitive to starting conditions and short-term dynamics caused by auto-correlated processes. The simulated herring time series for every operating model and control rule was passed to the predator and economic submodels, resulting in outputs as described below using the equations above.  We report performance metrics over the final fifty years as a way to describe the long-run performance of a particular control rule.  Performance metrics were derived directly from the results of the stakeholder workshop and supplemented with additional metrics drawn from MSE best practices [@punt_management_2016].
@@ -1181,7 +1208,7 @@ $Z$ has a standard normal distribution under the null hypothesis of dis-equilibr
 #Results
 
 Some performance metrics were redundant, showed similar tradeoffs, or were expected not to vary among operating models or control rules.  For example, the proportion of age-1 herring in the population was insensitive to control rules because the fishery does not select age-1 fish.  Such metrics were listed above to accurately document the outcome of the stakeholder process, but results below were focused on metrics likely of broad interest or with possible sensitivities to operating models or control rules. A subset of eleven metrics is presented with abbreviations for reference in figures: herring relative yield ("relyield") $\frac{yield}{MSY}$; herring interannual variation in yield ("yieldvar") *IAV* above; the proportion of years *Q*=0 ("closure") the herring fishery was closed; herring relative spawning stock biomass ("relSSB") $\frac{SSB}{SSB_{F=0}}$; the proportion of years the herring stock is overfished ("overfished") $SSB < \frac{SSB_{MSY}}{2}$; probability of good tern productivity ("ternprod") the median proportion of years that tern fledglings/breeding pair >= 1.0; probability of good dogfish status ("dogstatus") the median proportion of years that dogfish SSB relative 0.5 $SSB_{MSY}^P$ >= 1.0; probability of good tuna weight status ("tunawt") the median proportion of years that tuna population weight (population population biomass/population numbers) >= average; median herring fishery net revenue ("net revenue") as described above; herring fishery stable equilibrium ("equil1") if metric is small as described above; and herring fishery stable equilibrium ("equil2") if metric is large as described above. 
--->
+
 ## Effect of Operating Models
 
 ```{r YAY, fig.cap="Differences between operating models (OM) for key metrics. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of the distribution of medians for final 50 years of each simulation for each performance metric (x-axis label, please see text for definitions) and operating model (see Table 2 for definitions) across all control rule types. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further than 1.5 box lengths from the box (outliers) are represented by points. \\label{YAY}", fig.height=14, fig.width=11.5, out.width='\\linewidth', message = FALSE, warning = FALSE}
@@ -1271,7 +1298,7 @@ OMlabels <- c('LowFastBiased',
 #   return(list(plots=P, num=length(yvars)))
 # }
 
-#trying to align left side of plots--still not working--> finally works!
+#trying to align left side of plots--still not working-- finally works!
 plotting <- function(d, xvar, yvars, xlabs, ylabs){
   P <- list()
   for (i in 1:length(yvars)){
@@ -1309,7 +1336,7 @@ grid.draw(metOM)
 
 <!--
 Several performance metrics performed similarly among operating models, and were stable among control rules (Figure \ref{YAY}).    Herring metrics reported relative to reference points were generally less sensitive to operating model than metrics in absolute units (Figure \ref{YAY}).  Consequently, results below focus on herring metrics reported relative to reference points, with the understanding that the operating models differ in meaningful ways (e.g., different *MSY*) if metrics are reported in absolute units.  Dogfish performance metrics were also robust to the operating models and control rules (Figure \ref{YAY}), and were not considered further.  Tuna were affected by variation in herring growth among operating models, but did not vary among control rules (Figure \ref{YAY}), and were also not considered further because herring growth is not within the control of a management strategy (i.e., harvest control rule).   Other than tuna, most metrics were affected by differences in herring *M* and steepness more than herring growth (Figure \ref{YAY}).  The  *Equil1* and *Equil2* metrics are generally consistent with each other, and indicate that a stable long-run equilibrium of net revenue is possible for any operating model  (Figure \ref{YAY}).
--->
+
 ## Effect of Harvest Control Rules
 
 ```{r ZZZ, fig.cap="Differences between control rule types for key metrics. Boxplots represent the median (wide line within the box) and 25th and 75th percentiles (box) of the distribution of medians for final 50 years of each simulation for each performance metric (x-axis label, please see text for definitions) and control rule type (CR; described in the text Harvest control rules section: biomass based with 1 (BB), 3 (BB3yr), and 5 (BB5yr) quota blocks, biomass based 3 year quota block with a 15\\% restriction on interannual quota change (BB3yrPerc), constant catch (CC), and conditional constant catch(CCC)) across all operating models. Boxplot whiskers include the highest and lowest observations within 1.5 box lengths from the box. Observations further than 1.5 box lengths from the box (outliers) are represented by points.\\label{ZZZ}", fig.height=11, fig.width=8.5, message = FALSE, warning = FALSE}
@@ -1391,7 +1418,7 @@ grid.newpage()
 grid.draw(metCR)
 
 ```
-
+-->
 ## Predator results summary
 ```{r predresultsum}
 knitr::include_graphics(file.path(image.dir, 'herrtopreds_results.png'))
@@ -1403,10 +1430,10 @@ The constant catch, conditional constant catch, and the biomass based control ru
 Given that the metrics reported in results below focus on those that were relatively robust to operating models, additional results were only reported for the operating model with low *M*, high steepness, and slow growth ("HighSlowCorrect" in figures). Further, due to Council decisions to eliminate the constant catch, conditional constant catch, and a biomass based rule with a 15% restriction, more detailed tradeoff analyses below focus on the biomass based control rule applied annually ("BB"), or with three ("BB3yr") or five year ("BB5yr") quota blocks.
 
 -->
-## Tradeoffs in Remaining Control rules
+## Tradeoffs in Remaining Control Rules
 
-```{r yieldSSB, fig.cap="Tradeoff between herring relative yield and relative SSB for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation. \\label{yieldSSB}", message = FALSE, warning = FALSE}
-
+```{r yieldSSB,  message = FALSE, warning = FALSE}
+#fig.cap="Tradeoff between herring relative yield, fishery and predator metrics for HighSlowCorrect operating model ",and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation. \\label{yieldSSB}
 # pick one OM
 HiSlowCorrectOM <- allres %>%
   filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
@@ -1427,8 +1454,9 @@ ggplot(HSCOM_BBsonly, aes(x=MedSSBrelSSBmsy, y=YieldrelMSY, colour=CR)) +
 
 ---
 
-```{r yieldclose, fig.cap="Tradeoff between herring relative yield and frequency of fishery closure for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldPropClosure}", message = FALSE, warning = FALSE}
-
+```{r yieldclose, message = FALSE, warning = FALSE}
+#, fig.show='hold', out.width='0.49\\linewidth'
+#fig.cap="Tradeoff between herring relative yield and frequency of fishery closure for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldPropClosure}"
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
 #  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
@@ -1449,8 +1477,9 @@ ggplot(HSCOM_BBsonly, aes(x=PropClosure, y=YieldrelMSY, colour=CR)) +
 
 ---
 
-```{r yieldOF, fig.cap="Tradeoff between herring relative yield and probability of the stock is overfished for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldProbOF}", message = FALSE, warning = FALSE}
-
+```{r yieldOF,  message = FALSE, warning = FALSE}
+#, fig.show='hold', out.width='0.49\\linewidth'
+#fig.cap="Tradeoff between herring relative yield and probability of the stock is overfished for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldProbOF}",
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
 #  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
@@ -1471,8 +1500,9 @@ ggplot(HSCOM_BBsonly, aes(x=PropSSBrelhalfSSBmsy, y=YieldrelMSY, colour=CR)) +
 
 ---
 
-```{r yieldbirds, fig.cap="Tradeoff between herring relative yield and probability of good tern productivity for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medianstaken over the final 50 years of each simulation.\\label{yieldbirds}", message = FALSE, warning = FALSE}
-
+```{r yieldbirds, message = FALSE, warning = FALSE}
+# fig.show='hold', out.width='0.49\\linewidth'
+# fig.cap="Tradeoff between herring relative yield and probability of good tern productivity for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medianstaken over the final 50 years of each simulation.\\label{yieldbirds}",
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
 #  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
@@ -1504,7 +1534,16 @@ All of the control rule alternatives offered options that had high frequency of 
 
 The control rule alternatives resulted in good stability characteristics across a range of net revenues for the fishery (Figure \ref{revenuestability}). We have included results from the biomass based control rule with a 15% restriction on interannual variation in the quota to illustrate the relatively poor performance of this control rule type.
 -->
+## Can we get 90% of everything?
+
+- Tern productivity at 1.0 or above more than 90% of the time
+- Herring biomass more than 90% of SSBmsy
+- Fishery yield more than 90% of MSY
+\blankspace
+- Fishery closures (F=0) less than 1% of the time (second plot).
+
 ---
+
 ```{r}
 Nrulesgoodterns <- allres %>%
   filter(CR %in% c("BB", "BB3yr")) %>%
@@ -1540,6 +1579,78 @@ Nrulesgoodternherrfish <- allres %>%
 CRsgoodternherrfish <- allres %>%
   filter(CR %in% c("BB", "BB3yr")) %>%
   filter(MedPropYrs_goodProd_Targplustern > 0.9 & MedSSBrelSSBmsy > 0.9 & YieldrelMSY > 0.9) %>%
+  group_by(OM,CR) %>%
+  select(OM, CR, FracBmsyThreshLo, FracBmsyThreshHi,FracFtarg) %>%
+  mutate(id = seq(1:n()),
+         Xmin = 0,
+         Xmax = 4) %>%
+  gather(CRpart, x, Xmin,FracBmsyThreshLo, FracBmsyThreshHi,Xmax) %>%
+  arrange(OM, CR, id) %>%
+  mutate(y = case_when(CRpart == "Xmin" | CRpart == "FracBmsyThreshLo" ~ 0,
+                       CRpart == "FracBmsyThreshHi" | CRpart == "Xmax" ~ FracFtarg)) %>%
+  mutate(bigkey = paste0(OM, CR, id))
+  
+#with(CRsgoodternherrfish, 
+#     plot(x=c(0,FracBmsyThreshLo, FracBmsyThreshHi, 4),
+#          y=c(0,0,FracFtarg, FracFtarg), type="l"))  
+  
+p1 <- ggplot(CRsgoodternherrfish, aes(x=x, y=y, colour=CR)) + 
+  geom_line(aes(group=bigkey), alpha=0.3) +
+  labs(y="F/Fmsy", x="SSB/SSBmsy", colour="Control rule type") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
+  theme_Publication() + scale_colour_Publication()
+
+OMlabels <- c(HiM_LowSteep_AssBias_OldWt = 'LowFastBiased', 
+              HiM_LowSteep_AssBias_RecWt = 'LowSlowBiased', 
+              HiM_LowSteep_NoAssBias_OldWt = 'LowFastCorrect', 
+              HiM_LowSteep_NoAssBias_RecWt = 'LowSlowCorrect',  
+              LoM_HiSteep_AssBias_OldWt =  'HighFastBiased',  
+              LoM_HiSteep_AssBias_RecWt = 'HighSlowBiased', 
+              LoM_HiSteep_NoAssBias_OldWt = 'HighFastCorrect',
+              LoM_HiSteep_NoAssBias_RecWt = 'HighSlowCorrect'
+              )
+
+p1 + facet_wrap("OM", labeller=labeller(OM = OMlabels), nrow=2) + theme(legend.position="bottom")
+
+```
+
+---
+
+```{r}
+Nrulesgoodterns <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  group_by(OM,CR)%>%
+  filter(MedPropYrs_goodProd_Targplustern>0.9) %>%
+  summarize(tern90 = n())
+
+Nrulesgoodfishery <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  group_by(OM,CR)%>%
+  filter(YieldrelMSY>0.9) %>%
+  summarize(yield90 = n())
+
+Nrulesgoodherring <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  group_by(OM,CR)%>%
+  filter(MedSSBrelSSBmsy>0.9) %>%
+  summarize(SSB90 = n())
+
+Nrulesgoodternherrfish <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  filter(MedPropYrs_goodProd_Targplustern>0.9 & MedSSBrelSSBmsy>0.9 & YieldrelMSY>0.9 & PropClosure < 0.1) %>%
+  group_by(OM,CR)%>%
+  summarize(ternfishherr90 = n(), 
+            minF = min(FracFtarg), 
+            maxF = max(FracFtarg),
+            minloB = min(FracBmsyThreshLo), 
+            maxloB = max(FracBmsyThreshLo),
+            minhiB = min(FracBmsyThreshHi),
+            maxhiB = max(FracBmsyThreshHi)
+  )
+
+CRsgoodternherrfish <- allres %>%
+  filter(CR %in% c("BB", "BB3yr")) %>%
+  filter(MedPropYrs_goodProd_Targplustern > 0.9 & MedSSBrelSSBmsy > 0.9 & YieldrelMSY > 0.9 & PropClosure < 0.1) %>%
   group_by(OM,CR) %>%
   select(OM, CR, FracBmsyThreshLo, FracBmsyThreshHi,FracFtarg) %>%
   mutate(id = seq(1:n()),
@@ -1637,154 +1748,11 @@ In order to meet management timelines, the herring, predator, and economic model
 ## Acknowledgements
 We thank our New England Fishery Management Council collaborators Rachel G. Feeney and Deirdre Boelke, our collaborator and lead facilitator Brian J. Irwin, and the more than 80 individuals from the fishing industry, federal and state agencies, academia, environmental organizations, and other entities who gave their time to contribute to the workshops. Madeleine Hall-Arber, Jessica Joyce, Laura Singer, and Tiffany Vidal provided excellent workshop facilitation. Beth Goettel, Linda Welch, and Aly McKnight contributed seabird data and expertise. This manuscript benefitted from the peer review panel: Lisa Kerr (Chair), Gavin Fay, Douglas Lipton, and John Wiedenmann. Statements herein should neither be considered formal positions of the NEFMC, NMFS, nor a consensus of the participants.  Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
 
----
-## Extra Tables
-```{r MortsWts, tab.cap="Herring natural mortality and mean weights-at-age (kg) \\label{MWttab}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-tabl <- "
-|Age	|High $M$	|Low $M$	|Fast Growth	|Slow Growth |
-|:----|:----|:----|:----|:----|
-|1	|0.81	|0.54	|0.01	|0.02|
-|2	|0.65	|0.43	|0.03	|0.04|
-|3	|0.54	|0.36	|0.09	|0.07|
-|4	|0.48	|0.32	|0.16	|0.11|
-|5	|0.45	|0.3	|0.21	|0.14|
-|6	|0.42	|0.28	|0.25	|0.16|
-|7	|0.41	|0.27	|0.28	|0.18|
-|8+	|0.40	|0.26	|0.31	|0.21|
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
 
----
+## P.S. The clearest tradeoff
 
-```{r refpt,tab.cap="Life history traits and reference points including unfished SSB (i.e., virgin SSB), $SSB_{MSY}$, MSY, and $F_{MSY}$ reference points for the Atlantic herring operating models \\label{RefPts}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis' }
-tabl <- "
-| Steepness | Natural Mortality | Growth | Unfished SSB (mt) | SSB MSY (mt) | MSY (mt) | F MSY |
-|:----|:----|:----|:----|:----|:----|:----|
-| 0.44 | High | Slow | 845176 | 324977 | 66061 | 0.31 |
-| 0.44 | High | Fast | 845176 | 335849 | 60969 | 0.28 |
-| 0.79 | Low | Slow | 1347080 | 369089 | 129171 | 0.54 |
-| 0.79 | Low | Fast | 1347080 | 405485 | 120360 | 0.45 |
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
-
----
-
-```{r popsources, tab.cap="Predator population model specification and parameter sources. See methods for details of Gulf of Maine Seabird Working Group (GOMSWG) data. \\label{predsource}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-tabl <- "
-|                      | Highly migratory     | Seabird              | Groundfish           | Marine mammal        |
-|:---------------------|:---------------------|:---------------------|:---------------------|:---------------------|
-| Stakeholder preferred species | Bluefin tuna | Common tern | not specified | not specified |
-| Species modeled     | Bluefin tuna (western Atlantic stock) | Common tern (Gulf of Maine colonies as defined by the GOM Seabird Working Group) | Spiny dogfish (GOM and GB cod stocks also examined) | none, data limited (Minke & humpback whales, harbor porpoise, harbor seal examined) |
-| Stock-recruitment   | @iccat_report_2015 and @porch_making_2016 | Derived from GOMSWG data | @rago_implications_1998 and @rago_biological_2010 | No time series data for our region | 
-| Natural mortality | @iccat_report_2015 | @nisbet_common_2002 | @rago_update_2013 and Rago pers. comm. 2016 | Derivable from @hayes_us_2017? |
-| Fishing mortality | @iccat_report_2015 | n/a | @rago_update_2013 and Rago pers. comm. 2016 | Derivable from @hayes_us_2017? |
-| Initial population | @iccat_report_2015 | Derived from GOMSWG data | @rago_update_2013 and Rago pers. comm. 2016 | Derivable from @hayes_us_2017? |
-| Weight at age | @restrepo_updated_2010 | @nisbet_common_2002 | @rago_implications_1998 | Depending on species, derivable from literature | 
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
-
----
-
-```{r pars, tab.cap="Predator model input parameters\\label{predpars}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-tabl <- "
-| Parameter                | Tuna         | Tern         | Dogfish      |
-|:--------------------------------------------------------------------------|:-------------|:-------------|:-------------|
-| Numbers or Weight?       | Weight       | Numbers      | Weight       |
-| Unfished spawning pop (metric tons for fish, n of nesting pairs for tern)   | 6.69E+04     | 45000        | 300000       |
-| Steepness *h*           | 1.0          | 0.26         | 0.97         |
-| Base annual nat. mortality rate *v* | 0.14         | 0.1          | 0.092        |
-| Annual exploitation rate *u*  | 0.079        | 0.00         | 0.092        |
-| Growth intercept $Fw_{int}$ | 0.020605     | 0.00015      | 0.000278     |
-| Growth slope $Fw_{slope}$  | 0.9675       | 0.0          | 0.9577       |
-| Initial abundance $N^P_1$ (n for fish, n nesting pairs for tern)        | 111864       | 3000         | 49629630     |
-| Initial biomass $B^P_1$ (metric tons for fish, kg for tern but not used in model)        | 27966        | 1.5          | 134000       |
-| Recruit delay (age, years)  | 1            | 4            | 10           |
-| Prey-recruitment link $\\gamma$   | 1 (off)      | 1.09         | 1 (off)      |
-| Prey-mortality link $\\delta$     | 0 (off)      | 0 (off)      | 0.2          |
-| Prey-growth link  $\\lambda$       | 1.1          | 1 (off)      | 1 (off)      |
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
-
----
-<!--
-\begin{table}[htpb]
-\begin{centering}
-\begin{tabular}{l r r r r r r r r}\hline
-	&	Marginal &Catch &	Trip length&\multicolumn{3}{c}{Cost per day}	&	Observed	&	VTR	\\
-Year	&	Cost (\$/mt)& (mt/day) &days	&	Low	&	High	&	Raw	&	 trips	&	 trips	\\\hline
-Seine	&	14.27 & 87.5& 1.0&	1,249	&	1,664	&	1,396	&	207	&	1,413	\\
-Trawl	&	62.43 & 61.4	&2.9&	3,833	&	5,009	&	4,315	&	573	&	2,005	\\\hline
-\end{tabular}
-\caption{Marginal cost of 1mt of herring, daily catch, trip length, and cost per day for the purse seine and trawl fleets averaged over 2011-2015. \label{costs_combined}}
-\end{centering}
-\end{table}
--->
-```{r costs, tab.cap="Marginal cost of 1mt of herring, daily catch, trip length, and adjusted cost per day for the purse seine and trawl fleets averaged over 2011-2015.\\label{costs_combined}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-tabl <- "
-| Year | Marginal Cost (\\$/mt) | Catch (mt/day)   | Trip length (days)  | Adjusted Cost (\\$/day) |  Observed trips  | VTR  trips  |
-|:-----|---------------:|---------:|------------:|-------------:|-------:|------:|
-|Seine	|	14.27 | 87.5| 1.0|	1,249	|	207	|	1,413	|
-|Trawl	|	62.43 | 61.4	|2.9|	3,833	|	573	|	2,005	|
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
-
----
-
-\begin{table}[htbp]
-\begin{center}
-\caption{Regression results from the ``ARDL'' specification (Equation \ref{ARDL}), PSS Bounds test and associated critical values.  1995-2015 data only. The explanatory variables enter in levels in the first column and natural logarithms in the second column.  \label{ardl_regression}}
-\begin{tabular}{lcc} \hline
-Model		&	(1) &	(2) 	\\
-	&	price &	\textit{ln} price	\\\hline
-Price$_{t-1}$		&	0.646***	&	0.666***	\\
-		&	-0.0937	&	-0.0935	\\
-Quantity		&	-1.194***	&	-0.395***	\\
-		&	-0.277	&	-0.0956	\\
-Constant		&	217.8***	&	6.423***	\\
-		&	-48.16	&	-1.484	\\
-Observations		&	21	&	21	\\
-R-squared		&	0.906	&	0.906	\\
-BGp		&	0.34	&	0.547	\\
-BGF		&	1	&	0.4	\\
-PSS	F-statistic	&	10.2	&	9.34	\\\hline
-1\% Critical values &\multicolumn{2}{c}{[6.84, 7.84]} \\\hline
-\multicolumn{3}{c}{ Standard errors in parentheses} \\
-\multicolumn{3}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\\hline
-\end{tabular}
-\end{center}
-\end{table}
-<!--
-```{r regresults, tab.cap="Regression results from the ``ARDL'' specification (Equation \ref{ARDL}), PSS Bounds test and associated critical values.  1995-2015 data only. The explanatory variables enter in levels in the first column and natural logarithms in the second column.\\label{ardl_regression}", echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-tabl <- "
-| Model |   (1)   price |    (2)    *ln* price | 
-|:---------------|:------:|:-------:|
-|Price$_{t-1}$		|	0.646***	|	0.666***	|
-|		|	-0.0937	|	-0.0935	|
-|Quantity		|	-1.194***	|	-0.395***	|
-|		|	-0.277	|	-0.0956	|
-|Constant		|	217.8***	|	6.423***	|
-|		|	-48.16	|	-1.484	|
-|Observations		|	21	|	21	|
-|R-squared		|	0.906	|	0.906	|
-|BGp		|	0.34	|	0.547	|
-|BGF		|	1	|	0.4	|
-|PSS	F-statistic	|	10.2	|	9.34	|
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
--->
----
-
-
-## Extra Figures
-
-```{r yieldIAV, fig.cap="Tradeoff between herring relative yield and variation in yield for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldIAV}", message = FALSE, warning = FALSE}
-
+```{r yieldIAV,  message = FALSE, warning = FALSE}
+#fig.cap="Tradeoff between herring relative yield and variation in yield for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks. Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{yieldIAV}",
 # pick one OM
 #HiSlowCorrectOM <- allres %>%
 #  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
@@ -1803,36 +1771,3 @@ ggplot(HSCOM_BBsonly, aes(x=Yvar, y=YieldrelMSY, colour=CR)) +
 
 ```
 
-
----
-
-```{r revenuestability, fig.cap="Tradeoff between herring fleet Net Revenue and Equil1 for HighSlowCorrect operating model and biomass based control rules with 1 year (BB), 3 year (BB3yr), or 5 year (BB5yr) quota blocks compared with 3 year quota block with a 15\\% restriction on annual quota changes (BB3yrPerc). Each point represents the median of 100 medians taken over the final 50 years of each simulation.\\label{revenuestability}", message = FALSE, warning = FALSE}
-
-# pick one OM
-#HiSlowCorrectOM <- allres %>%
-#  filter(OM=="LoM_HiSteep_NoAssBias_RecWt")
-
-# pick BB CRs only
-#HSCOM_BBsonly <- HiSlowCorrectOM %>%
-#  filter(CR %in% c("BB", "BB3yr", "BB5yr"))
-
-# pick BBextras CRs only
-HSCOM_BBsonly <- HiSlowCorrectOM %>%
-  filter(CR %in% c("BB", "BB3yr", "BB5yr", "BB3yrPerc"))
-
-HSCOM_BBsonly$CR <- factor(HSCOM_BBsonly$CR, levels = c("BB", "BB3yr", "BB5yr", "BB3yrPerc"))
-
-ggplot(HSCOM_BBsonly, aes(x=p50_NR, y=stouffer, colour=CR)) + 
-  geom_point(alpha=0.2) + 
-  scale_y_continuous(limits = c(0,1)) + 
-  #geom_hline(yintercept=0.9) + 
-  labs(y="equil1", x="net revenue", colour="Control rule type") +
-  guides(colour = guide_legend(override.aes = list(alpha = 1))) +
-  theme_Publication() + scale_colour_Publication()
-
-#Reset this
-HSCOM_BBsonly <- HiSlowCorrectOM %>%
-  filter(CR %in% c("BB", "BB3yr", "BB5yr"))
-
-
-```
