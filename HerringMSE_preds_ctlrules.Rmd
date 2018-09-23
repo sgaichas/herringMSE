@@ -182,7 +182,9 @@ Constucting an ecosystem model with an interdisciplinary team of scientists to s
 -->
 
 ## Herring Methods
+- lots of modeling
 
+Deroba, J. J., Gaichas, S. K., Lee, M.-Y., Feeney, R. G., Boelke, D. V., and Irwin, B. J. 2018. The dream and the reality: meeting decision-making time frames while incorporating ecosystem and economic models into management strategy evaluation. Canadian Journal of Fisheries and Aquatic Sciences. http://www.nrcresearchpress.com/doi/10.1139/cjfas-2018-0128
 <!--A MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The herring component was modified from @Deroba2014EvaluatingRho, and symbols are largely consistent (Table \ref{symtab}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$, but simulations were of sufficient length to make the starting values moot.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate.
 
 Recruitment followed Beverton-Holt dynamics [@francis1992use]:
@@ -206,7 +208,6 @@ The variance of assessment errors ($\sigma_\phi^2$) equaled 0.05 and autocorrela
 -->
 
 ### Operating Models
-<!--
 ```{r OMs,  echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 #tab.cap="Operating model uncertainties addressed\\label{OMs}",
 tabl <- "
@@ -226,8 +227,9 @@ df<-df[-c(1,2) ,c("Operating Model Name","Herring Productivity","Herring Growth"
 knitr::kable(
   df, booktabs = TRUE 
   #caption = 'Operating model uncertainties addressed\\label{OMs}.'
-) #%>%
- # kable_styling(latex_options = "scale_down")
+) %>%
+ kable_styling(latex_options = "scale_down") %>%
+  kable_as_image()
 
 #cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
@@ -346,11 +348,11 @@ where 0 < $\delta$ <1 links herring population size to predator survival.
 
 After specifying the population model parameters and herring-predator relationship, we applied the [@hilborn_quantitative_2003] equilibruim calculation for the delay difference model with $F$=0 to get the unfished spawners per recruit ratio. This ratio was then used in a second equilibruim calculation with the current predator exploitation rate to estimate Beverton-Holt stock recruitment parameters, equilibrium recruitment and equilibrium individual weight under exploitation. Then, each model was run forward for 150 years with output from the herring operating model specifying the herring population characteristics. 
 -->
-## Predator population and herring-predatpr relationship models
+## Herring-predator relationship models
 
 - Lots of data analysis and modeling
 
-```{r, message = FALSE, warning = FALSE, fig.align='left', fig.show='hold', out.width='0.49\\linewidth'}
+```{r, message = FALSE, warning = FALSE, fig.show='hold', out.width='0.45\\linewidth'}
 # fig.cap="Modeled herring average weight (population >180mm in length) to tuna growth relationship.",See text (Herring-tuna relationship model section) for derivation. \\label{herringtuna}
 # from MSE_TunaLink.R
 FWalpha       <-  0.020605  #ford-walford plot intercept parameter 
@@ -365,6 +367,60 @@ AnnualAlpha<-(0.9*FWalpha) + ((1.1*FWalpha) - (0.9*FWalpha))/(1+exp((1-preypredg
 
 qplot(preyAvgWt, AnnualAlpha, geom="line", xlab="Herring average weight (kg)", ylab="Tuna AnnAlpha parameter") +
   theme_Publication() + scale_colour_Publication()
+
+#ternfig
+herring <- herring[,1:6]
+
+ternpopproddiet_herring <- left_join(ternpopproddiet, herring)
+
+terntotalpop <- ternpopproddiet %>%
+  group_by(yr, species) %>%
+  filter(yr<2016) %>%
+  select(breedpairs, nfledged) %>%
+  filter(!is.na(nfledged)) %>%
+  summarise(totpairs = sum(breedpairs, na.rm=T), totfledge = sum(nfledged, na.rm=T))
+
+# Monomoy Island is a third of the population but eats mainly sandlance and is south of GOM proper--leave out?
+
+terntotpop_noMon <- ternpopproddiet %>%
+  group_by(yr, species) %>%
+  filter(colony != "Monomoy") %>%
+  filter(yr<2016) %>%
+  select(breedpairs, nfledged) %>%
+  filter(!is.na(nfledged)) %>%
+  summarise(totpairs = sum(breedpairs, na.rm=T), totfledge = sum(nfledged, na.rm=T))
+
+ternpop_herringpop <- left_join(terntotalpop, herring)
+ternpopnomon_herringpop <- left_join(terntotpop_noMon, herring)
+
+totprodnomonherr <- ggplot(ternpopnomon_herringpop, aes(x=HerringTotalB, y=totfledge/totpairs, colour=species)) +
+  geom_point() +
+  geom_hline(yintercept = 1) #+
+  #ggtitle("Tern production (no Monomoy) and assessed herring tot B")
+
+#totprodnomonherr + stat_smooth(method = "lm", formula = y ~ x, size = 1) 
+
+HerrAlpha <- 1.09
+HerringThresh <- 400000
+
+recmult<-(HerrAlpha*(ternpopnomon_herringpop$HerringTotalB/HerringThresh))/((HerrAlpha-1)+(ternpopnomon_herringpop$HerringTotalB/HerringThresh))
+
+#totprodnomonherr + geom_line(aes(x=HerringTotalB, y=recmult), lwd=1.5)
+
+lmtotnomon <- lm(totfledge/totpairs ~ HerringTotalB, species=="Common", data=ternpopnomon_herringpop)
+
+#totprodnomonherr + geom_line(aes(x=HerringTotalB, y=recmult), lwd=1.5) +
+  #geom_line(aes(x=HerringTotalB, y=9.439e-01 + 1.210e-07*HerringTotalB), color="black", lty=3)
+
+totprodnomonherr + 
+  scale_y_continuous(limits = c(0,1.8)) +
+  scale_x_continuous(limits = c(0,2500000)) +
+  geom_line(aes(x=HerringTotalB, y=recmult), lwd=1.5) +
+  geom_line(aes(x=HerringTotalB, y=9.439e-01 + 1.210e-07*HerringTotalB), color="black", lty=3, show.legend = FALSE) +
+  geom_line(aes(x=seq(0,2500000,length.out=51), y=(HerrAlpha*(seq(0,2500000,length.out=51)/HerringThresh))/((HerrAlpha-1)+(seq(0,2500000,length.out=51)/HerringThresh)), show.legend = FALSE)) +
+  labs(x="Herring total biomass (metric tons)", y="Tern productivity (fledglings per nesting pair)", color='Tern species') +
+  scale_colour_manual(values=c("#fdb462","#386cb0")) +
+  theme_Publication() #+ scale_colour_Publication()
 
 ```
 
@@ -479,8 +535,8 @@ ternproddiet + facet_wrap(~colony) + #theme(text=element_text(size=16))
 
 ```
 
--->
-```{r, eval=sg_figs,  message=FALSE, warning=FALSE,fig.align='right', fig.show='hold', out.width='0.49\\linewidth'}
+
+```{r, eval=sg_figs,  message=FALSE, warning=FALSE,fig.align='right', fig.show='hold', out.width='0.4\\linewidth'}
 #fig.cap="Modeled influence of herring total biomass on tern reproductive success. The black horizontal line represents the target tern productivity of 1.0 fledgling per nest. \\label{herrternmod}",Total annual productivity (fledglings per nest) for both tern species relative to assessed herring total biomass is shown, but the modeled relationship (curve) is based only on common terns. A linear relationship between herring total biomass and common tern productivity crosses tern productivity=1 (black dotted line) at ~400,000 tons herring total biomass. This linear relationship does not have a statistically significant slope; the curve was fit to represent a level but positive contribution of herring total biomass to common tern productivity above the threshold. 
 #ternpopproddiet<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOMTernPopsProdDiet_Corrected.csv")
 
@@ -1081,7 +1137,7 @@ pupwtdiet+
 
 -->
 
-```{r, eval=sg_figs, message = FALSE, warning = FALSE, fig.show='hold', out.width='0.49\\linewidth'}
+```{r, eval=sg_figs, message = FALSE, warning = FALSE, fig.show='hold', out.width='0.4\\linewidth'}
 #fig.cap="Modeled herring relative population size-dogfish natural mortality relationship \\label{herringdogfish}",
 # from MSE_GroundfishLink.R
 PredannualA   <-  0.092  #0.6 #predator annual natural mortality rate (0-1); serves as max if time varying
@@ -1533,7 +1589,7 @@ All of the control rule alternatives offered options that had high frequency of 
 
 The control rule alternatives resulted in good stability characteristics across a range of net revenues for the fishery (Figure \ref{revenuestability}). We have included results from the biomass based control rule with a 15% restriction on interannual variation in the quota to illustrate the relatively poor performance of this control rule type.
 -->
-## Can we get 90% of everything?
+## What control rules give us 90% of everything?
 
 - Tern productivity at 1.0 or above more than 90% of the time
 - Herring biomass more than 90% of SSBmsy
@@ -1637,7 +1693,7 @@ Nrulesgoodherring <- allres %>%
 
 Nrulesgoodternherrfish <- allres %>%
   filter(CR %in% c("BB", "BB3yr")) %>%
-  filter(MedPropYrs_goodProd_Targplustern>0.9 & MedSSBrelSSBmsy>0.9 & YieldrelMSY>0.9 & PropClosure < 0.1) %>%
+  filter(MedPropYrs_goodProd_Targplustern>0.9 & MedSSBrelSSBmsy>0.9 & YieldrelMSY>0.9 & PropClosure < 0.01) %>%
   group_by(OM,CR)%>%
   summarize(ternfishherr90 = n(), 
             minF = min(FracFtarg), 
@@ -1650,7 +1706,7 @@ Nrulesgoodternherrfish <- allres %>%
 
 CRsgoodternherrfish <- allres %>%
   filter(CR %in% c("BB", "BB3yr")) %>%
-  filter(MedPropYrs_goodProd_Targplustern > 0.9 & MedSSBrelSSBmsy > 0.9 & YieldrelMSY > 0.9 & PropClosure < 0.1) %>%
+  filter(MedPropYrs_goodProd_Targplustern > 0.9 & MedSSBrelSSBmsy > 0.9 & YieldrelMSY > 0.9 & PropClosure < 0.01) %>%
   group_by(OM,CR) %>%
   select(OM, CR, FracBmsyThreshLo, FracBmsyThreshHi,FracFtarg) %>%
   mutate(id = seq(1:n()),
