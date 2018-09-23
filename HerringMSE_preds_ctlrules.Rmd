@@ -75,27 +75,27 @@ if(sg_figs){
 
 allres <- readRDS(file.path(data.dir,"allres.rds"))
 
-# #to get table captions and numbering
-# tn = local({
-#   i = 0
-#   function(x) {
-#     i <<- i + 1
-#     #paste('\n\n:Table ', i, ': ', x, sep = '')
-#     paste('\n\n:', x, sep = '')
-#     # The : before Table tells pandoc to wrap your caption in <caption></caption>
-#   }
-# })
-# knit_hooks$set(tab.cap = function(before, options, envir) {
-#   if(!before)
-#     tn(options$tab.cap)
-# })
-# default_output_hook = knit_hooks$get("output")
-# knit_hooks$set(output = function(x, options) {
-#   if (is.null(options$tab.cap) == F)  
-#     x
-#   else
-#     default_output_hook(x,options)
-# })
+#to get table captions and numbering
+tn = local({
+  i = 0
+  function(x) {
+    i <<- i + 1
+    #paste('\n\n:Table ', i, ': ', x, sep = '')
+    paste('\n\n:', x, sep = '')
+    # The : before Table tells pandoc to wrap your caption in <caption></caption>
+  }
+})
+knit_hooks$set(tab.cap = function(before, options, envir) {
+  if(!before)
+    tn(options$tab.cap)
+})
+default_output_hook = knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  if (is.null(options$tab.cap) == F)
+    x
+  else
+    default_output_hook(x,options)
+})
 
 #a better plotting theme than ggplot default? from https://rpubs.com/Koundy/71792
 theme_Publication <- function(base_size=14, base_family="") {
@@ -183,7 +183,6 @@ Constucting an ecosystem model with an interdisciplinary team of scientists to s
 
 ## Herring Methods
 
-- Lots of modeling
 <!--A MSE was developed specific to Gulf of Maine - Georges Bank Atlantic herring.  The herring component was modified from @Deroba2014EvaluatingRho, and symbols are largely consistent (Table \ref{symtab}). The MSE was based on an age-structured simulation that considered fish from age-1 through age-8+ (age-8 and older), which is consistent with the age ranges used in the 2012 and 2015 Atlantic herring stock assessments [@NEFSC2012Assessment; @Deroba2015atlantic].  The abundances at age in year one of all simulations equaled the equilibrium abundances produced by the fishing mortality rate that would reduce the population to 40% of $SSB_{F=0}$, but simulations were of sufficient length to make the starting values moot.  Abundance in each subsequent age and year was calculated assuming that fish died exponentially according to an age and year specific total instantaneous mortality rate.
 
 Recruitment followed Beverton-Holt dynamics [@francis1992use]:
@@ -207,28 +206,28 @@ The variance of assessment errors ($\sigma_\phi^2$) equaled 0.05 and autocorrela
 -->
 
 ### Operating Models
-
+<!--
 ```{r OMs,  echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 #tab.cap="Operating model uncertainties addressed\\label{OMs}",
 tabl <- "
 |Operating Model Name|Herring Productivity|Herring Growth|Assessment Bias|
-|:------------------|:---------------------|:-----------------|:-----------------|
-| LowFastBiased     | Low: high M, low h (0.44)  | 1976-1985: fast | 60% overestimate |
-| LowSlowBiased     | Low: high M, low h (0.44)  | 2005-2014: slow | 60% overestimate |
-| LowFastCorrect    | Low: high M, low h (0.44)  | 1976-1985: fast | None             |
-| LowSlowCorrect    | Low: high M, low h (0.44)  | 2005-2014: slow | None             |
-| HighFastBiased    | High: low M, high h (0.79) | 1976-1985: fast | 60% overestimate |
-| HighSlowBiased    | High: low M, high h (0.79) | 2005-2014: slow | 60% overestimate |
-| HighFastCorrect   | High: low M, high h (0.79) | 1976-1985: fast | None             |
-| HighSlowCorrect   | High: low M, high h (0.79) | 2005-2014: slow | None             |
+|:---------------------|:---------------------|:-----------------|:-----------------|
+| LowFastBiased        | Low: high M, low h (0.44)  | 1976-1985: fast | 60% overestimate |
+| LowSlowBiased        | Low: high M, low h (0.44)  | 2005-2014: slow | 60% overestimate |
+| LowFastCorrect       | Low: high M, low h (0.44)  | 1976-1985: fast | None             |
+| LowSlowCorrect       | Low: high M, low h (0.44)  | 2005-2014: slow | None             |
+| HighFastBiased       | High: low M, high h (0.79) | 1976-1985: fast | 60% overestimate |
+| HighSlowBiased       | High: low M, high h (0.79) | 2005-2014: slow | 60% overestimate |
+| HighFastCorrect      | High: low M, high h (0.79) | 1976-1985: fast | None             |
+| HighSlowCorrect      | High: low M, high h (0.79) | 2005-2014: slow | None             |
 "
 df<-read_delim(tabl, delim="|")
 df<-df[-c(1,2) ,c("Operating Model Name","Herring Productivity","Herring Growth","Assessment Bias")]
 knitr::kable(
   df, booktabs = TRUE 
   #caption = 'Operating model uncertainties addressed\\label{OMs}.'
-) %>%
-  kable_styling(latex_options = "scale_down")
+) #%>%
+ # kable_styling(latex_options = "scale_down")
 
 #cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
@@ -1539,7 +1538,8 @@ The control rule alternatives resulted in good stability characteristics across 
 - Tern productivity at 1.0 or above more than 90% of the time
 - Herring biomass more than 90% of SSBmsy
 - Fishery yield more than 90% of MSY
-\blankspace
+&nbsp;  
+&nbsp;  
 - Fishery closures (F=0) less than 1% of the time (second plot).
 
 ---
