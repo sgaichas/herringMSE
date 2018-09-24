@@ -1,8 +1,10 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{graphicx}
 
-\defbeamertemplate*{title page}{customized}[1][]
+\defbeamertemplate*{title page}{noaatitle}[1][]
 {
+\setbeamertemplate{headline}{\vskip\headheight}
+\setbeamertemplate{footline}{}
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{background_new.jpg}}
 \begin{textblock*}{90mm}(30mm,35mm)\Large
   \inserttitle \\
@@ -15,4 +17,5 @@
   \vspace{2mm}
   \insertinstitute\\
 \end{textblock*}
+
 }
