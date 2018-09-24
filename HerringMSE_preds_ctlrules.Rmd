@@ -10,6 +10,8 @@ output:
     slide_level: 2
     keep_tex: true
     latex_engine: xelatex
+    includes:
+      in_header: noaacover.tex
   ioslides_presentation:
     smaller: true
 bibliography: HerringMSE.bib
