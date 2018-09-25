@@ -152,7 +152,7 @@ knitr::include_graphics(file.path(image.dir, 'allcomponents.png'))
 The federal fisheries management process in New England usually starts when the New England Fishery Managment Council (NEFMC), the political body responsible for federally managed species in the northeast US, perceives a problem causing a management goal or objective to be unmet. Managers will propose a range of potential solutions and a technical group, typically composed of scientists and policy analysts from state agencies and the National Marine Fisheries Service (NMFS), will analyze these possible solutions. Council meetings are public, and stakholder input is solicited through open comment periods and diverse advisory panels.  Once the NEFMC votes on a solution, NMFS will, after verifying that it is consistent with applicable laws, translate those solutions into regulations and enforce those regulations. Management actions, particularly contentious ones, can take several years to develop and implement.
 -->
 
-## Introduction: MSE
+## Introduction: Management Strategy Evaluation
 ```{r introMSE}
 knitr::include_graphics(file.path(image.dir, 'MSECSIRO.png'))
 ```
