@@ -3,21 +3,13 @@ title: 'Are any herring harvest control rules good for both fisheries and predat
 author: Sarah K. Gaichas, Jonathan J. Deroba, Min-Yang Lee
 institute: NOAA NMFS Northeast Fisheries Science Center, Woods Hole, MA, USA
 date: September 26, 2018
-csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 output:
   beamer_presentation:
-    fig_caption: false
     slide_level: 2
     keep_tex: true
-    latex_engine: xelatex
-    includes:
-      in_header: noaacover.tex
-  ioslides_presentation:
-    smaller: true
-bibliography: HerringMSE.bib
 ---
 
-# Yes (In the Northwest Atlantic)
+# Yes (In New England)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, fig.align='center', out.width = "\\linewidth", warning = FALSE)
@@ -226,11 +218,8 @@ tabl <- "
 "
 df<-read_delim(tabl, delim="|")
 df<-df[-c(1,2) ,c("Operating Model Name","Herring Productivity","Herring Growth","Assessment Bias")]
-knitr::kable(
-  df, booktabs = TRUE 
-  #caption = 'Operating model uncertainties addressed\\label{OMs}.'
-) %>%
- kable_styling(latex_options = "scale_down") %>%
+knitr::kable(df, booktabs = TRUE) %>%
+  kable_styling(latex_options = "scale_down") %>%
   kable_as_image()
 
 #cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
@@ -1803,8 +1792,8 @@ Note that increases in the biomass of a particular predator could be a net ``bad
 
 In order to meet management timelines, the herring, predator, and economic models were developed in parallel, and not in sequence.  This required an educated guess about which predators and predator outcomes were sensitive to the range of HCRs.  For example, prior to completing the predator models, we did not anticipate that tuna weight would be sensitive to various operating models (i.e., fast and slow herring growth) but not the harvest control rules.  Developing the herring, predator, and economic models sequentially could have allowed for a model of the tuna fishery that accounts for the size-dependent prices [@Carroll2001PricingManagement].  In contrast, devoting scarce research time to examine the costs of harvesting tuna would not have resulted in performance measures that would help managers select among control rules because changes in herring abundance had relatively little effect on tuna.
 -->
-## Acknowledgements
-We thank our New England Fishery Management Council collaborators Rachel G. Feeney and Deirdre Boelke, our collaborator and lead facilitator Brian J. Irwin, and the more than 80 individuals from the fishing industry, federal and state agencies, academia, environmental organizations, and other entities who gave their time to contribute to the workshops. Madeleine Hall-Arber, Jessica Joyce, Laura Singer, and Tiffany Vidal provided excellent workshop facilitation. Beth Goettel, Linda Welch, and Aly McKnight contributed seabird data and expertise. This manuscript benefitted from the peer review panel: Lisa Kerr (Chair), Gavin Fay, Douglas Lipton, and John Wiedenmann. Statements herein should neither be considered formal positions of the NEFMC, NMFS, nor a consensus of the participants.  Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
+## Acknowledgements 
+We thank our New England Fishery Management Council collaborators Rachel G. Feeney and Deirdre Boelke, our collaborator and lead facilitator Brian J. Irwin, and the more than 80 individuals from the fishing industry, federal and state agencies, academia, environmental organizations, and other entities who gave their time to contribute to the workshops. Madeleine Hall-Arber, Jessica Joyce, Laura Singer, and Tiffany Vidal provided excellent workshop facilitation. Beth Goettel, Linda Welch, and Aly McKnight contributed seabird data and expertise. This work benefitted from the peer review panel: Lisa Kerr (Chair), Gavin Fay, Douglas Lipton, and John Wiedenmann. Statements herein should neither be considered formal positions of the NEFMC, NMFS, nor a consensus of the participants.  Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.
 
 
 ## P.S. The clearest tradeoff
