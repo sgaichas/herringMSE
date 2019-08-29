@@ -1,0 +1,32 @@
+GOMModGroup,GOMGuild,Level,Order,SpType,Color,Areal,Dummy
+Phytoplankton- Primary Producers,All,I,1,ND,0,All,1
+Bacteria,All,I,2,ND,0,All,1
+Microzooplankton,All,I,3,ND,0,All,1
+Small copepods,All,I,4,ND,0,All,1
+Large Copepods,All,I,5,ND,0,All,1
+Gelatinous Zooplankton,All,I,6,ND,0,All,1
+Micronekton,All,I,7,ND,0,All,1
+Macrobenthos- polychaetes,All,I,8,ND,0,All,1
+Macrobenthos- crustaceans,All,I,9,ND,0,All,1
+Macrobenthos- molluscs,All,I,10,ND,0,All,1
+Macrobenthos- other,All,I,11,ND,0,All,1
+Megabenthos- filterers,All,I,12,ND,0,All,1
+Megabenthos- other,All,I,13,ND,0,All,1
+Shrimp et al.,All,I,14,ND,0,All,1
+Larval-juv fish- all,All,I,15,ND,0,All,1
+Small Pelagics- commercial,All,I,16,ND,0,All,1
+Small Pelagics- other,All,I,17,ND,0,All,1
+Small Pelagics- squid,All,I,18,ND,0,All,1
+Small Pelagics- anadromous,All,I,19,ND,0,All,1
+Medium Pelagics- (piscivores & other),All,I,20,ND,0,All,1
+Demersals- benthivores,All,I,21,ND,0,All,1
+Demersals- omnivores,All,I,22,ND,0,All,1
+Demersals- piscivores,All,I,23,ND,0,All,1
+Sharks- pelagics,All,I,24,ND,0,All,1
+HMS,All,I,25,ND,0,All,1
+Pinnipeds,All,I,26,ND,0,All,1
+Baleen Whales,All,I,27,ND,0,All,1
+Odontocetes,All,I,28,ND,0,All,1
+Sea Birds,All,I,29,ND,0,All,1
+Discard,All,I,30,ND,0,All,1
+Detritus-POC,All,I,31,ND,0,All,1

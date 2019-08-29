@@ -1,0 +1,30 @@
+Num,Species,p0,p1,p2,p3,p4,p5,p6,p7,SSQ0,SSQ1,SSQ2,SSQ3,SSQ4
+1,Phytoplankton- Primary Producers,0,0,3,3,0,0,0,0,0,0,0,0,0
+2,Bacteria,0,0,3,3,0,0,0,0,0,0,0,0,0
+3,Microzooplankton,0,0,3,3,0,0,0,0,0,0,0,0,0
+4,Small copepods,0,0,3,3,0,0,0,0,0,0,0,0,0
+5,Large Copepods,0,0,3,3,0,0,0,0,0,0,0,0,0
+6,Gelatinous Zooplankton,0,0,3,3,0,0,0,0,0,0,0,0,0
+7,Micronekton,0,0,3,3,0,0,0,0,0,0,0,0,0
+8,Macrobenthos- polychaetes,0,0,3,3,0,0,0,0,0,0,0,0,0
+9,Macrobenthos- crustaceans,0,0,3,3,0,0,0,0,0,0,0,0,0
+10,Macrobenthos- molluscs,0,0,3,3,0,0,0,0,0,0,0,0,0
+11,Macrobenthos- other,0,0,3,3,0,0,0,0,0,0,0,0,0
+12,Megabenthos- filterers,0,0,3,3,0,0,0,0,0,0,0,0,0
+13,Megabenthos- other,0,0,3,3,0,0,0,0,0,0,0,0,0
+14,Shrimp et al.,0,0,3,3,0,0,0,0,0,0,0,0,0
+15,Larval-juv fish- all,0,0,3,3,0,0,0,0,0,0,0,0,0
+16,Small Pelagics- commercial,0,0,3,3,0,0,0,0,0,0,0,0,0
+17,Small Pelagics- other,0,0,3,3,0,0,0,0,0,0,0,0,0
+18,Small Pelagics- squid,0,0,3,3,0,0,0,0,0,0,0,0,0
+19,Small Pelagics- anadromous,0,0,3,3,0,0,0,0,0,0,0,0,0
+20,Medium Pelagics- (piscivores & other),0,0,3,3,0,0,0,0,0,0,0,0,0
+21,Demersals- benthivores,0,0,3,3,0,0,0,0,0,0,0,0,0
+22,Demersals- omnivores,0,0,3,3,0,0,0,0,0,0,0,0,0
+23,Demersals- piscivores,0,0,3,3,0,0,0,0,0,0,0,0,0
+24,Sharks- pelagics,0,0,3,3,0,0,0,0,0,0,0,0,0
+25,HMS,0,0,3,3,0,0,0,0,0,0,0,0,0
+26,Pinnipeds,0,0,3,3,0,0,0,0,0,0,0,0,0
+27,Baleen Whales,0,0,3,3,0,0,0,0,0,0,0,0,0
+28,Odontocetes,0,0,3,3,0,0,0,0,0,0,0,0,0
+29,Sea Birds,0,0,3,3,0,0,0,0,0,0,0,0,0
