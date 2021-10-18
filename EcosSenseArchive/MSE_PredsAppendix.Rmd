@@ -1,0 +1,400 @@
+---
+title: 'Herring MSE Appendix 1: Food web modeling'
+author: "Sarah Gaichas"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  html_document: null
+  pdf_document:
+    includes:
+      in_header: preamble-latex.tex
+    keep_tex: yes
+    pandoc_args: --latex-engine=xelatex
+  word_document: null
+bibliography: /Users/sgaichas/Documents/0_Data/MSE/HerringMSE/HerringMSE.bib
+csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.align='center')
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(broom)
+```
+
+# Introduction
+This document explains the food web modeling done in support of the Herring Mangement Strategy Evaluation (MSE). Potential effects of changes in herring production and/or biomass on marine mammals were evaluated using an updated version of an existing food web model for the Gulf of Maine and incorporating food web model parameter uncertainty. This analysis is intended to illustrate potential changes in multiple predator and prey groups as a result of high and low levels of herring biomass within the full Gulf of Maine ecosystem. This modeling is supplementary to the predator modeling reported in "Herring MSE: Predator models." 
+
+# Methods
+Food web models can quantify changes ecosystems by tracking the biomass gains and losses for each functional group in the system as they interact with predators (including fisheries) and prey. Generally, static system snapshots are developed by integrating information on the biomass, production and consumption rates, diet compositions, and removals by fishing or other human activities for each group in the model during a certain time period [@polovina_model_1984; @walters_structuring_1997]. This static system snapshot can then be used to initialize a dynamic model of the system tracking the changes in biomass of each functional group over time resulting from changes to the baseline conditions [@christensen_ecopath_2004; @walters_fisheries_2004]. Groups are linked by functional relationships predicting how predator consumption of prey is altered by changing biomass in both groups [@abrams_nature_2000; @ahrens_foraging_2012]. A summary of model equations and methods used here are presented in [@gaichas_wasp_2015].
+
+<!--
+```{r,fig.cap="The Northeast US food web \\label{ugly}", message = FALSE, warning = FALSE}
+knitr::include_graphics("/Users/sgaichas/Documents/0_Data/MSE/LinkNEUSfoodweb.png")
+```
+-->
+
+## Food web model updates
+A food web model for the Gulf of Maine [@link_northeast_2008; @link_response_2009; @link_documentation_2006] is available to evaluate potential effects of different levels of herring biomass. The model baseline reflects early 2000's conditions, which include a generally comparable level of herring biomass to the present (we consider the model group "Small pelagics-commercial" to be primarily herring in the Gulf of Maine). For a full description of the species included in the other aggregate groups, pelase see @link_documentation_2006. 
+
+For this analysis, several modifications to the original model were necessary, including updating diet compositions for marine mammal groups to reflect improved knowledge, adjusting biomass and/or production of two data poor groups to accommodate updated mammal diets, correcting detritus accounting for dynamic modeling, and adjusting one detritus feeding group's diet composition as a result of this correction. We describe each modification in detail below. 
+
+Diet information for a wide range of marine mammals on the Northeast US shelf suggests that minke whales, humpback whales, harbor seals, and harbor porpoises have the highest proportions of herring in their diets [@smith_consumption_2015], and therefore may show some reaction to changes in the herring ABC control rule. The Gulf of Maine EMAX model was updated to include this recent information. Species-specific diet compositions from [@smith_consumption_2015] were aggregated into the three Gulf of Maine EMAX model groups (Baleen whales, Odontocetes, and Pinnipeds) as weighted by the estimated biomass of each species during the early 2000s in the Northeast US shelf ecosystem (L. Smith, pers comm). Prey categories were translated from [@smith_consumption_2015] to the Gulf of Maine model groups [@link_documentation_2006] according to assumptions listed in Table 1. We note that the "Shrimp" category in [@smith_consumption_2015] represents both Euphausiids (krill) and decapod shrimp, so this prey category was considered to be all Euphausiids (Micronekton in the food web model) for baleen whales, but an equal mix of both categories for the other marine mammals. The resulting updated diet compositions are reported in Table 2. 
+
+Table 1. Matching the relevant subset of Gulf of Maine food web model groups from [@link_documentation_2006] with marine mammal prey categories from [@smith_consumption_2015] for each mammal group. 
+```{r preycat, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Gulf of Maine Model Group | Pinniped and Odontocete prey   | Baleen Whale prey |
+|:--------------------------|:----------------------------------|:----------------------------------|
+| Large Copepods            |                     | Zooplankton |
+| Micronekton               | 0.5 Shrimp          | Shrimp      |
+| Macrobenthos-crustaceans  | 0.5 Benthic Inverts |             |
+| Macrobenthos-molluscs     | 0.5 Benthic Inverts |             |
+| Shrimp et al.             | 0.5 Shrimp          |             |
+| Small Pelagics-commercial | Clupeids + Scombrids | Clupeids + Scombrids |
+| Small Pelagics-other      | Mesopelagics + Sandlance | Mesopelagics + Sandlance |
+| Small Pelagics-squid      | Squid               | Squid       |
+| Demersals-benthivores     | Flatfish + 0.5 Sm. Gadids + 0.25 Misc. Fish | Flatfish + 0.5 Sm. Gadids + 0.25 Misc. Fish |
+| Demersals-omnivores       | 0.25 Misc. Fish | 0.25 Misc. Fish |
+| Demersals-piscivores      | Lg. Gadids + 0.5 Sm. Gadids + 0.5 Misc. Fish | Lg. Gadids + 0.5 Sm. Gadids + 0.5 Misc. Fish |
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
+Table 2. Updated marine mammal diet compositions (proportions) used as inputs to the Gulf of Maine food web model.
+```{r diets, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Gulf of Maine Model Group | Pinnipeds     | Baleen Whales | Odontocetes   |
+|:-------------------------------|:--------------|:--------------|:--------------|
+| Phytoplankton             | 0             |	0             |	0             |
+| Bacteria                  | 0             |	0             |	0             |
+| Microzooplankton          | 0             |	0             |	0             |
+| Small copepods            | 0             |	0             |	0             |
+| Large Copepods            | 0             |	0.153928001   |	0             |
+| Gelatinous Zooplankton    | 0             |	0             |	0             |
+| Micronekton               | 0.00313569    |	0.502485518   |	0.000274618   |
+| Macrobenthos-polychaetes  | 0             |	0             |	0             |
+| Macrobenthos-crustaceans  | 0.005412052   |	0	            | 0.002591398   |
+| Macrobenthos-molluscs     | 0.005412052   |	0	            | 0.002591398   |
+| Macrobenthos-other        | 0             |	0             |	0             |
+| Megabenthos-filterers     | 0             |	0             |	0             |
+| Megabenthos-other         | 0             |	0             |	0             |
+| Shrimp et al.             | 0.00313569    |	0             |	0.000274618   |
+| Larval-juv fish-all       | 0             |	0             |	0             |
+| Small Pelagics-commercial | 0.135976071	  |	0.155097227  	|	0.228811951   |
+| Small Pelagics-other      | 0.256553036  	|	0.081013611  	|	0.065838485   |
+| Small Pelagics-squid      | 0.065668292  	|	0.03142953  	|	0.365222341   |
+| Small Pelagics-anadromous | 0             |	0             |	0             |
+| Medium Pelagics           | 0             |	0             |	0             |
+| Demersals-benthivores     | 0.251598986	  |	0.015326965	  |	0.111440098   |
+| Demersals-omnivores       | 0.024498741	  |	0.011023901	  |	0.045656537   |
+| Demersals-piscivores      | 0.248609389	  |	0.049695246	  |	0.177298555   |
+| Sharks-pelagics           | 0             |	0             |	0             |
+| HMS                       | 0             |	0             |	0             |
+| Pinnipeds                 | 0             |	0             |	0             |
+| Baleen Whales             | 0             |	0             |	0             |
+| Odontocetes               | 0             |	0             |	0             |
+| Sea Birds                 | 0             |	0             |	0             |
+| Discard                   | 0             |	0             |	0             |
+| Detritus-POC              | 0             |	0             |	0             |
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
+These updated marine mammal diet compositions resulted in excess consumption relative to the originally estimated production of two model groups: Small pelagics-squid and Small pelagics-other. Production is the product of the input biomass and the input production rate (production to biomass ratio). Small pelagics-other includes sandlance and mesopelagic fishes. These groups (and squids) are poorly sampled by existing surveys relative to other groups in the model, such that biomass estimates are highly uncertain. Therefore, input biomass was increased for both groups (from 1.24 to 1.275 tons per square km for Small pelagcis-other and from 0.275 to 0.29 tons per square km for Small pelagics-squid). In addition, the production to biomass ratio for Small pelagics-other was increased from 0.42 to 0.44. Small pelagics-other originally had the lowest production to biomass ratio of all the small pelagics groups in the model; this adjustment placed their productivity rougly equal to that of Small pelagics-anadromous but still well below that of Small pelagics-commercial or Small pelagics-squid. 
+
+An additional correction to the original model was necessary to achieve a baseline unperturbed dynamic run with no changes in biomass over time. Detritus accounting requires specification of a proportion of a group's unconsumed, non-living biomass to each detritus pool in the model. Fishery discards are specified to flow into a dedicated discard detritus pool, with all non-fishery detritus going to a separate pool. In the original model, a small portion of all groups' detritus fate was allocated to the fishery discard detritus pool (regardless of whether the group was fished), which caused instability in the unperturbed dynamic model. We corrected this so that only the fishery discard entered the discard detritus pool, with all other group's detritus fate going 100% into the general detritus pool. 
+
+As a result of the correction to discard accounting, the fishery discard detritus pool was over-consumed by a single predator group, seabirds. While seabirds (in particular gulls) have been observed to consume fishery discards, the proportion in the diet aggregated over all seabird species is uncertain. Further, diet information collected at Gulf of Maine seabird colonies which was unavailable when the model was constructued suggested a much higher proportion of juvenile fish in the diet than the model reflected. Therefore, we adjusted the seabird diet so that Discards (formerly >12%) were <1%, Demersals-benthivores went from 0 to 2% (based on observations of hake in tern diets) and Larval-juv fish-all went from 0 to 10% (also based on tern diets; see "Herring MSE: Predator models.")
+
+After these adjustments, marine mammal diets represented the best available science, the food web model was "balanced" (all consumption needs were met in the ecosystem), and the unperturbed dynamic baseline run was stable. 
+
+## Incorporating uncertainty in food web model parameters
+As noted above, food web models require information on biomass, production and consumption rates, diet compositions, and fishery catch and discard for all groups in the ecosystem. Some food web model inputs are well-informed by observational data, while others are highly uncertain. Information about the uncertainty of food web model input parameters was included in a "pedigree" when the Gulf of Maine EMAX model was constructed. The pedigree rates the uncertainty of each input parameter according to a set of criteria specific to that input, with low uncertainty reflected by values closer to 0 and higher uncertainty by values closer to 1. (Values of 0 generally indicate that the parameter is not relevant for the group; 0.1 is the lowest uncertainty rating available, representing the best information.) We did not modify the model pedigree for this analysis. The pedigree for Gulf of Maine input parameters is reported in Table 3.
+
+Table 3. Data uncertainty ratings (pedigree) input to the Gulf of Maine food web model.
+```{r pedigree, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Gulf of Maine Model Group | Biomass |	Production | Consumption |	Diet Comp | Fishery   |
+|:-------------------------------|:--------------|:--------------|:--------------|:--------------|:--------------|
+| Phytoplankton-Primary Producers |	0.1 |	0 |	0 |	0 |	0 |
+| Bacteria | 0.8 |	0.6 |	0.6 |	0.6 |	0 |
+| Microzooplankton | 0.8 | 0.6 |	0.6 |	0.6 |	0 |
+| Small copepods | 0.3 |	0.5 |	0.5 |	0.6 |	0 |
+| Large Copepods | 0.3 |	0.5 |	0.5 |	0.6 |	0 |
+| Gelatinous Zooplankton |	0.5	 | 0.6 |	0.6 |	0.6 |	0.7 |
+| Micronekton |	0.5 |	0.6 |	0.6 |	0.6 |	0 |
+| Macrobenthos-polychaetes |	0.3 |	0.5 |	0.5 |	0.6 |	0.7 |
+| Macrobenthos-crustaceans |	0.3 |	0.5 |	0.5 |	0.6 |	0.7 |
+| Macrobenthos-molluscs |	0.3 |	0.5 |	0.5 |	0.6 |	0.7 |
+| Macrobenthos-other |	0.3 |	0.5 |	0.5 |	0.6 |	0.7 |
+| Megabenthos-filterers |	0.3 |	0.5 |	0.5 |	0.6 |	0.3 |
+| Megabenthos-other |	0.5 |	0.5 |	0.5 |	0.6 |	0.3 |
+| Shrimp et al. |	0.1 |	0.5 |	0.5 |	0.6 |	0.1 |
+| Larval-juv fish-all	 | 0.5 |	0.6 |	0.6 |	0.5 |	0.7 |
+| Small Pelagics-commercial |	0.1 |	0.1 |	0.1 |	0.1 |	0.1 |
+| Small Pelagics-other	 | 0.3 |	0.3 |	0.3 |	0.3 |	0.5 |
+| Small Pelagics-squid   |	0.3 |	0.3 |	0.3 |	0.3 |	0.1 |
+| Small Pelagics-anadromous |	0.3 |	0.3 |	0.3 |	0.3 |	0.3 |
+| Medium Pelagics |	0.3 |	0.3 |	0.3 |	0.1 |	0.1 |
+| Demersals-benthivores	 | 0.1 |	0.3 |	0.1 |	0.1 |	0.1 |
+| Demersals-omnivores |	0.1 |	0.3 |	0.1 |	0.1 |	0.1 |
+| Demersals-piscivores |	0.1 |	0.3 |	0.1 |	0.1 |	0.1 |
+| Sharks-pelagics |	0.5 |	0.4 |	0.4	| 0.3	| 0.5 |
+| HMS |	0.5 |	0.2 |	0.4 |	0.3 |	0.5 |
+| Pinnipeds |	0.3 |	0.5 |	0.5 |	0.1 |	0.5 |
+| Baleen Whales |	0.3 |	0.5 |	0.5 |	0.5 |	0.5 |
+| Odontocetes |	0.3 |	0.5 |	0.5 |	0.5 |	0.5 |
+| Sea Birds |	0.3 |	0.5 |	0.5 |	0.3 |	0.5 |
+| Discard	 | 0 |	0 |	0 |	0 |	0 |
+| Detritus-POC |	0 |	0 |	0 |	0 |	0 |
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
+These input parameter uncertainty ratings from the model pedigree are used to construct prior distributions centered on the model parameters such that a well-informed parameter (pedigree=0.1) would have a narrow distribution while an uncertain parameter (pedigree>0.5) would have a wide distribution. New parameter values can then be drawn from each distribution and combined into a new food web model that resembles the original model but allows for a range of uncertain input parameters. Further, dynamic predator-prey functional response parameters are generally unknown, but greatly influence model behavior [@gaichas_beyond_2012]. These parameters can also be drawn from distributions to construct alternative food web models reflecting both uncertainty in inputs and in dynamic behvior.
+
+However, only sensible combinations of parameters should be used; some parameter combinations will result in unrealistic and unsustainable food web models where predators greatly outnumber their prey, or chaotic predator prey interactions take place. We drew 32,000 parameter sets as described above, and tested each set by running the model for 50 years to determine if any groups went extinct. Only parameter sets resulting in food web models that allowed all groups to persist for 50 years were kept for further analysis (5,677). These methods are reported in detail in [@gaichas_wasp_2015]. The full ensemble of 5,677 food web models was then used in perturbation analysis.
+
+## Perturbation analyses
+To evaluate how changes in individual group production propagate through the food web, and which groups might be most sensitive, a preliminary analysis systematically perturbed each group in the ensemble of food web models, allowing the remaining groups in the ecosystem to adjust to the new state of the perturbed group. The perturbation was a forced 10% increase in production relative to the base model for an individual group over the course of 100 years to allow the system to achieve a roughly stable state. Increased production was achieved by reducing unaccounted mortality by 10%. At the end of 100 years, production for all groups in the ecosystem was evaluated by averaging the final 10 years of the run (to smooth any oscillations).  All perturbation results are subtracted from the results of an unperturbed 100 year baseline run for each ensemble member so that the results reported are proportional differences from the base state.
+
+A second set of perturbation analyses were conducted to simulate the ecosystem effects of the highest and lowest long term average herring biomass projected looking across all the tested herring ABC control rules. These rather extreme scenarios were intended to provide insight into system behavior at these bounds, with the understanding that actual herring management under a selected control rule would be expected to lie somewhere in between. A visual inspection of herring model outputs for total biomass suggested that the minimum herring biomass in the system might be approximately half of the current (2000 model baseline) biomass, while the maximum spawning stock biomass might be 150% of current biomass. Therefore, a "low herring" run was set up that forced Small pelagics-commercial biomass from current to half of current over 10 years and then held it at half of current for the remainder of the 100 year run. Similarly, a "high herring" run was set up that forced Small pelagics-commercial biomass from current to 150% of current over 10 years and then held it at 150% of current biomass for the remainder of the 100 year run. Here, "current" biomass is slightly different in each ensemble member but the perturbation was relative to each ensemble's baseline, rather than an absolute amount of biomass. As above, all runs were compared to the unperturbed baseline run for each ensemble member, and proportional differences in each group's production from base (averaged over the final 10 years of the run) are reported.
+
+<!--But who knows what it means that primary production is most influential. Are herring the most important group in the system? Probably not. Does perturbing them cause uncertainty to propagate? Probably. And it mainly propagates to the side (other forage groups go down) and up to preators as a result of perturbations to all forage groups including herring.-->
+
+<!--Initial work: perturbation analysis of food web model (GOM EMAX only) to bound group responses to a long term 10% increase in herring production. Used existing pedigree. Did without (upper) and with (lower) variation in predator prey functional response.-->
+
+# Results
+## Food web model updates
+Small pelagics-commercial (which contain Atlantic herring) comprised less than 25% of diet for marine mammal groups. Relative to diets included in the original Gulf of Maine food web model  [@link_northeast_2008; @link_response_2009; @link_documentation_2006], updated Pinniped diets were more varied and less concentrated on Small pelagics-commercial, Baleen whale diets included more Small pelagics-commercial, and Odontocetes had a similar diet proportion of Small pelagics-commercial. These shifts required no changes to the original parameterization of Small pelagics-commercial in the food web model. 
+
+## Perturbation analysis
+The initial perturbation analysis looked at the full food web response to a permanent 10% increase in herring production; the response of each group in terms of production is reported here. These results include uncertainty in both the input food web parameters and the dynamic predator prey functional response parameters. Results are reported as interquantile ranges across ensemble members (50% within the box, 90% between the error bars).
+
+There is a mixed and largely uncertain response to increased Small pelagics-commercial (herring) production at mid to high trophic levels in the ecosystem (Figure \ref{herrup10p}). However, lower trophic levels (primary producers through large zooplankton and most benthic organisms) show almost no response to the perturbation. The largest response is the positive response of Small pelagics-commercial, which is the perturbation (though the median response to a forced 10% increase in production was less than a 10% increase in production, likely due to predator feedbacks). Predator groups with the strongest positive responses were Medium pelagics, Demersals-piscivores (groundfish including cod and dogfish), and Baleen whales. Demersals-piscivores were the only group where 90% of ensemble members showed a positive response (lower error bar remains above the dashed line representing 0 change, Figure \ref{herrup10p}). The strongest negative responses included all of the other Small pelagics groups (other, squid, and anadromous) as well as Shrimp et. al. and Larval/juvenile fish. Overall, high uncertainty in system response is indicated by the large 90% interquantile ranges, many of which overlap the dashed line representing 0 change. In particuar, there are uncertain responses for predators dependent on multiple forage groups as prey (e.g. Sharks-pelagic, Pinnipeds, Baleen whales, Odontocetes, Seabirds, and HMS which includes tunas and billfish) in response to the herring increase, likely due to the decrease in other forage groups. The direction of change in response to modestly increased herring production is uncertain for many groups, in particular HMS where even the 50% interquantile range includes both increased and decreased production. However, all other ecosystem groups had a smaller range of potential change than the perturbed group (Small pelagics-commercial), suggesting that responses to changes in herring tend to be damped rather than amplified by food web interactions.
+
+```{r,fig.cap="Relative change in group production from a forced 0.1 prodution increase for Small pelagics-commercial. Boxes represent 50 percent of model results and error bars encompass 90 percent of model results within the 5,677 member ensemble. \\label{herrup10p}", message = FALSE, warning = FALSE}
+# from /Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOM/senseSummaryTable.R
+GOMsensedatvul<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOM/results/GOM_Diffs_vul_allquants.csv")
+
+names(GOMsensedatvul)[1:2]<-c("Acted", "Actor")
+
+GOMpelv.actor.sensedat<-subset(GOMsensedatvul, Actor=="Small Pelagics- commercial")
+GOMpelv.acted.sensedat<-subset(GOMsensedatvul, Acted=="avP_Small.Pelagics..commercial")
+
+boxdat<-GOMpelv.actor.sensedat #impacts of 10% increase in herring survival, vuls varying
+
+boxdat<-boxdat[complete.cases(boxdat),] #gets rid of NA rows
+
+#pdf(paste(filename, "_box.pdf", sep=""), width=10.4, height=9.5)
+#par(mfrow=c(1,1))
+par(mar=c(6.5,2,0,0)+0.1)
+par(oma=c(1,0,0,0))
+par(mgp=c(1.4,0.5,0))
+plot((1:(dim(boxdat)[1])), seq(min(boxdat$X5.), max(boxdat$X95.), length.out=dim(boxdat)[1]), 
+     type="n", xlab="", ylab="Proportional Difference from Base", axes=F, cex.lab=0.7)
+abline(h=0.0, lty=2)
+#mtext(paste(outname))
+#use for who does Actor matter to
+axis(1, at=1:(dim(boxdat)[1]), lab=substring(boxdat$Acted[1:dim(boxdat)[1]],5), las=2, cex.axis=0.5, tck=-0.01)
+#use for who matters to Actor
+#axis(1, at=1:(dim(boxdat)[1]), lab=boxdat$Actor[1:dim(boxdat)[1]], las=2)
+
+mtext("Species", side=1, outer=T, cex=0.7)
+axis(2, cex.axis=0.5)
+for (j in 1:dim(boxdat)[1]){
+  rect((j-0.2),boxdat$X25.[j],(j+0.2),boxdat$X75.[j], col="grey")
+  arrows(j, boxdat$X25.[j], j, boxdat$X5.[j], angle=90, length=0.1)
+  arrows(j, boxdat$X75.[j], j, boxdat$X95.[j], angle=90, length=0.1)
+}
+#dev.off()
+```
+
+Similar patterns in group sensitivity and uncertainty are reflected in the results of perturbations for both high and low herring simulations. However, the uncertainty in outcomes increases greatly with these larger perturbations, even for the directly perturbed group. When Small pelagics-commercial biomass was decreased to 50% of baseline, there are no groups with a clear increase or decrease for 90% of ensemble members, and only Small pelagics-commercial have a clear decrease for 50% of ensemble members (Figure \ref{herrBdown50p}). Keeping this uncertainty in mind, the simulation suggests that all other forage groups might have increased production with this substantially decreased herring biomass, with more than half of ensemble results showing an increase for Shrimp et al, Larval and juvenile fish, and the other three Small pelagics groups: other, squid, and anadromous. However, the extent of increased production is highly uncertain, with half the ensemble results lying between trace and at most 25-27% increases (Figure \ref{herrBdown50p}). Similarly, some predator groups might have decreased production under this scenario with more than half of ensemble model results for Medium pelagics, Demersals-piscivores, and Baleen whales, which showed decreases ranging from trace to 13-23%. Other predator groups also showed potential decreased production, although with more uncertain results as even the 50% interquantile ranges included both increased and decreased production. Similar to the more modest perturbation reported above, no group had a wider range of response than the perturbed group (Small pelagics-commercial), suggesting that responses to decreases in herring biomass are damped rather than amplified by food web interactions. 
+
+```{r,fig.cap="Relative change in group production from a forced 0.5 x base biomass reduction for Small pelagics-commercial. Boxes represent 50 percent of model results and error bars encompass 90 percent of model results within the 5,677 member ensemble. \\label{herrBdown50p}", message = FALSE, warning = FALSE}
+FWoutdir <- "/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOM"
+
+FWtest <- "test"
+FWsense <- "sense"
+FWres <- "results"
+
+testdir <- paste(FWoutdir,FWtest, sep="/")
+sensedir <- paste(FWoutdir,FWsense, sep="/")
+sensediffs <- paste(sensedir, "diffs", sep="/")
+
+filename <- "vulherrdown_diff"
+outname <- "vul, herring down 50%, B"
+results <- read.csv(file.path(sensediffs, paste0(filename, ".csv")))
+
+# get rid of last year with 0s, find new max year, get only last 10 years for equilibrium boxplots
+endYr <- max(results$Year)
+results <- results[results$Year<endYr,]
+
+maxYr <- max(results$Year)
+results_end <- results[results$Year>(maxYr-10),]
+
+# get means of last 10 years, save in new object mean_diff2 
+sum_diff <- rowsum(results_end[,6:26], results_end$Species)
+mean_diff2 <- sum_diff/length(levels(as.factor(results_end$Year)))
+
+groupnames <- read.csv(file.path(FWoutdir, "GOMactors.csv"))
+
+# make a single boxplot of means of last 10 years for all species
+#pdf(paste(filename, "_box.pdf", sep=""), width=10.4, height=9.5)
+#par(mfrow=c(1,1))
+par(mar=c(6.4,2,0,0)+0.1)
+par(oma=c(1,0,0,0))
+par(mgp=c(1.4,0.5,0))
+plot((1:(dim(mean_diff2)[1])), seq(min(mean_diff2$CI_5), max(mean_diff2$CI_95), length.out=dim(mean_diff2)[1]), 
+     type="n", xlab="", ylab="Proportional Difference from Base", axes=F, cex.lab=0.7)
+abline(h=0.0, lty=2)
+mtext(paste(outname))
+axis(1, at=1:(dim(mean_diff2)[1]), lab=groupnames$Actor[1:dim(mean_diff2)[1]], las=2, cex.axis=0.5, tck=-0.01)
+mtext("Species", side=1, outer=T, cex=0.7)
+axis(2, cex.axis=0.5)
+for (j in 1:dim(mean_diff2)[1]){
+  rect((j-0.2),mean_diff2$CI_25[j],(j+0.2),mean_diff2$CI_75[j], col="grey")
+  arrows(j, mean_diff2$CI_25[j], j, mean_diff2$CI_5[j], angle=90, length=0.1)
+  arrows(j, mean_diff2$CI_75[j], j, mean_diff2$CI_95[j], angle=90, length=0.1)
+}
+#dev.off()
+
+```
+
+Results for the increased herring (Small pelagics-commercial) biomass simulation largely mirror those of the previous simulations, although the uncertainty in response is much higher for all groups in this scenario (Figure \ref{herrBup50p}). When Small pelagics-commercial were held at 150% of baseline biomass, the 50% interquantile ranges of productivity for the other forage groups generally decreased and those for the same predators groups generally increased. It is notable that the 90% interquantile ranges for Small pelagics-commercial, HMS, and Seabirds are extremely large, indicating a range from -70% to -40% decreased productivity to 600%-1300% increased productivity for this scenario. This is the only scenario where the range of responses by a non-perturbed group (HMS) exceeded those of the perturbed group (Small pelagics-commercial). However, the 50% interquantile range was still largest for the pertubed group and smaller for all others. This suggests that in about half of model runs the response to increased herring biomass was damped rather than amplified by the food web, but in the remaining half of model runs the uncertainty in response was amplified for the HMS group.
+
+```{r,fig.cap="Relative change in group production from a forced 1.5 x base biomass increase for Small pelagics-commercial. Boxes represent 50 percent of model results and error bars encompass 90 percent of model results within the 5,677 member ensemble. \\label{herrBup50p}", message = FALSE, warning = FALSE}
+FWoutdir <- "/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOM"
+
+FWtest <- "test"
+FWsense <- "sense"
+FWres <- "results"
+
+testdir <- paste(FWoutdir,FWtest, sep="/")
+sensedir <- paste(FWoutdir,FWsense, sep="/")
+sensediffs <- paste(sensedir, "diffs", sep="/")
+
+filename <- "vulherrup_diff"
+outname <- "vul, herring up 50%, B"
+results <- read.csv(file.path(sensediffs, paste0(filename, ".csv")))
+
+# get rid of last year with 0s, find new max year, get only last 10 years for equilibrium boxplots
+endYr <- max(results$Year)
+results <- results[results$Year<endYr,]
+
+maxYr <- max(results$Year)
+results_end <- results[results$Year>(maxYr-10),]
+
+# get means of last 10 years, save in new object mean_diff2 
+sum_diff <- rowsum(results_end[,6:26], results_end$Species)
+mean_diff2 <- sum_diff/length(levels(as.factor(results_end$Year)))
+
+groupnames <- read.csv(file.path(FWoutdir, "GOMactors.csv"))
+
+# make a single boxplot of means of last 10 years for all species
+#pdf(paste(filename, "_box.pdf", sep=""), width=10.4, height=9.5)
+#par(mfrow=c(1,1))
+par(mar=c(6.4,2,0,0)+0.1)
+par(oma=c(1,0,0,0))
+par(mgp=c(1.4,0.5,0))
+plot((1:(dim(mean_diff2)[1])), seq(min(mean_diff2$CI_5), max(mean_diff2$CI_95), length.out=dim(mean_diff2)[1]), 
+     type="n", xlab="", ylab="Proportional Difference from Base", axes=F, cex.lab=0.7)
+abline(h=0.0, lty=2)
+mtext(paste(outname))
+axis(1, at=1:(dim(mean_diff2)[1]), lab=groupnames$Actor[1:dim(mean_diff2)[1]], las=2, cex.axis=0.5, tck=-0.01)
+mtext("Species", side=1, outer=T, cex=0.7)
+axis(2, cex.axis=0.5)
+for (j in 1:dim(mean_diff2)[1]){
+  rect((j-0.2),mean_diff2$CI_25[j],(j+0.2),mean_diff2$CI_75[j], col="grey")
+  arrows(j, mean_diff2$CI_25[j], j, mean_diff2$CI_5[j], angle=90, length=0.1)
+  arrows(j, mean_diff2$CI_75[j], j, mean_diff2$CI_95[j], angle=90, length=0.1)
+}
+#dev.off()
+
+```
+
+In comparing all three scenarios (using only the 50% interquantile ranges) it becomes clear that the two biomass scenarios (red and blue) represent rather extreme changes in the ecosystem relative to the 10% change in production (green, Figure \ref{compareall}). Further, increasing herring biomass in the ecosystem (red) had a wider range of results, and therefore uncertainty, relative to decreasing herring biomass (blue).
+
+```{r,fig.cap="Relative change in group production from all three perturbation scenarios for Small pelagics-commercial: a 0.1 production increase (green), a 0.5 biomass decrease (blue), and a 1.5 biomass increase (red). Boxes represent 50 percent of model results within the 5,677 member ensemble. \\label{compareall}", message = FALSE, warning = FALSE}
+FWoutdir <- "/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOM"
+
+FWtest <- "test"
+FWsense <- "sense"
+FWres <- "results"
+
+testdir <- paste(FWoutdir,FWtest, sep="/")
+sensedir <- paste(FWoutdir,FWsense, sep="/")
+sensediffs <- paste(sensedir, "diffs", sep="/")
+resultsdir <- paste(FWoutdir,FWres, sep="/")
+
+filename <- c("vulherrup_diff","vulherrdown_diff")
+for(ff in filename){
+  results <- read.csv(file.path(sensediffs, paste0(ff, ".csv")))
+  
+  # get rid of last year with 0s, find new max year, get only last 10 years for equilibrium boxplots
+  endYr <- max(results$Year)
+  results <- results[results$Year<endYr,]
+  
+  maxYr <- max(results$Year)
+  results_end <- results[results$Year>(maxYr-10),]
+  
+  # get means of last 10 years, save in new object mean_diff2 
+  sum_diff <- rowsum(results_end[,6:26], results_end$Species)
+  mean_diff2 <- sum_diff/length(levels(as.factor(results_end$Year)))
+  saveRDS(mean_diff2, file.path(FWoutdir, paste0(ff,"_mean_diff2.rds")))
+}
+
+# read in already processed data from 10% P increase
+GOMsensedatvul<-read.csv("/Users/sgaichas/Documents/0_Data/MSE/HerringMSE/GOM/results/GOM_Diffs_vul_allquants.csv")
+
+names(GOMsensedatvul)[1:2]<-c("Acted", "Actor")
+
+#GOMpelv.actor.sensedat<-subset(GOMsensedatvul, Actor=="Small Pelagics- commercial")
+GOMpelv.acted.sensedat<-subset(GOMsensedatvul, Acted=="avP_Small.Pelagics..commercial")
+
+herrPup10p<-GOMpelv.actor.sensedat #impacts of 10% increase in herring survival, vuls varying
+
+herrPup10p<-herrPup10p[complete.cases(herrPup10p),] #gets rid of NA rows
+herrBdown50p<-readRDS(file.path(FWoutdir, "vulherrdown_diff_mean_diff2.rds"))
+herrBup50p<-readRDS(file.path(FWoutdir, "vulherrup_diff_mean_diff2.rds"))
+
+groupnames <- read.csv(file.path(FWoutdir, "GOMactors.csv"))
+
+# make a single boxplot of means of last 10 years for all species
+#pdf(paste(filename, "_box.pdf", sep=""), width=10.4, height=9.5)
+#par(mfrow=c(1,1))
+par(mar=c(6.4,2,0,0)+0.1)
+par(oma=c(1,0,0,0))
+par(mgp=c(1.4,0.5,0))
+plot((1:(dim(herrPup10p)[1])), seq(min(herrBdown50p$CI_25), max(herrBup50p$CI_75), length.out=dim(herrPup10p)[1]), 
+     type="n", xlab="", ylab="Proportional Difference from Base", axes=F, cex.lab=0.7)
+abline(h=0.0, lty=2)
+#mtext(paste(outname))
+axis(1, at=1:(dim(herrPup10p)[1]), lab=groupnames$Actor[1:dim(herrPup10p)[1]], las=2, cex.axis=0.5, tck=-0.01)
+mtext("Species", side=1, outer=T, cex=0.7)
+axis(2, cex.axis=0.5)
+for (j in 1:dim(herrPup10p)[1]){
+  rect((j-0.3),herrPup10p$X25[j],(j-0.1),herrPup10p$X75[j], col="green")
+  rect((j-0.1),herrBdown50p$CI_25[j],(j+0.1),herrBdown50p$CI_75[j], col="blue")
+  rect((j+0.1),herrBup50p$CI_25[j],(j+0.3),herrBup50p$CI_75[j], col="red")
+}
+#dev.off()
+
+```
+
+
+# Discussion
+Overall, food web modeling showed that a simulated increase in herring production in the Gulf of Maine may produce modest but uncertain benefits to marine mammal predators, primarily because increased herring was associated with decreases in other forage groups also preyed on by marine mammals. The reduced herring biomass scenario was largely a mirror-image of the increased productivity scenario in terms of other species' responses, although uncertainty was increased and the reactions were more pronounced because the scenario represented a larger change from baseline conditions. In all but the extreme increase in herring biomass scenario, responses of predator productivity (including those of marine mammals) was damped relative to the change in herring production. The 1.5x herring biomass increase scenario resulted in generally similar patters of response across species as the more modest 10% production increase scenario, although the uncertainty in response increased disproportionately as indicated by the extent of the 90% interquartile range of productivity. This suggests that the impacts of greatly increased herring biomass in the Gulf of Maine ecosystem may be more uncertain than greatly decreased herring biomass. 
+
+The advantage of using a full food web model to address the impacts of changing herring biomass is that it integrates both bottom up and top down food web responses and tradeoffs between species that could not be considered in the more detailed modeling of herring relationships with individual predators. In particular, the tradeoff between increased herring and decreased productivity of other forage groups demonstrated in these scenarios has the potential to diminish any expected benefits to predators from "leaving more herring in the water" when herring is considered in a single species context, even as an important forage fish. Predators in the Gulf of Maine and throughout the Northeast US shelf ecosystem tend to be opportunistic and rely on many prey, so tradeoffs between prey types caused by management for one prey species should be weighed carefully. 
+
+The disadvantage of this particular model is that groups are aggregated, although Small pelagics-commercial is mostly herring in the Gulf of Maine. Further, the predator groups with the highest proportions of herring in diets are aggregated with those with lower proportions, so that responses at the group level reflect an average species response. Individual species within each group would be expected to react either more strongly or weakly depending on the proportion of herring in individual diets. 
+
+Given additional time and resources, further work with the food web model could provide additional insight into the performance of herring ABC control rules in an ecosystem context. For instance, for a smaller subset of control rules the expected variation in herring biomass could be simulated as a perturbation using the same methods applied here. This would provide insight into a more realistic range of outcomes than was possible using this approach of minimum and maximum expected herring biomass, and could complement or bound the results from the simpler bottom up only set of operating models and help temper conclusions with full food web interactions and uncertainty.
+
+
+#References
+
+
